@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Redirect;
@@ -49,8 +50,16 @@ class UserLoginController extends Controller
      */
     public function postLogin(Request $request)
     {
+
         $email = $request->get('email');
         $password = $request->get('password');
+
+        $user = User::where('email', $email)->first();
+        if($user){
+            if(! $user->is_confirmed) {
+                return 'You Are Not Confirmed yet';
+            }
+        }
 
         if (empty($email) || empty($password)) {
             return Redirect::back()

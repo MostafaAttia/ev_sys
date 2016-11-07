@@ -14,7 +14,7 @@
 @stop
 
 @section('head')
-    {!!HTML::script('https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places')!!}
+    {!!HTML::script('https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyBrjKf7BKs-VOZAOvpxknoyVfkwpcnvpjs')!!}
     {!! HTML::script('vendor/geocomplete/jquery.geocomplete.min.js')!!}
 @stop
 

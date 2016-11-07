@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -170,6 +170,11 @@ return [
         MaxHoffmann\Parsedown\ParsedownServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
+
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
     ],
 
     /*
@@ -233,6 +238,10 @@ return [
         'Markdown'     => MaxHoffmann\Parsedown\ParsedownFacade::class,
         'Omnipay'      => Omnipay\Omnipay::class,
        // 'Omnipay'      => Omnipay\Omnipay::class,
+
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
     ],
 ];

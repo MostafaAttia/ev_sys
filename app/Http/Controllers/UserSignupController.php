@@ -8,7 +8,7 @@ use App\Models\User;
 use Hash;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class UserSignupController extends Controller
 {
@@ -60,15 +60,22 @@ class UserSignupController extends Controller
         $user_data['is_registered'] = 1;
         $user = User::create($user_data);
 
-        if ($is_attendize) {
-            // TODO: Do this async?
-            Mail::send('Emails.ConfirmEmail',
-                ['first_name' => $user->first_name, 'confirmation_code' => $user->confirmation_code],
-                function ($message) use ($request) {
-                    $message->to($request->get('email'), $request->get('first_name'))
-                        ->subject('Thank you for registering for Attendize');
-                });
-        }
+        Mail::send('Emails.ConfirmEmail',
+            ['first_name' => $user->first_name, 'confirmation_code' => $user->confirmation_code],
+            function ($message) use ($request) {
+                $message->to($request->get('email'), $request->get('first_name'))
+                    ->subject('Thank you for registering for Vitee');
+            });
+
+//        if ($is_attendize) {
+//            // TODO: Do this async?
+//            Mail::send('Emails.ConfirmEmail',
+//                ['first_name' => $user->first_name, 'confirmation_code' => $user->confirmation_code],
+//                function ($message) use ($request) {
+//                    $message->to($request->get('email'), $request->get('first_name'))
+//                        ->subject('Thank you for registering for Vitee');
+//                });
+//        }
 
         session()->flash('message', 'Success! You can now login.');
 
