@@ -27,6 +27,12 @@
                                         'rows' => 5
                                         ))  !!}
                         </div>
+
+                        <div class="form-group">
+                            {!! Form::label('category_id', 'Event Category', array('class'=>'control-label required')) !!}
+                            {!!  Form::select('category_id', ['' => 'Choose Category'] + $categories , Input::old('category_id') , array('class'=>'form-control' ))  !!}
+                        </div>
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">

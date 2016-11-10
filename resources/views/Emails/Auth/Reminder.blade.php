@@ -6,6 +6,7 @@
         To reset your password, complete this form: {{ route('showResetPassword', ['token' => $token]) }}.
         <br><br><br>
         Thank you,<br>
-        Team Attendize
+        <strong>Vitee</strong> Team
+
     </div>
 @stop

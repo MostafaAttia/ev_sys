@@ -5,10 +5,14 @@ use App\Http\Controllers;
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function ($api) {
-    // Auth routes
-    $api->post('login', 'App\Api\V1\Controllers\AuthController@login');
-    $api->post('signup', 'App\Api\V1\Controllers\AuthController@signup');
 
+    // Auth routes for CLIENTS
+    $api->post('signup', 'App\Api\V1\Controllers\ClientAuthController@signup');
+    $api->get('signup/confirm_email/{confirmation_code}', [
+        'as'   => 'ClientConfirmEmail',
+        'uses' => 'App\Api\V1\Controllers\ClientAuthController@confirmEmail',
+    ]);
+    $api->post('login', 'App\Api\V1\Controllers\ClientAuthController@login');
     $api->any('/logout', [
         'uses' => 'App\Api\V1\Controllers\UserLogoutController@doLogout',
         'as'   => 'logout',
@@ -18,6 +22,31 @@ $api->version('v1', function ($api) {
         'as'   => 'postForgotPassword',
         'uses' => 'App\Api\V1\Controllers\RemindersController@postRemind',
     ]);
+
+
+
+
+    // events routes
+    $api->get('/events/all', [
+        'as'   => 'getAllEvents',
+        'uses' => 'App\Api\V1\Controllers\EventController@getAllEvents',
+    ]);
+
+    $api->get('/events/live', [
+        'as'   => 'getLiveEvents',
+        'uses' => 'App\Api\V1\Controllers\EventController@getLiveEvents',
+    ]);
+
+
+
+
+
+
+
+
+
+
+
 
 
 

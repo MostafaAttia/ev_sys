@@ -67,15 +67,6 @@ class UserSignupController extends Controller
                     ->subject('Thank you for registering for Vitee');
             });
 
-//        if ($is_attendize) {
-//            // TODO: Do this async?
-//            Mail::send('Emails.ConfirmEmail',
-//                ['first_name' => $user->first_name, 'confirmation_code' => $user->confirmation_code],
-//                function ($message) use ($request) {
-//                    $message->to($request->get('email'), $request->get('first_name'))
-//                        ->subject('Thank you for registering for Vitee');
-//                });
-//        }
 
         session()->flash('message', 'Success! You can now login.');
 

@@ -57,6 +57,10 @@ class UserLoginController extends Controller
         $user = User::where('email', $email)->first();
         if($user){
             if(! $user->is_confirmed) {
+                if(empty($user->first_name)){ // if this user is added by a parent user
+                    $user->is_confirmed = 1;
+                    $user->save();
+                }
                 return 'You Are Not Confirmed yet';
             }
         }

@@ -2,7 +2,7 @@
 
 @section('message_content')
 
-<p>Hi {{$first_name}}</p>
+<p>Hi {{$name}}</p>
 <p>
     Thank you for registering for {{ config('attendize.app_name') }}. We're thrilled to have you on board.
 </p>

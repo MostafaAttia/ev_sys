@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Event;
 use App\Models\EventImage;
 use App\Models\Organiser;
@@ -22,10 +23,14 @@ class EventController extends MyBaseController
      */
     public function showCreateEvent(Request $request)
     {
+        $categories = Category::lists('name', 'id')->all();
+
+
         $data = [
             'modal_id'     => $request->get('modal_id'),
             'organisers'   => Organiser::scope()->lists('name', 'id'),
             'organiser_id' => $request->get('organiser_id') ? $request->get('organiser_id') : false,
+            'categories'   => $categories,
         ];
 
         return view('ManageOrganiser.Modals.CreateEvent', $data);
@@ -50,6 +55,7 @@ class EventController extends MyBaseController
 
         $event->title = $request->get('title');
         $event->description = strip_tags($request->get('description'));
+        $event->category_id = $request->get('category_id');
         $event->start_date = $request->get('start_date') ? Carbon::createFromFormat('d-m-Y H:i',
             $request->get('start_date')) : null;
 
