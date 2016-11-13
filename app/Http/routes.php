@@ -7,6 +7,23 @@ include_once('api_routes.php');
 
 /*
  * -------------------------
+ * Social Login
+ * -------------------------
+ */
+
+Route::get('login/{provider}', ['uses' => 'SocialLoginController@redirectToProvider', 'as' => 'social.login']);
+Route::get('social/login/{provider}', 'SocialLoginController@handleProviderCallback');
+
+
+
+
+
+
+
+
+
+/*
+ * -------------------------
  * Installer
  * -------------------------
  */

@@ -48,7 +48,7 @@ class ClientAuthController extends Controller
                     ->subject('Thank you for registering for Vitee');
             });
 
-        session()->flash('message', 'Success! You can now login.');
+        session()->flash('message', 'Success! You can now login, after confirming your email.');
 
         return $this->response->created();
 

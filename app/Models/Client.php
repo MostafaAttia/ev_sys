@@ -3,13 +3,18 @@
 namespace App\Models;
 
 use Hash;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Client extends Authenticatable
+class Client extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
 
-    use SoftDeletes;
+    use Authenticatable, CanResetPassword, SoftDeletes;
 
 
     /**

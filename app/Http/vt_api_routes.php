@@ -13,6 +13,7 @@ $api->version('v1', function ($api) {
         'uses' => 'App\Api\V1\Controllers\ClientAuthController@confirmEmail',
     ]);
     $api->post('login', 'App\Api\V1\Controllers\ClientAuthController@login');
+
     $api->any('/logout', [
         'uses' => 'App\Api\V1\Controllers\UserLogoutController@doLogout',
         'as'   => 'logout',
