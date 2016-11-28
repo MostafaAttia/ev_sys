@@ -24,7 +24,7 @@ class Client extends Model implements AuthenticatableContract, CanResetPasswordC
      */
     protected $table = 'clients';
 
-    protected $primaryKey = 'id';
+//    protected $primaryKey = 'id';
 
     /**
      * The attributes that should be mutated to dates.
@@ -39,7 +39,8 @@ class Client extends Model implements AuthenticatableContract, CanResetPasswordC
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'remember_token',

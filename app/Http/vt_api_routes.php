@@ -24,11 +24,14 @@ $api->version('v1', function ($api) {
         'uses' => 'App\Api\V1\Controllers\RemindersController@postRemind',
     ]);
 
+    $api->get('client/{client_id?}/{client_email?}', 'App\Api\V1\Controllers\ClientController@getClientDetails');
+    $api->post('client/{client_id}', 'App\Api\V1\Controllers\ClientController@updateClient');
+
 
 
 
     // events routes
-    $api->get('/events/all', [
+    $api->get('/events/all', [ 'middleware' => 'jwt.auth', // protected route !
         'as'   => 'getAllEvents',
         'uses' => 'App\Api\V1\Controllers\EventController@getAllEvents',
     ]);
@@ -36,6 +39,27 @@ $api->version('v1', function ($api) {
     $api->get('/events/live', [
         'as'   => 'getLiveEvents',
         'uses' => 'App\Api\V1\Controllers\EventController@getLiveEvents',
+    ]);
+
+    $api->get('/event/{event_id}', [
+        'as'   => 'getEvent',
+        'uses' => 'App\Api\V1\Controllers\EventController@getEvent',
+    ]);
+
+//    $api->post('{event_id}/checkout/create', [
+//        'as'   => 'postCreateOrder',
+//        'uses' => 'App\Api\V1\Controllers\EventCheckoutController@postCreateOrder',
+//    ]);
+
+
+    $api->post('{event_id}/checkout/', [
+        'as'   => 'postValidateTickets',
+        'uses' => 'App\Api\V1\Controllers\EventCheckoutController@postValidateTickets',
+    ]);
+
+    $api->post('{event_id}/checkout/create', [
+        'as'   => 'postCreateOrder',
+        'uses' => 'App\Api\V1\Controllers\EventCheckoutController@postCreateOrder',
     ]);
 
 

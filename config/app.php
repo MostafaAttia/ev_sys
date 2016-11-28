@@ -175,6 +175,8 @@ return [
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+
+        Barryvdh\Debugbar\ServiceProvider::class, // for debugging in DEV, Must Removed in PRODUCTION
     ],
 
     /*
@@ -242,6 +244,8 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+
+        'Debugbar' => Barryvdh\Debugbar\Facade::class, // for debugging in DEV, Must Removed in PRODUCTION
 
     ],
 ];

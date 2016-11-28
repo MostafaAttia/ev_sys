@@ -31,24 +31,25 @@ class ClientAuthController extends Controller
     public function signup(Request $request)
     {
         $this->validate($request, [
-            'name'         => 'required',
+            'first_name'         => 'required',
+            'last_name'         => 'required',
             'email'        => 'required|email|unique:clients',
             'password'     => 'required|min:5|confirmed',
         ]);
 
-        $client_data = $request->only(['email', 'name', 'password']);
+        $client_data = $request->only(['email', 'first_name', 'last_name', 'password']);
         $client_data['confirmation_code'] = str_random();
         $client = Client::create($client_data);
 
         // TODO: Do this async?
         Mail::send('Emails.ClientConfirmEmail',
-            ['name' => $client->name, 'confirmation_code' => $client->confirmation_code],
+            ['first_name' => $client->first_name, 'confirmation_code' => $client->confirmation_code],
             function ($message) use ($request) {
-                $message->to($request->get('email'), $request->get('name'))
+                $message->to($request->get('email'), $request->get('first_name'))
                     ->subject('Thank you for registering for Vitee');
             });
 
-        session()->flash('message', 'Success! You can now login, after confirming your email.');
+//        session()->flash('message', 'Success! You can now login, after confirming your email.');
 
         return $this->response->created();
 
@@ -75,11 +76,11 @@ class ClientAuthController extends Controller
         $client->confirmation_code = null;
         $client->save();
 
-        session()->flash('message', 'Success! Your email is now verified. You can now login.');
+//        session()->flash('message', 'Success! Your email is now verified. You can now login.');
 
 
         return $this->response()->array(['message'=> 'Your Email Confirmed, You can now login!']);
-        return redirect()->route('login');
+//        return redirect()->route('login');
     }
 
     /**

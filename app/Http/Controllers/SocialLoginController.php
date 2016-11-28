@@ -46,7 +46,7 @@ class SocialLoginController extends Controller
             'name'                  => $user->getName(),
             'email'                 => $user->getEmail(),
             'image_path'            => $user->getAvatar(),
-            'gender'                => $user->user['gender'] ? $user->user['gender'] : '',
+            'gender'                => isset($user->user['gender']) ? $user->user['gender'] : '',
             'is_email_confirmed'    => 1
 
         ];

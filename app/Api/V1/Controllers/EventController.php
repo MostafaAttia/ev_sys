@@ -5,8 +5,6 @@ namespace App\Api\V1\Controllers;
 use App\Api\V1\Transformers\EventTransformer;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
-use App\Models\EventImage;
-use App\Models\Organiser;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -45,6 +43,14 @@ class EventController extends Controller
         $events = Event::where('is_live', 1)->get();
 
         return $this->response->collection($events, new EventTransformer);
+    }
+
+    public function getEvent($event_id)
+    {
+        $event = Event::findOrFail($event_id);
+
+        return $this->response->item($event, new EventTransformer);
+
     }
 
 
