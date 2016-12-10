@@ -295,6 +295,21 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
             'as'   => 'postCreateEvent',
             'uses' => 'EventController@postCreateEvent',
         ]);
+
+        /*
+         * ----------
+         * Create Activity
+         * ----------
+         */
+        Route::get('/create/activity', [
+            'as'   => 'showCreateActivity',
+            'uses' => 'EventController@showCreateActivity',
+        ]);
+
+        Route::post('/create/activity', [
+            'as'   => 'postCreateActivity',
+            'uses' => 'EventController@postCreateActivity',
+        ]);
     });
 
     /*
@@ -544,6 +559,7 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
             'as'   => 'postEditEvent',
             'uses' => 'EventController@postEditEvent',
         ]);
+
 
         /*
          * -------

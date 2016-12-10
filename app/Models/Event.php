@@ -11,6 +11,14 @@ class Event extends MyBaseModel
 {
     use SoftDeletes;
 
+    protected $hidden = [
+        'pivot'
+    ];
+
+    protected $casts = [
+        'is_activity'       => 'boolean',
+    ];
+
     /**
      * The validation rules.
      *
@@ -40,6 +48,28 @@ class Event extends MyBaseModel
         'location_venue_name.required_without' => 'Please enter a venue for your event',
         'venue_name_full.required_without'     => 'Please enter a venue for your event',
     ];
+
+    /**
+     * The weekdays associated with the event/activity
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function weekdays()
+    {
+        return $this->belongsToMany(\App\Models\Weekday::class, 'activity_weekdays')->select(['id']);
+    }
+
+    public function weekdays_array()
+    {
+        $weekdays = $this->weekdays;
+        $weekdays_ids = [];
+        foreach($weekdays as $weekday)
+        {
+            array_push($weekdays_ids, $weekday['id']);
+        }
+
+        return $weekdays_ids;
+    }
 
     /**
      * The questions associated with the event.
@@ -160,6 +190,7 @@ class Event extends MyBaseModel
     {
         return $this->belongsTo(\App\Models\Organiser::class);
     }
+
 
     /**
      * Get the embed url.

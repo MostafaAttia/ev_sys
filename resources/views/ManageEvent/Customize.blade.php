@@ -3,7 +3,7 @@
 
 @section('title')
     @parent
-    Customize Event
+    Customize @if($event->is_activity) Activity @else Event @endif
 @stop
 
 @section('top_nav')
@@ -16,7 +16,7 @@
 
 @section('page_title')
     <i class="ico-cog mr5"></i>
-    Customize Event
+    Customize @if($event->is_activity) Activity @else Event @endif
 @stop
 
 @section('page_header')
@@ -187,7 +187,7 @@
                     class="{{($tab == 'general' || !$tab) ? 'active' : ''}}"><a href="#general" data-toggle="tab">General</a>
                 </li>
                 <li data-route="{{route('showEventCustomizeTab', ['event_id' => $event->id, 'tab' => 'design'])}}"
-                    class="{{$tab == 'design' ? 'active' : ''}}"><a href="#design" data-toggle="tab">Event Page
+                    class="{{$tab == 'design' ? 'active' : ''}}"><a href="#design" data-toggle="tab">@if($event->is_activity) Activity @else Event @endif Page
                         Design</a></li>
                 <li data-route="{{route('showEventCustomizeTab', ['event_id' => $event->id, 'tab' => 'order_page'])}}"
                     class="{{$tab == 'order_page' ? 'active' : ''}}"><a href="#order_page" data-toggle="tab">Order

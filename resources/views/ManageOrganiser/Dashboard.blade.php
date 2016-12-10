@@ -25,22 +25,71 @@
     {!! HTML::script('https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places') !!}
     {!! HTML::script('vendor/geocomplete/jquery.geocomplete.min.js')!!}
     {!! HTML::script('vendor/moment/moment.js')!!}
+    {!! HTML::script('vendor/moment-timezone/builds/moment-timezone-with-data.min.js')!!}
     {!! HTML::script('vendor/fullcalendar/dist/fullcalendar.min.js')!!}
     {!! HTML::style('vendor/fullcalendar/dist/fullcalendar.css')!!}
 
     <script>
+        moment.tz.guess();
         $(function() {
-           $('#calendar').fullCalendar({
-               events: {!! $calendar_events !!},
-            header: {
-                left:   'prev,',
-                center: 'title',
-                right:  'next'
-            },
-            dayClick: function(date, jsEvent, view) {
 
-               }
-           });
+            var calendar_activities = JSON.parse(' {!! $calendar_activities !!} ');
+            var calendar_events = JSON.parse(' {!! $calendar_events !!} ');
+            var repeatingEvents = [];
+            for (var i = 0, len = calendar_activities.length; i < len; i++) {
+                repeatingEvents.push({
+                    "title" : calendar_activities[i].title,
+                    "start" : calendar_activities[i].start,
+                    "end"   : calendar_activities[i].end,
+                    "dow"   : calendar_activities[i].dow,
+                    "ranges": [{
+                        "start": moment(calendar_activities[i].ranges.start),
+                        "end"  : moment(calendar_activities[i].ranges.end)
+                    }],
+                    "url"   : calendar_activities[i].url,
+                    "color" : calendar_activities[i].color
+
+                });
+            }
+            for (var i = 0, len = calendar_events.length; i < len; i++) {
+                repeatingEvents.push({
+                    "title" : calendar_events[i].title,
+                    "start" : calendar_events[i].start,
+                    "end"   : calendar_events[i].end,
+                    "url"   : calendar_events[i].url,
+                    "color" : calendar_events[i].color
+                });
+            }
+            var getEvents = function( start, end ){
+                return repeatingEvents;
+            };
+
+            $('#calendar').fullCalendar({
+                defaultDate: moment(),
+                header: {
+                    left: 'prev, today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay, next'
+                },
+                defaultView: 'month',
+                eventRender: function(event, element, view){
+                    if("ranges" in event){
+                        return (event.ranges.filter(function(range){
+                            return (event.start.isBefore(range.end) &&
+                            event.end.isAfter(range.start));
+                        }).length)>0;
+                    }
+
+                    return true;
+
+                },
+                events: function( start, end, timezone, callback ){
+                    var events = getEvents(start,end);
+
+                    callback(events);
+                }
+            });
+
         });
     </script>
 @stop
@@ -84,7 +133,13 @@
         <div class="col-md-8">
 
             <h4 style="margin-bottom: 25px;margin-top: 20px;">Event Calendar</h4>
-                    <div id="calendar"></div>
+
+            <div>
+                <span style="font-size:12px; padding-left:12px; background:#4E558F;">&nbsp;</span> Event <br>
+                <span style="font-size:12px; padding-left:12px; background:#0F8000;">&nbsp;</span> Activity <br> <br>
+            </div>
+
+            <div id="calendar"></div>
 
 
             <h4 style="margin-bottom: 25px;margin-top: 20px;">Upcoming Events</h4>

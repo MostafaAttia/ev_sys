@@ -1,5 +1,5 @@
 <div class="panel panel-success event">
-    <div class="panel-heading" data-style="background-color: {{{$event->bg_color}}};background-image: url({{{$event->bg_image_url}}}); background-size: cover;">
+    <div class="panel-heading" @if($event->is_activity) style="background-color: #0F8000; border-color: #0F8000;" @endif data-style="background-color: {{{$event->bg_color}}};background-image: url({{{$event->bg_image_url}}}); background-size: cover;">
         <div class="event-date">
             <div class="month">
                 {{strtoupper($event->start_date->format('M'))}}

@@ -217,3 +217,27 @@ var request_data = [{
     "ticket_holder_email": [{"4": "freedom4soul@gmail.com"}],
     "is_embedded": ""
 }];
+
+
+// event dashboard activity days
+
+var activity_weekdays = [
+    {
+        "id": 1,
+        "name": "Saturday",
+        "short": "Sat",
+        "pivot": {"event_id": 14, "weekday_id": 1}
+    },
+    {
+        "id": 2,
+        "name": "Sunday",
+        "short": "Sun",
+        "pivot": {"event_id": 14,"weekday_id": 2}
+    },
+    {
+        "id": 6,
+        "name": "Thursday",
+        "short": "Thu",
+        "pivot": {"event_id": 14, "weekday_id": 6}
+    }
+];

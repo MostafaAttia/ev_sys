@@ -27,6 +27,7 @@
         <div class="btn-toolbar">
             <div class="btn-group btn-group-responsive">
                 <a href="#" data-modal-id="CreateEvent" data-href="{{route('showCreateEvent', ['organiser_id' => @$organiser->id])}}" class="btn btn-success loadModal"><i class="ico-plus"></i> Create Event</a>
+                <a href="#" data-modal-id="CreateActivity" data-href="{{route('showCreateActivity', ['organiser_id' => @$organiser->id])}}" class="btn btn-success loadModal" style="margin-left: 5px; background-color: #0F8000; border-color: #0F8000; "><i class="ico-plus"></i> Create Activity</a>
             </div>
         </div>
     </div>

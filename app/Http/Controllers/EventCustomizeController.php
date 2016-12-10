@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Event;
 use File;
 use Illuminate\Http\Request;
@@ -19,10 +20,13 @@ class EventCustomizeController extends MyBaseController
      */
     public function showCustomize($event_id = '', $tab = '')
     {
+        $categories = Category::lists('name', 'id')->all();
+
         $data = $this->getEventViewData($event_id, [
             'available_bg_images'        => $this->getAvailableBackgroundImages(),
             'available_bg_images_thumbs' => $this->getAvailableBackgroundImagesThumbs(),
             'tab'                        => $tab,
+            'categories'                => $categories,
         ]);
 
         return view('ManageEvent.Customize', $data);

@@ -1,6 +1,8 @@
 {!! HTML::script('vendor/simplemde/dist/simplemde.min.js') !!}
 {!! HTML::style('vendor/simplemde/dist/simplemde.min.css') !!}
 
+{!! HTML::style('assets/stylesheet/activity.css') !!}
+
 <script>
     $(function() {
         try {
@@ -30,6 +32,7 @@
         $div.DateTimePicker({
             dateTimeFormat: window.Attendize.DateTimeFormat
         });
+
 
     });
 </script>

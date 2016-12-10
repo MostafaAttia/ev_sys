@@ -267,26 +267,21 @@ class EventCheckoutController extends Controller
     public function postCreateOrder(Request $request, $event_id)
     {
 
+        $ticket_order = $request->all();
+
         /*
-         * If there's no session kill the request and redirect back to the event homepage.
+         * If there's no session kill the request and respond with error message
          */
-//        if (!session()->get('ticket_order_' . $event_id)) {
-//            return response()->json([
-//                'status'      => 'error',
-//                'message'     => 'Your session has expired.',
-//                'redirectUrl' => route('showEventPage', [
-//                    'event_id' => $event_id,
-//                ])
-//            ]);
-//        }
+        if($ticket_order['expires']['date'] < Carbon::now()){
+            return response()->json([
+                'status'      => 'error',
+                'message'     => 'Your session has expired.'
+            ]);
+        }
 
 
         $event = Event::findOrFail($event_id);
         $order = new Order;
-
-//        $ticket_order = session()->get('ticket_order_' . $event_id);
-        $ticket_order = $request->all();
-
         $order_request = $ticket_order['request_data'][0];
 
         $validation_rules = $ticket_order['validation_rules'];

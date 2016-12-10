@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
-            {!! Form::label('is_live', 'Event Visibility', array('class'=>'control-label required')) !!}
+            {!! Form::label('is_live', 'Visibility', array('class'=>'control-label required')) !!}
             {!!  Form::select('is_live', [
             '1' => 'Make event visible to the public.',
             '0' => 'Hide event from the public.'],null,
@@ -14,7 +14,7 @@
                                         ))  !!}
         </div>
         <div class="form-group">
-            {!! Form::label('title', 'Event Title', array('class'=>'control-label required')) !!}
+            {!! Form::label('title', 'Title', array('class'=>'control-label required')) !!}
             {!!  Form::text('title', Input::old('title'),
                                         array(
                                         'class'=>'form-control',
@@ -23,12 +23,17 @@
         </div>
 
         <div class="form-group">
-           {!! Form::label('description', 'Event Description', array('class'=>'control-label')) !!}
+           {!! Form::label('description', 'Description', array('class'=>'control-label')) !!}
             {!!  Form::textarea('description', Input::old('description'),
                                         array(
                                         'class'=>'form-control editable',
                                         'rows' => 5
                                         ))  !!}
+        </div>
+
+        <div class="form-group">
+            {!! Form::label('category_id', 'Category', array('class'=>'control-label required')) !!}
+            {!!  Form::select('category_id', ['' => 'Choose Category'] + $categories , $event->category_id , array('class'=>'form-control' ))  !!}
         </div>
 
         <div class="form-group address-automatic" style="display:{{$event->location_is_manual ? 'none' : 'block'}};">
@@ -114,11 +119,11 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    {!! Form::label('start_date', 'Event Start Date', array('class'=>'required control-label')) !!}
-                    {!!  Form::text('start_date', $event->getFormattedDate('start_date'),
+                    {!! Form::label('start_date', 'Start Date', array('class'=>'required control-label')) !!}
+                    {!!  Form::text('start_date', $event->getFormattedDate('start_date', 'd-m-Y'),
                                                         [
                                                     'class'=>'form-control start hasDatepicker ',
-                                                    'data-field'=>'datetime',
+                                                    'data-field'=>'date',
                                                     'data-startend'=>'start',
                                                     'data-startendelem'=>'.end',
                                                     'readonly'=>''
@@ -129,18 +134,87 @@
 
             <div class="col-sm-6 ">
                 <div class="form-group">
-                    {!!  Form::label('end_date', 'Event End Date',
+                    {!!  Form::label('end_date', 'End Date',
                                         [
                                     'class'=>'required control-label '
                                 ])  !!}
-                    {!!  Form::text('end_date', $event->getFormattedDate('end_date'),
+                    {!!  Form::text('end_date', $event->getFormattedDate('end_date', 'd-m-Y'),
                                                 [
                                             'class'=>'form-control end hasDatepicker ',
-                                            'data-field'=>'datetime',
+                                            'data-field'=>'date',
                                             'data-startend'=>'end',
                                             'data-startendelem'=>'.start',
                                             'readonly'=>''
                                         ])  !!}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            {!!  Form::label('activity_weekdays', 'Days',
+            [
+            'class'=>'required control-label '
+            ])  !!}
+
+
+
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-xs btn-weekday @if(in_array(6, $event->weekdays_array())) active @endif">
+                    <input type="checkbox" name="weekdays[]" value="6" autocomplete="off" @if(in_array(6, $event->weekdays_array())) checked @endif > Saturday
+                </label>
+                <label class="btn btn-xs btn-weekday @if(in_array(7, $event->weekdays_array())) active @endif">
+                    <input type="checkbox" name="weekdays[]" value="7" autocomplete="off" @if(in_array(7, $event->weekdays_array())) checked @endif> Sunday
+                </label>
+                <label class="btn btn-xs btn-weekday @if(in_array(1, $event->weekdays_array())) active @endif">
+                    <input type="checkbox" name="weekdays[]" value="1" autocomplete="off" @if(in_array(1, $event->weekdays_array())) checked @endif> Monday
+                </label>
+                <label class="btn btn-xs btn-weekday @if(in_array(2, $event->weekdays_array())) active @endif">
+                    <input type="checkbox" name="weekdays[]" value="2" autocomplete="off" @if(in_array(2, $event->weekdays_array())) checked @endif> Tuesday
+                </label>
+                <label class="btn btn-xs btn-weekday @if(in_array(3, $event->weekdays_array())) active @endif">
+                    <input type="checkbox" name="weekdays[]" value="3" autocomplete="off" @if(in_array(3, $event->weekdays_array())) checked @endif> Wednesday
+                </label>
+                <label class="btn btn-xs btn-weekday @if(in_array(4, $event->weekdays_array())) active @endif">
+                    <input type="checkbox" name="weekdays[]" value="4" autocomplete="off" @if(in_array(4, $event->weekdays_array())) checked @endif> Thursday
+                </label>
+                <label class="btn btn-xs btn-weekday @if(in_array(5, $event->weekdays_array())) active @endif">
+                    <input type="checkbox" name="weekdays[]" value="5" autocomplete="off" @if(in_array(5, $event->weekdays_array())) checked @endif> Friday
+                </label>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    {!! Form::label('activity_start_time', 'Start Time', array('class'=>'required control-label')) !!}
+                    {!!  Form::text('activity_start_time', substr($event->activity_start_time, 0, -3),
+                    [
+                    'class'=>'form-control start hasDatepicker ',
+                    'data-field'=>'time',
+                    'data-startend'=>'start',
+                    'data-startendelem'=>'.end',
+                    'readonly'=>''
+
+                    ])  !!}
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    {!!  Form::label('activity_end_time', 'End Time',
+                    [
+                    'class'=>'required control-label '
+                    ])  !!}
+
+                    {!!  Form::text('activity_end_time', substr($event->activity_end_time, 0, -3),
+                    [
+                    'class'=>'form-control end hasDatepicker ',
+                    'data-field'=>'time',
+                    'data-startend'=>'end',
+                    'data-startendelem'=>'.start',
+                    'readonly'=> ''
+                    ])  !!}
                 </div>
             </div>
         </div>
