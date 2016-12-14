@@ -46,21 +46,51 @@ $api->version('v1', function ($api) {
         'uses' => 'App\Api\V1\Controllers\EventController@getEvent',
     ]);
 
-//    $api->post('{event_id}/checkout/create', [
-//        'as'   => 'postCreateOrder',
-//        'uses' => 'App\Api\V1\Controllers\EventCheckoutController@postCreateOrder',
-//    ]);
-
-
-    $api->post('{event_id}/checkout/', [
+    // get event tickets
+    $api->post('event/{event_id}/checkout/', [
         'as'   => 'postValidateTickets',
         'uses' => 'App\Api\V1\Controllers\EventCheckoutController@postValidateTickets',
     ]);
 
-    $api->post('{event_id}/checkout/create', [
+    $api->post('event/{event_id}/checkout/create', [
         'as'   => 'postCreateOrder',
         'uses' => 'App\Api\V1\Controllers\EventCheckoutController@postCreateOrder',
     ]);
+
+
+    // get list of attendees
+    $api->get('event/{event_id}/attendees', [
+        'as'   => 'getEventAttendees',
+        'uses' => 'App\Api\V1\Controllers\EventController@getEventAttendees',
+    ]);
+
+    // get list of categories
+    $api->get('categories', [
+        'as'   => 'getCategories',
+        'uses' => 'App\Api\V1\Controllers\EventController@getCategories',
+    ]);
+
+    // get all events inside a category
+    $api->get('/category/{category_id}/events', [
+        'as'   => 'getCategoryEvents',
+        'uses' => 'App\Api\V1\Controllers\EventController@getCategoryEvents',
+    ]);
+
+    // search events by title, venue name, location
+    $api->get('/events/search/{query}', [
+        'as'   => 'searchEvents',
+        'uses' => 'App\Api\V1\Controllers\EventController@searchEvents',
+    ]);
+
+
+
+
+
+
+
+
+
+
 
 
 

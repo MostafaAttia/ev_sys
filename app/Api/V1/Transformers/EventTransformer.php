@@ -29,7 +29,8 @@ class EventTransformer extends TransformerAbstract
             'location_state'            => $event->location_state,
             'location_lat'              => $event->location_lat,
             'location_long'             => $event->location_long,
-//            'is_live'                   => $event->is_live
+//            'is_live'                   => $event->is_live,
+            'category_id'               => $event->category_id,
         ];
 
         return $events;

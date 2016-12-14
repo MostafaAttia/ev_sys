@@ -28,7 +28,7 @@
 @stop
 
 @section('head')
-    {!! HTML::script('https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places') !!}
+    {!! HTML::script('https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyBrjKf7BKs-VOZAOvpxknoyVfkwpcnvpjs')!!}
     {!! HTML::script('vendor/geocomplete/jquery.geocomplete.min.js') !!}
     <script>
         $(function () {
@@ -389,9 +389,9 @@
 
                                             {!! Form::hidden('bg_image_path_custom', ($event->bg_type == 'image') ? $event->bg_image_path : '') !!}
                                         </div>
-                                            <a class="btn btn-link" href="https://pixabay.com?ref=attendize" title="PixaBay Free Images">
-                                            Images Provided By <b>PixaBay.com</b>
-                                            </a>
+                                            {{--<a class="btn btn-link" href="https://pixabay.com?ref=attendize" title="PixaBay Free Images">--}}
+                                            {{--Images Provided By <b>PixaBay.com</b>--}}
+                                            {{--</a>--}}
                                     </div>
                                 </div>
 

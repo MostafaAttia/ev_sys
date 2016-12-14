@@ -23,17 +23,44 @@
         <div class="col-md-12">
             <h1 property="name">{{$event->title}}</h1>
             <div class="event_venue">
-                <span property="startDate" content="{{ $event->start_date->toIso8601String() }}">
-                    {{ $event->start_date->format('D d M H:i A') }}
-                </span>
+                @if($event->is_activity)
+                    <b>From: </b>
+                    <span property="startDate" content="{{ $event->start_date->toIso8601String() }}">
+                        {{ $event->start_date->format('D d M Y') }}
+                    </span>
+                @else
+                    <span property="startDate" content="{{ $event->start_date->toIso8601String() }}">
+                        {{ $event->start_date->format('D d M H:i A') }}
+                    </span>
+                @endif
+
                 -
-                <span property="endDate" content="{{ $event->end_date->toIso8601String() }}">
-                     @if($event->start_date->diffInHours($event->end_date) <= 12)
-                        {{ $event->end_date->format('H:i A') }}
-                     @else
-                        {{ $event->end_date->format('D d M H:i A') }}
-                     @endif
-                </span>
+                @if($event->is_activity)
+                    <b>To: </b>
+                    <span property="endDate" content="{{ $event->end_date->toIso8601String() }}">
+                             @if($event->start_date->diffInHours($event->end_date) <= 12)
+                                {{ $event->end_date->format('H:i A') }}
+                             @else
+                                {{ $event->end_date->format('D d M Y') }}
+                             @endif
+                    </span>
+                    <br>
+                    <b>Every: </b>
+                    <span>
+                        @foreach($event->weekdays_names as $day)
+                            {{ $day->name }},
+                        @endforeach
+                    </span>
+                    <br>
+                @else
+                    <span property="endDate" content="{{ $event->end_date->toIso8601String() }}">
+                         @if($event->start_date->diffInHours($event->end_date) <= 12)
+                            {{ $event->end_date->format('H:i A') }}
+                        @else
+                            {{ $event->end_date->format('D d M H:i A') }}
+                        @endif
+                    </span>
+                @endif
                 @
                 <span property="location" typeof="Place">
                     <b property="name">{{$event->venue_name}}</b>

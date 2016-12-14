@@ -34,7 +34,8 @@
         "dingo/api": "1.0.*@dev",
         "barryvdh/laravel-cors": "^0.7.1",
         "zizaco/entrust": "5.2.x-dev",
-        "barryvdh/laravel-debugbar": "^2.3"
+        "barryvdh/laravel-debugbar": "^2.3",
+        "nicolaslopezj/searchable": "1.*"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",

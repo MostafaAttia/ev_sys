@@ -120,6 +120,7 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('start_date', 'Start Date', array('class'=>'required control-label')) !!}
+                    @if($event->is_activity)
                     {!!  Form::text('start_date', $event->getFormattedDate('start_date', 'd-m-Y'),
                                                         [
                                                     'class'=>'form-control start hasDatepicker ',
@@ -129,6 +130,18 @@
                                                     'readonly'=>''
 
                                                 ])  !!}
+                    @else
+                        {!!  Form::text('start_date', $event->getFormattedDate('start_date'),
+                        [
+                        'class'=>'form-control start hasDatepicker ',
+                        'data-field'=>'datetime',
+                        'data-startend'=>'start',
+                        'data-startendelem'=>'.end',
+                        'readonly'=>''
+
+                        ])  !!}
+                    @endif
+
                 </div>
             </div>
 
@@ -138,25 +151,36 @@
                                         [
                                     'class'=>'required control-label '
                                 ])  !!}
+                    @if($event->is_activity)
                     {!!  Form::text('end_date', $event->getFormattedDate('end_date', 'd-m-Y'),
                                                 [
                                             'class'=>'form-control end hasDatepicker ',
-                                            'data-field'=>'date',
+                                            'data-field'=>'date' ,
                                             'data-startend'=>'end',
                                             'data-startendelem'=>'.start',
                                             'readonly'=>''
                                         ])  !!}
+                    @else
+                        {!!  Form::text('end_date', $event->getFormattedDate('end_date'),
+                        [
+                        'class'=>'form-control end hasDatepicker ',
+                        'data-field'=>'datetime' ,
+                        'data-startend'=>'end',
+                        'data-startendelem'=>'.start',
+                        'readonly'=>''
+                        ])  !!}
+                    @endif
+
                 </div>
             </div>
         </div>
 
+        @if($event->is_activity)
         <div class="form-group">
             {!!  Form::label('activity_weekdays', 'Days',
             [
             'class'=>'required control-label '
             ])  !!}
-
-
 
             <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-xs btn-weekday @if(in_array(6, $event->weekdays_array())) active @endif">
@@ -218,6 +242,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <div class="row">
             <div class="col-md-6">

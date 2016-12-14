@@ -83,52 +83,53 @@ struct URLS{
     
     // USER LOGIN URLS
     // ---------------------------------------------------
-    USER_CREATE_ACCOUNT = USER_LOGIN + "login_normal.php",
-    USER_CREATE = USER_LOGIN + "login_facebook.php",
-    USER_CREATE_GOOGLE = USER_LOGIN + "login_google.php",
-    USER_LOGOUT_GOOGLE = USER_LOGIN + "logout.php",
+    USER_CREATE_ACCOUNT = USER_LOGIN + "login_normal.php",                  // Done
+    USER_CREATE = USER_LOGIN + "login_facebook.php",                        // Done
+    USER_CREATE_GOOGLE = USER_LOGIN + "login_google.php",                   // Done
+    USER_LOGOUT_GOOGLE = USER_LOGIN + "logout.php",                         // Done
     
     
     // USER URLS
     // -------------------------------------------
-    USER_FORGOT_PASSWORD = USER_PASSWORD + "password_reset_request.php",
-    USER_SEND_EMAIL = USER_EMAIL + "email_send_one.php",
+    USER_FORGOT_PASSWORD = USER_PASSWORD + "password_reset_request.php",    // Done
+    USER_SEND_EMAIL = USER_EMAIL + "email_send_one.php",                    // Deprecated
     
     
     // USER EDIT URLS
     // ---------------------------------------------------
-    USER_GET_DETAILS = USER_EDIT + "user_get_details.php",
-    USER_UPDATE_DETAILS = USER_EDIT + "user_update.php",
+    USER_GET_DETAILS = USER_EDIT + "user_get_details.php",                  // Done
+
+    USER_UPDATE_DETAILS = USER_EDIT + "user_update.php",                    // Done
     
     
     // USER LIST URLS
     // -------------------------------------------------------------
-    USERS_GET_ATTENDING = USER_MULTIPLE + "users_get_attending.php",
-    USERS_SEARCH = USER_MULTIPLE + "users_search.php",
+    USERS_GET_ATTENDING = USER_MULTIPLE + "users_get_attending.php",        // Done
+    USERS_SEARCH = USER_MULTIPLE + "users_search.php",                      // Deprecated
     
     
     // EVENT URLS
     // -----------------------------------------------------
-    EVENT_GET_DATA = EVENT_SINGLE + "event_get_details.php",
-    EVENT_CHECK_ATTEND = EVENT_SINGLE + "event_check_attend.php",
-    EVENT_ATTEND = EVENT_SINGLE + "event_attend.php",
-    EVENT_UNATTEND = EVENT_SINGLE + "event_unattend.php",
+    EVENT_GET_DATA = EVENT_SINGLE + "event_get_details.php",                // Done
+    EVENT_CHECK_ATTEND = EVENT_SINGLE + "event_check_attend.php",           // Deprecated
+    EVENT_ATTEND = EVENT_SINGLE + "event_attend.php",                       // Deprecated
+    EVENT_UNATTEND = EVENT_SINGLE + "event_unattend.php",                   // Deprecated
     
     
     // EVENT EDIT URLS
     // --------------------------------------------
-    EVENT_GET_DETAILS = EVENT_EDIT + "event_get_details.php",
+    EVENT_GET_DETAILS = EVENT_EDIT + "event_get_details.php",               // Deprecated
     
     
     // EVENT LIST URLS
     // ---------------------------------------------------------------------
-    EVENTS_GET_CATEGORIES = EVENT_MULTIPLE + "get_categories.php",
-    EVENTS_GET_ALL = EVENT_MULTIPLE + "events_get_by_category.php",
-    EVENTS_GET_GEO = EVENT_MULTIPLE + "events_get_by_geo.php",
-    EVENTS_SEARCH = EVENT_MULTIPLE + "events_search.php",
-    EVENTS_GET_CREATED = EVENT_MULTIPLE + "events_get_my_events.php",
-    EVENTS_GET_ATTENDING = EVENT_MULTIPLE + "events_get_my_attending.php",
-    EVENTS_GET_BOOKMARKED = EVENT_MULTIPLE + "events_get_bookmarked.php",
+    EVENTS_GET_CATEGORIES = EVENT_MULTIPLE + "get_categories.php",          // Done
+    EVENTS_GET_ALL = EVENT_MULTIPLE + "events_get_by_category.php",         // Done
+    EVENTS_GET_GEO = EVENT_MULTIPLE + "events_get_by_geo.php",              // Done, by venue name
+    EVENTS_SEARCH = EVENT_MULTIPLE + "events_search.php",                   // Done, by venue name, title, address
+    EVENTS_GET_CREATED = EVENT_MULTIPLE + "events_get_my_events.php",       // Deprecated
+    EVENTS_GET_ATTENDING = EVENT_MULTIPLE + "events_get_my_attending.php",  // Deprecated
+    EVENTS_GET_BOOKMARKED = EVENT_MULTIPLE + "events_get_bookmarked.php",   // Deprecated
     
     
     // COMMENT URLS
@@ -146,9 +147,9 @@ struct URLS{
     
     // TICKET LIST URLS
     // ------------------------------------------
-    TICKETS_GET_MY = TICKET_USER + "getMyTickets.php",
-    TICKETS_GET = TICKET_USER + "tickets_get.php",
-    TICKETS_GET_INFO = TICKET_EVENT + "tickets_get_stock.php",
+    TICKETS_GET_MY = TICKET_USER + "getMyTickets.php",                      // Done
+    TICKETS_GET = TICKET_USER + "tickets_get.php",                          // Done
+    TICKETS_GET_INFO = TICKET_EVENT + "tickets_get_stock.php",              // Deprecated
     
     
     // TICKET URLS

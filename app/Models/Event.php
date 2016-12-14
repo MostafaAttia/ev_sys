@@ -7,9 +7,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Str;
 use URL;
 
+use Nicolaslopezj\Searchable\SearchableTrait;
+
 class Event extends MyBaseModel
 {
-    use SoftDeletes;
+    use SoftDeletes, SearchableTrait;
+
+    protected $searchable = [
+        /**
+         * Columns and their priority in search results.
+         * Columns with higher values are more important.
+         * Columns with equal values have equal importance.
+         *
+         * @var array
+         */
+        'columns' => [
+            'events.title' => 10,
+            'events.venue_name' => 8,
+            'events.location_address_line_2' => 2,
+        ],
+    ];
 
     protected $hidden = [
         'pivot'
@@ -57,6 +74,11 @@ class Event extends MyBaseModel
     public function weekdays()
     {
         return $this->belongsToMany(\App\Models\Weekday::class, 'activity_weekdays')->select(['id']);
+    }
+
+    public function weekdays_names()
+    {
+        return $this->belongsToMany(\App\Models\Weekday::class, 'activity_weekdays')->select(['name']);
     }
 
     public function weekdays_array()

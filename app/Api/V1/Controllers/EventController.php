@@ -2,12 +2,12 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Api\V1\Transformers\AttendeeTransformer;
 use App\Api\V1\Transformers\EventTransformer;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Event;
 use Auth;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Image;
 use Log;
 use Validator;
@@ -51,6 +51,36 @@ class EventController extends Controller
 
         return $this->response->item($event, new EventTransformer);
 
+    }
+
+    public function getEventAttendees($event_id)
+    {
+        $event = Event::findOrFail($event_id);
+
+        $attendees = $event->attendees;
+
+        return $this->response->collection($attendees, new AttendeeTransformer);
+    }
+
+    public function getCategories()
+    {
+        $categories = Category::all();
+
+        return $categories;
+    }
+
+    public function getCategoryEvents($category_id)
+    {
+        $events = Event::where(['category_id' => $category_id, 'is_live'=> 1])->get();
+
+        return $this->response->collection($events, new EventTransformer);
+    }
+
+    public function searchEvents($query)
+    {
+        $events = Event::search($query)->get();
+
+        return $this->response->collection($events, new EventTransformer);
     }
 
 
