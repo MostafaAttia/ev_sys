@@ -154,6 +154,29 @@
                                                      class=" loadModal">You can click here to create an event.</a>
                 </div>
             @endif
+
+            <h4 style="margin-bottom: 25px;margin-top: 20px;">Upcoming Activities</h4>
+            @if($upcoming_activities->count())
+                @foreach($upcoming_activities as $event)
+                    @include('ManageOrganiser.Partials.EventPanel')
+                @endforeach
+            @else
+                <div class="alert alert-success alert-lg">
+                    You have no Activities coming up.
+                </div>
+            @endif
+
+            <h4 style="margin-bottom: 25px;margin-top: 20px;">Happening Now</h4>
+            @if($recent_activities->count())
+                @foreach($recent_activities as $event)
+                    @include('ManageOrganiser.Partials.EventPanel')
+                @endforeach
+            @else
+                <div class="alert alert-success alert-lg">
+                    You have no Recent Activities !
+                </div>
+            @endif
+
         </div>
         <div class="col-md-4">
             <h4 style="margin-bottom: 25px;margin-top: 20px;">Recent Orders</h4>

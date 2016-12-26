@@ -302,8 +302,6 @@ class EventCheckoutController extends Controller
             ]);
         }
 
-        Log::info('postCreateOrder request after validation: ');
-        Log::info($request->all());
 
         /*
          * Add the request data to a session in case payment is required off-site
@@ -513,13 +511,6 @@ class EventCheckoutController extends Controller
             $event = Event::findOrFail($ticket_order['event_id']);
             $attendee_increment = 1;
             $ticket_questions = isset($request_data['ticket_holder_questions']) ? $request_data['ticket_holder_questions'] : [];
-
-            Log::info('completeOrder ticket_order session: ');
-            Log::info(json_encode($ticket_order));
-
-            Log::info('completeOrder $request_data array: ');
-            Log::info($request_data);
-
 
             /*
              * Create the order

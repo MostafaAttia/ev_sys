@@ -121,6 +121,8 @@
                 <div class="form-group">
                     {!! Form::label('start_date', 'Start Date', array('class'=>'required control-label')) !!}
                     @if($event->is_activity)
+                    {!! Form::hidden('is_activity', 1) !!}
+
                     {!!  Form::text('start_date', $event->getFormattedDate('start_date', 'd-m-Y'),
                                                         [
                                                     'class'=>'form-control start hasDatepicker ',

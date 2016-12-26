@@ -473,6 +473,8 @@ class EventController extends MyBaseController
             ]);
         }
 
+        $is_activity = $request->has('is_activity') ? true : false;
+
         $event->is_live = $request->get('is_live');
         $event->title = $request->get('title');
         $event->description = strip_tags($request->get('description'));
@@ -480,16 +482,19 @@ class EventController extends MyBaseController
         $event->start_date = $request->get('start_date') ? Carbon::createFromFormat('d-m-Y H:i',
             $request->get('start_date') . ($event->is_activity ?  ' 00:00' : '') ) : null;
 
-        $event->activity_start_time = $request->get('activity_start_time') ? Carbon::createFromFormat('H:i',
-            $request->get('activity_start_time')) : null;
+        if($is_activity){
 
-        $event->activity_end_time = $request->get('activity_end_time') ? Carbon::createFromFormat('H:i',
-            $request->get('activity_end_time')) : null;
+            $event->activity_start_time = $request->get('activity_start_time') ? Carbon::createFromFormat('H:i',
+                $request->get('activity_start_time')) : null;
 
-        $weekdays = Input::get('weekdays');
-        $event->weekdays()->sync($weekdays);
+            $event->activity_end_time = $request->get('activity_end_time') ? Carbon::createFromFormat('H:i',
+                $request->get('activity_end_time')) : null;
 
-//        Log::info($event->weekdays()->getRelatedIds());
+            $weekdays = Input::get('weekdays');
+            $event->weekdays()->sync($weekdays);
+
+        }
+
 
         /*
          * If the google place ID is the same as before then don't update the venue

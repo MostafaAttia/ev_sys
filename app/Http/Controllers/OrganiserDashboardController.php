@@ -17,7 +17,10 @@ class OrganiserDashboardController extends MyBaseController
     public function showDashboard($organiser_id)
     {
         $organiser = Organiser::scope()->findOrFail($organiser_id);
-        $upcoming_events = $organiser->events()->where('end_date', '>=', Carbon::now())->get();
+        $upcoming_events = $organiser->events()->where('is_activity', '=', 0)->where('end_date', '>=', Carbon::now())->get();
+        $upcoming_activities = $organiser->events()->where('is_activity', '=', 1)->where('start_date', '>=', Carbon::now())->get();
+        $recent_activities = $organiser->events()->where('is_activity', '=', 1)->where('end_date', '>=', Carbon::now())->get();
+
         $calendar_events = [];
         $calendar_activities = [];
 
@@ -66,6 +69,8 @@ class OrganiserDashboardController extends MyBaseController
         $data = [
             'organiser'             => $organiser,
             'upcoming_events'       => $upcoming_events,
+            'upcoming_activities'   => $upcoming_activities,
+            'recent_activities'     => $recent_activities,
             'calendar_events'       => json_encode($calendar_events),
             'calendar_activities'   => json_encode($calendar_activities),
         ];
