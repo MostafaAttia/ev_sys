@@ -6,6 +6,44 @@
 include_once('api_routes.php');
 
 
+Route::group(['prefix' => 'admin'], function(){
+
+    Route::get('register', 'AdminController@register');
+    Route::post('register', 'AdminController@store');
+    Route::get('login',['as' => 'admin.login', 'uses' => 'AdminController@showLogin']);
+    Route::post('login','AdminController@postLogin');
+
+    Route::group(['middleware' => 'admin'], function(){
+
+        Route::get('logout', 'AdminController@logout');
+        Route::get('dashboard', ['as'=>'admin.dashboard', 'uses'=> 'AdminController@showDashboard']);
+
+        // manage admins
+        Route::group(['middleware' => 'admin.super'], function(){
+            Route::get('create', ['as'=>'admin.create.show', 'uses'=> 'AdminController@showCreate']);
+            Route::post('create', ['as'=>'admin.create.post', 'uses'=> 'AdminController@postCreate']);
+            Route::get('manage', ['as'=>'admin.manage', 'uses'=> 'AdminController@showManage']);
+            Route::get('/{admin_id}/edit', ['as'=>'admin.edit', 'uses'=> 'AdminController@edit']);
+            Route::post('/{admin_id}/update', ['as'=>'admin.update', 'uses'=> 'AdminController@update']);
+            Route::delete('/{admin_id}/delete', ['as'=>'admin.delete', 'uses'=> 'AdminController@destroy']);
+        });
+
+        // manage organisers
+        Route::group(['prefix' => 'organisers'], function(){
+            Route::get('/', ['as'=>'organisers.manage', 'uses'=> 'AdminController@showAllOrganisers']);
+            Route::delete('/{organiser_id}/delete', ['as'=>'organiser.delete', 'uses'=> 'AdminController@destroy']);
+
+        });
+
+
+
+    });
+
+
+
+
+});
+
 
 /*
  * -------------------------

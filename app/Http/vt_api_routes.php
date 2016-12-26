@@ -83,33 +83,6 @@ $api->version('v1', function ($api) {
     ]);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // Role routes
 //    $api->post('role/', 'App\Http\Controllers\RolesController@store');
 //    $api->post('attach/{user_id}/role/{role_name}/', 'App\Http\Controllers\UsersController@assignUserRole');

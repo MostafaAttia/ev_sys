@@ -34,7 +34,6 @@
                     </span>
                 @endif
 
-                -
                 @if($event->is_activity)
                     <b>To: </b>
                     <span property="endDate" content="{{ $event->end_date->toIso8601String() }}">
@@ -50,6 +49,12 @@
                         @foreach($event->weekdays_names as $day)
                             {{ $day->name }},
                         @endforeach
+                    </span>
+                    <br>
+                    <span>
+                        {{ \Carbon::parse($event->activity_start_time)->format('H:i')  }} &nbsp;
+                        <i class="fa fa-clock-o"></i> &nbsp;
+                        {{ \Carbon::parse($event->activity_end_time)->format('H:i')  }}
                     </span>
                     <br>
                 @else
