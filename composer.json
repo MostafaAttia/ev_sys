@@ -36,7 +36,8 @@
         "zizaco/entrust": "5.2.x-dev",
         "barryvdh/laravel-debugbar": "^2.3",
         "nicolaslopezj/searchable": "1.*",
-        "cartalyst/sentinel": "2.0.*"
+        "cartalyst/sentinel": "2.0.*",
+        "mpociot/laravel-apidoc-generator": "1.*"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",

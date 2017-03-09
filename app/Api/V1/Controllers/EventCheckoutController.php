@@ -45,7 +45,7 @@ class EventCheckoutController extends Controller
     }
 
     /**
-     * Validate a ticket request. If successful reserve the tickets and redirect to checkout
+     * Validate a ticket request. If successful reserve the tickets
      *
      * @param Request $request
      * @param $event_id
@@ -258,7 +258,7 @@ class EventCheckoutController extends Controller
     }
 
     /**
-     * Create the order, handle payment, update stats, fire off email jobs then redirect user
+     * Create the order, handle payment, update stats, fire off email jobs
      *
      * @param Request $request
      * @param $event_id

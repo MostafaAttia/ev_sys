@@ -4,7 +4,13 @@ use App\Http\Controllers;
 
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1', function ($api) {
+$api->version('v1', /**
+ * @param $api
+ */
+    /**
+     * @param $api
+     */
+    function ($api) {
 
     // Auth routes for CLIENTS
     $api->post('signup', 'App\Api\V1\Controllers\ClientAuthController@signup');
@@ -19,10 +25,10 @@ $api->version('v1', function ($api) {
         'as'   => 'logout',
     ]);
 
-    $api->post('login/forgot-password', [
-        'as'   => 'postForgotPassword',
-        'uses' => 'App\Api\V1\Controllers\RemindersController@postRemind',
-    ]);
+//    $api->post('login/forgot-password', [
+//        'as'   => 'postForgotPassword',
+//        'uses' => 'App\Api\V1\Controllers\RemindersController@postRemind',
+//    ]);
 
     $api->get('client/{client_id?}/{client_email?}', 'App\Api\V1\Controllers\ClientController@getClientDetails');
     $api->post('client/{client_id}', 'App\Api\V1\Controllers\ClientController@updateClient');
@@ -46,18 +52,6 @@ $api->version('v1', function ($api) {
         'uses' => 'App\Api\V1\Controllers\EventController@getEvent',
     ]);
 
-    // get event tickets
-    $api->post('event/{event_id}/checkout/', [
-        'as'   => 'postValidateTickets',
-        'uses' => 'App\Api\V1\Controllers\EventCheckoutController@postValidateTickets',
-    ]);
-
-    $api->post('event/{event_id}/checkout/create', [
-        'as'   => 'postCreateOrder',
-        'uses' => 'App\Api\V1\Controllers\EventCheckoutController@postCreateOrder',
-    ]);
-
-
     // get list of attendees
     $api->get('event/{event_id}/attendees', [
         'as'   => 'getEventAttendees',
@@ -80,6 +74,17 @@ $api->version('v1', function ($api) {
     $api->get('/events/search/{query}', [
         'as'   => 'searchEvents',
         'uses' => 'App\Api\V1\Controllers\EventController@searchEvents',
+    ]);
+
+    // get event tickets
+    $api->post('event/{event_id}/checkout/', [
+        'as'   => 'postValidateTickets',
+        'uses' => 'App\Api\V1\Controllers\EventCheckoutController@postValidateTickets',
+    ]);
+
+    $api->post('event/{event_id}/checkout/create', [
+        'as'   => 'postCreateOrder',
+        'uses' => 'App\Api\V1\Controllers\EventCheckoutController@postCreateOrder',
     ]);
 
 

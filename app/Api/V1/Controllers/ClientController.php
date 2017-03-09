@@ -22,7 +22,14 @@ class ClientController extends Controller
 
 
     /**
-     * get the user details by ID or Email
+     * Get User Details by ID OR Email
+     *
+     * <strong>Parameters:</strong>
+     * <br>
+     * ID             : optional_if|min:6 <br>
+     * email          : optional_if|email|unique <br>
+     *
+     * if you want to get details by email, first param will be null.
      *
      * @param null $client_id
      * @param null $client_email
@@ -47,6 +54,24 @@ class ClientController extends Controller
 
     }
 
+    /**
+     * Update/Edit User
+     *
+     * <strong>Parameters:</strong>
+     * <br>
+     * first_name   : optional|max:56|min:4 <br>
+     * last_name    : optional|max:56|min:4 <br>
+     * email        : optional|email|unique <br>
+     * gender       : optional|in:male,female <br>
+     * dob          : optional|date <br>
+     * phone        : optional|max:15|min:4 <br>
+     * address      : optional|string|min:10|max:255 <br>
+     *
+     *
+     * @param Request $request
+     * @param $client_id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function updateClient(Request $request, $client_id)
     {
 

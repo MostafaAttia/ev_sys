@@ -18,7 +18,7 @@ class UserLogoutController extends Controller
     }
 
     /**
-     * Log a user out and redirect them
+     * Log Out
      *
      * @return mixed
      */
@@ -28,6 +28,5 @@ class UserLogoutController extends Controller
 
         return $this->response->array(['message' => 'You Are Now Logged out!']);
 
-//        return redirect()->to('/?logged_out=yup');
     }
 }

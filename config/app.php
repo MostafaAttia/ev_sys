@@ -176,6 +176,7 @@ return [
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class, // for debugging in DEV, Must Removed in PRODUCTION
     ],

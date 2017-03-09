@@ -23,7 +23,16 @@ class ClientAuthController extends Controller
     use Helpers;
 
     /**
-     * Client sign up
+     * Sign Up
+     *
+     * <strong>Parameters:</strong>
+     * <br>
+     * first_name           : required <br>
+     * last_name            : required <br>
+     * email                : required|email|unique <br>
+     * password             : required|min:6 <br>
+     * password_confirmation: required <br>
+     *
      *
      * @param Request $request
      * @return \Dingo\Api\Http\Response
@@ -34,7 +43,7 @@ class ClientAuthController extends Controller
             'first_name'         => 'required',
             'last_name'         => 'required',
             'email'        => 'required|email|unique:clients',
-            'password'     => 'required|min:5|confirmed',
+            'password'     => 'required|min:6|confirmed',
         ]);
 
         $client_data = $request->only(['email', 'first_name', 'last_name', 'password']);
@@ -57,7 +66,7 @@ class ClientAuthController extends Controller
     }
 
     /**
-     * Confirm a client email
+     * Confirm email
      *
      * @param $confirmation_code
      * @return mixed
@@ -76,15 +85,21 @@ class ClientAuthController extends Controller
         $client->confirmation_code = null;
         $client->save();
 
-//        session()->flash('message', 'Success! Your email is now verified. You can now login.');
-
-
         return $this->response()->array(['message'=> 'Your Email Confirmed, You can now login!']);
 //        return redirect()->route('login');
     }
 
     /**
-     * Client login
+     * Login
+     *
+     * <strong>Parameters:</strong>
+     * <br>
+     * email                : required|email|unique <br>
+     * password             : required|min:6 <br>
+     *
+     * <strong>Response:</strong>
+     * <br>
+     * {"token": "jwt_token"}
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|string|void
@@ -113,7 +128,6 @@ class ClientAuthController extends Controller
         try {
 
             if (! $token = JWTAuth::attempt($credentials) ) {
-//                return $this->response->errorUnauthorized();
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
         } catch (JWTException $e) {

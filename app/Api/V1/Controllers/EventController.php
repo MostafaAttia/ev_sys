@@ -21,7 +21,7 @@ class EventController extends Controller
 
 
     /**
-     * Return all events, including unpublished events
+     * Get all Events [including unpublished events]
      *
      * @return \Dingo\Api\Http\Response
      */
@@ -34,7 +34,7 @@ class EventController extends Controller
 
 
     /**
-     * Return all live events
+     * Get all live events
      *
      * @return \Dingo\Api\Http\Response
      */
@@ -45,6 +45,16 @@ class EventController extends Controller
         return $this->response->collection($events, new EventTransformer);
     }
 
+    /**
+     * Get Event by id
+     *
+     * <strong>Parameters:</strong>
+     * <br>
+     * event_id  : required|integer <br>
+     *
+     * @param $event_id
+     * @return \Dingo\Api\Http\Response
+     */
     public function getEvent($event_id)
     {
         $event = Event::findOrFail($event_id);
@@ -53,6 +63,16 @@ class EventController extends Controller
 
     }
 
+    /**
+     * List Attendees
+     *
+     * <strong>Parameters:</strong>
+     * <br>
+     * event_id  : required|integer <br>
+     *
+     * @param $event_id
+     * @return \Dingo\Api\Http\Response
+     */
     public function getEventAttendees($event_id)
     {
         $event = Event::findOrFail($event_id);
@@ -62,6 +82,11 @@ class EventController extends Controller
         return $this->response->collection($attendees, new AttendeeTransformer);
     }
 
+    /**
+     * List all Categories
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function getCategories()
     {
         $categories = Category::all();
@@ -69,6 +94,16 @@ class EventController extends Controller
         return $categories;
     }
 
+    /**
+     * Get Events in a category
+     *
+     * <strong>Parameters:</strong>
+     * <br>
+     * category_id  : required|integer <br>
+     *
+     * @param $category_id
+     * @return \Dingo\Api\Http\Response
+     */
     public function getCategoryEvents($category_id)
     {
         $events = Event::where(['category_id' => $category_id, 'is_live'=> 1])->get();
@@ -76,6 +111,11 @@ class EventController extends Controller
         return $this->response->collection($events, new EventTransformer);
     }
 
+    /**
+     * Search Events by title, venue name, location
+     * @param $query
+     * @return \Dingo\Api\Http\Response
+     */
     public function searchEvents($query)
     {
         $events = Event::search($query)->get();
