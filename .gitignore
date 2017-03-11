@@ -3,6 +3,7 @@
 /vendor
 /node_modules
 .env
+.env.dev
 .idea
 installed
 /.settings/
