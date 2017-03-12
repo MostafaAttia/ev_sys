@@ -3,6 +3,8 @@
 /node_modules
 .idea
 installed
+/vendor
+.env
 /.settings/
 /.project
 /.buildpath
