@@ -4,7 +4,7 @@ php /var/www/html/artisan optimize
 php /var/www/html/artisan view:clear
 php /var/www/html/artisan cache:clear
 
-sudo chown -R ec2-user:www-data /var/www/html
+sudo chown -R ec2-user:www /var/www/html
 sudo find /var/www/html -type d -exec chmod 755 {} +
 sudo find /var/www/html -type f -exec chmod 644 {} +
 sudo chmod -R 777 /var/www/html/storage
