@@ -7,4 +7,4 @@ sudo find /var/www/html -type d -exec sudo chmod 755 {} +
 sudo chmod -R 777 /var/www/html/storage
 sudo chmod -R 777 /var/www/html/bootstrap
 
-#composer install -d /var/www/html
+composer update -d /var/www/html
