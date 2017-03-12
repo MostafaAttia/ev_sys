@@ -20,7 +20,3 @@ sudo chgrp -R apache /var/www/html/storage /var/www/html/bootstrap/cache
 sudo chmod -R ug+rwx /var/www/html/storage /var/www/html/bootstrap/cache
 
 composer update -d /var/www/html
-
-#sudo chmod -R 777 /var/www/html/public
-#sudo chmod -R 777 /var/www/html/bootstrap
-#sudo chmod -R 777 /var/www/html/storage
