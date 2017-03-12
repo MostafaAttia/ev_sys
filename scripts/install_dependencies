@@ -1,2 +1,3 @@
 #!/bin/bash
 #yum install -y httpd24
+sudo chown -R ec2-user:www /var/www/html
