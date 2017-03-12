@@ -5,6 +5,7 @@
 installed
 /vendor
 .env
+.env.*
 /.settings/
 /.project
 /.buildpath
