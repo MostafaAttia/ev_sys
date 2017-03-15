@@ -6,6 +6,7 @@ installed
 /vendor
 .env
 .env.*
+/config/filesystems.php
 /.settings/
 /.project
 /.buildpath
