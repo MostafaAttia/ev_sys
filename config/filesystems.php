@@ -50,15 +50,15 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key'    => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            'key'    => 'AKIAISSBYORQEZ7VMJEA',
+            'secret' => 'YOwdDkqNLKcsMmdw1Rx8pbA0m2Jo5zbrCtdJlkzH',
+            'region' => 'us-east-1',
+            'bucket' => 'cdn.vt17.dev',
         ],
 
         'rackspace' => [
             'driver'    => 'rackspace',
-            'username'  => 'your-username',
+            'username'  => 'NitKLnpK3VOnyEQytNwdLQa6h/G4axnyma9p4aY+',
             'key'       => 'your-key',
             'container' => 'your-container',
             'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',

@@ -30,6 +30,16 @@ last_name            : required <br>
 email                : required|email|unique <br>
 password             : required|min:6 <br>
 password_confirmation: required <br>
+<br>
+gender               : optional|in:male,female <br>
+dob                  : optional|date <br>
+phone                : optional|max:15|min:4 <br>
+address              : optional|string|min:10|max:255 <br>
+image                : optional|image|mimes:jpeg,png,jpg|max:2048 bytes <br>
+
+<strong>Response:</strong>
+
+array containing a message of success and a token
 
 > Example request:
 
@@ -173,13 +183,7 @@ $.ajax(settings).done(function (response) {
 > Example response:
 
 ```json
-{
-    "exception": null,
-    "original": {
-        "message": "You Are Now Logged out!"
-    },
-    "headers": {}
-}
+null
 ```
 
 ### HTTP Request
@@ -248,8 +252,8 @@ null
 
 <strong>Parameters:</strong>
 <br>
-first_name   : optional|max:56|min:4 <br>
-last_name    : optional|max:56|min:4 <br>
+first_name   : optional|max:56 <br>
+last_name    : optional|max:56 <br>
 email        : optional|email|unique <br>
 gender       : optional|in:male,female <br>
 dob          : optional|date <br>

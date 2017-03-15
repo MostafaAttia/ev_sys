@@ -59,8 +59,8 @@ class ClientController extends Controller
      *
      * <strong>Parameters:</strong>
      * <br>
-     * first_name   : optional|max:56|min:4 <br>
-     * last_name    : optional|max:56|min:4 <br>
+     * first_name   : optional|max:56 <br>
+     * last_name    : optional|max:56 <br>
      * email        : optional|email|unique <br>
      * gender       : optional|in:male,female <br>
      * dob          : optional|date <br>
@@ -76,8 +76,8 @@ class ClientController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'first_name'    => 'max:56|min:4',
-            'last_name'     => 'max:56|min:4',
+            'first_name'    => 'max:56',
+            'last_name'     => 'max:56',
             'email'         => 'email|unique:clients',
             'gender'        => 'in:male,female',
             'dob'           => 'date',

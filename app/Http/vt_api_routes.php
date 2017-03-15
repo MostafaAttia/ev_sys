@@ -4,9 +4,8 @@ use App\Http\Controllers;
 
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1', /**
- * @param $api
- */
+$api->version('v1',
+
     /**
      * @param $api
      */
@@ -37,7 +36,7 @@ $api->version('v1', /**
 
 
     // events routes
-    $api->get('/events/all', [ 'middleware' => 'jwt.auth', // protected route !
+    $api->get('/events/all', [ 'middleware' => 'jwt.refresh', // protected route !
         'as'   => 'getAllEvents',
         'uses' => 'App\Api\V1\Controllers\EventController@getAllEvents',
     ]);

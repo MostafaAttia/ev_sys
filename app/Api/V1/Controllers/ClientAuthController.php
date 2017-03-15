@@ -2,7 +2,6 @@
 
 namespace App\Api\V1\Controllers;
 
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -17,6 +16,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Dingo\Api\Exception\ValidationHttpException;
+use Storage;
 
 class ClientAuthController extends Controller
 {
@@ -32,6 +32,16 @@ class ClientAuthController extends Controller
      * email                : required|email|unique <br>
      * password             : required|min:6 <br>
      * password_confirmation: required <br>
+     * <br>
+     * gender               : optional|in:male,female <br>
+     * dob                  : optional|date <br>
+     * phone                : optional|max:15|min:4 <br>
+     * address              : optional|string|min:10|max:255 <br>
+     * image                : optional|image|mimes:jpeg,png,jpg|max:2048 bytes <br>
+     *
+     * <strong>Response:</strong>
+     *
+     * array containing a message of success and a token
      *
      *
      * @param Request $request
@@ -40,14 +50,28 @@ class ClientAuthController extends Controller
     public function signup(Request $request)
     {
         $this->validate($request, [
-            'first_name'         => 'required',
-            'last_name'         => 'required',
-            'email'        => 'required|email|unique:clients',
-            'password'     => 'required|min:6|confirmed',
+            'first_name'    => 'required|max:56',
+            'last_name'     => 'required|max:56',
+            'email'         => 'required|email|unique:clients',
+            'password'      => 'required|min:6|confirmed',
+            'gender'        => 'in:male,female',
+            'dob'           => 'date',
+            'phone'         => 'max:15|min:4',
+            'address'       => 'string|min:10|max:255',
+            'image'         => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $client_data = $request->only(['email', 'first_name', 'last_name', 'password']);
+        $client_data = $request->all();
         $client_data['confirmation_code'] = str_random();
+
+        // upload user image
+
+        $imageName = time().'.'.$request->image->getClientOriginalExtension();
+        $image = $request->file('image');
+        $t = Storage::disk('s3')->put('user_content/'.$imageName, file_get_contents($image), 'public');
+        $imageName = Storage::disk('s3')->url('user_content/'.$imageName);
+        $client_data['image_path'] = $imageName;
+
         $client = Client::create($client_data);
 
         // TODO: Do this async?
@@ -56,12 +80,23 @@ class ClientAuthController extends Controller
             function ($message) use ($request) {
                 $message->to($request->get('email'), $request->get('first_name'))
                     ->subject('Thank you for registering for Vitee');
-            });
+        });
 
-//        session()->flash('message', 'Success! You can now login, after confirming your email.');
+        Config::set('auth.providers.users.model', Client::class);
+        $credentials = $request->only(['email', 'password']);
 
-        return $this->response->created();
+        try {
+            if (! $token = JWTAuth::attempt($credentials) ) {
+                return response()->json(['error' => 'invalid_credentials'], 401);
+            }
+        } catch (JWTException $e) {
+            return $this->response->error('could_not_create_token', 500);
+        }
 
+        return $this->response->array([
+            'message'   => 'Thank you for registering for Vitee!',
+            'token'     => $token
+        ]);
 
     }
 
@@ -86,7 +121,7 @@ class ClientAuthController extends Controller
         $client->save();
 
         return $this->response()->array(['message'=> 'Your Email Confirmed, You can now login!']);
-//        return redirect()->route('login');
+
     }
 
     /**
@@ -126,7 +161,6 @@ class ClientAuthController extends Controller
         }
 
         try {
-
             if (! $token = JWTAuth::attempt($credentials) ) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }

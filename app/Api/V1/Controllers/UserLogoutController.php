@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Dingo\Api\Routing\Helpers;
 
+use Illuminate\Http\Request;
+use JWTAuth;
+
 class UserLogoutController extends Controller
 {
     use Helpers;
@@ -22,11 +25,14 @@ class UserLogoutController extends Controller
      *
      * @return mixed
      */
-    public function doLogout()
+    public function doLogout(Request $request)
     {
-        $this->auth->logout();
+        // $this->auth->logout();
+        $header = $request->header('Authorization');
 
-        return $this->response->array(['message' => 'You Are Now Logged out!']);
+        $token = ltrim($header,"Bearer");
+
+        JWTAuth::invalidate($token);
 
     }
 }
