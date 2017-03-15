@@ -66,11 +66,12 @@ class ClientAuthController extends Controller
 
         // upload user image
 
-        $imageName = time().'.'.$request->image->getClientOriginalExtension();
-        $image = $request->file('image');
-        $t = Storage::disk('s3')->put('user_content/'.$imageName, file_get_contents($image), 'public');
-        $imageName = Storage::disk('s3')->url('user_content/'.$imageName);
-        $client_data['image_path'] = $imageName;
+        if($image = $request->file('image')){
+            $imageName = time().'.'.$request->image->getClientOriginalExtension();
+            $t = Storage::disk('s3')->put('user_content/'.$imageName, file_get_contents($image), 'public');
+            $imageName = Storage::disk('s3')->url('user_content/'.$imageName);
+            $client_data['image_path'] = $imageName;
+        }
 
         $client = Client::create($client_data);
 
@@ -82,20 +83,8 @@ class ClientAuthController extends Controller
                     ->subject('Thank you for registering for Vitee');
         });
 
-        Config::set('auth.providers.users.model', Client::class);
-        $credentials = $request->only(['email', 'password']);
-
-        try {
-            if (! $token = JWTAuth::attempt($credentials) ) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
-            }
-        } catch (JWTException $e) {
-            return $this->response->error('could_not_create_token', 500);
-        }
-
         return $this->response->array([
-            'message'   => 'Thank you for registering for Vitee!',
-            'token'     => $token
+            'message'   => 'Thank you for registering for Vitee!, We have sent you a confirmation email to '. $client->email
         ]);
 
     }
@@ -152,7 +141,9 @@ class ClientAuthController extends Controller
         $client = Client::where('email', $request->get('email'))->first();
         if($client){
             if(! $client->is_email_confirmed) {
-                return 'You Are Not Confirmed yet';
+                return $this->response->array([
+                    'message'=> 'You Are Not Confirmed yet'
+                ]);
             }
         }
 
