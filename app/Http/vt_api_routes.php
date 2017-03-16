@@ -34,9 +34,8 @@ $api->version('v1',
 
 
 
-
     // events routes
-    $api->get('/events/all', [ 'middleware' => 'jwt.refresh', // protected route !
+    $api->get('/events/all', [ 'middleware' => 'jwt.refresh',
         'as'   => 'getAllEvents',
         'uses' => 'App\Api\V1\Controllers\EventController@getAllEvents',
     ]);

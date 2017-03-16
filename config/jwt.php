@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'secret' => env('JWT_SECRET', 'DETaNAWF7yWWtytnVdr7IpJNQUUgZXia'),
+    'secret' => env('JWT_SECRET', 'w77oF8GJm7HZQR8KXXzgvebsqubN26ij'),
 
     /*
     |--------------------------------------------------------------------------
@@ -110,7 +110,7 @@ return [
     |
     */
 
-    'blacklist_enabled' => env('JWT_BLACKLIST_ENABLED', true),
+    'blacklist_enabled' => env('JWT_BLACKLIST_ENABLED', false),
 
     /*
     |--------------------------------------------------------------------------
