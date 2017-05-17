@@ -16,6 +16,15 @@
                 </a>
             </li>
 
+            @if($organiser->has_auditorium)
+            <li class="{{ Request::is('*auditoriums*') ? 'active' : '' }}">
+                <a href="{{route('showOrganiserAuditoriums', array('organiser_id' => $organiser->id))}}">
+                    <span class="figure"><i class="ico-clubs"></i></span>
+                    <span class="text">Auditoriums</span>
+                </a>
+            </li>
+            @endif
+
             <li class="{{ Request::is('*customize*') ? 'active' : '' }}">
                 <a href="{{route('showOrganiserCustomize', array('organiser_id' => $organiser->id))}}">
                     <span class="figure"><i class="ico-cog"></i></span>

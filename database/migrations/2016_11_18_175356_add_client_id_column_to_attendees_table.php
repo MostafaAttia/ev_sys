@@ -26,7 +26,7 @@ class AddClientIdColumnToAttendeesTable extends Migration
      */
     public function down()
     {
-        Schema::table('clients', function($table)
+        Schema::table('attendees', function($table)
         {
             $table->dropColumn('client_id');
         });

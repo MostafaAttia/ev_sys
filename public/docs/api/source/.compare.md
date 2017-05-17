@@ -201,6 +201,96 @@ null
 
 
 <!-- END_135a29bc1e5ba0dc0dbeb458895243c0 -->
+<!-- START_ff3f8c566c9ef2b4156ea5ebcf6bcf69 -->
+## Generates reset token for a given user
+
+* <strong>Parameters:</strong>
+<br>
+email                : required|email <br>
+
+NOTE: in headers please send  Accept  application/json , or your request will fail :)
+
+<strong>Response:</strong> <br>
+
+success: data array with password-reset token, <br>
+error: otherwise <br>
+
+> Example request:
+
+```bash
+curl "http://localhost//api/password/email" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/password/email",
+    "method": "POST",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST /api/password/email`
+
+
+<!-- END_ff3f8c566c9ef2b4156ea5ebcf6bcf69 -->
+<!-- START_5e9e4ac523cd01bd511cd54c969e8d9c -->
+## Reset the given user&#039;s password.
+
+<strong>Parameters:</strong>
+<br>
+email                : required|email <br>
+password             : required|min:6 <br>
+password_confirmation: required <br>
+token                : required <br>
+
+NOTE: in headers please send  Accept  application/json , or your request will fail :)
+
+<strong>Response:</strong> <br>
+
+array containing a message with a login token, <br>
+if success -> token:{your_login_token}, <br>
+if failed ->  token:null <br>
+
+> Example request:
+
+```bash
+curl "http://localhost//api/password/reset" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/password/reset",
+    "method": "POST",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST /api/password/reset`
+
+
+<!-- END_5e9e4ac523cd01bd511cd54c969e8d9c -->
 <!-- START_d433d0ecb2571e4312c50b13716d74bb -->
 ## Get User Details by ID OR Email
 
@@ -247,23 +337,28 @@ null
 
 
 <!-- END_d433d0ecb2571e4312c50b13716d74bb -->
-<!-- START_4db0fcc03b9e0826560cc79fd0580e63 -->
+<!-- START_21c3b1d3f53a04b23635d2d10717f9fb -->
 ## Update/Edit User
+
+<strong>Required:</strong><br>
+
+header: Authorization "token" for this user
 
 <strong>Parameters:</strong>
 <br>
 first_name   : optional|max:56 <br>
 last_name    : optional|max:56 <br>
-email        : optional|email|unique <br>
+password     : optional|min:6 <br>
+password_confirmation: required_with:password|min:6 <br>
 gender       : optional|in:male,female <br>
-dob          : optional|date <br>
-phone        : optional|max:15|min:4 <br>
+dob          : optional|date "YYYY-MM-DD" <br>
+phone        : optional|string|max:15|min:4 <br>
 address      : optional|string|min:10|max:255 <br>
 
 > Example request:
 
 ```bash
-curl "http://localhost//api/client/{client_id}" \
+curl "http://localhost//api/client/update" \
 -H "Accept: application/json"
 ```
 
@@ -271,7 +366,7 @@ curl "http://localhost//api/client/{client_id}" \
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost//api/client/{client_id}",
+    "url": "http://localhost//api/client/update",
     "method": "POST",
     "headers": {
         "accept": "application/json"
@@ -285,10 +380,293 @@ $.ajax(settings).done(function (response) {
 
 
 ### HTTP Request
-`POST /api/client/{client_id}`
+`POST /api/client/update`
 
 
-<!-- END_4db0fcc03b9e0826560cc79fd0580e63 -->
+<!-- END_21c3b1d3f53a04b23635d2d10717f9fb -->
+<!-- START_c027020f44b52e61d6a1354fbff6b949 -->
+## Store a newly created comment in storage.
+
+Parameters: <br>
+content: text|required
+
+Headers : auth token
+
+> Example request:
+
+```bash
+curl "http://localhost//api/event/{event_id}/comment" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/event/{event_id}/comment",
+    "method": "POST",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST /api/event/{event_id}/comment`
+
+
+<!-- END_c027020f44b52e61d6a1354fbff6b949 -->
+<!-- START_ba86a55170c4d00c6ec71041668421e1 -->
+## return the specified comment
+
+> Example request:
+
+```bash
+curl "http://localhost//api/comment/{comment_id}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/comment/{comment_id}",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/comment/{comment_id}`
+
+`HEAD /api/comment/{comment_id}`
+
+
+<!-- END_ba86a55170c4d00c6ec71041668421e1 -->
+<!-- START_ffb840a9db2696163385fcfe0d95d443 -->
+## Update the specified comment in storage.
+
+Parameters: <br>
+content: text|required
+
+> Example request:
+
+```bash
+curl "http://localhost//api/comment/{comment_id}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/comment/{comment_id}",
+    "method": "POST",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST /api/comment/{comment_id}`
+
+
+<!-- END_ffb840a9db2696163385fcfe0d95d443 -->
+<!-- START_eacaf299c930d7aa962fd07369475145 -->
+## Remove the specified comment from storage.
+
+> Example request:
+
+```bash
+curl "http://localhost//api/comment/{comment_id}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/comment/{comment_id}",
+    "method": "DELETE",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+
+### HTTP Request
+`DELETE /api/comment/{comment_id}`
+
+
+<!-- END_eacaf299c930d7aa962fd07369475145 -->
+<!-- START_32803795778a67192a0f27db26a09a4d -->
+## Get all comments for an event.
+
+> Example request:
+
+```bash
+curl "http://localhost//api/event/{event_id}/comments" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/event/{event_id}/comments",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "exception": null,
+    "original": {
+        "status": "success",
+        "data": [
+            {
+                "id": 7,
+                "event_id": 1,
+                "client_id": 43,
+                "content": "the concert was awesome",
+                "created_at": "2017-05-11 15:48:34",
+                "updated_at": "2017-05-11 15:48:34"
+            },
+            {
+                "id": 8,
+                "event_id": 1,
+                "client_id": 32,
+                "content": "not my comment",
+                "created_at": "2017-05-14 10:08:15",
+                "updated_at": "2017-05-14 10:08:15"
+            }
+        ],
+        "message": null
+    },
+    "headers": {}
+}
+```
+
+### HTTP Request
+`GET /api/event/{event_id}/comments`
+
+`HEAD /api/event/{event_id}/comments`
+
+
+<!-- END_32803795778a67192a0f27db26a09a4d -->
+<!-- START_21515a56eedfa639ab6c6184b17aa70d -->
+## Post/Update rating for event
+
+<strong>Required:</strong><br>
+
+header: Authorization "token" for current user
+
+<strong>Parameters:</strong>
+<br>
+rating   : required|in:1,2,3,4,5 <br>
+
+> Example request:
+
+```bash
+curl "http://localhost//api/event/{event_id}/rating" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/event/{event_id}/rating",
+    "method": "POST",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+
+### HTTP Request
+`POST /api/event/{event_id}/rating`
+
+
+<!-- END_21515a56eedfa639ab6c6184b17aa70d -->
+<!-- START_e9d6fc18a46965a48ae4ea817ecdd897 -->
+## delete user&#039;s rating
+
+<strong>Required:</strong><br>
+
+header: Authorization "token" for current user
+
+> Example request:
+
+```bash
+curl "http://localhost//api/event/{event_id}/rating" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/event/{event_id}/rating",
+    "method": "DELETE",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+
+### HTTP Request
+`DELETE /api/event/{event_id}/rating`
+
+
+<!-- END_e9d6fc18a46965a48ae4ea817ecdd897 -->
 <!-- START_24150484e1a5ffc20d8914b803a39b56 -->
 ## Get all Events [including unpublished events]
 
@@ -421,7 +799,11 @@ $.ajax(settings).done(function (response) {
             "activity_start_date": null,
             "activity_end_date": null,
             "activity_start_time": null,
-            "activity_end_time": null
+            "activity_end_time": null,
+            "is_show": 0,
+            "director": null,
+            "cast": null,
+            "duration": null
         },
         {
             "id": 4,
@@ -484,7 +866,11 @@ $.ajax(settings).done(function (response) {
             "activity_start_date": null,
             "activity_end_date": null,
             "activity_start_time": null,
-            "activity_end_time": null
+            "activity_end_time": null,
+            "is_show": 0,
+            "director": null,
+            "cast": null,
+            "duration": null
         },
         {
             "id": 5,
@@ -547,7 +933,11 @@ $.ajax(settings).done(function (response) {
             "activity_start_date": null,
             "activity_end_date": null,
             "activity_start_time": null,
-            "activity_end_time": null
+            "activity_end_time": null,
+            "is_show": 0,
+            "director": null,
+            "cast": null,
+            "duration": null
         },
         {
             "id": 6,
@@ -610,7 +1000,11 @@ $.ajax(settings).done(function (response) {
             "activity_start_date": null,
             "activity_end_date": null,
             "activity_start_time": null,
-            "activity_end_time": null
+            "activity_end_time": null,
+            "is_show": 0,
+            "director": null,
+            "cast": null,
+            "duration": null
         },
         {
             "id": 14,
@@ -673,7 +1067,11 @@ $.ajax(settings).done(function (response) {
             "activity_start_date": null,
             "activity_end_date": null,
             "activity_start_time": "03:00:00",
-            "activity_end_time": "09:00:00"
+            "activity_end_time": "09:00:00",
+            "is_show": 0,
+            "director": null,
+            "cast": null,
+            "duration": null
         },
         {
             "id": 19,
@@ -736,7 +1134,11 @@ $.ajax(settings).done(function (response) {
             "activity_start_date": null,
             "activity_end_date": null,
             "activity_start_time": "12:38:00",
-            "activity_end_time": "13:38:00"
+            "activity_end_time": "13:38:00",
+            "is_show": 0,
+            "director": null,
+            "cast": null,
+            "duration": null
         },
         {
             "id": 20,
@@ -799,7 +1201,11 @@ $.ajax(settings).done(function (response) {
             "activity_start_date": null,
             "activity_end_date": null,
             "activity_start_time": "13:03:00",
-            "activity_end_time": "14:03:00"
+            "activity_end_time": "14:03:00",
+            "is_show": 0,
+            "director": null,
+            "cast": null,
+            "duration": null
         },
         {
             "id": 22,
@@ -862,7 +1268,11 @@ $.ajax(settings).done(function (response) {
             "activity_start_date": null,
             "activity_end_date": null,
             "activity_start_time": null,
-            "activity_end_time": null
+            "activity_end_time": null,
+            "is_show": 0,
+            "director": null,
+            "cast": null,
+            "duration": null
         }
     ],
     "headers": {}
@@ -972,7 +1382,11 @@ $.ajax(settings).done(function (response) {
         "activity_start_date": null,
         "activity_end_date": null,
         "activity_start_time": null,
-        "activity_end_time": null
+        "activity_end_time": null,
+        "is_show": 0,
+        "director": null,
+        "cast": null,
+        "duration": null
     },
     "headers": {}
 }
@@ -1191,6 +1605,74 @@ $.ajax(settings).done(function (response) {
     "exception": null,
     "original": [
         {
+            "id": 26,
+            "title": "Activity 2017",
+            "location": null,
+            "bg_type": "image",
+            "bg_color": "#B23333",
+            "bg_image_path": "assets\/images\/public\/EventPage\/backgrounds\/5.jpg",
+            "description": "random text",
+            "start_date": "2017-05-07 00:00:00",
+            "end_date": "2017-11-07 23:59:00",
+            "on_sale_date": null,
+            "account_id": 11,
+            "user_id": 12,
+            "currency_id": 1,
+            "sales_volume": "0.00",
+            "organiser_fees_volume": "0.00",
+            "organiser_fee_fixed": "0.00",
+            "organiser_fee_percentage": "0.000",
+            "organiser_id": 6,
+            "venue_name": "Batelco Building",
+            "venue_name_full": "Batelco Building, Manama, Bahrain",
+            "location_address": "Batelco Building, Manama 304, Bahrain",
+            "location_address_line_1": "",
+            "location_address_line_2": "Manama",
+            "location_country": "Bahrain",
+            "location_country_code": "BH",
+            "location_state": "Capital Governorate",
+            "location_post_code": "304",
+            "location_street_number": "",
+            "location_lat": "26.2347067",
+            "location_long": "50.576700399999936",
+            "location_google_place_id": "ChIJXwHr8V-vST4RmrNgXBdv-XY",
+            "pre_order_display_message": null,
+            "post_order_display_message": null,
+            "social_share_text": null,
+            "social_show_facebook": 1,
+            "social_show_linkedin": 1,
+            "social_show_twitter": 1,
+            "social_show_email": 1,
+            "social_show_googleplus": 1,
+            "location_is_manual": 0,
+            "is_live": 0,
+            "created_at": "2017-05-07 14:13:59",
+            "updated_at": "2017-05-07 14:13:59",
+            "deleted_at": null,
+            "barcode_type": "QRCODE",
+            "ticket_border_color": "#000000",
+            "ticket_bg_color": "#FFFFFF",
+            "ticket_text_color": "#000000",
+            "ticket_sub_text_color": "#999999",
+            "social_show_whatsapp": 1,
+            "questions_collection_type": "buyer",
+            "checkout_timeout_after": 8,
+            "is_1d_barcode_enabled": 0,
+            "enable_offline_payments": 0,
+            "offline_payment_instructions": null,
+            "category_id": 1,
+            "is_activity": true,
+            "activity_start_date": null,
+            "activity_end_date": null,
+            "activity_start_time": "17:13:00",
+            "activity_end_time": "19:13:00",
+            "is_show": 0,
+            "director": null,
+            "cast": null,
+            "duration": null,
+            "relevance": 10
+        },
+        {
             "id": 4,
             "title": "Batelco first event",
             "location": null,
@@ -1252,6 +1734,10 @@ $.ajax(settings).done(function (response) {
             "activity_end_date": null,
             "activity_start_time": null,
             "activity_end_time": null,
+            "is_show": 0,
+            "director": null,
+            "cast": null,
+            "duration": null,
             "relevance": 8
         }
     ],

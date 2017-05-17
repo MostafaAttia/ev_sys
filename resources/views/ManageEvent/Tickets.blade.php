@@ -52,12 +52,14 @@
     <div class="col-md-9">
         <!-- Toolbar -->
         <div class="btn-toolbar" role="toolbar">
+
             <div class="btn-group btn-group-responsive">
                 <button data-modal-id='CreateTicket'
                         data-href="{{route('showCreateTicket', array('event_id'=>$event->id))}}"
                         class='loadModal btn btn-success' type="button"><i class="ico-ticket"></i> Create Ticket
                 </button>
             </div>
+
             @if(false)
                 <div class="btn-group btn-group-responsive ">
                     <button data-modal-id='TicketQuestions'
@@ -72,6 +74,7 @@
                     </button>
                 </div>
             @endif
+
         </div>
         <!--/ Toolbar -->
     </div>
@@ -93,7 +96,7 @@
         <div class="row">
             <div class="col-md-3 col-xs-6">
                 <div class='order_options'>
-                    <span class="event_count">{{$tickets->count()}} events</span>
+                    <span class="event_count">{{$tickets->count()}} tickets</span>
                 </div>
             </div>
             <div class="col-md-2 col-xs-6 col-md-offset-7">

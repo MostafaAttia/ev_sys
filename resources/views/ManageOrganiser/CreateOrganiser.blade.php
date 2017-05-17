@@ -53,8 +53,10 @@
                         </div>
                     </div>
 
-
-
+                    <div class="form-group">
+                        {!! Form::label('has_auditorium', 'Use Seats Map or Auditoriums (for Movies, Theater, etc..) ?', array('class'=>'control-label required')) !!}
+                        {!!  Form::select('has_auditorium', ['0'=>'No', '1'=>'Yes' ] , Input::old('has_auditorium') , array('class'=>'form-control' ))  !!}
+                    </div>
 
                     <div class="form-group">
                         {!! Form::label('about', 'Organiser Description', array('class'=>'control-label ')) !!}

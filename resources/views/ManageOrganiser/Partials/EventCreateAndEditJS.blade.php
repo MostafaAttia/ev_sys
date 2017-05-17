@@ -1,7 +1,12 @@
 {!! HTML::script('vendor/simplemde/dist/simplemde.min.js') !!}
 {!! HTML::style('vendor/simplemde/dist/simplemde.min.css') !!}
 
+{!! HTML::script('assets/javascript/bootstrap-switch.min.js') !!}
+{!! HTML::style('assets/stylesheet/bootstrap-switch.min.css') !!}
+
 {!! HTML::style('assets/stylesheet/activity.css') !!}
+
+
 
 <script>
     $(function() {
@@ -33,8 +38,21 @@
             dateTimeFormat: window.Attendize.DateTimeFormat
         });
 
+        $("#is_activity").bootstrapSwitch({
+            onText: 'Yes',
+            onColor: 'success',
+            offText: 'No',
+            offColor: 'warning',
+            labelWidth: 10,
+        }).on('switchChange.bootstrapSwitch', function(event, is_activity) {
+          $('#event_date_fields').toggle(500);
+          $('#activity_date_fields').toggle(500);
+        });
+
 
     });
+
+
 </script>
 <style>
     .editor-toolbar {

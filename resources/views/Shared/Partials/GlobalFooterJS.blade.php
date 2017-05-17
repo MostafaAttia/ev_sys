@@ -1,5 +1,5 @@
 @if(session()->get('message'))
-    <script>showMessage('{{\Session::get('message')}}');</script>
+    <script>showMessage('{{\Session::get('message')}}');</script> 
 @endif
 <script>
     @if(env('GOOGLE_ANALYTICS_ID'))

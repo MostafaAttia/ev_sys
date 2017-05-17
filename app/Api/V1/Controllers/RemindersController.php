@@ -8,6 +8,8 @@ use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 
+use App\Models\Client;
+
 class RemindersController extends Controller
 {
 
@@ -67,6 +69,8 @@ class RemindersController extends Controller
         $response = $this->passwords->sendResetLink($request->only('email'), function ($m) {
             $m->subject($this->getEmailSubject());
         });
+
+        // $client = Client::where('email', $request->input('email'))->first();
 
         switch ($response) {
             case PasswordBroker::RESET_LINK_SENT:

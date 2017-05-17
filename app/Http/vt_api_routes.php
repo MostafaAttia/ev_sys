@@ -11,26 +11,70 @@ $api->version('v1',
      */
     function ($api) {
 
-    // Auth routes for CLIENTS
+    /*
+     * ----------
+     * Auth routes for CLIENTS
+     * ----------
+     */
     $api->post('signup', 'App\Api\V1\Controllers\ClientAuthController@signup');
     $api->get('signup/confirm_email/{confirmation_code}', [
         'as'   => 'ClientConfirmEmail',
         'uses' => 'App\Api\V1\Controllers\ClientAuthController@confirmEmail',
     ]);
     $api->post('login', 'App\Api\V1\Controllers\ClientAuthController@login');
-
     $api->any('/logout', [
         'uses' => 'App\Api\V1\Controllers\UserLogoutController@doLogout',
         'as'   => 'logout',
     ]);
-
-//    $api->post('login/forgot-password', [
-//        'as'   => 'postForgotPassword',
-//        'uses' => 'App\Api\V1\Controllers\RemindersController@postRemind',
-//    ]);
-
+    $api->post('password/email', 'App\Api\V1\Controllers\ForgotPasswordController@getResetToken');
+    $api->post('password/reset', 'App\Api\V1\Controllers\ResetPasswordController@reset');
     $api->get('client/{client_id?}/{client_email?}', 'App\Api\V1\Controllers\ClientController@getClientDetails');
-    $api->post('client/{client_id}', 'App\Api\V1\Controllers\ClientController@updateClient');
+    $api->post('client/update', ['middleware' => 'jwt.refresh',
+        'as'    => 'updateClient',
+        'uses'  => 'App\Api\V1\Controllers\ClientController@updateClient',
+    ]);
+
+
+    /*
+     * ----------
+     * Comments
+     * ----------
+     */
+    $api->post('event/{event_id}/comment', ['middleware' => 'jwt.refresh',
+        'as'   => 'postComment',
+        'uses' => 'App\Api\V1\Controllers\CommentsController@postComment',
+    ]);
+    $api->get('comment/{comment_id}', [
+        'as'   => 'getComment',
+        'uses' => 'App\Api\V1\Controllers\CommentsController@getComment',
+    ]);
+    $api->post('comment/{comment_id}', ['middleware' => 'jwt.refresh',
+        'as'   => 'updateComment',
+        'uses' => 'App\Api\V1\Controllers\CommentsController@updateComment',
+    ]);
+    $api->delete('comment/{comment_id}', ['middleware' => 'jwt.refresh',
+        'as'   => 'deleteComment',
+        'uses' => 'App\Api\V1\Controllers\CommentsController@deleteComment',
+    ]);
+    $api->get('event/{event_id}/comments', [
+        'as'   => 'getEventComments',
+        'uses' => 'App\Api\V1\Controllers\CommentsController@getEventComments',
+    ]);
+
+
+    /*
+     * ----------
+     * Ratings
+     * ----------
+     */
+    $api->post('event/{event_id}/rating', ['middleware' => 'jwt.refresh',
+        'as'   => 'postRating',
+        'uses' => 'App\Api\V1\Controllers\RatingController@postRating',
+    ]);
+    $api->delete('event/{event_id}/rating', ['middleware' => 'jwt.refresh',
+        'as'   => 'deleteRating',
+        'uses' => 'App\Api\V1\Controllers\RatingController@deleteRating',
+    ]);
 
 
 

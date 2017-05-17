@@ -46,10 +46,16 @@ class Event extends MyBaseModel
         'description'         => ['required'],
         'location_venue_name' => ['required_without:venue_name_full'],
         'venue_name_full'     => ['required_without:location_venue_name'],
-        'start_date'          => ['required'],
-        'end_date'            => ['required'],
+        'start_date'          => ['required_without_all:activity_start_date,activity_end_date,activity_start_time,activity_end_time'],
+        'end_date'            => ['required_without_all:activity_start_date,activity_end_date,activity_start_time,activity_end_time'],
         'organiser_name'      => ['required_without:organiser_id'],
         'event_image'         => ['mimes:jpeg,jpg,png', 'max:3000'],
+        'category_id'         => ['required'],
+
+        'activity_start_date' => ['required_without_all:start_date, end_date'],
+        'activity_end_date'   => ['required_without_all:start_date, end_date'],
+        'activity_start_time' => ['required_without_all:start_date, end_date'],
+        'activity_end_time'   => ['required_without_all:start_date, end_date'],
     ];
 
     /**
@@ -64,7 +70,29 @@ class Event extends MyBaseModel
         'event_image.max'                      => 'Pleae ensure the image is not larger then 3MB',
         'location_venue_name.required_without' => 'Please enter a venue for your event',
         'venue_name_full.required_without'     => 'Please enter a venue for your event',
+        'category_id.required'                 => 'Please select a category for your event',
+
+        'start_date.required_without_all'          => 'Please select a starting date for your event',
+        'end_date.required_without_all'            => 'Please select an ending date for your event',
+
+        'activity_start_date.required_without_all' => 'Please select a starting date for your activity',
+        'activity_end_date.required_without_all'   => 'Please select an ending date for your activity',
+        'activity_start_time.required_without_all' => 'Please select a starting time for your activity',
+        'activity_end_time.required_without_all'   => 'Please select an ending time for your activity',
+
+
     ];
+
+
+    /**
+     * The Screening associated with the Show (Movie, Play)
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function screenings()
+    {
+        return $this->belongsToMany(\App\Models\Screening::class, 'screening');
+    }
 
     /**
      * The weekdays associated with the event/activity
@@ -92,6 +120,27 @@ class Event extends MyBaseModel
 
         return $weekdays_ids;
     }
+
+    /**
+     * The comments associated with the event
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(\App\Models\Comment::class);
+    }
+
+    /**
+     * The ratings associated with the event
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function ratings()
+    {
+        return $this->hasMany(\App\Models\Rating::class);
+    }
+
 
     /**
      * The questions associated with the event.
@@ -323,9 +372,9 @@ class Event extends MyBaseModel
      */
     public function getEmbedHtmlCodeAttribute()
     {
-        return "<!--Attendize.com Ticketing Embed Code-->
+        return "<!--Vitee.com Ticketing Embed Code-->
                 <iframe style='overflow:hidden; min-height: 350px;' frameBorder='0' seamless='seamless' width='100%' height='100%' src='" . $this->embed_url . "' vspace='0' hspace='0' scrolling='auto' allowtransparency='true'></iframe>
-                <!--/Attendize.com Ticketing Embed Code-->";
+                <!--/Vitee.com Ticketing Embed Code-->";
     }
 
     /**
@@ -411,5 +460,21 @@ END:VCALENDAR
 ICSTemplate;
 
         return $icsTemplate;
+    }
+
+    /**
+     * Indicates whether the user can comment on this event or not (event ended or activity begin?)
+     *
+     * @return bool
+     */
+    public function getCanCommentAttribute()
+    {
+        if($this->is_activity){
+            $start_date = new Carbon($this->start_date);
+            return $start_date->isPast();
+        } else {
+            $end_date = new Carbon($this->end_date);
+            return $end_date->isPast();
+        }
     }
 }

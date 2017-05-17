@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-    /*
-      Attendize.com   - Event Management & Ticketing
-     */
 
 /**
  * Description of OrderItems.

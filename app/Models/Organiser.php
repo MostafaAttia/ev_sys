@@ -50,6 +50,17 @@ class Organiser extends MyBaseModel
     }
 
     /**
+     * The auditoriums associated with the organizer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function auditoriums()
+    {
+        return $this->hasMany(\App\Models\Auditorium::class);
+    }
+
+
+    /**
      * The attendees associated with the organizer.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough

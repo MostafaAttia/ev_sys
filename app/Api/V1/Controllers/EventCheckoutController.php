@@ -26,7 +26,7 @@ use Validator;
 class EventCheckoutController extends Controller
 {
     /**
-     * Is the checkout in an embedded Iframe?
+     * Is the checkout in an embedded Iframe? 
      *
      * @var bool
      */

@@ -4,9 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-/*
-  Attendize.com   - Event Management & Ticketing
- */
 
 /**
  * Description of Attendees.

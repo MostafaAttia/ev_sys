@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-/*
-  Attendize.com   - Event Management & Ticketing
- */
 
 class Affiliate extends \Illuminate\Database\Eloquent\Model
 {

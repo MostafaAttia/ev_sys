@@ -15,12 +15,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            {!! Form::label('title', 'Event Title', array('class'=>'control-label required')) !!}
+                            {!! Form::label('title', 'Title', array('class'=>'control-label required')) !!}
                             {!!  Form::text('title', Input::old('title'),array('class'=>'form-control','placeholder'=>'E.g: '.Auth::user()->first_name.'\'s International Conference' ))  !!}
                         </div>
 
                         <div class="form-group custom-theme">
-                            {!! Form::label('description', 'Event Description', array('class'=>'control-label required')) !!}
+                            {!! Form::label('description', 'Description', array('class'=>'control-label required')) !!}
                             {!!  Form::textarea('description', Input::old('description'),
                                         array(
                                         'class'=>'form-control  editable',
@@ -29,14 +29,20 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('category_id', 'Event Category', array('class'=>'control-label required')) !!}
+                            {!! Form::label('category_id', 'Category', array('class'=>'control-label required')) !!}
                             {!!  Form::select('category_id', ['' => 'Choose Category'] + $categories , Input::old('category_id') , array('class'=>'form-control' ))  !!}
                         </div>
 
-                        <div class="row">
+                        <div class="form-group">
+                            {!! Form::label('is_activity', 'Is Activity?', array('class'=>'control-label required')) !!}
+                            <input type="checkbox" name="is_activity" id="is_activity">
+                        </div>
+
+
+                        <div class="row" id="event_date_fields">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    {!! Form::label('start_date', 'Event Start Date', array('class'=>'required control-label')) !!}
+                                    {!! Form::label('start_date', 'Start Date', array('class'=>'required control-label')) !!}
                                     {!!  Form::text('start_date', Input::old('start_date'),
                                                         [
                                                     'class'=>'form-control start hasDatepicker ',
@@ -51,7 +57,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    {!!  Form::label('end_date', 'Event End Date',
+                                    {!!  Form::label('end_date', 'End Date',
                                                 [
                                             'class'=>'required control-label '
                                         ])  !!}
@@ -67,6 +73,113 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div id="activity_date_fields" style="display: none;" >
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        {!! Form::label('activity_start_date', 'Start Date', array('class'=>'required control-label')) !!}
+                                        {!!  Form::text('activity_start_date', Input::old('activity_start_date'),
+                                        [
+                                        'class'=>'form-control start hasDatepicker ',
+                                        'data-field'=>'date',
+                                        'data-startend'=>'start',
+                                        'data-startendelem'=>'.end',
+                                        'readonly'=>''
+
+                                        ])  !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        {!!  Form::label('activity_end_date', 'End Date',
+                                        [
+                                        'class'=>'required control-label '
+                                        ])  !!}
+
+                                        {!!  Form::text('activity_end_date', Input::old('activity_end_date'),
+                                        [
+                                        'class'=>'form-control end hasDatepicker ',
+                                        'data-field'=>'date',
+                                        'data-startend'=>'end',
+                                        'data-startendelem'=>'.start',
+                                        'readonly'=> ''
+                                        ])  !!}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {!!  Form::label('activity_weekdays', 'Days',
+                                [
+                                'class'=>'required control-label '
+                                ])  !!}
+
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-xs btn-weekday">
+                                        <input type="checkbox" name="weekdays[]" value="6" autocomplete="off" > Saturday
+                                    </label>
+                                    <label class="btn btn-xs btn-weekday">
+                                        <input type="checkbox" name="weekdays[]" value="7" autocomplete="off"> Sunday
+                                    </label>
+                                    <label class="btn btn-xs btn-weekday">
+                                        <input type="checkbox" name="weekdays[]" value="1" autocomplete="off"> Monday
+                                    </label>
+                                    <label class="btn btn-xs btn-weekday">
+                                        <input type="checkbox" name="weekdays[]" value="2" autocomplete="off"> Tuesday
+                                    </label>
+                                    <label class="btn btn-xs btn-weekday">
+                                        <input type="checkbox" name="weekdays[]" value="3" autocomplete="off"> Wednesday
+                                    </label>
+                                    <label class="btn btn-xs btn-weekday">
+                                        <input type="checkbox" name="weekdays[]" value="4" autocomplete="off"> Thursday
+                                    </label>
+                                    <label class="btn btn-xs btn-weekday">
+                                        <input type="checkbox" name="weekdays[]" value="5" autocomplete="off"> Friday
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        {!! Form::label('activity_start_time', 'Start Time', array('class'=>'required control-label')) !!}
+                                        {!!  Form::text('activity_start_time', Input::old('activity_start_time'),
+                                        [
+                                        'class'=>'form-control start hasDatepicker ',
+                                        'data-field'=>'time',
+                                        'data-startend'=>'start',
+                                        'data-startendelem'=>'.end',
+                                        'readonly'=>''
+
+                                        ])  !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        {!!  Form::label('activity_end_time', 'End Time',
+                                        [
+                                        'class'=>'required control-label '
+                                        ])  !!}
+
+                                        {!!  Form::text('activity_end_time', Input::old('activity_end_time'),
+                                        [
+                                        'class'=>'form-control end hasDatepicker ',
+                                        'data-field'=>'time',
+                                        'data-startend'=>'end',
+                                        'data-startendelem'=>'.start',
+                                        'readonly'=> ''
+                                        ])  !!}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
                         <div class="form-group">
                             {!! Form::label('event_image', 'Event Image (Flyer or Graphic etc.)', array('class'=>'control-label ')) !!}
                             {!! Form::styledFile('event_image') !!}

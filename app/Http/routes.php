@@ -5,7 +5,7 @@
  */
 include_once('api_routes.php');
 
-//Route::get('s3-image-upload','S3ImageController@imageUpload');
+//Route::get('s3-image-upload','S3ImageController@imageUpload'); 
 //Route::post('s3-image-upload','S3ImageController@imageUploadPost');
 
 
@@ -315,6 +315,74 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
             'as'   => 'postEditOrganiserPageDesign',
             'uses' => 'OrganiserCustomizeController@postEditOrganiserPageDesign'
         ]);
+
+
+        /*
+         * -------
+         * Auditoriums
+         * -------
+         */
+        Route::get('{organiser_id}/auditoriums/', [
+            'as'   => 'showOrganiserAuditoriums',
+            'uses' => 'OrganiserAuditoriumsController@showOrganiserAuditoriums',
+        ]);
+        Route::get('{organiser_id}/auditoriums/create', [
+            'as'   => 'showCreateAuditorium',
+            'uses' => 'OrganiserAuditoriumsController@showCreateAuditorium',
+        ]);
+        Route::post('{organiser_id}/auditoriums/create', [
+            'as'   => 'postCreateAuditorium',
+            'uses' => 'OrganiserAuditoriumsController@postCreateAuditorium',
+        ]);
+
+        Route::get('{organiser_id}/auditoriums/{auditorium_id}/preview', [
+            'as'   => 'previewAuditorium',
+            'uses' => 'OrganiserAuditoriumsController@previewAuditorium',
+        ]);
+
+        /*
+         * -------
+         * Auditoriums - Raw Spaces
+         * -------
+         */
+
+        Route::get('{organiser_id}/auditoriums/{auditorium_id}/rows', [
+            'as'   => 'showCustomizeAuditorium',
+            'uses' => 'OrganiserAuditoriumsController@showCustomizeAuditorium',
+        ]);
+
+        Route::post('auditoriums/{auditorium_id}/rows/spaces', [
+            'as'   => 'postCreateAllSpaces',
+            'uses' => 'OrganiserAuditoriumsController@postCreateAllSpaces',
+        ]);
+
+
+        Route::get('/rows/{row_id}/spaces', [
+            'as'   => 'showCreateSpaces',
+            'uses' => 'OrganiserAuditoriumsController@showCreateSpaces',
+        ]);
+
+        Route::post('/rows/{row_id}/spaces', [
+            'as'   => 'postCreateRowSpaces',
+            'uses' => 'OrganiserAuditoriumsController@postCreateRowSpaces',
+        ]);
+
+        Route::post('/rows/{row_id}', [
+            'as'   => 'deleteAuditoriumRow',
+            'uses' => 'OrganiserAuditoriumsController@deleteAuditoriumRow',
+        ]);
+
+
+
+        Route::post('{organiser_id}/auditoriums/{auditorium_id}', [
+            'as'   => 'deleteAuditorium',
+            'uses' => 'OrganiserAuditoriumsController@deleteAuditorium',
+        ]);
+
+        
+
+
+
     });
 
     /*
@@ -337,20 +405,6 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
             'uses' => 'EventController@postCreateEvent',
         ]);
 
-        /*
-         * ----------
-         * Create Activity
-         * ----------
-         */
-        Route::get('/create/activity', [
-            'as'   => 'showCreateActivity',
-            'uses' => 'EventController@showCreateActivity',
-        ]);
-
-        Route::post('/create/activity', [
-            'as'   => 'postCreateActivity',
-            'uses' => 'EventController@postCreateActivity',
-        ]);
     });
 
     /*
@@ -399,11 +453,13 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
             }
         ]);
 
+
         /*
          * -------
          * Tickets
          * -------
          */
+
         Route::get('{event_id}/tickets/', [
             'as'   => 'showEventTickets',
             'uses' => 'EventTicketsController@showTickets',

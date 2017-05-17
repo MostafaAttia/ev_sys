@@ -79,6 +79,16 @@ class Account extends MyBaseModel
     }
 
     /**
+     * The Auditoriums associated with the account.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function auditoriums()
+    {
+        return $this->hasMany(\App\Models\Auditorium::class);
+    }
+
+    /**
      * The orders associated with the account.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

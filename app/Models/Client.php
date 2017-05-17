@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Hash;
 use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -74,16 +73,26 @@ class Client extends Model implements AuthenticatableContract, CanResetPasswordC
         $this->attributes['password'] = Hash::make($value);
     }
 
-//    /**
-//     * Boot all of the bootable traits on the model.
-//     */
-//    public static function boot()
-//    {
-//        parent::boot();
-//
-//        static::creating(function ($client) {
-//            $client->confirmation_code = str_random();
-////            $user->api_token = str_random(60);
-//        });
-//    }
+
+    /**
+     * The comments associated with the client
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(\App\Models\Comment::class);
+    }
+
+    /**
+     * The ratings submitted by this client
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function ratings()
+    {
+        return $this->hasMany(\App\Models\Rating::class);
+    }
+
+
 }

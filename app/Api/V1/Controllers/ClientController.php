@@ -12,7 +12,11 @@ use Image;
 use Log;
 use Validator;
 
+use Illuminate\Support\Facades\Mail;
+
 use Dingo\Api\Routing\Helpers;
+
+use JWTAuth;
 
 
 class ClientController extends Controller
@@ -57,28 +61,42 @@ class ClientController extends Controller
     /**
      * Update/Edit User
      *
+     * <strong>Required:</strong><br>
+     *
+     * header: Authorization "token" for this user
+     *
      * <strong>Parameters:</strong>
      * <br>
      * first_name   : optional|max:56 <br>
      * last_name    : optional|max:56 <br>
-     * email        : optional|email|unique <br>
+     * password     : optional|min:6 <br>
+     * password_confirmation: required_with:password|min:6 <br>
      * gender       : optional|in:male,female <br>
-     * dob          : optional|date <br>
-     * phone        : optional|max:15|min:4 <br>
+     * dob          : optional|date "YYYY-MM-DD" <br>
+     * phone        : optional|string|max:15|min:4 <br>
      * address      : optional|string|min:10|max:255 <br>
      *
      *
      * @param Request $request
-     * @param $client_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updateClient(Request $request, $client_id)
+    public function updateClient(Request $request)
     {
+        $user = JWTAuth::parseToken()->toUser();
+
+        if($request->has('email')){
+            return response()->json(
+                [
+                    'status'    => 'error',
+                    'data'      => null,
+                    'message'   => 'you can not change your email from here! :( ',
+                ], 404);
+        }
 
         $validator = Validator::make($request->all(), [
             'first_name'    => 'max:56',
             'last_name'     => 'max:56',
-            'email'         => 'email|unique:clients',
+            'password'      => 'min:6|confirmed',
             'gender'        => 'in:male,female',
             'dob'           => 'date',
             'phone'         => 'max:15|min:4',
@@ -87,14 +105,31 @@ class ClientController extends Controller
 
         if($validator->fails())
         {
-            return $validator->errors()->all();
+            return response()->json(
+                [
+                    'status'    => 'error',
+                    'data'      => null,
+                    'message'   => $validator->errors()->all(),
+                ], 404);
         }
 
-        $client = Client::findOrFail($client_id);
+        $user->update($request->except('email'));
 
-        $client->update($request->all());
+        // if($request->has('password')){
+        //     Mail::send('Emails.ClientPasswordChanged',
+        //         ['first_name' => $client->first_name, 'password' => $request->get('password')],
+        //         function ($message) use ($client) {
+        //             $message->to($client->email, $client->first_name)
+        //                 ->subject('Security alert for your account @ Vitee');
+        //     });
+        // }
 
-        return response()->json(['message' => 'Client Updated!'], 200);
+        return response()->json(
+                [
+                    'status'    => 'success',
+                    'data'      => null,
+                    'message'   => 'User Updated successfully',
+                ], 200);
 
     }
 

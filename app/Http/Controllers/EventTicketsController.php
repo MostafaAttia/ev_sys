@@ -8,9 +8,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Log;
 
-/*
-  Attendize.com   - Event Management & Ticketing
- */
 
 class EventTicketsController extends MyBaseController
 {
@@ -51,6 +48,7 @@ class EventTicketsController extends MyBaseController
         return view('ManageEvent.Tickets', compact('event', 'tickets', 'sort_by', 'q', 'allowed_sorts'));
     }
 
+    
     /**
      * Show the edit ticket modal
      *
