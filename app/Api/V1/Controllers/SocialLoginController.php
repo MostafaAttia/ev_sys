@@ -29,12 +29,6 @@ class SocialLoginController extends Controller
 
     public function handleProviderCallback($provider)
     {
-//        $user = $service->createOrGetUser(Socialite::driver($provider), $provider);
-
-//        $user = $service->createOrGetUser(Socialite::driver($provider)->stateless()->user(), $provider);
-//        $user = $service->createOrGetUser(Socialite::with($provider)->stateless()->user(), $provider);
-
-
         $provider = Socialite::with('facebook');
 
         $user = $provider->stateless()->user();

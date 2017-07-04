@@ -66,7 +66,13 @@ class EventTransformer extends TransformerAbstract
             'location_lat'              => $event->location_lat,
             'location_long'             => $event->location_long,
             'is_activity'               => $event->is_live,
-            'category'                  => $event->category_id !== null ? $category->name : null
+            'category'                  => $event->category_id !== null ? [
+                'id'                    => $category->id,
+                'name'                  => $category->name
+            ] : [
+                'id'                    => null,
+                'name'                  => null
+            ]
         ];
 
         return $events;
