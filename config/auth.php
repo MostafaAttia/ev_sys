@@ -46,6 +46,11 @@ return [
             'provider' => 'users',
         ],
 
+        'client' => [
+            'driver' => 'session',
+            'provider' => 'client',
+        ],
+
     ],
 
     /*
@@ -71,6 +76,10 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'client' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Client::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -101,6 +110,12 @@ return [
         'users' => [
             'provider' => 'users',
             'email' => 'Emails.Auth.Reminder',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'clients' => [
+            'provider' => 'client',
+            'email' => 'Emails.Auth.ReminderClient',
             'table' => 'password_resets',
             'expire' => 60,
         ],

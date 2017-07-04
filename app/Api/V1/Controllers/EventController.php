@@ -5,20 +5,20 @@ namespace App\Api\V1\Controllers;
 use App\Api\V1\Transformers\AttendeeTransformer;
 use App\Api\V1\Transformers\EventTransformer;
 use App\Http\Controllers\Controller;
+use Dingo\Api\Routing\Helpers;
 use App\Models\Category;
 use App\Models\Event;
-use Auth;
-use Image;
-use Log;
+use League\Fractal;
 use Validator;
+use Image;
+use Auth;
+use Log;
 
-use Dingo\Api\Routing\Helpers;
 
 class EventController extends Controller
 {
 
     use Helpers;
-
 
     /**
      * Get all Events [including unpublished events]
@@ -29,7 +29,17 @@ class EventController extends Controller
     {
         $events = Event::paginate(10);
 
-        return $this->response->paginator($events, new EventTransformer);
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+        $events = new Fractal\Resource\Collection($events, new EventTransformer);
+        $events = $fractal->createData($events)->toArray();
+
+        return response()->json(
+            [
+                'status'    => 'success',
+                'data'      => $events['data'],
+                'message'   => null,
+            ], 200);
     }
 
 
@@ -42,7 +52,18 @@ class EventController extends Controller
     {
         $events = Event::where('is_live', 1)->get();
 
-        return $this->response->collection($events, new EventTransformer);
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+        $events = new Fractal\Resource\Collection($events, new EventTransformer);
+        $events = $fractal->createData($events)->toArray();
+
+        return response()->json(
+            [
+                'status'    => 'success',
+                'data'      => $events['data'],
+                'message'   => null,
+            ], 200);
+
     }
 
     /**
@@ -59,7 +80,17 @@ class EventController extends Controller
     {
         $event = Event::findOrFail($event_id);
 
-        return $this->response->item($event, new EventTransformer);
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+        $event = new Fractal\Resource\Item($event, new EventTransformer);
+        $event = $fractal->createData($event)->toArray();
+
+        return response()->json(
+            [
+                'status'    => 'success',
+                'data'      => $event,
+                'message'   => null,
+            ], 200);
 
     }
 
@@ -79,7 +110,17 @@ class EventController extends Controller
 
         $attendees = $event->attendees;
 
-        return $this->response->collection($attendees, new AttendeeTransformer);
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+        $attendees = new Fractal\Resource\Collection($attendees, new EventTransformer);
+        $attendees = $fractal->createData($attendees)->toArray();
+
+        return response()->json(
+            [
+                'status'    => 'success',
+                'data'      => $attendees['data'],
+                'message'   => null,
+            ], 200);
     }
 
     /**
@@ -91,7 +132,12 @@ class EventController extends Controller
     {
         $categories = Category::all();
 
-        return $categories;
+        return response()->json(
+            [
+                'status'    => 'success',
+                'data'      => $categories,
+                'message'   => null,
+            ], 200);
     }
 
     /**
@@ -108,7 +154,17 @@ class EventController extends Controller
     {
         $events = Event::where(['category_id' => $category_id, 'is_live'=> 1])->get();
 
-        return $this->response->collection($events, new EventTransformer);
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+        $events = new Fractal\Resource\Collection($events, new EventTransformer);
+        $events = $fractal->createData($events)->toArray();
+
+        return response()->json(
+            [
+                'status'    => 'success',
+                'data'      => $events['data'],
+                'message'   => null,
+            ], 200);
     }
 
     /**
@@ -120,11 +176,18 @@ class EventController extends Controller
     {
         $events = Event::search($query)->get();
 
-        return $this->response->collection($events, new EventTransformer);
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+        $events = new Fractal\Resource\Collection($events, new EventTransformer);
+        $events = $fractal->createData($events)->toArray();
+
+        return response()->json(
+            [
+                'status'    => 'success',
+                'data'      => $events['data'],
+                'message'   => null,
+            ], 200);
+
     }
-
-
-
-
 
 }

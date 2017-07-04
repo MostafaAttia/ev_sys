@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Organiser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Image;
 
 class OrganiserController extends MyBaseController
@@ -53,26 +54,30 @@ class OrganiserController extends MyBaseController
         $organiser->twitter = $request->get('twitter');
         $organiser->confirmation_key = str_random(15);
 
+        // upload user image
+
         if ($request->hasFile('organiser_logo')) {
-            $path = public_path() . '/' . config('attendize.organiser_images_path');
-            $filename = 'organiser_logo-' . $organiser->id . '.' . strtolower($request->file('organiser_logo')->getClientOriginalExtension());
 
-            $file_full_path = $path . '/' . $filename;
+            $image = $request->file('organiser_logo');
+            $imageName = 'img_'.md5(time(). str_random()).'.'.$image->getClientOriginalExtension();
+            $organiser->logo_path = $imageName;
 
-            $request->file('organiser_logo')->move($path, $filename);
+            Storage::disk('s3')->put('organizer/original/'.$imageName, file_get_contents($image), 'public');
 
-            $img = Image::make($file_full_path);
+            // save as THUMB 60*60
+            $image_thumb_60_60 = Image::make($image)->resize(60, 60)->stream();
+            Storage::disk('s3')->put('organizer/60*60/'.$imageName, $image_thumb_60_60->__toString(), 'public');
 
-            $img->resize(250, 250, function ($constraint) {
-                $constraint->upsize();
-            });
+            // save as THUMB 120*120
+            $image_thumb_120_120 = Image::make($image)->resize(120, 120)->stream();
+            Storage::disk('s3')->put('organizer/120*120/'.$imageName, $image_thumb_120_120->__toString(), 'public');
 
-            $img->save($file_full_path);
+            // save as VERTICAL poster 240*240
+            $image_vert_poster_240_240 = Image::make($image)->resize(240, 240)->stream();
+            Storage::disk('s3')->put('organizer/240*240/'.$imageName, $image_vert_poster_240_240->__toString(), 'public');
 
-            if (file_exists($file_full_path)) {
-                $organiser->logo_path = config('attendize.organiser_images_path') . '/' . $filename;
-            }
         }
+
 
         $organiser->save();
 

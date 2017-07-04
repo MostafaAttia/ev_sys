@@ -303,13 +303,13 @@ class CreateUsersTable extends Migration
             $t->tinyInteger('is_paused')->default(0);
 
             $t->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
-            $t->foreign('order_id')->references('id')->on('orders');
+            $t->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $t->foreign('edited_by_user_id')->references('id')->on('users');
 
             $t->unsignedInteger('public_id')->nullable()->index();
 
             $t->unsignedInteger('user_id');
-            $t->foreign('user_id')->references('id')->on('users');
+            $t->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::create('order_items', function ($table) {

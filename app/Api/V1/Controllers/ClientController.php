@@ -4,19 +4,15 @@ namespace App\Api\V1\Controllers;
 
 use App\Api\V1\Transformers\ClientTransformer;
 use App\Http\Controllers\Controller;
-use App\Models\Client;
-use Auth;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Image;
-use Log;
-use Validator;
-
-use Illuminate\Support\Facades\Mail;
-
 use Dingo\Api\Routing\Helpers;
-
+use Illuminate\Http\Request;
+use App\Models\Client;
+use League\Fractal;
+use Validator;
 use JWTAuth;
+use Image;
+use Auth;
+use Log;
 
 
 class ClientController extends Controller
@@ -42,18 +38,34 @@ class ClientController extends Controller
     public function getClientDetails($client_id = null, $client_email = null)
     {
 
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+
         if($client_id !== 'null')
         {
             $client = Client::findOrFail($client_id);
+            $client = new Fractal\Resource\Item($client, new ClientTransformer);
+            $client = $fractal->createData($client)->toArray();
+            return response()->json(
+                [
+                    'status'    => 'success',
+                    'data'      => $client,
+                    'message'   => null,
+                ], 200);
 
-            return $this->response->item($client, new ClientTransformer);
         }
 
         if($client_email !== 'null')
         {
             $client = Client::whereEmail($client_email)->first();
-
-            return $this->response->item($client, new ClientTransformer);
+            $client = new Fractal\Resource\Item($client, new ClientTransformer);
+            $client = $fractal->createData($client)->toArray();
+            return response()->json(
+                [
+                    'status'    => 'success',
+                    'data'      => $client,
+                    'message'   => null,
+                ], 200);
         }
 
     }
@@ -114,16 +126,6 @@ class ClientController extends Controller
         }
 
         $user->update($request->except('email'));
-
-        // if($request->has('password')){
-        //     Mail::send('Emails.ClientPasswordChanged',
-        //         ['first_name' => $client->first_name, 'password' => $request->get('password')],
-        //         function ($message) use ($client) {
-        //             $message->to($client->email, $client->first_name)
-        //                 ->subject('Security alert for your account @ Vitee');
-        //     });
-        // }
-
         return response()->json(
                 [
                     'status'    => 'success',

@@ -15,12 +15,12 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \Illuminate\Cookie\Middleware\EncryptCookies::class,
-        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-        \Illuminate\Session\Middleware\StartSession::class,
-        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \App\Http\Middleware\VerifyCsrfToken::class,
-        \App\Http\Middleware\GeneralChecks::class,
+//        \Illuminate\Cookie\Middleware\EncryptCookies::class,
+//        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+//        \Illuminate\Session\Middleware\StartSession::class,
+//        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+//        \App\Http\Middleware\VerifyCsrfToken::class,
+//        \App\Http\Middleware\GeneralChecks::class,
     ];
 
     /**
@@ -32,8 +32,9 @@ class Kernel extends HttpKernel
         'web' => [
             \Illuminate\Cookie\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-//            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
         ],
         'api' => [
             'throttle:60,1',
@@ -57,6 +58,7 @@ class Kernel extends HttpKernel
         'installed'  => \App\Http\Middleware\CheckInstalled::class,
         'admin'      => \App\Http\Middleware\AuthenticateAdmin::class,
         'admin.super'=> \App\Http\Middleware\CheckSuperAdmin::class,
+        'client'     => \App\Http\Middleware\RedirectIfNotClient::class,
 
         'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
         'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class,

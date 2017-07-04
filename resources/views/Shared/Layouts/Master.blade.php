@@ -11,7 +11,7 @@
 
     <!--Meta-->
     @include('Shared.Partials.GlobalMeta')
-   <!--/Meta-->
+   <!--/Meta--> 
 
     <!--JS-->
     {!! HTML::script(config('attendize.cdn_url_static_assets').'/vendor/jquery/dist/jquery.min.js') !!}

@@ -141,6 +141,16 @@ class Event extends MyBaseModel
         return $this->hasMany(\App\Models\Rating::class);
     }
 
+    /**
+     * The category associated with the event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function category()
+    {
+        return $this->belongsTo(\App\Models\Category::class);
+    }
+
 
     /**
      * The questions associated with the event.
@@ -205,7 +215,7 @@ class Event extends MyBaseModel
     /**
      * The stats associated with the event.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany 
      */
     public function stats()
     {

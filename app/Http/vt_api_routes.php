@@ -18,7 +18,7 @@ $api->version('v1',
      */
     $api->post('signup', 'App\Api\V1\Controllers\ClientAuthController@signup');
     $api->get('signup/confirm_email/{confirmation_code}', [
-        'as'   => 'ClientConfirmEmail',
+        'as'   => 'ClientConfirmEmailApi',
         'uses' => 'App\Api\V1\Controllers\ClientAuthController@confirmEmail',
     ]);
     $api->post('login', 'App\Api\V1\Controllers\ClientAuthController@login');
@@ -33,6 +33,10 @@ $api->version('v1',
         'as'    => 'updateClient',
         'uses'  => 'App\Api\V1\Controllers\ClientController@updateClient',
     ]);
+
+
+//    $api->get('login/{provider}', ['uses' => 'App\Api\V1\Controllers\SocialLoginController@redirectToProvider', 'as' => 'social.login']);
+//    $api->get('social/login/{provider}', 'App\Api\V1\Controllers\SocialLoginController@handleProviderCallback');
 
 
     /*
@@ -76,9 +80,11 @@ $api->version('v1',
         'uses' => 'App\Api\V1\Controllers\RatingController@deleteRating',
     ]);
 
-
-
-    // events routes
+     /*
+     * ----------
+     * Events
+     * ----------
+     */
     $api->get('/events/all', [ 'middleware' => 'jwt.refresh',
         'as'   => 'getAllEvents',
         'uses' => 'App\Api\V1\Controllers\EventController@getAllEvents',
@@ -128,27 +134,5 @@ $api->version('v1',
         'as'   => 'postCreateOrder',
         'uses' => 'App\Api\V1\Controllers\EventCheckoutController@postCreateOrder',
     ]);
-
-
-    // Role routes
-//    $api->post('role/', 'App\Http\Controllers\RolesController@store');
-//    $api->post('attach/{user_id}/role/{role_name}/', 'App\Http\Controllers\UsersController@assignUserRole');
-//    $api->post('detach/{user_id}/role/{role_name}/', 'App\Http\Controllers\UsersController@detachUserRole');
-//    $api->post('attach/{role_name}/perm/{perm_name}', 'App\Http\Controllers\RolesController@attachRolePermission');
-//    $api->post('detach/{role_name}/perm/{perm_name}', 'App\Http\Controllers\RolesController@detachRolePermission');
-//    $api->put('role/{name}', 'App\Http\Controllers\RolesController@updateRole');
-//    $api->delete('role/{name}', 'App\Http\Controllers\RolesController@deleteRole');
-//
-//
-//    // Permission routes
-//    $api->post('perm/', 'App\Http\Controllers\PermissionsController@store');
-//    $api->put('perm/{name}', 'App\Http\Controllers\PermissionsController@updatePermission');
-//    $api->delete('perm/{name}', 'App\Http\Controllers\PermissionsController@deletePermission');
-//
-//
-//    // transformers test
-//    $api->get('users', 'App\Http\Controllers\UsersController@getUsers');
-//    $api->get('perm', 'App\Http\Controllers\PermissionsController@getPermissions');
-
 
 });

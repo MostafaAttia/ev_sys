@@ -15,7 +15,7 @@
                             <span class="time">{{ $event->start_date->format('h:i') }}</span>
                         </time>
                         @if(count($event->images))
-                        <img class="hide" alt="{{ $event->title }}" src="{{ asset($event->images->first()['image_path']) }}"/>
+                        <img class="hide" alt="{{ $event->title }}" src="{{ config('attendize.s3_base_url').config('attendize.s3_event_images_original').$event->images->first()['image_path'] }}"/>
                         @endif
                         <div class="info">
                             <h2 class="title ellipsis">

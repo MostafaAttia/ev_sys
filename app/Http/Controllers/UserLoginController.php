@@ -61,7 +61,10 @@ class UserLoginController extends Controller
                     $user->is_confirmed = 1;
                     $user->save();
                 }
-                return 'You Are Not Confirmed yet';
+//                return 'You Are Not Confirmed yet';
+                return Redirect::back()
+                    ->with(['message' => 'You Are Not Confirmed yet', 'failed' => true])
+                    ->withInput();
             }
         }
 

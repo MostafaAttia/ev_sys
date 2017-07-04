@@ -14,7 +14,7 @@
         "nitmedia/wkhtml2pdf": "dev-master",
         "maatwebsite/excel": "~2.0.0",
         "dompdf/dompdf": "dev-master",
-        "laravel/socialite": "~2.0",
+        "laravel/socialite": "2.*",
         "filp/whoops": "~1.0",
         "vinelab/http": "dev-master",
         "mews/purifier": "~2.0",

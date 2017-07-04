@@ -13,7 +13,7 @@
         </div>
         <div class="col-md-5">
             <div class="content event_poster">
-                <img alt="{{$event->title}}" src="{{config('attendize.cdn_url_user_assets').'/'.$event->images->first()['image_path']}}" property="image">
+                <img alt="{{$event->title}}" src="{{config('attendize.s3_base_url').config('attendize.s3_event_images_original').$event->images->first()['image_path']}}" property="image">
             </div>
         </div>
         @else

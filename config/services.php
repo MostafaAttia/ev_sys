@@ -34,9 +34,9 @@ return [
         'secret' => '',
     ],
 
-    'twitter' => [
-        'widget_id' => env('TWITTER_WIDGET_ID'),
-    ],
+//    'twitter' => [
+//        'widget_id' => env('TWITTER_WIDGET_ID'),
+//    ],
 
     'sparkpost' => [
         'secret' => env('SPARKPOST_SECRET')
@@ -56,6 +56,11 @@ return [
         'client_id' =>  env('GOOGLE_APP_ID'),
         'client_secret' => env('GOOGLE_APP_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT'),
+    ],
+    'twitter' => [
+        'client_id' =>  env('TWITTER_APP_ID'),
+        'client_secret' => env('TWITTER_APP_SECRET'),
+        'redirect' => env('TWITTER_REDIRECT'),
     ]
 
 

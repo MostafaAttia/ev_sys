@@ -5,10 +5,51 @@
  */
 include_once('api_routes.php');
 
-//Route::get('s3-image-upload','S3ImageController@imageUpload'); 
-//Route::post('s3-image-upload','S3ImageController@imageUploadPost');
+
+/*
+ * -------------------------
+ * Clients
+ * -------------------------
+ */
+
+Route::get('/', function () {
+    return Redirect::route('home');
+});
+
+Route::group(['prefix' => 'home'], function(){
+
+    Route::get('/',[
+        'as'   => 'home',
+        'uses' => 'HomeController@index',
+    ]);
+    Route::post('signup','ClientAuth\AuthController@signup');
+    Route::get('signup/confirm_email/{confirmation_code}', [
+        'as'   => 'ClientConfirmEmail',
+        'uses' => 'ClientController@confirmEmail',
+    ]);
+
+    Route::post('login','ClientAuth\AuthController@authenticate');
+    Route::get('logout','ClientAuth\AuthController@logout');
+
+});
 
 
+
+
+/*
+ * -------------------------
+ * Social Login
+ * -------------------------
+ */
+
+Route::get('login/{provider}', ['uses' => 'SocialLoginController@redirectToProvider', 'as' => 'social.login']);
+Route::get('social/login/{provider}', 'SocialLoginController@handleProviderCallback');
+
+
+
+
+
+// Routes for Admin
 Route::group(['prefix' => 'admin'], function(){
 
     Route::get('register', 'AdminController@register');
@@ -38,24 +79,8 @@ Route::group(['prefix' => 'admin'], function(){
 
         });
 
-
-
     });
-
-
-
-
 });
-
-
-/*
- * -------------------------
- * Social Login
- * -------------------------
- */
-
-Route::get('login/{provider}', ['uses' => 'SocialLoginController@redirectToProvider', 'as' => 'social.login']);
-Route::get('social/login/{provider}', 'SocialLoginController@handleProviderCallback');
 
 
 /*
@@ -824,9 +849,6 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
     });
 });
 
-Route::get('/', function () {
-    return Redirect::route('showSelectOrganiser');
-});
 
 Route::get('/terms_and_conditions', [
     'as' => 'termsAndConditions',
