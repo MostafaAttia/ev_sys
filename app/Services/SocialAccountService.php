@@ -25,6 +25,8 @@ class SocialAccountService
         $providerUser = $provider->user();
         $providerName = class_basename($provider);
 
+        $avatar_original = $providerUser->avatar_original;
+
         $account = SocialAccount::whereProvider($providerName)
             ->whereProviderUserId($providerUser->getId())
             ->first();
@@ -52,7 +54,7 @@ class SocialAccountService
                     'last_name'             => $last_name,
                     'email'                 => $providerUser->getEmail(),
                     'password'              => bcrypt(str_random()),
-                    'image_path'            => $providerUser->getAvatar(),
+                    'image_path'            => $providerUser->getAvatar('avatar_original'),
                     'is_email_confirmed'    => 1
                 ]);
             }

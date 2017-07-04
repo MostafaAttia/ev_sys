@@ -44,7 +44,7 @@ class EventTransformer extends TransformerAbstract
             'organiser'                 => [
                     'id'                => $organiser->id ,
                     'name'              => $organiser->name,
-                    'logo'              => $organiser->logo_path ? [
+                    'image_path'              => $organiser->logo_path ? [
                         'original'              => config('attendize.s3_base_url').config('attendize.s3_organiser_original'). $organiser->logo_path,
                         '60*60'                 => config('attendize.s3_base_url').config('attendize.s3_organiser_60_60'). $organiser->logo_path,
                         '120*120'               => config('attendize.s3_base_url').config('attendize.s3_organiser_120_120'). $organiser->logo_path,
