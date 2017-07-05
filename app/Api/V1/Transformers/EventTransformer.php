@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Transformers;
 
+use Carbon\Carbon;
 use League\Fractal\TransformerAbstract;
 use App\Models\Event;
 use App\Models\Organiser;
@@ -15,7 +16,18 @@ class EventTransformer extends TransformerAbstract
         if($event->category_id){
             $category = $event->category;
         }
-        
+
+        // reformat date
+        $end_date['date'] = $event->end_date->format('Y-m-d H:i:s');
+        foreach($event->end_date->timezone as $key=>$value){
+            $end_date[$key] = $value;
+        }
+
+        $start_date['date'] = $event->start_date->format('Y-m-d H:i:s');
+        foreach($event->start_date->timezone as $key=>$value){
+            $start_date[$key] = $value;
+        }
+
         $events = [
             'id'                        => $event->id,
             'title'                     => $event->title,
@@ -39,8 +51,8 @@ class EventTransformer extends TransformerAbstract
                     '600*1080'              => config('attendize.s3_base_url').config('attendize.s3_event_defaults'). '600*1080.jpg'
                 ,
             ],
-            'start_date'                => $event->start_date,
-            'end_date'                  => $event->end_date,
+            'start_date'                => $start_date,
+            'end_date'                  => $end_date,
             'organiser'                 => [
                     'id'                => $organiser->id ,
                     'name'              => $organiser->name,

@@ -487,4 +487,5 @@ ICSTemplate;
             return $end_date->isPast();
         }
     }
+
 }

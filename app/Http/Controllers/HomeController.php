@@ -27,9 +27,7 @@ class HomeController extends Controller
     {
         $fractal = new Fractal\Manager();
         $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
-
         $events = Event::where('is_live', 1)->get();
-
         $events = new Fractal\Resource\Collection($events, new EventTransformer);
         $events = $fractal->createData($events)->toArray();
 
@@ -41,8 +39,6 @@ class HomeController extends Controller
         }
 
         return view('Front.Home.Home', compact('events'));
-
-
     }
 
     /**

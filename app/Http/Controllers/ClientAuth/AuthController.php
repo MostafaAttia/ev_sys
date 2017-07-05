@@ -20,6 +20,7 @@ use Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Validator;
 use App\Models\Client;
 
@@ -146,21 +147,37 @@ class AuthController extends Controller
             'last_name'     => 'required|max:56',
             'email'         => 'required|email|unique:clients',
             'password'      => 'required|min:6|confirmed',
-//            'gender'        => 'in:male,female',
-//            'dob'           => 'date',
-//            'phone'         => 'max:15|min:4',
-//            'address'       => 'string|min:10|max:255',
-//            'image'         => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=300,min_height=300',
+            'gender'        => 'in:male,female',
+            'dob'           => 'date',
+            'phone'         => 'max:15|min:4',
+            'address'       => 'string|min:10|max:255',
+            'image'         => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=300,min_height=300',
         ]);
 
         $client_data = $request->all();
         $client_data['confirmation_code'] = str_random();
 
-        if($image = $request->file('image')){
-            $imageName = time().'.'.$request->image->getClientOriginalExtension();
-            $t = Storage::disk('s3')->put('user_content/'.$imageName, file_get_contents($image), 'public');
-            $imageName = Storage::disk('s3')->url('user_content/'.$imageName);
+        // upload user image
+        if ($request->hasFile('image')) {
+
+            $image = $request->file('image');
+            $imageName = 'img_'.md5(time(). str_random()).'.'.$image->getClientOriginalExtension();
             $client_data['image_path'] = $imageName;
+
+            Storage::disk('s3')->put('user_content/original/'.$imageName, file_get_contents($image), 'public');
+
+            // save as THUMB 60*60
+            $image_thumb_60_60 = Image::make($image)->resize(60, 60)->stream();
+            Storage::disk('s3')->put('user_content/60*60/'.$imageName, $image_thumb_60_60->__toString(), 'public');
+
+            // save as THUMB 120*120
+            $image_thumb_120_120 = Image::make($image)->resize(120, 120)->stream();
+            Storage::disk('s3')->put('user_content/120*120/'.$imageName, $image_thumb_120_120->__toString(), 'public');
+
+            // save as VERTICAL poster 240*240
+            $image_vert_poster_240_240 = Image::make($image)->resize(240, 240)->stream();
+            Storage::disk('s3')->put('user_content/240*240/'.$imageName, $image_vert_poster_240_240->__toString(), 'public');
+
         }
 
         $client = Client::create($client_data);

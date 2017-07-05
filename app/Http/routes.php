@@ -33,9 +33,6 @@ Route::group(['prefix' => 'home'], function(){
 
 });
 
-
-
-
 /*
  * -------------------------
  * Social Login
@@ -44,10 +41,6 @@ Route::group(['prefix' => 'home'], function(){
 
 Route::get('login/{provider}', ['uses' => 'SocialLoginController@redirectToProvider', 'as' => 'social.login']);
 Route::get('social/login/{provider}', 'SocialLoginController@handleProviderCallback');
-
-
-
-
 
 // Routes for Admin
 Route::group(['prefix' => 'admin'], function(){

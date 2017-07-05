@@ -140,7 +140,7 @@
                                 <div class="footer">
                                     <div class="author">
                                         <a href="#pablo">
-                                           <img src="{{ $event['organiser']['logo']['original'] }}" alt="..." class="avatar img-raised">
+                                           <img src="{{ $event['organiser']['image_path']['original'] }}" alt="..." class="avatar img-raised">
                                            <span>{{ $event['organiser']['name'] }}</span>
                                         </a>
                                     </div>
