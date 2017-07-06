@@ -168,6 +168,33 @@ class EventController extends Controller
     }
 
     /**
+     * Get Events by organiser id
+     *
+     * <strong>Parameters:</strong>
+     * <br>
+     * organiser_id  : required|integer <br>
+     *
+     * @param $organiser_id
+     * @return \Dingo\Api\Http\Response
+     */
+    public function getOrganiserEvents($organiser_id)
+    {
+        $events = Event::where(['organiser_id' => $organiser_id, 'is_live'=> 1])->get();
+
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+        $events = new Fractal\Resource\Collection($events, new EventTransformer);
+        $events = $fractal->createData($events)->toArray();
+
+        return response()->json(
+            [
+                'status'    => 'success',
+                'data'      => $events['data'],
+                'message'   => null,
+            ], 200);
+    }
+
+    /**
      * Search Events by title, venue name, location
      * @param $query
      * @return \Dingo\Api\Http\Response

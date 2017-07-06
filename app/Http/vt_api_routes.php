@@ -118,6 +118,12 @@ $api->version('v1',
         'uses' => 'App\Api\V1\Controllers\EventController@getCategoryEvents',
     ]);
 
+    // get all events by organiser
+    $api->get('/organiser/{organiser_id}/events', [
+        'as'   => 'getOrganiserEvents',
+        'uses' => 'App\Api\V1\Controllers\EventController@getOrganiserEvents',
+    ]);
+
     // search events by title, venue name, location
     $api->get('/events/search/{query}', [
         'as'   => 'searchEvents',
