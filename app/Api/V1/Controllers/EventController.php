@@ -4,7 +4,9 @@ namespace App\Api\V1\Controllers;
 
 use App\Api\V1\Transformers\AttendeeTransformer;
 use App\Api\V1\Transformers\EventTransformer;
+use App\Api\V1\Transformers\OrganiserTransformer;
 use App\Http\Controllers\Controller;
+use App\Models\Organiser;
 use Dingo\Api\Routing\Helpers;
 use App\Models\Category;
 use App\Models\Event;
@@ -230,6 +232,38 @@ class EventController extends Controller
             [
                 'status'    => 'success',
                 'data'      => $events['data'],
+                'message'   => null,
+            ], 200);
+
+    }
+
+    /**
+     * Search Organisers by name
+     * @param $query
+     * @return \Dingo\Api\Http\Response
+     */
+    public function searchOrganisers($query)
+    {
+        $organisers = Organiser::search($query)->get();
+
+        if(count($organisers) === 0) {
+            return response()->json(
+                [
+                    'status'    => 'error',
+                    'data'      => null,
+                    'message'   => 'organiser not found',
+                ], 404);
+        }
+
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+        $organisers = new Fractal\Resource\Collection($organisers, new OrganiserTransformer);
+        $organisers = $fractal->createData($organisers)->toArray();
+
+        return response()->json(
+            [
+                'status'    => 'success',
+                'data'      => $organisers['data'],
                 'message'   => null,
             ], 200);
 

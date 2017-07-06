@@ -130,6 +130,12 @@ $api->version('v1',
         'uses' => 'App\Api\V1\Controllers\EventController@searchEvents',
     ]);
 
+    // search organisers by name
+    $api->get('/organisers/search/{query}', [
+        'as'   => 'searchOrganisers',
+        'uses' => 'App\Api\V1\Controllers\EventController@searchOrganisers',
+    ]);
+
     // get event tickets
     $api->post('event/{event_id}/checkout/', [
         'as'   => 'postValidateTickets',
