@@ -2,7 +2,6 @@
 
 namespace App\Api\V1\Transformers;
 
-use Illuminate\Support\Facades\Storage;
 use League\Fractal\TransformerAbstract;
 use App\Models\Client;
 

@@ -112,7 +112,7 @@ class EventController extends Controller
 
         $fractal = new Fractal\Manager();
         $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
-        $attendees = new Fractal\Resource\Collection($attendees, new EventTransformer);
+        $attendees = new Fractal\Resource\Collection($attendees, new AttendeeTransformer);
         $attendees = $fractal->createData($attendees)->toArray();
 
         return response()->json(
@@ -154,6 +154,15 @@ class EventController extends Controller
     {
         $events = Event::where(['category_id' => $category_id, 'is_live'=> 1])->get();
 
+        if(count($events) === 0) {
+            return response()->json(
+                [
+                    'status'    => 'error',
+                    'data'      => null,
+                    'message'   => 'Category doesn\'t exist or has no events yet',
+                ], 404);
+        }
+
         $fractal = new Fractal\Manager();
         $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
         $events = new Fractal\Resource\Collection($events, new EventTransformer);
@@ -180,6 +189,15 @@ class EventController extends Controller
     public function getOrganiserEvents($organiser_id)
     {
         $events = Event::where(['organiser_id' => $organiser_id, 'is_live'=> 1])->get();
+
+        if(count($events) === 0) {
+            return response()->json(
+                [
+                    'status'    => 'error',
+                    'data'      => null,
+                    'message'   => 'organiser doesn\'t exist or has no events yet',
+                ], 404);
+        }
 
         $fractal = new Fractal\Manager();
         $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());

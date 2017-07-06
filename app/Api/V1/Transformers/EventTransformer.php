@@ -2,7 +2,6 @@
 
 namespace App\Api\V1\Transformers;
 
-use Carbon\Carbon;
 use League\Fractal\TransformerAbstract;
 use App\Models\Event;
 use App\Models\Organiser;
