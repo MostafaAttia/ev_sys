@@ -132,7 +132,7 @@
                             </div>
                             <div class="card-content">
                                 <h4 class="card-title">
-                                    <a href="#pablo">{{ $event['title'] }}</a>
+                                    <a href="{{ route('showEventPage', $event['id']) }}">{{ $event['title'] }}</a>
                                 </h4>
                                 <p class="card-description">
                                     {{ str_limit($event['desc'], $limit = 200, $end = '...') }}

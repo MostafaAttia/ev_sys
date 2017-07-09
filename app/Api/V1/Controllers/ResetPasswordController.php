@@ -85,7 +85,7 @@ class ResetPasswordController extends Controller
                     'status'    => 'error',
                     'data'      => null,
                     'message'   => $validator->errors(),
-                ], 404);
+                ], 401);
         }
 
         $credentials = $request->only(
@@ -105,7 +105,7 @@ class ResetPasswordController extends Controller
                     'status'    => 'success',
                     'data'      => ['token' => $token],
                     'message'   => null,
-                ], 200);
+                ], 201);
         } else {
             return response()->json(
                 [

@@ -17,7 +17,7 @@ $api->version('v1',
      * ----------
      */
     $api->post('signup', 'App\Api\V1\Controllers\ClientAuthController@signup');
-    $api->get('signup/confirm_email/{confirmation_code}', [
+    $api->get('signup/confirm_email/{confirmation_code}', [ 'middleware' => 'web',
         'as'   => 'ClientConfirmEmailApi',
         'uses' => 'App\Api\V1\Controllers\ClientAuthController@confirmEmail',
     ]);
@@ -26,8 +26,10 @@ $api->version('v1',
         'uses' => 'App\Api\V1\Controllers\UserLogoutController@doLogout',
         'as'   => 'logout',
     ]);
+
     $api->post('password/email', 'App\Api\V1\Controllers\ForgotPasswordController@getResetToken');
     $api->post('password/reset', 'App\Api\V1\Controllers\ResetPasswordController@reset');
+
     $api->get('client/{client_id?}/{client_email?}', 'App\Api\V1\Controllers\ClientController@getClientDetails');
     $api->post('client/update', ['middleware' => 'jwt.refresh',
         'as'    => 'updateClient',

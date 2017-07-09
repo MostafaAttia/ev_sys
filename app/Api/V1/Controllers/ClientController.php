@@ -102,7 +102,7 @@ class ClientController extends Controller
                     'status'    => 'error',
                     'data'      => null,
                     'message'   => 'you can not change your email from here! :( ',
-                ], 404);
+                ], 401);
         }
 
         $validator = Validator::make($request->all(), [
@@ -121,8 +121,8 @@ class ClientController extends Controller
                 [
                     'status'    => 'error',
                     'data'      => null,
-                    'message'   => $validator->errors()->all(),
-                ], 404);
+                    'message'   => $validator->errors(),
+                ], 401);
         }
 
         $user->update($request->except('email'));

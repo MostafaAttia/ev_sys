@@ -2,9 +2,9 @@
 
 namespace App\Api\V1\Controllers;
 
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
+use App\Api\V1\Transformers\ClientTransformer;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
 use JWTAuth;
 use Validator;
@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Password;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Dingo\Api\Exception\ValidationHttpException;
 use Storage;
+use Auth;
+use League\Fractal;
 
 class ClientAuthController extends Controller
 {
@@ -50,7 +52,7 @@ class ClientAuthController extends Controller
      */
     public function signup(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'first_name'    => 'required|max:56',
             'last_name'     => 'required|max:56',
             'email'         => 'required|email|unique:clients',
@@ -61,6 +63,17 @@ class ClientAuthController extends Controller
             'address'       => 'string|min:10|max:255',
             'image'         => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=300,min_height=300',
         ]);
+
+
+        if($validator->fails()) {
+            return response()->json(
+                [
+                    'status'    => 'error',
+                    'data'      => null,
+                    'message'   => $validator->errors(),
+                ], 400);
+        }
+
 
         $client_data = $request->all();
         $client_data['confirmation_code'] = str_random();
@@ -74,16 +87,22 @@ class ClientAuthController extends Controller
 
             Storage::disk('s3')->put('user_content/original/'.$imageName, file_get_contents($image), 'public');
 
-            // save as THUMB 60*60
-            $image_thumb_60_60 = Image::make($image)->resize(60, 60)->stream();
+            // save as THUMB 60*?
+            $image_thumb_60_60 = Image::make($image)->resize(60, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->stream();
             Storage::disk('s3')->put('user_content/60*60/'.$imageName, $image_thumb_60_60->__toString(), 'public');
 
-            // save as THUMB 120*120
-            $image_thumb_120_120 = Image::make($image)->resize(120, 120)->stream();
+            // save as THUMB 120*?
+            $image_thumb_120_120 = Image::make($image)->resize(120, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->stream();
             Storage::disk('s3')->put('user_content/120*120/'.$imageName, $image_thumb_120_120->__toString(), 'public');
 
-            // save as VERTICAL poster 240*240
-            $image_vert_poster_240_240 = Image::make($image)->resize(240, 240)->stream();
+            // save as VERTICAL poster 240*?
+            $image_vert_poster_240_240 = Image::make($image)->resize(240, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->stream();
             Storage::disk('s3')->put('user_content/240*240/'.$imageName, $image_vert_poster_240_240->__toString(), 'public');
 
         }
@@ -103,7 +122,7 @@ class ClientAuthController extends Controller
                 'status'    => 'success',
                 'data'      => null,
                 'message'   => 'Thank you for registering for Vitee!, We have sent you a confirmation email to '. $client->email,
-            ], 200);
+            ], 201);
 
     }
 
@@ -118,24 +137,26 @@ class ClientAuthController extends Controller
         $client = Client::whereConfirmationCode($confirmation_code)->first();
 
         if (!$client) {
-            return response()->json(
-                [
-                    'status'    => 'error',
-                    'data'      => null,
-                    'message'   => 'The confirmation code is missing or malformed.',
-                ], 404);
+            Session::flash('message', [
+                'content'   => 'The confirmation code is missing or malformed!',
+                'type'      => 'error' // alert, success, error, warning, info
+            ]);
+
+            return redirect()->intended('home');
         }
 
         $client->is_email_confirmed = 1;
         $client->confirmation_code = null;
         $client->save();
 
-        return response()->json(
-            [
-                'status'    => 'success',
-                'data'      => null,
-                'message'   => 'Your Email Confirmed, You can now login!',
-            ], 200);
+        Auth::guard('client')->login($client);
+
+        Session::flash('message', [
+            'content'   => 'Welcome!',
+            'type'      => 'success' // alert, success, error, warning, info
+        ]);
+
+        return redirect()->intended('home');
 
     }
 
@@ -164,7 +185,17 @@ class ClientAuthController extends Controller
             'password' => 'required',
         ]);
 
+        if($validator->fails()) {
+            return response()->json(
+                [
+                    'status'    => 'error',
+                    'data'      => null,
+                    'message'   => $validator->errors(),
+                ], 400);
+        }
+
         $client = Client::where('email', $request->get('email'))->first();
+
         if($client){
             if(! $client->is_email_confirmed) {
                 return response()->json(
@@ -177,9 +208,7 @@ class ClientAuthController extends Controller
             }
         }
 
-        if($validator->fails()) {
-            throw new ValidationHttpException($validator->errors()->all());
-        }
+
 
         try {
             if (! $token = JWTAuth::attempt($credentials) ) {
@@ -187,8 +216,8 @@ class ClientAuthController extends Controller
                     [
                         'status'    => 'error',
                         'data'      => null,
-                        'message'   => 'invalid_credentials.',
-                    ], 401);
+                        'message'   => 'invalid credentials!',
+                    ], 400);
 
             }
         } catch (JWTException $e) {
@@ -200,10 +229,22 @@ class ClientAuthController extends Controller
                 ], 500);
         }
 
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+
+        $client = new Fractal\Resource\Item($client, new ClientTransformer);
+        $client = $fractal->createData($client)->toArray();
+
+        $user['client'] = $client;
+        foreach(compact('token') as $key=>$value){
+            $user[$key] = $value;
+        }
+
+
         return response()->json(
             [
                 'status'    => 'success',
-                'data'      => compact('token'),
+                'data'      => $user,
                 'message'   => null,
             ], 200);
     }

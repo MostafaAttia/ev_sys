@@ -51,6 +51,7 @@ class ForgotPasswordController extends Controller
      */
     public function getResetToken(Request $request)
     {
+
         $validator = \Validator::make($request->all(), ['email' => 'required|email']);
 
         if($validator->fails()){
@@ -82,5 +83,14 @@ class ForgotPasswordController extends Controller
                     'message'   => null,
                 ], 200);
         }
+
+        return response()->json(
+            [
+                'status'    => 'error',
+                'data'      => null,
+                'message'   => 'you have to send Accept header as application/json',
+            ], 404);
+
+
     }
 }
