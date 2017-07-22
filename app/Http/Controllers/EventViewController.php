@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Api\V1\Transformers\ClientTransformer;
 use App\Attendize\Utils;
 use App\Models\Affiliate;
 use App\Models\Event;
@@ -11,6 +12,7 @@ use Cookie;
 use Illuminate\Http\Request;
 use Mail;
 use Validator;
+use League\Fractal;
 
 class EventViewController extends Controller
 {
@@ -29,6 +31,71 @@ class EventViewController extends Controller
 
         if (!Utils::userOwns($event) && !$event->is_live) {
             return view('Public.ViewEvent.EventNotLivePage');
+        }
+
+        $client = [];
+
+        if(Auth::guard('client')->user()) {
+            $fractal = new Fractal\Manager();
+            $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+            $auth_client = Auth::guard('client')->user();
+            $client_obj = new Fractal\Resource\Item($auth_client, new ClientTransformer);
+            $client = $fractal->createData($client_obj)->toArray();
+        }
+
+        $data = [
+            'event'       => $event,
+            'tickets'     => $event->tickets()->where('is_hidden', 0)->orderBy('sort_order', 'asc')->get(),
+            'client'      => $client,
+            'is_embedded' => 0,
+        ];
+        /*
+         * Don't record stats if we're previewing the event page from the backend or if we own the event.
+         */
+        if (!$preview && !Auth::check()) {
+            $event_stats = new EventStats();
+            $event_stats->updateViewCount($event_id);
+        }
+
+        /*
+         * See if there is an affiliate referral in the URL
+         */
+        if ($affiliate_ref = $request->get('ref')) {
+            $affiliate_ref = preg_replace("/\W|_/", '', $affiliate_ref);
+
+            if ($affiliate_ref) {
+                $affiliate = Affiliate::firstOrNew([
+                    'name'       => $request->get('ref'),
+                    'event_id'   => $event_id,
+                    'account_id' => $event->account_id,
+                ]);
+
+                ++$affiliate->visits;
+
+                $affiliate->save();
+
+                Cookie::queue('affiliate_' . $event_id, $affiliate_ref, 60 * 24 * 60);
+            }
+        }
+
+        return view('Public.ViewEvent.EventPage', $data);
+    }
+
+    /**
+     * Show the homepage for an event in frontend
+     *
+     * @param Request $request
+     * @param $event_id
+     * @param string $slug
+     * @param bool $preview
+     * @return mixed
+     */
+    public function showEventHomeFront(Request $request, $event_id, $slug = '', $preview = false)
+    {
+        $event = Event::findOrFail($event_id);
+
+        if (!Utils::userOwns($event) && !$event->is_live) {
+            return view('Front.ViewEvent.EventNotLivePage');
         }
 
         $data = [
@@ -65,7 +132,7 @@ class EventViewController extends Controller
             }
         }
 
-        return view('Public.ViewEvent.EventPage', $data);
+        return view('Front.ViewEvent.EventPage', $data);
     }
 
     /**

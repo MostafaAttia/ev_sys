@@ -19,7 +19,7 @@ class HomeController extends Controller
     use Helpers;
 
     /**
-     * Display a listing of the resource.
+     * Show Home page
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,8 +27,9 @@ class HomeController extends Controller
     {
         $fractal = new Fractal\Manager();
         $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
-        $events = Event::where('is_live', 1)->get();
-        $events = new Fractal\Resource\Collection($events, new EventTransformer);
+        $eventsOriginal = Event::where('is_live', 1)->paginate(10);
+
+        $events = new Fractal\Resource\Collection($eventsOriginal, new EventTransformer);
         $events = $fractal->createData($events)->toArray();
 
         if(Auth::guard('client')->user()) {
@@ -37,6 +38,15 @@ class HomeController extends Controller
             $client = $fractal->createData($client_obj)->toArray();
             return view('Front.Home.Home', compact('events', 'client'));
         }
+
+        foreach($eventsOriginal->toArray() as $key=>$value){
+            if($key == 'data') continue;
+            $events[$key] = $value;
+        }
+
+        Log::info($events['next_page_url']);
+        Log::info($events);
+
 
         return view('Front.Home.Home', compact('events'));
     }

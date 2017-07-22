@@ -78,7 +78,7 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()) {
-            Session::flash('message', [
+            Session::flash('notification', [
                 'content'   => 'Please make sure your email/password are correct!',
                 'type'      => 'error' // alert, success, error, warning, info
             ]);
@@ -89,7 +89,7 @@ class AuthController extends Controller
         $client = Client::where('email', $request->get('email'))->first();
         if($client){
             if(! $client->is_email_confirmed) {
-                Session::flash('message', [
+                Session::flash('notification', [
                     'content'   => 'Please confirm your email first!',
                     'type'      => 'error' // alert, success, error, warning, info
                 ]);
@@ -97,25 +97,25 @@ class AuthController extends Controller
                 return redirect()->intended('home');
             }
         } else {
-            Session::flash('message', [
+            Session::flash('notification', [
                 'content'   => 'your email is incorrect!',
                 'type'      => 'error' // alert, success, error, warning, info
             ]);
 
-            return redirect()->intended('home');
+            return redirect()->back();
         }
 
 
         if (Auth::guard('client')->attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
             // Authentication passed...
-            return redirect()->intended('home');
+            return redirect()->back();
         } else {
-            Session::flash('message', [
+            Session::flash('notification', [
                 'content'   => 'invalid password!',
                 'type'      => 'error' // alert, success, error, warning, info
             ]);
 
-            return redirect()->intended('home');
+            return redirect()->back();
         }
     }
 
@@ -196,7 +196,7 @@ class AuthController extends Controller
                     ->subject('Thank you for registering for Vitee');
             });
 
-        Session::flash('message', [
+        Session::flash('notification', [
             'content'   => 'We have sent a confirmation email to '. $request->get('email') . ', Please confirm your email and then login!',
             'type'      => 'success' // alert, success, error, warning, info
         ]);

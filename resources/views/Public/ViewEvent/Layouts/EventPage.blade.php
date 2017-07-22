@@ -7,6 +7,9 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
         <link rel="canonical" href="{{$event->event_url}}" />
 
+        {!!HTML::script(config('attendize.cdn_url_static_assets').'/assets/javascript/frontend.js')!!}
+        {!!HTML::script(config('attendize.cdn_url_static_assets').'/front/js/material.min.js')!!}
+        @include('Front.Partials.core-scripts')
 
         <!-- Open Graph data -->
         <meta property="og:title" content="{{{$event->title}}}" />
@@ -15,11 +18,8 @@
         @if($event->images->count())
         <meta property="og:image" content="{{config('attendize.cdn_url_user_assets').'/'.$event->images->first()['image_path']}}" />
         @endif
-        @if($event->is_activity)
-            {!!HTML::style(config('attendize.cdn_url_static_assets').'/vendor/fontawesome/css/font-awesome.min.css')!!}
-        @endif
         <meta property="og:description" content="{{Str::words(strip_tags(Markdown::parse($event->description))), 20}}" />
-        <meta property="og:site_name" content="Attendize.com" />
+        <meta property="og:site_name" content="vitee.net" />
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -67,9 +67,22 @@
             </style>
         @endif
 
+                <!--     Fonts and icons     -->
+            <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+            <!-- CSS Files -->
+            {!!  HTML::style(config('attendize.cdn_url_static_assets').'/front/css/material-kit.css?v=1.1.0') !!}
+            {!!  HTML::style(config('attendize.cdn_url_static_assets').'/front/css/noty.css') !!}
+            {!!  HTML::style(config('attendize.cdn_url_static_assets').'/front/css/animate.min.css') !!}
+            {!!  HTML::style(config('attendize.cdn_url_static_assets').'/front/css/custom.css') !!}
+
     </head>
     <body class="attendize">
-        <div id="event_page_wrap" vocab="http://schema.org/" typeof="Event">
+
+        @include('Front.Partials.NavBarEvent')
+
+        <div id="event_page_wrap" vocab="http://schema.org/" typeof="Event" style="padding-top: 50px;">
             @yield('content')
 
             {{-- Push for sticky footer--}}
@@ -81,9 +94,6 @@
 
         <a href="#intro" style="display:none;" class="totop"><i class="ico-angle-up"></i>
             <span style="font-size:11px;">TOP</span></a>
-
-        {!!HTML::script(config('attendize.cdn_url_static_assets').'/assets/javascript/frontend.js')!!}
-
 
         @if(isset($secondsToExpire))
         <script>if($('#countdown')) {setCountdown($('#countdown'), {{$secondsToExpire}});}</script>

@@ -116,7 +116,8 @@
                                         <div class="col-md-6">
                                             <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                                 <div class="fileinput-new thumbnail img-circle img-raised">
-                                                    <img src="front/img/placeholder.jpg" style="width: 50px;">
+                                                    {{--<img src="front/img/placeholder.jpg" style="width: 50px;">--}}
+                                                    <img src="{{URL::asset('front/img/placeholder.jpg')}}" style="width: 50px;">
                                                 </div>
                                                 <div class="fileinput-preview fileinput-exists thumbnail img-circle img-raised"></div>
                                                 <div>

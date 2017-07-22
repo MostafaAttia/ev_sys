@@ -36,13 +36,12 @@
 
 	@yield('content')
 
-    @yield('modals')
-
     @yield('footer')
 
     @include('Front.Partials.core-scripts')
 
     @yield('footer-scripts')
 
+    {!!  HTML::script(config('attendize.cdn_url_static_assets').'/front/js/vt-custom.js') !!}
 </body>
 </html>

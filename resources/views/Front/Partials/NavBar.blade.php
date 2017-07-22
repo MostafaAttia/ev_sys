@@ -39,14 +39,14 @@
 						</li>
 						<li>
 							<a href="{{ route('showSignup') }}">
-								<i class="fa fa-user-plus vt-color"></i> Register
+								<i class="fa fa-user-plus vt-color"></i> Join Us
 							</a>
 						</li>
 					</ul>
 				</li>
                 @else
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <a href="#" class="dropdown-toggle" style="padding-bottom: 0px;" data-toggle="dropdown" aria-expanded="false">
                         <img src="{{ $client['image_path']['original'] }}" alt="{{ $client['first_name'] .'\' image' }}" class="client-avatar"/>
                         {{ $client['first_name'] }}
                         <b class="caret"></b>
@@ -76,3 +76,25 @@
     	</div>
 	</div>
 </nav>
+
+@if (Session::has('notification'))
+    <script>
+        new Noty({
+            text: '{{ Session::get('notification')['content'] }}',
+            type: '{{ Session::get('notification')['type'] }}',
+            layout: 'topRight',
+            theme: 'metroui',
+            timeout: 5000,
+            progressBar: true,
+            closeWith: ['click', 'button'],
+            animation: {
+                open: 'animated bounceInRight',
+                close: 'animated bounceOutRight'
+            },
+            queue: 'global'
+        }).show();
+    </script>
+@endif
+
+@include('Front.Home.Modals.Login')
+@include('Front.Home.Modals.Signup')

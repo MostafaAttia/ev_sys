@@ -1,4 +1,4 @@
 <!--   Core JS Files   -->
-<script src="front/js/jquery.min.js" type="text/javascript"></script>
-<script src="front/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="front/js/material.min.js"></script>
+{!!  HTML::script(config('attendize.cdn_url_static_assets').'/front/js/jquery.min.js') !!}
+{!!  HTML::script(config('attendize.cdn_url_static_assets').'/front/js/bootstrap.min.js') !!}
+{!!  HTML::script(config('attendize.cdn_url_static_assets').'/front/js/material.min.js') !!}

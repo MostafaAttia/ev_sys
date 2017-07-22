@@ -419,3 +419,14 @@ var big_image;
 
      return ((elemTop < viewportBottom) && (elemBottom > viewportTop));
  }
+
+function RotateCardReset(){
+    setTimeout(function(){
+        $('.card-rotate:not(.card-checked) .card-image > .back').each(function(){
+            if($(this).hasClass('back-background')){
+                var img_src = $(this).siblings('.front').find('img').attr('src');
+                $(this).css('background-image','url("' + img_src + '")');
+            }
+        });
+    },1000);
+}

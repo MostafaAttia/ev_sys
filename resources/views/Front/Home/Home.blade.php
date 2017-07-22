@@ -5,14 +5,16 @@
     Welcome to Vitee
 @stop
 
-@section('navbar')
-    @include('Front.Partials.NavBar')
+@section('header-scripts')
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.0b2.120519/jquery.infinitescroll.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.1.2/masonry.pkgd.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.min.js"></script>
+
 @stop
 
-@section('header-scripts')
-	<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <!-- noty, plugin for Notifications, full docs here: http://ned.im/noty/  -->
-    <script src="front/js/noty.min.js" type="text/javascript"></script>
+@section('navbar')
+    @include('Front.Partials.NavBar')
 @stop
 
 @section('content')
@@ -36,25 +38,6 @@
     <div class="main main-raised vt-bg-lite">
 		<div class="container">
 			<div class="vt-top-filters">
-
-                @if (Session::has('message'))
-                    <script>
-                        new Noty({
-                            text: '{{ Session::get('message')['content'] }}',
-                            type: '{{ Session::get('message')['type'] }}',
-                            layout: 'topRight',
-                            theme: 'metroui',
-                            timeout: 5000,
-                            progressBar: true,
-                            closeWith: ['click', 'button'],
-                            animation: {
-                                open: 'animated bounceInRight',
-                                close: 'animated bounceOutRight'
-                            },
-                            queue: 'global'
-                        }).show();
-                    </script>
-                @endif
 
 				<ul class="nav nav-pills nav-pills-icons nav-pills-danger" role="tablist">
 					<li>
@@ -154,16 +137,20 @@
                     </div>
                 @endforeach
             </div>
+
+            <div class="navigation">
+                <div class="nav-next">
+                    <a href="{{ $events['next_page_url'] }}"></a>
+                </div>
+            </div>
+
+            <div id="loading-spin">
+                <img src="../front/img/loader.gif"/>
+            </div>
+
 	    </div>
 	</div>
 @stop
-
-
-@section('modals')
-    @include('Front.Home.Modals.Login')
-    @include('Front.Home.Modals.Signup')
-@stop
-
 
 @section('footer')
 	@include('Front.Partials.Footer')
