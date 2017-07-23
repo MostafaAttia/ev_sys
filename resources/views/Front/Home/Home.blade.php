@@ -122,7 +122,7 @@
                                 </p>
                                 <div class="footer">
                                     <div class="author">
-                                        <a href="#pablo">
+                                        <a href="{{route('showOrganiserHome', [$event['organiser']['id'], Str::slug($event['organiser']['name'])])}}" title="Organiser Page">
                                            <img src="{{ $event['organiser']['image_path']['original'] }}" alt="..." class="avatar img-raised">
                                            <span>{{ $event['organiser']['name'] }}</span>
                                         </a>

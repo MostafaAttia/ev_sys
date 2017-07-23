@@ -13,6 +13,7 @@
                 <a title="{{{$event->title}}}" href="{{route('showEventDashboard', ['event_id'=>$event->id])}}">
                     {{{ str_limit($event->title, $limit = 75, $end = '...') }}}
                 </a>
+
             </li>
             <li class="event-organiser">
                 By <a href='{{route('showOrganiserDashboard', ['organiser_id' => $event->organiser->id])}}'>{{{$event->organiser->name}}}</a>

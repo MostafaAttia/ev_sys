@@ -21,6 +21,7 @@
 @section('content')
      @include('Public.ViewOrganiser.Partials.OrganiserHeaderSection')
      @include('Public.ViewOrganiser.Partials.OrganiserEventsSection')
-     @include('Public.ViewOrganiser.Partials.OrganiserFooterSection')
+     {{--@include('Public.ViewOrganiser.Partials.OrganiserFooterSection')--}}
+     @include('Front.Partials.Footer')
 @stop
 

@@ -20,7 +20,7 @@ return [
 
     'app_name'               => 'Vitee',
     'event_default_bg_color' => '#B23333',
-    'event_default_bg_image' => 'assets/images/public/EventPage/backgrounds/5.jpg',
+    'event_default_bg_image' => 'assets/images/public/EventPage/backgrounds/30.jpg',
     'event_default_image'    => 'user_content/defaults/default-event.jpg',
 
     's3_base_url'               => 'https://s3.amazonaws.com/cdn.vt17.dev',

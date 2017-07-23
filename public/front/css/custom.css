@@ -155,3 +155,16 @@
     margin-bottom: 20px;
 }
 
+#organiser_page_wrap #intro {
+    margin-top: 50px !important;
+}
+
+#footer, .footer {
+    padding: 0;
+}
+
+
+.description {
+    color: #fff;
+}
+

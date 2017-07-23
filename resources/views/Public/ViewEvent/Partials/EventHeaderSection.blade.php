@@ -21,7 +21,22 @@
 <section id="intro" class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 property="name">{{$event->title}}</h1>
+            <div class="card card-plain card-blog">
+                <div class="card-image">
+                    <a href="#pablo">
+                        <img class="img img-raised" src="{{config('attendize.s3_base_url').config('attendize.s3_event_images_original').$event->images->first()['image_path']}}">
+                    </a>
+                </div>
+
+                <div class="card-content">
+                    <h6 class="category text-info">{{ $event->category->name }}</h6>
+                    <h1 class="card-title" style="color: #fff;">{{ $event->title }}</h1>
+                    {{--<p class="card-description">--}}
+                        {{--Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses.<a href="#pablo"> Read More </a>--}}
+                    {{--</p>--}}
+                </div>
+            </div>
+            {{--<h1 property="name">{{$event->title}}</h1>--}}
             <div class="event_venue">
                 @if($event->is_activity)
                     <b>From: </b>

@@ -116,12 +116,11 @@
                                         <div class="col-md-6">
                                             <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                                 <div class="fileinput-new thumbnail img-circle img-raised">
-                                                    {{--<img src="front/img/placeholder.jpg" style="width: 50px;">--}}
                                                     <img src="{{URL::asset('front/img/placeholder.jpg')}}" style="width: 50px;">
                                                 </div>
                                                 <div class="fileinput-preview fileinput-exists thumbnail img-circle img-raised"></div>
                                                 <div>
-                                                    <span class="btn btn-sm btn-raised btn-round btn-default btn-file">
+                                                    <span class="btn btn-sm btn-raised btn-round btn-danger btn-file">
                                                         <span class="fileinput-new">Add Avatar</span>
                                                         <span class="fileinput-exists">Change</span>
                                                         <input type="file" name="image" />
@@ -133,7 +132,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <div class="form-group is-empty">
-                                                    <select class="selectpicker" name="gender" data-style="btn btn btn-default btn-round" title="Single Select" data-size="7">
+                                                    <select class="selectpicker" name="gender" data-style="btn btn btn-danger btn-round" title="Single Select" data-size="7">
                                                         <option disabled selected>gender</option>
                                                         <option value="male">Male</option>
                                                         <option value="female">Female</option>

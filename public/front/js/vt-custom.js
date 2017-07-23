@@ -20,8 +20,6 @@ $(document).ready(function(){
     }
     $(window).on("load", dataWord);
 
-    materialKit.initFormExtendedDatetimepickers();
-
     $('.page-header').vegas({
         slides: [
             { src: 'front/img/slider.jpg',
@@ -34,12 +32,6 @@ $(document).ready(function(){
                 }
             }
         ]
-    });
-
-    $(function () {
-        $('#dobpicker').datetimepicker({
-            viewMode: 'years'
-        });
     });
 
 

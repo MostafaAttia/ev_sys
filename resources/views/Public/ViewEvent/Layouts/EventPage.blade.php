@@ -7,9 +7,21 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
         <link rel="canonical" href="{{$event->event_url}}" />
 
-        {!!HTML::script(config('attendize.cdn_url_static_assets').'/assets/javascript/frontend.js')!!}
-        {!!HTML::script(config('attendize.cdn_url_static_assets').'/front/js/material.min.js')!!}
-        @include('Front.Partials.core-scripts')
+        <!--     Fonts and icons     -->
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+        {!!HTML::style('assets/stylesheet/frontend.css')!!}
+
+        <!-- CSS Files -->
+        {!!HTML::style('front/css/bootstrap.min.css')!!}
+        {!!HTML::style('front/css/material-kit.css?v=1.1.0')!!}
+        {!!HTML::style('front/css/noty.css')!!}
+        {!!HTML::style('front/css/animate.min.css')!!}
+        {!!HTML::style('front/css/custom.css')!!}
+
+        {!!HTML::script('assets/javascript/frontend.js')!!}
+        {!! HTML::script(config('attendize.cdn_url_static_assets').'/front/js/material.min.js') !!}
 
         <!-- Open Graph data -->
         <meta property="og:title" content="{{{$event->title}}}" />
@@ -25,8 +37,6 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         @yield('head')
-
-       {!!HTML::style(config('attendize.cdn_url_static_assets').'/assets/stylesheet/frontend.css')!!}
 
         <!--Bootstrap placeholder fix-->
         <style>
@@ -67,16 +77,6 @@
             </style>
         @endif
 
-                <!--     Fonts and icons     -->
-            <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-
-            <!-- CSS Files -->
-            {!!  HTML::style(config('attendize.cdn_url_static_assets').'/front/css/material-kit.css?v=1.1.0') !!}
-            {!!  HTML::style(config('attendize.cdn_url_static_assets').'/front/css/noty.css') !!}
-            {!!  HTML::style(config('attendize.cdn_url_static_assets').'/front/css/animate.min.css') !!}
-            {!!  HTML::style(config('attendize.cdn_url_static_assets').'/front/css/custom.css') !!}
-
     </head>
     <body class="attendize">
 
@@ -98,6 +98,9 @@
         @if(isset($secondsToExpire))
         <script>if($('#countdown')) {setCountdown($('#countdown'), {{$secondsToExpire}});}</script>
         @endif
+
+        @include('Front.Partials.core-scripts')
+        @include('Front.Home.Modals.Modals')
 
         @include('Shared.Partials.GlobalFooterJS')
     </body>

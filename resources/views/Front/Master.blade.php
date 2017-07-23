@@ -19,12 +19,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
 	<!-- CSS Files -->
-    <link href="front/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="front/css/material-kit.css?v=1.1.0" rel="stylesheet"/>
-    <link href="front/css/vegas.min.css" rel="stylesheet"/>
-    <link href="front/css/noty.css" rel="stylesheet">
-    <link href="front/css/animate.min.css" rel="stylesheet">
-    <link href="front/css/custom.css" rel="stylesheet"/>
+    {!!HTML::style('front/css/bootstrap.min.css')!!}
+    {!!HTML::style('front/css/material-kit.css?v=1.1.0')!!}
+    {!!HTML::style('front/css/vegas.min.css')!!}
+    {!!HTML::style('front/css/noty.css')!!}
+    {!!HTML::style('front/css/animate.min.css')!!}
+    {!!HTML::style('front/css/custom.css')!!}
 
     @include('Front.Partials.core-header-scripts')
     @yield('header-scripts')
@@ -38,9 +38,10 @@
 
     @yield('footer')
 
-    @include('Front.Partials.core-scripts')
-
     @yield('footer-scripts')
+
+    @include('Front.Partials.core-scripts')
+    @include('Front.Home.Modals.Modals')
 
     {!!  HTML::script(config('attendize.cdn_url_static_assets').'/front/js/vt-custom.js') !!}
 </body>

@@ -95,6 +95,3 @@
         }).show();
     </script>
 @endif
-
-@include('Front.Home.Modals.Login')
-@include('Front.Home.Modals.Signup')
