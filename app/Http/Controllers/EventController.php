@@ -78,10 +78,6 @@ class EventController extends MyBaseController
         }
 
 
-        
-
-        // $event->is_show = $request->get('is_show');
-
         /*
          * Venue location info (Usually auto-filled from google maps)
          */
@@ -212,37 +208,37 @@ class EventController extends MyBaseController
             $eventImage->save();
 
             // save as THUMB 200*?
-            $image_thumb_200_200 = Image::make($image)->resize(200, null, function ($constraint) {
+            $image_thumb_200_200 = Image::make($image)->resize(200, 200, function ($constraint) {
                 $constraint->aspectRatio();
             })->stream();
             Storage::disk('s3')->put('event_images/200*200/'.$imageName, $image_thumb_200_200->__toString(), 'public');
 
             // save as THUMB 300*?
-            $image_thumb_300_300 = Image::make($image)->resize(300, null, function ($constraint) {
+            $image_thumb_300_300 = Image::make($image)->resize(300, 300, function ($constraint) {
                 $constraint->aspectRatio();
             })->stream();
             Storage::disk('s3')->put('event_images/300*300/'.$imageName, $image_thumb_300_300->__toString(), 'public');
 
             // save as VERTICAL poster 400*?
-            $image_vert_poster_300_400 = Image::make($image)->resize(400, null, function ($constraint) {
+            $image_vert_poster_300_400 = Image::make($image)->resize(300, 400, function ($constraint) {
                 $constraint->aspectRatio();
             })->stream();
             Storage::disk('s3')->put('event_images/300*400/'.$imageName, $image_vert_poster_300_400->__toString(), 'public');
 
             // save as VERTICAL poster 600*?
-            $image_vert_poster_450_600 = Image::make($image)->resize(600, null, function ($constraint) {
+            $image_vert_poster_450_600 = Image::make($image)->resize(450, 600, function ($constraint) {
                 $constraint->aspectRatio();
             })->stream();
             Storage::disk('s3')->put('event_images/450*600/'.$imageName, $image_vert_poster_450_600->__toString(), 'public');
 
             // save as VERTICAL poster 720*?
-            $image_horiz_poster_400_720 = Image::make($image)->resize(720, null, function ($constraint) {
+            $image_horiz_poster_400_720 = Image::make($image)->resize(null, 720, function ($constraint) {
                 $constraint->aspectRatio();
             })->stream();
             Storage::disk('s3')->put('event_images/400*720/'.$imageName, $image_horiz_poster_400_720->__toString(), 'public');
 
             // save as VERTICAL poster 1080*?
-            $image_horiz_poster_600_1080 = Image::make($image)->resize(1080, null, function ($constraint) {
+            $image_horiz_poster_600_1080 = Image::make($image)->resize(null, 1080, function ($constraint) {
                 $constraint->aspectRatio();
             })->stream();
             Storage::disk('s3')->put('event_images/600*1080/'.$imageName, $image_horiz_poster_600_1080->__toString(), 'public');
@@ -349,30 +345,52 @@ class EventController extends MyBaseController
         $event->save();
 
         if ($request->hasFile('event_image')) {
-            $path = public_path() . '/' . config('attendize.event_images_path');
-            $filename = 'event_image-' . md5(time() . $event->id) . '.' . strtolower($request->file('event_image')->getClientOriginalExtension());
 
-            $file_full_path = $path . '/' . $filename;
-
-            $request->file('event_image')->move($path, $filename);
-
-            $img = Image::make($file_full_path);
-
-            $img->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-
-            $img->save($file_full_path);
-
-            \Storage::put(config('attendize.event_images_path') . '/' . $filename, file_get_contents($file_full_path));
-
-            EventImage::where('event_id', '=', $event->id)->delete();
+            $image = $request->file('event_image');
+            $imageName = 'event_image_'.md5(time() . $event->id).'.'.$image->getClientOriginalExtension();
+            Storage::disk('s3')->put('event_images/original/'.$imageName, file_get_contents($image), 'public');
 
             $eventImage = EventImage::createNew();
-            $eventImage->image_path = config('attendize.event_images_path') . '/' . $filename;
+            $eventImage->image_path = $imageName;
             $eventImage->event_id = $event->id;
             $eventImage->save();
+
+            // save as THUMB 200*?
+            $image_thumb_200_200 = Image::make($image)->resize(200, 200, function ($constraint) {
+                $constraint->aspectRatio();
+            })->stream();
+            Storage::disk('s3')->put('event_images/200*200/'.$imageName, $image_thumb_200_200->__toString(), 'public');
+
+            // save as THUMB 300*?
+            $image_thumb_300_300 = Image::make($image)->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+            })->stream();
+            Storage::disk('s3')->put('event_images/300*300/'.$imageName, $image_thumb_300_300->__toString(), 'public');
+
+            // save as VERTICAL poster 400*?
+            $image_vert_poster_300_400 = Image::make($image)->resize(300, 400, function ($constraint) {
+                $constraint->aspectRatio();
+            })->stream();
+            Storage::disk('s3')->put('event_images/300*400/'.$imageName, $image_vert_poster_300_400->__toString(), 'public');
+
+            // save as VERTICAL poster 600*?
+            $image_vert_poster_450_600 = Image::make($image)->resize(450, 600, function ($constraint) {
+                $constraint->aspectRatio();
+            })->stream();
+            Storage::disk('s3')->put('event_images/450*600/'.$imageName, $image_vert_poster_450_600->__toString(), 'public');
+
+            // save as VERTICAL poster 720*?
+            $image_horiz_poster_400_720 = Image::make($image)->resize(null, 720, function ($constraint) {
+                $constraint->aspectRatio();
+            })->stream();
+            Storage::disk('s3')->put('event_images/400*720/'.$imageName, $image_horiz_poster_400_720->__toString(), 'public');
+
+            // save as VERTICAL poster 1080*?
+            $image_horiz_poster_600_1080 = Image::make($image)->resize(null, 1080, function ($constraint) {
+                $constraint->aspectRatio();
+            })->stream();
+            Storage::disk('s3')->put('event_images/600*1080/'.$imageName, $image_horiz_poster_600_1080->__toString(), 'public');
+
         }
 
         return response()->json([
