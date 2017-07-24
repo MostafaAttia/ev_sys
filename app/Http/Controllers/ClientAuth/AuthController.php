@@ -167,21 +167,15 @@ class AuthController extends Controller
             Storage::disk('s3')->put('user_content/original/'.$imageName, file_get_contents($image), 'public');
 
             // save as THUMB 60*?
-            $image_thumb_60_60 = Image::make($image)->resize(60, 60, function ($constraint) {
-                $constraint->aspectRatio();
-            })->stream();
+            $image_thumb_60_60 = Image::make($image)->resize(60, 60)->stream();
             Storage::disk('s3')->put('user_content/60*60/'.$imageName, $image_thumb_60_60->__toString(), 'public');
 
             // save as THUMB 120*?
-            $image_thumb_120_120 = Image::make($image)->resize(120, 120, function ($constraint) {
-                $constraint->aspectRatio();
-            })->stream();
+            $image_thumb_120_120 = Image::make($image)->resize(120, 120)->stream();
             Storage::disk('s3')->put('user_content/120*120/'.$imageName, $image_thumb_120_120->__toString(), 'public');
 
             // save as VERTICAL poster 240*?
-            $image_vert_poster_240_240 = Image::make($image)->resize(240, 240, function ($constraint) {
-                $constraint->aspectRatio();
-            })->stream();
+            $image_vert_poster_240_240 = Image::make($image)->resize(240, 240)->stream();
             Storage::disk('s3')->put('user_content/240*240/'.$imageName, $image_vert_poster_240_240->__toString(), 'public');
 
         }

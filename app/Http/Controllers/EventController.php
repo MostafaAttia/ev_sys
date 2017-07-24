@@ -356,27 +356,23 @@ class EventController extends MyBaseController
             $eventImage->save();
 
             // save as THUMB 200*?
-            $image_thumb_200_200 = Image::make($image)->resize(200, 200, function ($constraint) {
-                $constraint->aspectRatio();
-            })->stream();
+            $image_thumb_200_200 = Image::make($image)->resize(200, 200)->stream();
             Storage::disk('s3')->put('event_images/200*200/'.$imageName, $image_thumb_200_200->__toString(), 'public');
 
             // save as THUMB 300*?
-            $image_thumb_300_300 = Image::make($image)->resize(300, 300, function ($constraint) {
-                $constraint->aspectRatio();
-            })->stream();
+            $image_thumb_300_300 = Image::make($image)->resize(300, 300)->stream();
             Storage::disk('s3')->put('event_images/300*300/'.$imageName, $image_thumb_300_300->__toString(), 'public');
 
+            // save as THUMB 300*?
+            $image_thumb_335_250 = Image::make($image)->resize(335, 250)->stream();
+            Storage::disk('s3')->put('event_images/335*250/'.$imageName, $image_thumb_335_250->__toString(), 'public');
+
             // save as VERTICAL poster 400*?
-            $image_vert_poster_300_400 = Image::make($image)->resize(300, 400, function ($constraint) {
-                $constraint->aspectRatio();
-            })->stream();
+            $image_vert_poster_300_400 = Image::make($image)->resize(300, 400)->stream();
             Storage::disk('s3')->put('event_images/300*400/'.$imageName, $image_vert_poster_300_400->__toString(), 'public');
 
             // save as VERTICAL poster 600*?
-            $image_vert_poster_450_600 = Image::make($image)->resize(450, 600, function ($constraint) {
-                $constraint->aspectRatio();
-            })->stream();
+            $image_vert_poster_450_600 = Image::make($image)->resize(450, 600)->stream();
             Storage::disk('s3')->put('event_images/450*600/'.$imageName, $image_vert_poster_450_600->__toString(), 'public');
 
             // save as VERTICAL poster 720*?
