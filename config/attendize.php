@@ -28,6 +28,7 @@ return [
     's3_event_images_original'  => '/event_images/original/',
     's3_event_images_200_200'   => '/event_images/200*200/',
     's3_event_images_300_300'   => '/event_images/300*300/',
+    's3_event_images_335_250'   => '/event_images/335*250/',
     's3_event_images_300_400'   => '/event_images/300*400/',
     's3_event_images_450_600'   => '/event_images/450*600/',
     's3_event_images_400_720'   => '/event_images/400*720/',

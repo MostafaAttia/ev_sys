@@ -163,8 +163,11 @@
     padding: 0;
 }
 
-
 .description {
     color: #fff;
+}
+
+.vt-event-image {
+    max-height: 400px;
 }
 

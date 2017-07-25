@@ -88,6 +88,7 @@
                             <div class="rotating-card-container">
                                 <div class="card-image">
                                     <div class="front">
+{{--                                        <img class="img" src="{{ $event['image_path']['335*250'] }}"/>--}}
                                         <img class="img" src="{{ $event['image_path']['original'] }}"/>
                                     </div>
                                     <div class="back back-background">
@@ -114,6 +115,7 @@
                                 </div>
                             </div>
                             <div class="card-content">
+                                <h6 class="category text-info">{{ $event['category']['name'] }}</h6>
                                 <h4 class="card-title">
                                     <a href="{{ route('showEventPage', $event['id']) }}">{{ $event['title'] }}</a>
                                 </h4>

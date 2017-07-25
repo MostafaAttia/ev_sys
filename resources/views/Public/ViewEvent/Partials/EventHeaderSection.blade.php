@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div onclick="window.location='{{$event->event_url}}#organiser'" class="event_organizer">
+                <div onclick="window.location='#organiser'" class="event_organizer">
                     <b>{{$event->organiser->name}}</b> Presents
                 </div>
             </div>
@@ -24,7 +24,7 @@
             <div class="card card-plain card-blog">
                 @if($event->images->first()['image_path'])
                     <div class="card-image">
-                        <img class="img img-raised" src="{{config('attendize.s3_base_url').config('attendize.s3_event_images_original').$event->images->first()['image_path']}}">
+                        <img class="img img-raised vt-event-image" src="{{config('attendize.s3_base_url').config('attendize.s3_event_images_original').$event->images->first()['image_path']}}">
                     </div>
                 @endif
 
@@ -89,13 +89,13 @@
             <div class="event_buttons">
                 <div class="row">
                     <div class="col-md-4 col-sm-4">
-                        <a class="btn btn-event-link btn-lg" href="{{{$event->event_url}}}#tickets">TICKETS</a>
+                        <a class="btn btn-event-link btn-lg" href="#tickets">TICKETS</a>
                     </div>
                     <div class="col-md-4 col-sm-4">
-                        <a class="btn btn-event-link btn-lg" href="{{{$event->event_url}}}#details">DETAILS</a>
+                        <a class="btn btn-event-link btn-lg" href="#details">DETAILS</a>
                     </div>
                     <div class="col-md-4 col-sm-4">
-                        <a class="btn btn-event-link btn-lg" href="{{{$event->event_url}}}#location">LOCATION</a>
+                        <a class="btn btn-event-link btn-lg" href="#location">LOCATION</a>
                     </div>
                 </div>
             </div>
