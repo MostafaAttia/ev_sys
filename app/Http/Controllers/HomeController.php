@@ -162,9 +162,12 @@ class HomeController extends Controller
 
         $eventsOriginal = Event::where('is_live', 1)
             ->where('end_date', '>', date("Y-m-d H:i:s"))
-            ->where('location_address_line_2', $city)
-            ->orWhere('venue_name_full', 'like', $city)
-            ->orWhere('location_country', $country)
+            ->where(function($query) use ($city, $country) {
+                $query->where('location_address_line_2',  $city)
+                    ->orWhere('venue_name_full', 'like', $city)
+                    ->orWhere('location_country', $country);
+
+            })
             ->orderBy('start_date', 'asc')
             ->paginate(10);
 
