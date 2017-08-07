@@ -63,9 +63,18 @@
                                     <a href="#pablo" class="btn btn-just-icon btn-round btn-white btn-pinterest">
                                         <i class="fa fa-pinterest"></i>
                                     </a>
-                                    <a href="#pablo" class="btn btn-just-icon btn-round btn-white btn-facebook">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
+                                    {{--<a href="https://www.facebook.com/sharer/sharer.php?u={{$event->event_url}}" class="btn btn-just-icon btn-round btn-white btn-facebook popup">--}}
+                                        {{--<i class="fa fa-facebook"></i>--}}
+                                    {{--</a>--}}
+                                    @if($event['social_show_facebook'] === 1)
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{$event['event_url']}}" class="btn btn-just-icon btn-round btn-white btn-facebook social-share">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                    @endif
+
+
+
+
                                 </div>
                             </div>
                         </div>

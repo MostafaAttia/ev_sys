@@ -80,6 +80,8 @@ class EventTransformer extends TransformerAbstract
             'location_lat'              => $event->location_lat,
             'location_long'             => $event->location_long,
             'is_activity'               => $event->is_activity,
+            'event_url'                 => $event->event_url,
+            'social_show_facebook'      => $event->social_show_facebook,
             'category'                  => $event->category_id !== null ? [
                 'id'                    => $category->id,
                 'name'                  => $category->name
