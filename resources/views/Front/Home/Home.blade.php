@@ -11,6 +11,24 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.1.2/masonry.pkgd.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.min.js"></script>
 
+    <script>
+        function processUserLocation(city, country) {
+            var route = $('#events-around').attr('data-cat-route');
+            $('#events-around').attr('data-cat-route', route + city + '/' + country);
+        }
+        function getUserLocation(precessUserLocation) {
+            $.ajax({
+                url: "https://geoip-db.com/jsonp",
+                jsonpCallback: "callback",
+                dataType: "jsonp",
+                success: function( location ) {
+                    precessUserLocation(location.city, location.country_name);
+                }
+            });
+        }
+        getUserLocation(processUserLocation);
+    </script>
+
 @stop
 
 @section('navbar')
@@ -38,112 +56,48 @@
     <div class="main main-raised vt-bg-lite">
 		<div class="container">
 			<div class="vt-top-filters">
-
 				<ul class="nav nav-pills nav-pills-icons nav-pills-danger" role="tablist">
-					<li>
-						<a href="#all" role="tab" data-toggle="tab">
+					<li class="active">
+						<a class="events-filter" data-cat-route="{{ route("home") }}" id="events-all" role="tab"  data-toggle="tab">
 							<i class="material-icons">dashboard</i>
 							All
 						</a>
 					</li>
 					<li>
-						<a href="#around" role="tab" data-toggle="tab">
+{{--						<a class="events-filter" data-cat-route="{{ route("aroundYouEvents", ['city' => $city, 'country' => $country]) }}" id="events-around" role="tab" data-toggle="tab">--}}
+						<a class="events-filter" data-cat-route="{{ route("home") . '/events/around/' }}" id="events-around" role="tab" data-toggle="tab">
 							<i class="material-icons">person_pin_circle</i>
 							Around You
 						</a>
 					</li>
-					<li class="active">
-						<a href="#latest" role="tab" data-toggle="tab">
+					<li>
+						<a class="events-filter" data-cat-route="{{ route("latestEvents") }}" id="events-latest" role="tab" data-toggle="tab">
 							<i class="material-icons">schedule</i>
 							Latest
 						</a>
 					</li>
 					<li>
-						<a href="#popular" role="tab" data-toggle="tab">
+						<a class="events-filter" data-cat-route="{{ route("popularEvents") }}" id="events-popular" role="tab" data-toggle="tab">
 							<i class="material-icons">whatshot</i>
 							Popular
 						</a>
 					</li>
 					<li class="dropdown">
-						<a href="#category" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" >
+						<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" >
 							<i class="material-icons">list</i>
 							Category
 						</a>
 						<ul class="dropdown-menu ">
-							<li><a href="#art">Art & Theatre</a></li>
-							<li><a href="#exhibitions">Exhibitions</a></li>
-							<li><a href="#networking">Networking & Social</a></li>
-							<li><a href="#nightlife">Nightlife</a></li>
-							<li><a href="#food">Food & Dining</a></li>
-							<li><a href="#sport">Sport</a></li>
+                            @foreach($categories as $category)
+                                <li><a class="events-filter" id="{{ $category['name_slug'] }}" data-cat-route="{{ route("getCategoryEvents", $category['id']) }}">{{ $category['name'] }}</a></li>
+                            @endforeach
 						</ul>
 					</li>
 				</ul>
 			</div>
-            <div id="masonry-grid">
-                @foreach($events['data'] as $event)
-                    <div class="grid-sizer"></div>
-                    <div class="grid-item">
-                        <div class="card card-blog card-rotate">
-                            <div class="rotating-card-container">
-                                <div class="card-image">
-                                    <div class="front">
-{{--                                        <img class="img" src="{{ $event['image_path']['335*250'] }}"/>--}}
-                                        <img class="img" src="{{ $event['image_path']['original'] }}"/>
-                                    </div>
-                                    <div class="back back-background">
-                                        <div class="card-content">
-                                            <h5 class="card-title">
-                                                Share this event...
-                                            </h5>
-                                            <p class="card-description">
-                                                You can share this event with your friends, family or on different networks...
-                                            </p>
-                                            <div class="footer text-center">
-                                                <a href="#pablo" class="btn btn-just-icon btn-round btn-white btn-twitter">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                                <a href="#pablo" class="btn btn-just-icon btn-round btn-white btn-pinterest">
-                                                    <i class="fa fa-pinterest"></i>
-                                                </a>
-                                                <a href="#pablo" class="btn btn-just-icon btn-round btn-white btn-facebook">
-                                                    <i class="fa fa-facebook"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <h6 class="category text-info">{{ $event['category']['name'] }}</h6>
-                                <h4 class="card-title">
-                                    <a href="{{ route('showEventPage', $event['id']) }}">{{ $event['title'] }}</a>
-                                </h4>
-                                <p class="card-description">
-                                    {{ str_limit($event['desc'], $limit = 200, $end = '...') }}
-                                </p>
-                                <div class="footer">
-                                    <div class="author">
-                                        <a href="{{route('showOrganiserHome', [$event['organiser']['id'], Str::slug($event['organiser']['name'])])}}" title="Organiser Page">
-                                           <img src="{{ $event['organiser']['image_path']['original'] }}" alt="..." class="avatar img-raised">
-                                           <span>{{ $event['organiser']['name'] }}</span>
-                                        </a>
-                                    </div>
-                                   <div class="stats">
-                                       <i class="material-icons">favorite</i> 142 &middot;
-                                       <i class="material-icons">chat_bubble</i> 45
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
 
-            <div class="navigation">
-                <div class="nav-next">
-                    <a href="{{ $events['next_page_url'] }}"></a>
-                </div>
+            <div id="masonry-grid">
+                @include('Front.Home.Partials.MasonryGrid')
             </div>
 
             <div id="loading-spin">

@@ -222,6 +222,7 @@ class Event extends MyBaseModel
         return $this->hasMany(\App\Models\EventStats::class);
     }
 
+
     /**
      * The affiliates associated with the event.
      *

@@ -31,6 +31,28 @@ Route::group(['prefix' => 'home'], function(){
     Route::post('login','ClientAuth\AuthController@authenticate');
     Route::get('logout','ClientAuth\AuthController@logout');
 
+    Route::get('/category/{category_id}/events', [
+        'as'   => 'getCategoryEvents',
+        'uses' => 'HomeController@getCategoryEvents',
+    ]);
+
+    Route::get('/events/popular', [
+        'as'   => 'popularEvents',
+        'uses' => 'HomeController@getPopularEvents',
+    ]);
+
+    Route::get('/events/latest', [
+        'as'   => 'latestEvents',
+        'uses' => 'HomeController@getLatestEvents',
+    ]);
+
+    Route::get('/events/around/{city}/{country}', [
+//    Route::get('/events/around/', [
+        'as'   => 'aroundYouEvents',
+        'uses' => 'HomeController@getEventsByLocation',
+    ]);
+
+
 });
 
 /*

@@ -64,12 +64,16 @@ class GenerateTicket extends Job implements ShouldQueue
             $image_path = $event->images()->first()->image_path;
         }
 
+        $event_image = $event->images->count()
+            ? config('attendize.s3_base_url').config('attendize.s3_event_images_original').$event->images->first()['image_path']
+            : config('attendize.s3_base_url').config('attendize.s3_event_defaults'). 'original.jpg';
+
         $data = [
             'order'     => $order,
             'event'     => $event,
             'attendees' => $attendees,
             'css'       => file_get_contents(public_path('assets/stylesheet/ticket.css')),
-            'image'     => base64_encode(file_get_contents(public_path($image_path))),
+            'image'     => base64_encode(file_get_contents($event_image)),
         ];
 
         PDF::setOutputMode('F'); // force to file

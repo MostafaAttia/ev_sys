@@ -73,12 +73,13 @@ class EventTransformer extends TransformerAbstract
             'venue_name_full'           => $event->venue_name_full,
             'location_address'          => $event->location_address,
             'location_address_line_1'   => $event->location_address_line_1,
-            'location_address_line_2'   => $event->location_address_line_2,
-            'location_country'          => $event->location_country,
+            'location_address_line_2'   => str_replace(' ', '', $event->location_address_line_2),
+            'location_country'          => str_replace(' ', '', $event->location_country),
+            'location_country_code'     => $event->location_country_code,
             'location_state'            => $event->location_state,
             'location_lat'              => $event->location_lat,
             'location_long'             => $event->location_long,
-            'is_activity'               => $event->is_live,
+            'is_activity'               => $event->is_activity,
             'category'                  => $event->category_id !== null ? [
                 'id'                    => $category->id,
                 'name'                  => $category->name

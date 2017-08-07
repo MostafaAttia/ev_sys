@@ -34,38 +34,68 @@ $(document).ready(function(){
         ]
     });
 
+    $('.nav-pills-icons li').click(function(event){
+        event.preventDefault();
+        $('.active').removeClass('active');
+        $(this).addClass('active');
+    });
 
-    (function() {
+    //$.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
 
-        var $container = $('#masonry-grid');
+    var $container = $('#masonry-grid');
+    var next_url = $('.nav-next a');
 
-        // Masonry + ImagesLoaded
+    function onGetClick(route)
+    {
+        $.get(route, onSuccess);
+    }
+
+    function onSuccess(data)
+    {
+        var responseAsHTML = $.parseHTML( data );
+        next_url = $(responseAsHTML).find(".nav-next a");
+        $container.infinitescroll('destroy');
+        $container.infinitescroll('binding','unbind');
+        $container.data('infinitescroll', null);
+        $container.html(responseAsHTML);
+
+        if(next_url.attr('href') == '') {
+            $('#loading-spin').hide();
+        }
+
+        if($('#noCategoryEvents').length){
+            $container.css('height', '400px');
+            $('#loading-spin').hide();
+            return false;
+        } else {
+            initMasonry();
+            $container.masonry('reloadItems');
+            RotateCardReset();
+        }
+    }
+
+    $('.events-filter').on('click', function(event){
+        event.preventDefault();
+        onGetClick($(this).attr('data-cat-route'));
+    });
+
+    var initMasonry = function() {
         $container.imagesLoaded().progress(function(){
-            $container.masonry({
+            $('#masonry-grid').masonry({
                 itemSelector: '.grid-item',
                 columnWidth: '.grid-sizer'
             });
         });
-
-        // Infinite Scroll
         $container.infinitescroll({
-                // selector for the paged navigation (it will be hidden)
                 navSelector  : ".navigation",
-                // selector for the NEXT link (to page 2)
-                nextSelector : ".nav-next a",
-                // selector for all items you'll retrieve
+                nextSelector : next_url,
                 itemSelector : ".grid-item",
-
-                // finished message
                 loading: {
                     finishedMsg: '<span class="no-more-events"> No more events at the moment, <strong>Stay Tuned!</strong>  </span>',
-                    img: 'http://i.imgur.com/6RMhx.gif',
                     msgText: "<em>Loading...</em>"
                 },
                 errorCallback: function() { $('#infscr-loading').animate({opacity: 0.8}, 15000).fadeOut('slow'); }
             },
-
-            // Trigger Masonry as a callback
             function( newElements ) {
                 // hide new items while they are loading
                 var $newElems = $( newElements ).hide();
@@ -76,11 +106,11 @@ $(document).ready(function(){
                     // show elems now they're ready
                     $newElems.show();
                     RotateCardReset();  // Reset Rotating Cards
-                    $container.masonry( 'appended', $newElems, true );
+                    $('#masonry-grid').masonry( 'appended', $newElems, true );
                 });
             });
-
-    })();
-
+    };
+    initMasonry();
 
 });
+
