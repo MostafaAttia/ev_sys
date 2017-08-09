@@ -82,6 +82,9 @@ class EventTransformer extends TransformerAbstract
             'is_activity'               => $event->is_activity,
             'event_url'                 => $event->event_url,
             'social_show_facebook'      => $event->social_show_facebook,
+            'social_show_twitter'      => $event->social_show_twitter,
+            'social_show_googleplus'      => $event->social_show_googleplus,
+            'social_show_linkedin'      => $event->social_show_linkedin,
             'category'                  => $event->category_id !== null ? [
                 'id'                    => $category->id,
                 'name'                  => $category->name

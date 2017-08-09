@@ -7,6 +7,29 @@
 
 @section('header-scripts')
 
+    <script>
+            /** Animate Text on Video intro **/
+            function dataWord () {
+                $("[data-words]").attr("data-words", function(i, d){
+                    var $self  = $(this),
+                            $words = d.split("|"),
+                            tot    = $words.length,
+                            c      = 0;
+                    // CREATE SPANS INSIDE SPAN
+                    for(var i=0; i<tot; i++) $self.append($('<span/>',{text:$words[i]}));
+                    // COLLECT WORDS AND HIDE
+                    $words = $self.find("span").hide();
+                    // ANIMATE AND LOOP
+                    (function loop(){
+                        $self.animate({ width: $words.eq( c ).width() });
+                        $words.stop().fadeOut().eq(c).fadeIn().delay(1000).show(0, loop);
+                        c = ++c % tot;
+                    }());
+                });
+            }
+            $(window).on("load", dataWord);
+    </script>
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.0b2.120519/jquery.infinitescroll.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.1.2/masonry.pkgd.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.min.js"></script>

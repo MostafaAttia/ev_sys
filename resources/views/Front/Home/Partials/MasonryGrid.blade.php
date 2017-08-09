@@ -57,24 +57,26 @@
                                     </div>
                                 </div>
                                 <div class="footer text-center">
-                                    <a href="#pablo" class="btn btn-just-icon btn-round btn-white btn-twitter">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                    <a href="#pablo" class="btn btn-just-icon btn-round btn-white btn-pinterest">
-                                        <i class="fa fa-pinterest"></i>
-                                    </a>
-                                    {{--<a href="https://www.facebook.com/sharer/sharer.php?u={{$event->event_url}}" class="btn btn-just-icon btn-round btn-white btn-facebook popup">--}}
-                                        {{--<i class="fa fa-facebook"></i>--}}
-                                    {{--</a>--}}
+                                    @if($event['social_show_twitter'] === 1)
+                                        <a href="http://twitter.com/intent/tweet?text=Check out: {{$event['event_url']}} {{{Str::words(strip_tags($event['desc']), 20)}}}" class="btn btn-just-icon btn-round btn-white btn-twitter social-share">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    @endif
+                                    @if($event['social_show_linkedin'] === 1)
+                                        <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{$event['event_url']}}?title={{urlencode($event['title'])}}&amp;summary={{{Str::words(strip_tags($event['desc']), 20)}}}" class="btn btn-just-icon btn-round btn-white btn-linkedin social-share">
+                                            <i class="fa fa-linkedin"></i>
+                                        </a>
+                                    @endif
+                                    @if($event['social_show_googleplus'] === 1)
+                                        <a href="https://plus.google.com/share?url={{$event['event_url']}}" class="btn btn-just-icon btn-round btn-white btn-google social-share">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                    @endif
                                     @if($event['social_show_facebook'] === 1)
                                         <a href="https://www.facebook.com/sharer/sharer.php?u={{$event['event_url']}}" class="btn btn-just-icon btn-round btn-white btn-facebook social-share">
                                             <i class="fa fa-facebook"></i>
                                         </a>
                                     @endif
-
-
-
-
                                 </div>
                             </div>
                         </div>
