@@ -23,6 +23,10 @@ $(document).ready(function(){
 
     var $container = $('#masonry-grid');
     var next_url = $('.nav-next a');
+    
+    if(next_url.attr('href') == '') {
+        $('#loading-spin').hide();
+    }
 
     function onGetClick(route)
     {
