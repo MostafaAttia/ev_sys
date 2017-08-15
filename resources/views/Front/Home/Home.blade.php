@@ -87,7 +87,6 @@
 						</a>
 					</li>
 					<li>
-{{--						<a class="events-filter" data-cat-route="{{ route("aroundYouEvents", ['city' => $city, 'country' => $country]) }}" id="events-around" role="tab" data-toggle="tab">--}}
 						<a class="events-filter" data-cat-route="{{ route("home") . '/events/around/' }}" id="events-around" role="tab" data-toggle="tab">
 							<i class="material-icons">person_pin_circle</i>
 							Around You

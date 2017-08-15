@@ -21,6 +21,16 @@ class HomeController extends Controller
 
     use Helpers;
 
+
+    public function testPayment()
+    {
+        return view('Front.Payment.Test');
+    }
+
+
+
+
+
     /**
      * Show Home page
      *

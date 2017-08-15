@@ -36,7 +36,7 @@
             </a>
         </div>
         <div class="copyright">
-            © <script>document.write(new Date().getFullYear())</script> Vitee, made with <i class="material-icons" style="color: rgba(212, 0, 0, 0.96);">favorite</i>
+            © {{ date('Y') }} Vitee, made with <i class="material-icons" style="color: rgba(212, 0, 0, 0.96);">favorite</i>
         </div>
     </div>
 </footer>

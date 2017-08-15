@@ -1,3 +1,5 @@
+{!!  HTML::script(config('attendize.cdn_url_static_assets').'/front/js/noty.min.js') !!}
+
 <nav class="animated bounceInDown navbar navbar-default navbar-fixed-top navbar-transparent navbar-color-on-scroll" style="padding:0"  role="navigation" color-on-scroll="200">
 	<div class="container">
     	<div class="navbar-header ">
@@ -54,7 +56,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-with-icons">
                         <li>
-                            <a href="../sections.html#headers">
+                            <a href="{{ route('showClientProfile', $client['id']) }}">
                                 <i class="fa fa-sign-in vt-color"></i> Profile
                             </a>
                         </li>

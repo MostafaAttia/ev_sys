@@ -127,6 +127,10 @@
     box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
+.client-profile-avatar {
+    margin: 0 auto;
+}
+
 #infscr-loading {
     position: absolute;
     bottom: 10px;
@@ -175,5 +179,14 @@
 
 .vt-event-image {
     max-height: 400px;
+}
+
+.profile-page-wrapper {
+    margin-top: 60px;
+}
+
+.error-help {
+    color: #f44336;
+    display: none;
 }
 

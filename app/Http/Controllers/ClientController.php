@@ -8,89 +8,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log;
-use Dingo\Api\Routing\Helpers;
+use App\Api\V1\Transformers\ClientTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+use Dingo\Api\Routing\Helpers;
 use App\Models\Client;
 use App\Http\Requests;
+use League\Fractal;
 use Auth;
+use Validator;
+use JWTAuth;
+
 
 class ClientController extends Controller
 {
     use Helpers;
-
-    /**
-     * Sign Up
-     *
-     * <strong>Parameters:</strong>
-     * <br>
-     * first_name           : required <br>
-     * last_name            : required <br>
-     * email                : required|email|unique <br>
-     * password             : required|min:6 <br>
-     * password_confirmation: required <br>
-     * <br>
-     * gender               : optional|in:male,female <br>
-     * dob                  : optional|date <br>
-     * phone                : optional|max:15|min:4 <br>
-     * address              : optional|string|min:10|max:255 <br>
-     * image                : optional|image|mimes:jpeg,png,jpg|max:2048 bytes <br>
-     *
-     * @param Request $request
-     * @return \Dingo\Api\Http\Response
-     */
-    public function signup(Request $request)
-    {
-        $this->validate($request, [
-            'first_name'    => 'required|max:56',
-            'last_name'     => 'required|max:56',
-            'email'         => 'required|email|unique:clients',
-            'password'      => 'required|min:6|confirmed',
-            'gender'        => 'in:male,female',
-            'dob'           => 'date',
-            'phone'         => 'max:15|min:4',
-            'address'       => 'string|min:10|max:255',
-            'image'         => 'image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
-        $client_data = $request->all();
-        $client_data['confirmation_code'] = str_random();
-
-        // upload user image
-
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $imageName = time().'.'.$request->image->getClientOriginalExtension();
-            $t = Storage::disk('s3')->put('user_content/'.$imageName, file_get_contents($image), 'public');
-            $imageName = Storage::disk('s3')->url('user_content/'.$imageName);
-            $client_data['image_path'] = $imageName;
-        }
-
-        $client = Client::create($client_data);
-
-        // TODO: Do this async?
-        Mail::send('Emails.ClientConfirmEmail',
-            ['first_name' => $client->first_name, 'confirmation_code' => $client->confirmation_code],
-            function ($message) use ($request) {
-                $message->to($request->get('email'), $request->get('first_name'))
-                    ->subject('Thank you for registering for Vitee');
-            });
-
-        if (\Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
-            // Authentication passed...
-            Log::info('touched me!');
-            return redirect()->intended('/home');
-        }
-
-        return $this->response->array([
-            'message'   => 'Thank you for registering for Vitee!, We have sent you a confirmation email to '. $client->email
-        ]);
-
-    }
 
     /**
      * Confirm email
@@ -120,109 +53,85 @@ class ClientController extends Controller
         return redirect()->intended('home');
     }
 
+    public function showClientProfile($client_id)
+    {
+
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+
+        $auth_client = Client::findOrFail($client_id);
+        $client_obj = new Fractal\Resource\Item($auth_client, new ClientTransformer);
+        $client = $fractal->createData($client_obj)->toArray();
+
+        $title = $client['first_name'] . '\' Profile';
+
+        return view('Front.Client.Profile', compact('client', 'title'));
+
+    }
+
+
+
     /**
-     * Login
+     * Update/Edit User
      *
      * <strong>Parameters:</strong>
      * <br>
-     * email                : required|email|unique <br>
-     * password             : required|min:6 <br>
+     * first_name   : optional|max:56 <br>
+     * last_name    : optional|max:56 <br>
+     * password     : optional|min:6 <br>
+     * password_confirmation: required_with:password|min:6 <br>
+     * gender       : optional|in:male,female <br>
+     * dob          : optional|date "YYYY-MM-DD" <br>
+     * phone        : optional|string|max:15|min:4 <br>
+     * address      : optional|string|min:10|max:255 <br>
      *
-     * <strong>Response:</strong>
-     * <br>
-     * {"token": "jwt_token"}
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|string|void
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
+    public function updateClient(Request $request, $client_id)
     {
-        Config::set('auth.providers.users.model', Client::class);
-        $credentials = $request->only(['email', 'password']);
+        $user = Client::findOrFail($client_id);
 
-        $validator = Validator::make($credentials, [
-            'email' => 'required',
-            'password' => 'required',
+        Log::info($request->all());
+
+        if($request->has('email') || $request->has('password')){
+            return response()->json(
+                [
+                    'status'    => 'error',
+                    'data'      => null,
+                    'message'   => 'you can not change your email/password from here! :( ',
+                ], 401);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'first_name'    => 'filled|min:3|max:56',
+            'last_name'     => 'filled|min:3|max:56',
+            'dob'           => 'filled|date',
+            'phone'         => 'filled|max:15|min:4',
+            'address'       => 'filled|string|min:10|max:255'
         ]);
 
-        $client = Client::where('email', $request->get('email'))->first();
-        if($client){
-            if(! $client->is_email_confirmed) {
-                return $this->response->array([
-                    'message'=> 'You Are Not Confirmed yet'
-                ]);
-            }
+        if($validator->fails())
+        {
+            return response()->json(
+                [
+                    'status'    => 'error',
+                    'data'      => null,
+                    'message'   => $validator->errors()->all(),
+                ], 200);
         }
 
-        if($validator->fails()) {
-            throw new ValidationHttpException($validator->errors()->all());
-        }
+        $user->update($request->except('email'));
+        return response()->json(
+            [
+                'status'    => 'success',
+                'data'      => null,
+                'message'   => 'User Updated successfully',
+            ], 200);
 
-        try {
-            if (! $token = JWTAuth::attempt($credentials) ) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
-            }
-        } catch (JWTException $e) {
-            return $this->response->error('could_not_create_token', 500);
-        }
-        
-        return response()->json(compact('token'));
     }
 
 
 
-    public function recovery(Request $request)
-    {
-        $validator = Validator::make($request->only('email'), [
-            'email' => 'required'
-        ]);
-
-        if($validator->fails()) {
-            throw new ValidationHttpException($validator->errors()->all());
-        }
-
-        $response = Password::sendResetLink($request->only('email'), function (Message $message) {
-            $message->subject(Config::get('boilerplate.recovery_email_subject'));
-        });
-
-        switch ($response) {
-            case Password::RESET_LINK_SENT:
-                return $this->response->noContent();
-            case Password::INVALID_USER:
-                return $this->response->errorNotFound();
-        }
-    }
-
-    public function reset(Request $request)
-    {
-        $credentials = $request->only(
-            'email', 'password', 'password_confirmation', 'token'
-        );
-
-        $validator = Validator::make($credentials, [
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed|min:6',
-        ]);
-
-        if($validator->fails()) {
-            throw new ValidationHttpException($validator->errors()->all());
-        }
-
-        $response = Password::reset($credentials, function ($user, $password) {
-            $user->password = $password;
-            $user->save();
-        });
-
-        switch ($response) {
-            case Password::PASSWORD_RESET:
-                if(Config::get('boilerplate.reset_token_release')) {
-                    return $this->login($request);
-                }
-                return $this->response->noContent();
-
-            default:
-                return $this->response->error('could_not_reset_password', 500);
-        }
-    }
 }

@@ -19,4 +19,4 @@
 <!-- vegas, plugin for home page slideshow  -->
 {!!  HTML::script(config('attendize.cdn_url_static_assets').'/front/js/vegas.min.js') !!}
 <!-- noty, plugin for Notifications, full docs here: http://ned.im/noty/  -->
-{!!  HTML::script(config('attendize.cdn_url_static_assets').'/front/js/noty.min.js') !!}
+

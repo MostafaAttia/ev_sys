@@ -23,7 +23,7 @@ $(document).ready(function(){
 
     var $container = $('#masonry-grid');
     var next_url = $('.nav-next a');
-    
+
     if(next_url.attr('href') == '') {
         $('#loading-spin').hide();
     }
@@ -102,8 +102,7 @@ $(document).ready(function(){
 
     $('.social-share').on('click', function(e){
 
-        var
-            verticalPos = Math.floor(($(window).width() - popupSize.width) / 2),
+        var verticalPos = Math.floor(($(window).width() - popupSize.width) / 2),
             horizontalPos = Math.floor(($(window).height() - popupSize.height) / 2);
 
         var popup = window.open($(this).prop('href'), 'social',

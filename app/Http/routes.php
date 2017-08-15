@@ -47,9 +47,30 @@ Route::group(['prefix' => 'home'], function(){
     ]);
 
     Route::get('/events/around/{city}/{country}', [
-//    Route::get('/events/around/', [
         'as'   => 'aroundYouEvents',
         'uses' => 'HomeController@getEventsByLocation',
+    ]);
+
+
+
+    Route::get('/payment', [
+        'as'   => 'payment',
+        'uses' => 'HomeController@testPayment',
+    ]);
+
+
+});
+
+Route::group(['prefix' => 'client'], function(){
+
+    Route::get('/{client_id}/profile', [
+        'as'   => 'showClientProfile',
+        'uses' => 'ClientController@showClientProfile',
+    ]);
+
+    Route::post('/{client_id}/update', [
+        'as'    => 'updateClient',
+        'uses'  => 'ClientController@updateClient',
     ]);
 
 
