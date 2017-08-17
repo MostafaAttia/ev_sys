@@ -58,6 +58,11 @@ Route::group(['prefix' => 'home'], function(){
         'uses' => 'HomeController@testPayment',
     ]);
 
+    Route::post('/',[
+        'as'   => 'home',
+        'uses' => 'HomeController@index',
+    ]);
+
 
 });
 
