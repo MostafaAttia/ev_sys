@@ -19,7 +19,7 @@
         settings:{
             secret_key: "5TXqUUNH350N4Ql6dm1CGY0EvjrTSvhXpfojab1eg12lSnr5KsIqqI5V2wPU27SrngLxsMMJOO4GbvMWYumpdrlgYaa0h3rFkdcM",
             merchant_id: "10018556",
-            amount: ".100",
+            amount: ".200",
             currency: "BHD",
             title: "Test Express Checkout Transaction",
             product_names: "Product1,Product2,Product3",
