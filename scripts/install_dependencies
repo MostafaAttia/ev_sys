@@ -22,3 +22,5 @@ sudo chgrp -R apache /var/www/html/storage /var/www/html/bootstrap/cache
 sudo chmod -R ug+rwx /var/www/html/storage /var/www/html/bootstrap/cache
 
 composer update -d /var/www/html
+
+sudo chmod -R 775 vendor/ public/
