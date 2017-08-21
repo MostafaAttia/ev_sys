@@ -679,7 +679,7 @@ class EventCheckoutController extends Controller
                 'redirectUrl' => route('showOrderDetails', [
                     'is_embedded'     => $this->is_embedded,
                     'order_reference' => $order->order_reference,
-                ]),
+                ])
             ]);
         }
 
@@ -735,14 +735,17 @@ class EventCheckoutController extends Controller
             abort(404);
         }
 
+        $event_image = $order->event->images->count()
+            ? config('attendize.s3_base_url').config('attendize.s3_event_images_original'). $order->event->images->first()['image_path']
+            : config('attendize.s3_base_url').config('attendize.s3_event_defaults'). 'original.jpg';
+
         $data = [
             'order'     => $order,
             'event'     => $order->event,
             'tickets'   => $order->event->tickets,
             'attendees' => $order->attendees,
             'css'       => file_get_contents(public_path('assets/stylesheet/ticket.css')),
-            'image'     => base64_encode(file_get_contents(public_path($order->event->organiser->full_logo_path))),
-
+            'image'     => base64_encode(file_get_contents($event_image))
         ];
 
         if ($request->get('download') == '1') {

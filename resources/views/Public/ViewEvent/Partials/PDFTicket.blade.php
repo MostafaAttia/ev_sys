@@ -56,9 +56,8 @@
             @foreach($attendees as $attendee)
                 @if(!$attendee->is_cancelled)
                     <div class="ticket">
-
                         <div class='logo'>
-				<img alt="{{$event->organiser->full_logo_path}}" src="data:image/png;base64, {{$image}}" />
+				            <img alt="{{$event->organiser->full_logo_path}}" src="data:image/png;base64, {{$image}}" />
                         </div>
 
                         <div class="event_details">
@@ -101,8 +100,6 @@
             @endforeach
 
             <div class="bottom_info">
-                {{--Attendize is provided free of charge on the condition the below hyperlink is left in place.--}}
-                {{--See https://www.attendize.com/licence.php for more information.--}}
                 @include('Shared.Partials.PoweredBy')
             </div>
         </div>
