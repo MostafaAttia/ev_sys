@@ -9,6 +9,8 @@ php /var/www/html/artisan view:clear
 
 php /var/www/html/artisan cache:clear
 
+sudo mkdir /var/www/html/public/user_content/pdf_tickets
+
 sudo chown -R ec2-user:apache /var/www/html
 
 sudo find /var/www/html -type d -exec sudo chmod 755 {} +
