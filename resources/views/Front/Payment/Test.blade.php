@@ -36,7 +36,7 @@
 //            },
             is_iframe:{
                 load: "onbodyload",
-                show: 1,
+                show: 1
             },
         },
         customer_info:{
