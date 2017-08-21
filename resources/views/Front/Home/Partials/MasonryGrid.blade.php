@@ -99,7 +99,7 @@
                             </a>
                         </div>
                         <div class="stats">
-                            <i class="material-icons">favorite</i> 160 &middot;
+                            <i class="material-icons">favorite</i> 999 &middot;
                             <i class="material-icons">chat_bubble</i> 45
                         </div>
                     </div>
