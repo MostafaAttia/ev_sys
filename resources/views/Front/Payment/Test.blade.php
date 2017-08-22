@@ -59,10 +59,10 @@
     //                css: "custom",
     //                linktocss: "https://www.yourstore.com/css/style.css",
     //            },
-                is_iframe:{
-                    load: "onbodyload",
-                    show: 1
-                },
+//                is_iframe:{
+//                    load: "onbodyload",
+//                    show: 1
+//                },
             },
             customer_info:{
                 first_name: "John",
