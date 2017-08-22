@@ -85,7 +85,8 @@
                 <div class="card-content">
 
                     <h4 class="card-title">
-                        <a href="{{ route('showEventPage', $event['id']) }}">{{ $event['title'] }}</a>
+{{--                        <a href="{{ route('showEventPage', $event['id']) }}">{{ $event['title'] }}</a>--}}
+                        <a href="{{ $event['event_url'] }}">{{ $event['title'] }}</a>
                     </h4>
                     <h6 class="category text-info">{{ $event['category']['name'] }}</h6>
                     <p class="card-description">
