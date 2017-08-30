@@ -302,6 +302,8 @@ class EventCheckoutController extends Controller
             ]);
         }
 
+        Log::info($ticket_order);
+
 
         /*
          * Add the request data to a session in case payment is required off-site

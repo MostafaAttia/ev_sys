@@ -6,7 +6,7 @@ return [
 
     'ticket_status_sold_out'        => 1,
     'ticket_status_after_sale_date' => 2,//
-    'enable_test_payments'          => env('ENABLE_TEST_PAYMENTS', false),
+    'enable_test_payments'          => env('ENABLE_TEST_PAYMENTS', true),
 
     'payment_gateway_stripe'   => 1,
     'payment_gateway_paypal'   => 2,
