@@ -49,7 +49,7 @@ class OrganiserController extends MyBaseController
         $organiser->name = $request->get('name');
         $organiser->about = $request->get('about');
         $organiser->email = $request->get('email');
-        $organiser->has_auditorium = $request->get('has_auditorium');
+        //$organiser->has_auditorium = $request->get('has_auditorium');
         $organiser->facebook = $request->get('facebook');
         $organiser->twitter = $request->get('twitter');
         $organiser->confirmation_key = str_random(15);
