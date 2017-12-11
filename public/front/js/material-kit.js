@@ -329,18 +329,30 @@ var big_image;
 
  materialKitDemo = {
 
+     //checkScrollForParallax: debounce(function(){
+     //   if(isElementInViewport(big_image)){
+     //        var current_scroll = $(this).scrollTop();
+     //        oVal = ($(window).scrollTop() / 3);
+     //        big_image.css({
+     //            'transform':'translate3d(0,' + oVal +'px,0)',
+     //            '-webkit-transform':'translate3d(0,' + oVal +'px,0)',
+     //            '-ms-transform':'translate3d(0,' + oVal +'px,0)',
+     //            '-o-transform':'translate3d(0,' + oVal +'px,0)'
+     //        });
+     //   }
+     //}, 4),
+
      checkScrollForParallax: debounce(function(){
-        if(isElementInViewport(big_image)){
-             var current_scroll = $(this).scrollTop();
-             oVal = ($(window).scrollTop() / 3);
-             big_image.css({
-                 'transform':'translate3d(0,' + oVal +'px,0)',
-                 '-webkit-transform':'translate3d(0,' + oVal +'px,0)',
-                 '-ms-transform':'translate3d(0,' + oVal +'px,0)',
-                 '-o-transform':'translate3d(0,' + oVal +'px,0)'
-             });
-        }
-     }, 4),
+
+         oVal = ($(window).scrollTop() / 3);
+         big_image.css({
+             'transform':'translate3d(0,' + oVal +'px,0)',
+             '-webkit-transform':'translate3d(0,' + oVal +'px,0)',
+             '-ms-transform':'translate3d(0,' + oVal +'px,0)',
+             '-o-transform':'translate3d(0,' + oVal +'px,0)'
+         });
+
+     }, 6),
 
      initContactUsMap: function(){
          var myLatlng = new google.maps.LatLng(44.433530, 26.093928);

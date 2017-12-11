@@ -55,7 +55,7 @@ class OrganiserCustomizeController extends MyBaseController
         if ($request->get('remove_current_image') == '1') {
             $organiser->logo_path = '';
         }
-        
+
 
         if ($request->hasFile('organiser_logo')) {
 
