@@ -20,8 +20,8 @@
     @else
 
         @foreach($events['data'] as $event)
-        <div class="grid-sizer"></div>
-        <div class="grid-item">
+        <div class="grid-sizer hidden-xs hidden-sm hidden-md col-lg-1"></div>
+        <div class="grid-item col-xs-12 col-sm-12 col-md-6 col-lg-4">
             <div class="card card-blog card-rotate">
                 <div class="rotating-card-container">
                     <div class="card-image">

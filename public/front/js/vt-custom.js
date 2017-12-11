@@ -66,7 +66,8 @@ $(document).ready(function(){
         $container.imagesLoaded().progress(function(){
             $('#masonry-grid').masonry({
                 itemSelector: '.grid-item',
-                columnWidth: '.grid-sizer'
+                columnWidth: '.grid-sizer',
+                percentPosition: true
             });
         });
         $container.infinitescroll({
