@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Organiser;
-use File;
-use Image;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Models\Organiser;
 use Validator;
+use Image;
+use File;
 
 class OrganiserCustomizeController extends MyBaseController
 {
@@ -54,26 +55,28 @@ class OrganiserCustomizeController extends MyBaseController
         if ($request->get('remove_current_image') == '1') {
             $organiser->logo_path = '';
         }
+        
 
         if ($request->hasFile('organiser_logo')) {
-            $the_file = \File::get($request->file('organiser_logo')->getRealPath());
-            $file_name = str_slug($organiser->name).'-logo-'.$organiser->id.'.'.strtolower($request->file('organiser_logo')->getClientOriginalExtension());
 
-            $relative_path_to_file = config('attendize.organiser_images_path').'/'.$file_name;
-            $full_path_to_file = public_path($relative_path_to_file);
+            $image = $request->file('organiser_logo');
+            $imageName = 'img_'.md5(time(). str_random()).'.'.$image->getClientOriginalExtension();
+            $organiser->logo_path = $imageName;
 
-            $img = Image::make($the_file);
+            Storage::disk('s3')->put('organizer/original/'.$imageName, file_get_contents($image), 'public');
 
-            $img->resize(200, 200, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
+            // save as THUMB 60*60
+            $image_thumb_60_60 = Image::make($image)->resize(60, 60)->stream();
+            Storage::disk('s3')->put('organizer/60*60/'.$imageName, $image_thumb_60_60->__toString(), 'public');
 
-            $img->save($full_path_to_file);
+            // save as THUMB 120*120
+            $image_thumb_120_120 = Image::make($image)->resize(120, 120)->stream();
+            Storage::disk('s3')->put('organizer/120*120/'.$imageName, $image_thumb_120_120->__toString(), 'public');
 
-            if (\Storage::put($file_name, $the_file)) {
-                $organiser->logo_path = $relative_path_to_file;
-            }
+            // save as VERTICAL poster 240*240
+            $image_vert_poster_240_240 = Image::make($image)->resize(240, 240)->stream();
+            Storage::disk('s3')->put('organizer/240*240/'.$imageName, $image_vert_poster_240_240->__toString(), 'public');
+
         }
 
         $organiser->save();
