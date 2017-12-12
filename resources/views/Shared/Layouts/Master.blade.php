@@ -28,7 +28,7 @@
 <header id="header" class="navbar">
 
     <div class="navbar-header">
-        <a class="navbar-brand" href="javascript:void(0);">
+        <a class="navbar-brand" href="{{ route('home') }}">
             <img style="width: 150px; height: 36px;" class="logo" alt="Vitee" src="{{asset('assets/images/logo-light.png')}}"/>
         </a>
     </div>
