@@ -65,7 +65,7 @@
         <div class="container">
 	        <div class="row">
 				<div class="col-lg-10">
-					<h1 id="vt-video-text " class="title">Let The <span data-words="Fun|Art|Game|Magic|Race|Adventure|Joy|Party|Journey|Festival"></span> Begin!</h1>
+					<h1 id="vt-video-text " class="title">Let The <span data-words="Fun|Art|Game|Magic|Race|Adventure|Joy|Party|Festival"></span> Begin!</h1>
 					<div class="col-md-6">
 						<h4><i class="material-icons vt-color" style="font-size: 18px;">gps_fixed</i> Find your favorite event</h4>
 						<h4><i class="fa fa-ticket vt-color" ></i> Get your tickets</h4>
