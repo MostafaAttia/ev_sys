@@ -177,6 +177,8 @@ return [
         Barryvdh\Cors\ServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
+        Vinkla\Pusher\PusherServiceProvider::class,
+        Overtrue\LaravelFollow\FollowServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class, // for debugging in DEV, Must Removed in PRODUCTION
     ],
@@ -250,6 +252,8 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+
+        'LaravelPusher' => Vinkla\Pusher\Facades\Pusher::class,
 
         'Debugbar' => Barryvdh\Debugbar\Facade::class, // for debugging in DEV, Must Removed in PRODUCTION
 

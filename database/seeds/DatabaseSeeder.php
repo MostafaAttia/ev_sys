@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call('TicketStatusSeeder');
         $this->call('TimezoneSeeder');
         $this->call('CategoriesSeeder');
+        $this->call('WeekDaysTableSeeder');
     }
 }

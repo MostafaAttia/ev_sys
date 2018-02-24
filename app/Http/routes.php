@@ -6,6 +6,18 @@
 include_once('api_routes.php');
 
 
+Route::get('/bridge', function() {
+    $messages = [
+        "name"      =>"hello from vitee",
+        "content"   =>"Another message from the other side"
+    ];
+
+    LaravelPusher::trigger('test_channel', 'my_event', ['message' => $messages]);
+
+    return 'sent';
+});
+
+
 /*
  * -------------------------
  * Clients
@@ -51,8 +63,6 @@ Route::group(['prefix' => 'home'], function(){
         'uses' => 'HomeController@getEventsByLocation',
     ]);
 
-
-
     Route::get('/payment', [
         'as'   => 'payment',
         'uses' => 'HomeController@testPayment',
@@ -77,6 +87,56 @@ Route::group(['prefix' => 'client'], function(){
         'as'    => 'updateClient',
         'uses'  => 'ClientController@updateClient',
     ]);
+
+    Route::group(['middleware' => 'auth:client'], function(){
+
+        Route::get('follow/{organiser_id}', [
+            'as'    => 'follow',
+            'uses'  => 'ClientController@followOrganiser'
+        ]);
+
+        Route::get('unfollow/{organiser_id}', [
+            'as'    => 'unfollow',
+            'uses'  => 'ClientController@unfollowOrganiser'
+        ]);
+
+        Route::get('favorite/{category_id}', [
+            'as'    => 'favorite',
+            'uses'  => 'ClientController@favoriteCategory'
+        ]);
+
+        Route::get('unfavorite/{category_id}', [
+            'as'    => 'unfavorite',
+            'uses'  => 'ClientController@unfavoriteCategory'
+        ]);
+
+        Route::get('like/{event_id}', [
+            'as'    => 'like',
+            'uses'  => 'ClientController@likeEvent'
+        ]);
+
+        Route::get('unlike/{event_id}', [
+            'as'    => 'unlike',
+            'uses'  => 'ClientController@unlikeEvent'
+        ]);
+
+        Route::get('likes/{event_id}', [
+            'as'    => 'likes',
+            'uses'  => 'ClientController@eventLikes'
+        ]);
+
+        Route::get('fans/{category_id}', [
+            'as'    => 'fans',
+            'uses'  => 'ClientController@categoryFans'
+        ]);
+
+        Route::get('/followers/{organiser_id}', [
+            'as'    => 'followers',
+            'uses'  => 'ClientController@organiserFollowers'
+        ]);
+
+    });
+
 
 
 });

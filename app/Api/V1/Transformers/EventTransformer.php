@@ -12,8 +12,17 @@ class EventTransformer extends TransformerAbstract
     {
 
         $organiser  = Organiser::findOrFail($event->organiser_id);
+        $organiser_events = Event::where(['organiser_id' => $organiser->id, 'is_live'=> 1])
+            ->where('end_date', '>', date("Y-m-d H:i:s"))->get()->toArray();
+
+        $organiser_events_counter  = count($organiser_events);
+
         if($event->category_id){
             $category = $event->category;
+            $events = Event::where(['category_id' => $category->id, 'is_live'=> 1])
+                ->where('end_date', '>', date("Y-m-d H:i:s"))->get()->toArray();
+
+            $events_counter  = count($events);
         }
 
         // reformat date
@@ -57,6 +66,8 @@ class EventTransformer extends TransformerAbstract
             'organiser'                 => [
                     'id'                => $organiser->id ,
                     'name'              => $organiser->name,
+                    'events'            => $organiser_events_counter,
+                    'followers_ids'     => $organiser->followers()->get()->pluck('id')->toArray(),
                     'image_path'              => $organiser->logo_path ? [
                         'original'              => config('attendize.s3_base_url').config('attendize.s3_organiser_original'). $organiser->logo_path,
                         '60*60'                 => config('attendize.s3_base_url').config('attendize.s3_organiser_60_60'). $organiser->logo_path,
@@ -87,11 +98,18 @@ class EventTransformer extends TransformerAbstract
             'social_show_linkedin'      => $event->social_show_linkedin,
             'category'                  => $event->category_id !== null ? [
                 'id'                    => $category->id,
-                'name'                  => $category->name
+                'name'                  => $category->name,
+                'image'                 => $category->img_path,
+                'events'                => $events_counter,
+                'fans_ids'              => $category->favoriters()->get()->pluck('id')->toArray()
             ] : [
                 'id'                    => null,
-                'name'                  => null
-            ]
+                'name'                  => null,
+                'image'                 => null,
+                'events'                => null,
+                'fans_ids'              => null
+            ],
+            'likers_ids'                  => $event->likers()->get()->pluck('id')->toArray()
         ];
 
         return $events;

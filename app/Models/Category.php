@@ -1,11 +1,13 @@
 <?php
 namespace App\Models;
 
+use Overtrue\LaravelFollow\Traits\CanBeFavorited;
 use Illuminate\Database\Eloquent\Model;
-use App\Model\Event;
 
 class Category extends Model
 {
+
+    use CanBeFavorited;
 
     protected $hidden = [
         'created_at',

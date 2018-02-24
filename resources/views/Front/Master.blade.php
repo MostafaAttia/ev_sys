@@ -42,6 +42,7 @@
 
     @include('Front.Partials.core-scripts')
     @include('Front.Home.Modals.Modals')
+{{--    @include('Shared.Layouts.ViewJavascript')--}}
 
     {!!  HTML::script(config('attendize.cdn_url_static_assets').'/front/js/vt-custom.js') !!}
 </body>

@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
+use LaravelPusher;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //require app_path('Attendize/constants.php');
+
+        $pusher = $this->app->make('pusher');
+        $pusher->set_logger( new LaravelLoggerProxy() );
+
     }
 
     /**
@@ -30,5 +36,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'Illuminate\Contracts\Auth\Registrar', 'App\Services\Registrar'
         );
+    }
+}
+
+class LaravelLoggerProxy { // logging pusher events
+    public function log( $msg ) {
+        Log::info($msg);
     }
 }

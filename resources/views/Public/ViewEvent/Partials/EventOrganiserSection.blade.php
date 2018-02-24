@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="event_organiser_details" property="organizer" typeof="Organization">
                 <div class="logo">
-                    <img alt="{{$event->organiser->name}}" src="{{asset($event->organiser->full_logo_path)}}" property="logo">
+                    <img class="img-thumbnail" alt="{{$event->organiser->name}}" src="{{asset($event->organiser->full_logo_path)}}" property="logo">
                 </div>
                 <h3>
                     @if($event->organiser->enable_organiser_page)

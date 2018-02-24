@@ -16,37 +16,44 @@ class CategoriesSeeder extends Seeder
             [
                 'id'            => 1,
                 'name'          => 'Art & Theatre',
-                'description'   => ''
+                'description'   => '',
+                'img_path'      => asset('/front/img/categories/art.jpg')
             ],
             [
                 'id'            => 2,
                 'name'          => 'Exhibitions',
-                'description'   => ''
+                'description'   => '',
+                'img_path'      => asset('/front/img/categories/exhibition.jpg')
             ],
             [
                 'id'            => 3,
                 'name'          => 'Music & Entertainment',
-                'description'   => ''
+                'description'   => '',
+                'img_path'      => asset('/front/img/categories/music.jpg')
             ],
             [
                 'id'            => 4,
                 'name'          => 'Networking & Social',
-                'description'   => ''
+                'description'   => '',
+                'img_path'      => asset('/front/img/categories/social.jpg')
             ],
             [
                 'id'            => 5,
                 'name'          => 'Nightlife',
-                'description'   => ''
+                'description'   => '',
+                'img_path'      => asset('/front/img/categories/nightlife.jpg')
             ],
 [
                 'id'            => 6,
                 'name'          => 'Food & Dining',
-                'description'   => ''
+                'description'   => '',
+                'img_path'      => asset('/front/img/categories/food.jpg')
             ],
 [
                 'id'            => 7,
-                'name'          => 'Sport',
-                'description'   => ''
+                'name'          => 'Sports',
+                'description'   => '',
+                'img_path'      => asset('/front/img/categories/sports.jpg')
             ],
 
         ]);

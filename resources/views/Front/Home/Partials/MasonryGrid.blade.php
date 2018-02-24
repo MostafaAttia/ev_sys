@@ -16,7 +16,6 @@
         </div>
     </div>
 
-
     @else
 
         @foreach($events['data'] as $event)
@@ -87,21 +86,94 @@
                     <h4 class="card-title">
                         <a href="{{ $event['event_url'] }}">{{ $event['title'] }}</a>
                     </h4>
-                    <h6 class="category text-info">{{ $event['category']['name'] }}</h6>
+
+                    @if(Auth::guard('client')->user())
+                    <h6 class="category category-popover-{{ $event['category']['id'] }} text-info"
+                        data-html="true" data-toggle="popover" data-placement="auto bottom"
+                        data-content="<div class='category-popover'>
+                        <img class='img-thumbnail category-thumb' src='{{ $event['category']['image'] }}'>
+                        <br> <span class='text-info'><strong>{{ $event['category']['name'] }}</strong></span> <br>
+
+                        <i class='material-icons btn-fav-category {{ in_array($event['category']['id'], $favorites) ? 'vt-red': 'vt-grey' }} '
+                        data-category-events='{{ $event['category']['events'] }}'
+                        data-category-name='{{ $event['category']['name'] }}'
+                        data-category-thumb='{{ $event['category']['image'] }}'
+                        data-category-id='{{ $event['category']['id'] }}'>favorite</i>
+                        <br>
+                        <div class='fav-counter vt-grey'>
+                        <i class='material-icons'>favorite</i> <span title='#fans' class='fans-counter-{{ $event['category']['id'] }}'> {{ count($event['category']['fans_ids']) }} </span> &nbsp; &middot; &nbsp;
+                        <i class='material-icons'>list</i> <span title='#active events'> {{ $event['category']['events'] }}</span>
+                        </div></div>">
+
+                        {{ $event['category']['name'] }}
+                    </h6>
+                    @else
+                        <h6 class="category text-info"
+                            data-html="true" data-toggle="popover" data-placement="auto bottom"
+                            data-content="<div class='category-popover'>
+                            <img class='img-thumbnail category-thumb' src='{{ $event['category']['image'] }}'>
+                            <br> <span class='text-info'><strong>{{ $event['category']['name'] }}</strong></span> <br>
+
+                            <div class='fav-counter vt-grey'>
+                            <i class='material-icons'>favorite</i> <span title='#fans'> {{ count($event['category']['fans_ids']) }} </span> &nbsp; &middot; &nbsp;
+                            <i class='material-icons'>list</i> <span title='#active events'> {{ $event['category']['events'] }}</span>
+                            </div></div>">
+
+                            {{ $event['category']['name'] }}
+                        </h6>
+                    @endif
                     <p class="card-description">
                         {{ str_limit($event['desc'], $limit = 200, $end = '...') }}
                     </p>
                     <div class="footer">
                         <div class="author">
-                            <a href="{{route('showOrganiserHome', [$event['organiser']['id'], Str::slug($event['organiser']['name'])])}}" title="Organiser Page">
-                                <img src="{{ $event['organiser']['image_path']['original'] }}" alt="..." class="avatar img-raised">
+                            @if(Auth::guard('client')->user())
+                            <a class="organiser-name organiser-popover-{{ $event['organiser']['id'] }}" href="{{ route('showOrganiserHome', [$event['organiser']['id'], Str::slug($event['organiser']['name'])]) }}"
+                               data-html="true" data-toggle="popover" data-placement="auto"
+                               data-content="<div class='organiser-popover-content'>
+                                <img class='img-thumbnail category-thumb' src='{{ $event['organiser']['image_path']['60*60'] }}'>
+                                <br> <span class='text-info'><strong>{{ $event['organiser']['name'] }}</strong></span> <br>
+                                <i class='material-icons btn-follow-organiser {{ in_array($event['organiser']['id'], $following) ? 'vt-red': 'vt-grey' }} '
+                                data-organiser-events='{{ $event['organiser']['events'] }}'
+                                data-organiser-name='{{ $event['organiser']['name'] }}'
+                                data-organiser-thumb='{{ $event['organiser']['image_path']['60*60'] }}'
+                                data-organiser-id='{{ $event['organiser']['id'] }}'>star</i>
+
+                                <br>
+                                <div class='fav-counter vt-grey'>
+                                <i class='material-icons'>star</i> <span title='#fans' class='followers-counter-{{ $event['organiser']['id'] }}'> {{ count($event['organiser']['followers_ids']) }} </span> &nbsp; &middot; &nbsp;
+                                <i class='material-icons'>list</i> <span title='#active events'> {{ $event['organiser']['events'] }}</span>
+                                </div></div>">
+                                <img src="{{ $event['organiser']['image_path']['original'] }}" alt="organiser logo" class="avatar img-raised">
                                 <span>{{ $event['organiser']['name'] }}</span>
                             </a>
+                            @else
+                            <a class="organiser-name organiser-popover-{{ $event['organiser']['id'] }}" href="{{ route('showOrganiserHome', [$event['organiser']['id'], Str::slug($event['organiser']['name'])]) }}"
+                               data-html="true" data-toggle="popover" data-placement="auto"
+                               data-content="<div class='organiser-popover-content'>
+                                <img class='img-thumbnail category-thumb' src='{{ $event['organiser']['image_path']['original'] }}'>
+                                <br> <span class='text-info'><strong>{{ $event['organiser']['name'] }}</strong></span> <br>
+
+                                <div class='fav-counter vt-grey'>
+                                <i class='material-icons'>star</i> <span title='#fans'> {{ count($event['organiser']['followers_ids']) }} </span> &nbsp; &middot; &nbsp;
+                                <i class='material-icons'>list</i> <span title='#active events'> {{ $event['organiser']['events'] }}</span>
+                                </div></div>">
+                                <img src="{{ $event['organiser']['image_path']['60*60'] }}" alt="organiser logo" class="avatar img-raised">
+                                <span>{{ $event['organiser']['name'] }}</span>
+                            </a>
+                            @endif
                         </div>
+                        @if(Auth::guard('client')->user())
                         <div class="stats">
-                            <i class="material-icons">favorite</i> 999 &middot;
-                            <i class="material-icons">chat_bubble</i> 45
+                            <a class="event-like-status {{ in_array($event['id'], $liked_events) ? 'vt-red': 'vt-grey' }}" data-event-id="{{ $event['id'] }}">
+                                <i class="material-icons">thumb_up</i>
+                            </a> <span id="likes-counter-{{$event['id']}}">{{ count($event['likers_ids']) }}</span>
                         </div>
+                        @else
+                        <div class="stats">
+                            <i class="material-icons fav">thumb_up</i> <span>{{ count($event['likers_ids']) }}</span>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

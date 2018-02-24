@@ -94,30 +94,6 @@
 	color: #FFFFFF !important;
 }
 
-
-/*for masonry grid*/
-/*@media (min-width:1025px){*/
-    /*#masonry-grid .grid-sizer { width:33.333%; }*/
-    /*#masonry-grid .grid-item { width:32%; margin-bottom:1%; }*/
-    /*#masonry-grid { max-width: 100%; margin: 0 auto; }*/
-/*}*/
-/*@media (max-width:1024px){*/
-    /*#masonry-grid .grid-sizer { width:33.333%; }*/
-    /*#masonry-grid .grid-item { width:32%; margin-bottom:1%; }*/
-    /*#masonry-grid { max-width: 100%; margin: 0 auto; }*/
-/*}*/
-/*@media (max-width:768px){*/
-    /*#masonry-grid .grid-sizer { width: 50%; }*/
-    /*#masonry-grid .grid-item { width:48%; margin-bottom:4%; }*/
-    /*#masonry-grid { max-width: 95%; margin: 0 auto; }*/
-/*}*/
-/*@media (max-width:425px){*/
-    /*#masonry-grid .grid-sizer { width:0%; }*/
-    /*#masonry-grid .grid-item { width:100%; margin-bottom:4%; }*/
-    /*#masonry-grid { max-width: 95%; margin: 0 auto; }*/
-/*}*/
-
-
 .client-avatar {
     width: 30px;
     height: 30px;
@@ -147,6 +123,7 @@
     color: rgba(212, 0, 0, 0.96);
     font-weight: 700;
     font-family: "Roboto Slab", "Times New Roman", serif;
+    padding-top: 20px;
 }
 
 #loading-spin {
@@ -188,5 +165,63 @@
 .error-help {
     color: #f44336;
     display: none;
+}
+
+.event-like-status .material-icons {
+    vertical-align: baseline;
+    cursor: pointer;
+}
+
+.event-like-status:hover, .event-like-status:focus {
+    color: #f44336;
+    text-decoration: none;
+}
+
+.vt-grey {
+    color: #999999;
+}
+
+.vt-red {
+    color: #f44336;
+}
+
+.category {
+    display: table;
+    cursor: pointer;
+}
+
+.category-popover {
+    text-align: center;
+    width: 100px;
+}
+
+.category-thumb {
+    margin-bottom: 8px;
+    max-width: 120px;
+    max-height: 120px;
+}
+
+.fav-counter {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.fav-counter i {
+    vertical-align: bottom;
+    font-size: 18px;
+}
+
+.btn-fav-category {
+    vertical-align: baseline;
+    cursor: pointer;
+}
+
+.organiser-popover-content {
+    text-align: center;
+}
+
+.organiser-popover-content .material-icons {
+    /*vertical-align: baseline;*/
+    cursor: pointer;
 }
 

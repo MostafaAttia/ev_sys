@@ -30,7 +30,7 @@
 
                 <div class="card-content">
                     @if($event->images->first()['image_path'])
-                    <h6 class="category text-info">{{ $event->category->name }}</h6>
+                    <h6 class="category text-info" style="display: block;">{{ $event->category->name }}</h6>
                     @endif
                     <h1 class="card-title" style="color: #fff;">{{ $event->title }}</h1>
                 </div>

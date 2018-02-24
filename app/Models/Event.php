@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Overtrue\LaravelFollow\Traits\CanBeLiked;
 use Str;
 use URL;
 
@@ -11,7 +12,7 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Event extends MyBaseModel
 {
-    use SoftDeletes, SearchableTrait;
+    use SoftDeletes, SearchableTrait, CanBeLiked;
 
     protected $searchable = [
         /**

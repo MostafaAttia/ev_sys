@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Api\V1\Transformers\ClientTransformer;
 use App\Attendize\Utils;
 use App\Models\Organiser;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use League\Fractal;
 
 class OrganiserViewController extends Controller
 {
@@ -41,12 +43,23 @@ class OrganiserViewController extends Controller
         $upcoming_events = $organiser->events()->where('is_live', 1)->where('end_date', '>=', Carbon::now())->get();
         $past_events = $organiser->events()->where('is_live', 1)->where('end_date', '<', Carbon::now())->limit(10)->get();
 
+        $client = [];
+
+        if(Auth::guard('client')->user()) {
+            $fractal = new Fractal\Manager();
+            $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+            $auth_client = Auth::guard('client')->user();
+            $client_obj = new Fractal\Resource\Item($auth_client, new ClientTransformer);
+            $client = $fractal->createData($client_obj)->toArray();
+        }
+
         $data = [
             'organiser'       => $organiser,
             'tickets'         => $organiser->events()->orderBy('created_at', 'desc')->get(),
             'is_embedded'     => 0,
             'upcoming_events' => $upcoming_events,
             'past_events'     => $past_events,
+            'client'          => $client
         ];
 
         return view('Public.ViewOrganiser.OrganiserPage', $data);
