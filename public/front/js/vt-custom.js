@@ -96,7 +96,6 @@ $(document).ready(function(){
             $.get('client/follow/' + organiser_id).then(
                 function() {
                     $.get('client/followers/' + organiser_id).then( function(data){
-                        //var popover = $('.organiser-popover-'+organiser_id).data('bs.popover');
                         var data_content = " <div class='organiser-popover-content'>"
                             +"<img class='img-thumbnail category-thumb' src='" +organiser_thumb+ "'> "
                             +"<br> <span class='text-info'><strong>" + organiser_name + "</strong></span> <br>"
@@ -115,7 +114,6 @@ $(document).ready(function(){
             $.get('client/unfollow/' + organiser_id).then(
                 function() {
                     $.get('client/followers/' + organiser_id).then( function(data){
-                        //var popover = $('.organiser-popover-'+organiser_id).data('bs.popover');
                         var data_content = " <div class='organiser-popover-content'>"
                             +"<img class='img-thumbnail category-thumb' src='" +organiser_thumb+ "'> "
                             +"<br> <span class='text-info'><strong>" + organiser_name + "</strong></span> <br>"
@@ -131,8 +129,6 @@ $(document).ready(function(){
             $(this).removeClass('vt-red').addClass('vt-grey');
         }
     });
-
-
 
     $(document).ajaxComplete(function() {
 
