@@ -28,10 +28,6 @@ class HomeController extends Controller
         return view('Front.Payment.Test');
     }
 
-
-
-
-
     /**
      * Show Home page
      *
