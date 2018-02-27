@@ -51,7 +51,7 @@
                             </div> -->
                         </div>
                         <div class="modal-footer text-center">
-                            <button type="submit" class="btn btn-primary btn-round">Get Started</button>
+                            <button type="submit" class="btn btn-primary btn-round">Login</button>
                         </div>
                     </form>
                 </div>
