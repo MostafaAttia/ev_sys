@@ -1,29 +1,57 @@
----
-title: API Reference
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
 
-language_tabs:
-- bash
-- javascript
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/all.js"></script>
 
-includes:
 
-search: true
+          <script>
+        $(function() {
+            setupLanguages(["bash","javascript"]);
+        });
+      </script>
+      </head>
 
-toc_footers:
-- <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
----
-<!-- START_INFO -->
-# Info
-
-Welcome to the generated API reference.
-[Get Postman Collection](http://localhost/docs/api/collection.json)
+  <body class="">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <img src="images/logo.png" />
+                    <div class="lang-selector">
+                                  <a href="#" data-language-name="bash">bash</a>
+                                  <a href="#" data-language-name="javascript">javascript</a>
+                            </div>
+                            <div class="search">
+              <input type="text" class="search" id="input-search" placeholder="Search">
+            </div>
+            <ul class="search-results"></ul>
+              <div id="toc">
+      </div>
+                    <ul class="toc-footer">
+                                  <li><a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a></li>
+                            </ul>
+            </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+          <!-- START_INFO -->
+<h1>Info</h1>
+<p>Welcome to the generated API reference.
+<a href="http://localhost/docs/api/collection.json">Get Postman Collection</a></p>
 <!-- END_INFO -->
-
-#general
+<h1>general</h1>
 <!-- START_8e73e131257b043c6c352d7c21d0309b -->
-## Sign Up
-
-<strong>Parameters:</strong>
+<h2>Sign Up</h2>
+<p><strong>Parameters:</strong>
 <br>
 first_name           : required <br>
 last_name            : required <br>
@@ -35,21 +63,15 @@ gender               : optional|in:male,female <br>
 dob                  : optional|date <br>
 phone                : optional|max:15|min:4 <br>
 address              : optional|string|min:10|max:255 <br>
-image                : optional|image|mimes:jpeg,png,jpg|max:2048 bytes <br>
-
-<strong>Response:</strong>
-
-array containing a message of success and a token
-
-> Example request:
-
-```bash
-curl "http://localhost//api/signup" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+image                : optional|image|mimes:jpeg,png,jpg|max:2048 bytes <br></p>
+<p><strong>Response:</strong></p>
+<p>array containing a message of success and a token</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/signup" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/signup",
@@ -61,27 +83,18 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-
-### HTTP Request
-`POST /api/signup`
-
-
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/signup</code></p>
 <!-- END_8e73e131257b043c6c352d7c21d0309b -->
 <!-- START_7571ba0bcf678b5474025c2b69ea88a9 -->
-## Confirm email
-
-> Example request:
-
-```bash
-curl "http://localhost//api/signup/confirm_email/{confirmation_code}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Confirm email</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/signup/confirm_email/{confirmation_code}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/signup/confirm_email/{confirmation_code}",
@@ -93,45 +106,32 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
     "headers": {}
-}
-```
-
-### HTTP Request
-`GET /api/signup/confirm_email/{confirmation_code}`
-
-`HEAD /api/signup/confirm_email/{confirmation_code}`
-
-
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/signup/confirm_email/{confirmation_code}</code></p>
+<p><code>HEAD /api/signup/confirm_email/{confirmation_code}</code></p>
 <!-- END_7571ba0bcf678b5474025c2b69ea88a9 -->
 <!-- START_b982a9c2785c94e078bbe534a1f12d68 -->
-## Login
-
-<strong>Parameters:</strong>
+<h2>Login</h2>
+<p><strong>Parameters:</strong>
 <br>
 email                : required|email|unique <br>
-password             : required|min:6 <br>
-
-<strong>Response:</strong>
+password             : required|min:6 <br></p>
+<p><strong>Response:</strong>
 <br>
-{"token": "jwt_token"}
-
-> Example request:
-
-```bash
-curl "http://localhost//api/login" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+{&quot;token&quot;: &quot;jwt_token&quot;}</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/login" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/login",
@@ -143,27 +143,18 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-
-### HTTP Request
-`POST /api/login`
-
-
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/login</code></p>
 <!-- END_b982a9c2785c94e078bbe534a1f12d68 -->
 <!-- START_135a29bc1e5ba0dc0dbeb458895243c0 -->
-## Log Out
-
-> Example request:
-
-```bash
-curl "http://localhost//api/logout" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Log Out</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/logout" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/logout",
@@ -175,53 +166,36 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/logout`
-
-`HEAD /api/logout`
-
-`POST /api/logout`
-
-`PUT /api/logout`
-
-`PATCH /api/logout`
-
-`DELETE /api/logout`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/logout</code></p>
+<p><code>HEAD /api/logout</code></p>
+<p><code>POST /api/logout</code></p>
+<p><code>PUT /api/logout</code></p>
+<p><code>PATCH /api/logout</code></p>
+<p><code>DELETE /api/logout</code></p>
 <!-- END_135a29bc1e5ba0dc0dbeb458895243c0 -->
 <!-- START_ff3f8c566c9ef2b4156ea5ebcf6bcf69 -->
-## Generates reset token for a given user
-
-* <strong>Parameters:</strong>
+<h2>Generates reset token for a given user</h2>
+<ul>
+<li><strong>Parameters:</strong>
 <br>
-email                : required|email <br>
-
-NOTE: in headers please send  Accept  application/json , or your request will fail :)
-
-<strong>Response:</strong> <br>
-
-success: data array with password-reset token, <br>
-error: otherwise <br>
-
-> Example request:
-
-```bash
-curl "http://localhost//api/password/email" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+email                : required|email <br></li>
+</ul>
+<p>NOTE: in headers please send  Accept  application/json , or your request will fail :)</p>
+<p><strong>Response:</strong> <br></p>
+<p>success: data array with password-reset token, <br>
+error: otherwise <br></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/password/email" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/password/email",
@@ -233,42 +207,29 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-
-### HTTP Request
-`POST /api/password/email`
-
-
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/password/email</code></p>
 <!-- END_ff3f8c566c9ef2b4156ea5ebcf6bcf69 -->
 <!-- START_5e9e4ac523cd01bd511cd54c969e8d9c -->
-## Reset the given user&#039;s password.
-
-<strong>Parameters:</strong>
+<h2>Reset the given user&#039;s password.</h2>
+<p><strong>Parameters:</strong>
 <br>
 email                : required|email <br>
 password             : required|min:6 <br>
 password_confirmation: required <br>
-token                : required <br>
-
-NOTE: in headers please send  Accept  application/json , or your request will fail :)
-
-<strong>Response:</strong> <br>
-
-array containing a message with a login token, <br>
-if success -> token:{your_login_token}, <br>
-if failed ->  token:null <br>
-
-> Example request:
-
-```bash
-curl "http://localhost//api/password/reset" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+token                : required <br></p>
+<p>NOTE: in headers please send  Accept  application/json , or your request will fail :)</p>
+<p><strong>Response:</strong> <br></p>
+<p>array containing a message with a login token, <br>
+if success -&gt; token:{your_login_token}, <br>
+if failed -&gt;  token:null <br></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/password/reset" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/password/reset",
@@ -280,34 +241,23 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-
-### HTTP Request
-`POST /api/password/reset`
-
-
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/password/reset</code></p>
 <!-- END_5e9e4ac523cd01bd511cd54c969e8d9c -->
 <!-- START_d433d0ecb2571e4312c50b13716d74bb -->
-## Get User Details by ID OR Email
-
-<strong>Parameters:</strong>
+<h2>Get User Details by ID OR Email</h2>
+<p><strong>Parameters:</strong>
 <br>
 ID             : optional_if|min:6 <br>
-email          : optional_if|email|unique <br>
-
-if you want to get details by email, first param will be null.
-
-> Example request:
-
-```bash
-curl "http://localhost//api/client/{client_id?}/{client_email?}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+email          : optional_if|email|unique <br></p>
+<p>if you want to get details by email, first param will be null.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/client/{client_id?}/{client_email?}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/client/{client_id?}/{client_email?}",
@@ -319,13 +269,11 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
     "exception": null,
     "original": {
         "status": "success",
@@ -349,43 +297,31 @@ $.ajax(settings).done(function (response) {
         "message": null
     },
     "headers": {}
-}
-```
-
-### HTTP Request
-`GET /api/client/{client_id?}/{client_email?}`
-
-`HEAD /api/client/{client_id?}/{client_email?}`
-
-
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/client/{client_id?}/{client_email?}</code></p>
+<p><code>HEAD /api/client/{client_id?}/{client_email?}</code></p>
 <!-- END_d433d0ecb2571e4312c50b13716d74bb -->
 <!-- START_21c3b1d3f53a04b23635d2d10717f9fb -->
-## Update/Edit User
-
-<strong>Required:</strong><br>
-
-header: Authorization "token" for this user
-
-<strong>Parameters:</strong>
+<h2>Update/Edit User</h2>
+<p><strong>Required:</strong><br></p>
+<p>header: Authorization &quot;token&quot; for this user</p>
+<p><strong>Parameters:</strong>
 <br>
 first_name   : optional|max:56 <br>
 last_name    : optional|max:56 <br>
 password     : optional|min:6 <br>
 password_confirmation: required_with:password|min:6 <br>
 gender       : optional|in:male,female <br>
-dob          : optional|date "YYYY-MM-DD" <br>
+dob          : optional|date &quot;YYYY-MM-DD&quot; <br>
 phone        : optional|string|max:15|min:4 <br>
-address      : optional|string|min:10|max:255 <br>
-
-> Example request:
-
-```bash
-curl "http://localhost//api/client/update" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+address      : optional|string|min:10|max:255 <br></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/client/update" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/client/update",
@@ -397,32 +333,21 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-
-### HTTP Request
-`POST /api/client/update`
-
-
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/client/update</code></p>
 <!-- END_21c3b1d3f53a04b23635d2d10717f9fb -->
 <!-- START_c027020f44b52e61d6a1354fbff6b949 -->
-## Store a newly created comment in storage.
-
-Parameters: <br>
-content: text|required
-
-Headers : auth token
-
-> Example request:
-
-```bash
-curl "http://localhost//api/event/{event_id}/comment" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Store a newly created comment in storage.</h2>
+<p>Parameters: <br>
+content: text|required</p>
+<p>Headers : auth token</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/event/{event_id}/comment" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/event/{event_id}/comment",
@@ -434,27 +359,18 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-
-### HTTP Request
-`POST /api/event/{event_id}/comment`
-
-
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/event/{event_id}/comment</code></p>
 <!-- END_c027020f44b52e61d6a1354fbff6b949 -->
 <!-- START_ba86a55170c4d00c6ec71041668421e1 -->
-## return the specified comment
-
-> Example request:
-
-```bash
-curl "http://localhost//api/comment/{comment_id}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>return the specified comment</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/comment/{comment_id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/comment/{comment_id}",
@@ -466,37 +382,25 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/comment/{comment_id}`
-
-`HEAD /api/comment/{comment_id}`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/comment/{comment_id}</code></p>
+<p><code>HEAD /api/comment/{comment_id}</code></p>
 <!-- END_ba86a55170c4d00c6ec71041668421e1 -->
 <!-- START_ffb840a9db2696163385fcfe0d95d443 -->
-## Update the specified comment in storage.
-
-Parameters: <br>
-content: text|required
-
-> Example request:
-
-```bash
-curl "http://localhost//api/comment/{comment_id}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Update the specified comment in storage.</h2>
+<p>Parameters: <br>
+content: text|required</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/comment/{comment_id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/comment/{comment_id}",
@@ -508,27 +412,18 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-
-### HTTP Request
-`POST /api/comment/{comment_id}`
-
-
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/comment/{comment_id}</code></p>
 <!-- END_ffb840a9db2696163385fcfe0d95d443 -->
 <!-- START_eacaf299c930d7aa962fd07369475145 -->
-## Remove the specified comment from storage.
-
-> Example request:
-
-```bash
-curl "http://localhost//api/comment/{comment_id}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Remove the specified comment from storage.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/comment/{comment_id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/comment/{comment_id}",
@@ -540,27 +435,18 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-
-### HTTP Request
-`DELETE /api/comment/{comment_id}`
-
-
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE /api/comment/{comment_id}</code></p>
 <!-- END_eacaf299c930d7aa962fd07369475145 -->
 <!-- START_32803795778a67192a0f27db26a09a4d -->
-## Get all comments for an event.
-
-> Example request:
-
-```bash
-curl "http://localhost//api/event/{event_id}/comments" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Get all comments for an event.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/event/{event_id}/comments" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/event/{event_id}/comments",
@@ -572,42 +458,28 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/event/{event_id}/comments`
-
-`HEAD /api/event/{event_id}/comments`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/event/{event_id}/comments</code></p>
+<p><code>HEAD /api/event/{event_id}/comments</code></p>
 <!-- END_32803795778a67192a0f27db26a09a4d -->
 <!-- START_21515a56eedfa639ab6c6184b17aa70d -->
-## Post/Update rating for event
-
-<strong>Required:</strong><br>
-
-header: Authorization "token" for current user
-
-<strong>Parameters:</strong>
+<h2>Post/Update rating for event</h2>
+<p><strong>Required:</strong><br></p>
+<p>header: Authorization &quot;token&quot; for current user</p>
+<p><strong>Parameters:</strong>
 <br>
-rating   : required|in:1,2,3,4,5 <br>
-
-> Example request:
-
-```bash
-curl "http://localhost//api/event/{event_id}/rating" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+rating   : required|in:1,2,3,4,5 <br></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/event/{event_id}/rating" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/event/{event_id}/rating",
@@ -619,31 +491,20 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-
-### HTTP Request
-`POST /api/event/{event_id}/rating`
-
-
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/event/{event_id}/rating</code></p>
 <!-- END_21515a56eedfa639ab6c6184b17aa70d -->
 <!-- START_e9d6fc18a46965a48ae4ea817ecdd897 -->
-## delete user&#039;s rating
-
-<strong>Required:</strong><br>
-
-header: Authorization "token" for current user
-
-> Example request:
-
-```bash
-curl "http://localhost//api/event/{event_id}/rating" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>delete user&#039;s rating</h2>
+<p><strong>Required:</strong><br></p>
+<p>header: Authorization &quot;token&quot; for current user</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/event/{event_id}/rating" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/event/{event_id}/rating",
@@ -655,27 +516,18 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-
-### HTTP Request
-`DELETE /api/event/{event_id}/rating`
-
-
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE /api/event/{event_id}/rating</code></p>
 <!-- END_e9d6fc18a46965a48ae4ea817ecdd897 -->
 <!-- START_24150484e1a5ffc20d8914b803a39b56 -->
-## Get all Events [including unpublished events]
-
-> Example request:
-
-```bash
-curl "http://localhost//api/events/all" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Get all Events [including unpublished events]</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/events/all" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/events/all",
@@ -687,34 +539,23 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/events/all`
-
-`HEAD /api/events/all`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/events/all</code></p>
+<p><code>HEAD /api/events/all</code></p>
 <!-- END_24150484e1a5ffc20d8914b803a39b56 -->
 <!-- START_a271b2813bbc84345e0f55e28c1f6b5a -->
-## Get all live events
-
-> Example request:
-
-```bash
-curl "http://localhost//api/events/live" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Get all live events</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/events/live" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/events/live",
@@ -726,13 +567,11 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
     "exception": null,
     "original": {
         "status": "success",
@@ -791,7 +630,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 1,
-                    "name": "Art & Theatre",
+                    "name": "Art &amp; Theatre",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/art.jpg",
                     "events": 1,
                     "fans_ids": []
@@ -854,7 +693,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 3,
-                    "name": "Music & Entertainment",
+                    "name": "Music &amp; Entertainment",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg",
                     "events": 3,
                     "fans_ids": []
@@ -984,7 +823,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 3,
-                    "name": "Music & Entertainment",
+                    "name": "Music &amp; Entertainment",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg",
                     "events": 3,
                     "fans_ids": []
@@ -1097,8 +936,8 @@ $.ajax(settings).done(function (response) {
                         "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
                     }
                 },
-                "venue_name": "Bahrain International Exhibition & Convention Centre",
-                "venue_name_full": "Bahrain International Exhibition & Convention Centre, Avenue 28, Sanabis, Bahrain",
+                "venue_name": "Bahrain International Exhibition &amp; Convention Centre",
+                "venue_name_full": "Bahrain International Exhibition &amp; Convention Centre, Avenue 28, Sanabis, Bahrain",
                 "location_address": "158 Avenue 28, Sanabis 11644, Bahrain",
                 "location_address_line_1": "Avenue 28",
                 "location_address_line_2": "Sanabis",
@@ -1115,7 +954,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 4,
-                    "name": "Networking & Social",
+                    "name": "Networking &amp; Social",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/social.jpg",
                     "events": 2,
                     "fans_ids": [
@@ -1311,7 +1150,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 6,
-                    "name": "Food & Dining",
+                    "name": "Food &amp; Dining",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/food.jpg",
                     "events": 1,
                     "fans_ids": []
@@ -1372,7 +1211,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 4,
-                    "name": "Networking & Social",
+                    "name": "Networking &amp; Social",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/social.jpg",
                     "events": 2,
                     "fans_ids": [
@@ -1498,7 +1337,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 3,
-                    "name": "Music & Entertainment",
+                    "name": "Music &amp; Entertainment",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg",
                     "events": 3,
                     "fans_ids": []
@@ -1774,32 +1613,22 @@ $.ajax(settings).done(function (response) {
         "message": null
     },
     "headers": {}
-}
-```
-
-### HTTP Request
-`GET /api/events/live`
-
-`HEAD /api/events/live`
-
-
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/events/live</code></p>
+<p><code>HEAD /api/events/live</code></p>
 <!-- END_a271b2813bbc84345e0f55e28c1f6b5a -->
 <!-- START_b4a1cefd9ab5f4ce350a0e48db43120a -->
-## Get Event by id
-
-<strong>Parameters:</strong>
+<h2>Get Event by id</h2>
+<p><strong>Parameters:</strong>
 <br>
-event_id  : required|integer <br>
-
-> Example request:
-
-```bash
-curl "http://localhost//api/event/{event_id}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+event_id  : required|integer <br></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/event/{event_id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/event/{event_id}",
@@ -1811,13 +1640,11 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
     "exception": null,
     "original": {
         "status": "success",
@@ -1875,7 +1702,7 @@ $.ajax(settings).done(function (response) {
             "social_show_linkedin": 1,
             "category": {
                 "id": 1,
-                "name": "Art & Theatre",
+                "name": "Art &amp; Theatre",
                 "image": "http:\/\/localhost:8000\/front\/img\/categories\/art.jpg",
                 "events": 1,
                 "fans_ids": []
@@ -1887,32 +1714,22 @@ $.ajax(settings).done(function (response) {
         "message": null
     },
     "headers": {}
-}
-```
-
-### HTTP Request
-`GET /api/event/{event_id}`
-
-`HEAD /api/event/{event_id}`
-
-
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/event/{event_id}</code></p>
+<p><code>HEAD /api/event/{event_id}</code></p>
 <!-- END_b4a1cefd9ab5f4ce350a0e48db43120a -->
 <!-- START_21563b8989534d55b8bc8df32e393ff8 -->
-## List Attendees
-
-<strong>Parameters:</strong>
+<h2>List Attendees</h2>
+<p><strong>Parameters:</strong>
 <br>
-event_id  : required|integer <br>
-
-> Example request:
-
-```bash
-curl "http://localhost//api/event/{event_id}/attendees" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+event_id  : required|integer <br></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/event/{event_id}/attendees" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/event/{event_id}/attendees",
@@ -1924,13 +1741,11 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
     "exception": null,
     "original": {
         "status": "success",
@@ -1938,28 +1753,19 @@ $.ajax(settings).done(function (response) {
         "message": null
     },
     "headers": {}
-}
-```
-
-### HTTP Request
-`GET /api/event/{event_id}/attendees`
-
-`HEAD /api/event/{event_id}/attendees`
-
-
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/event/{event_id}/attendees</code></p>
+<p><code>HEAD /api/event/{event_id}/attendees</code></p>
 <!-- END_21563b8989534d55b8bc8df32e393ff8 -->
 <!-- START_9595ab5304948ee38b3672fc5018e16f -->
-## List all Categories
-
-> Example request:
-
-```bash
-curl "http://localhost//api/categories" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>List all Categories</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/categories" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/categories",
@@ -1971,20 +1777,18 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
     "exception": null,
     "original": {
         "status": "success",
         "data": [
             {
                 "id": 1,
-                "name": "Art & Theatre",
+                "name": "Art &amp; Theatre",
                 "description": "",
                 "img_path": "http:\/\/localhost:8000\/front\/img\/categories\/art.jpg"
             },
@@ -1996,13 +1800,13 @@ $.ajax(settings).done(function (response) {
             },
             {
                 "id": 3,
-                "name": "Music & Entertainment",
+                "name": "Music &amp; Entertainment",
                 "description": "",
                 "img_path": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg"
             },
             {
                 "id": 4,
-                "name": "Networking & Social",
+                "name": "Networking &amp; Social",
                 "description": "",
                 "img_path": "http:\/\/localhost:8000\/front\/img\/categories\/social.jpg"
             },
@@ -2014,7 +1818,7 @@ $.ajax(settings).done(function (response) {
             },
             {
                 "id": 6,
-                "name": "Food & Dining",
+                "name": "Food &amp; Dining",
                 "description": "",
                 "img_path": "http:\/\/localhost:8000\/front\/img\/categories\/food.jpg"
             },
@@ -2028,32 +1832,22 @@ $.ajax(settings).done(function (response) {
         "message": null
     },
     "headers": {}
-}
-```
-
-### HTTP Request
-`GET /api/categories`
-
-`HEAD /api/categories`
-
-
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/categories</code></p>
+<p><code>HEAD /api/categories</code></p>
 <!-- END_9595ab5304948ee38b3672fc5018e16f -->
 <!-- START_5d38a97a16c14f50e92fe67fedb6392f -->
-## Get Events in a category
-
-<strong>Parameters:</strong>
+<h2>Get Events in a category</h2>
+<p><strong>Parameters:</strong>
 <br>
-category_id  : required|integer <br>
-
-> Example request:
-
-```bash
-curl "http://localhost//api/category/{category_id}/events" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+category_id  : required|integer <br></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/category/{category_id}/events" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/category/{category_id}/events",
@@ -2065,13 +1859,11 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
     "exception": null,
     "original": {
         "status": "success",
@@ -2130,7 +1922,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 1,
-                    "name": "Art & Theatre",
+                    "name": "Art &amp; Theatre",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/art.jpg",
                     "events": 1,
                     "fans_ids": []
@@ -2143,32 +1935,22 @@ $.ajax(settings).done(function (response) {
         "message": null
     },
     "headers": {}
-}
-```
-
-### HTTP Request
-`GET /api/category/{category_id}/events`
-
-`HEAD /api/category/{category_id}/events`
-
-
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/category/{category_id}/events</code></p>
+<p><code>HEAD /api/category/{category_id}/events</code></p>
 <!-- END_5d38a97a16c14f50e92fe67fedb6392f -->
 <!-- START_ff11ed1613c3216917e968b8fc30ae36 -->
-## Get Events by organiser id
-
-<strong>Parameters:</strong>
+<h2>Get Events by organiser id</h2>
+<p><strong>Parameters:</strong>
 <br>
-organiser_id  : required|integer <br>
-
-> Example request:
-
-```bash
-curl "http://localhost//api/organiser/{organiser_id}/events" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+organiser_id  : required|integer <br></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/organiser/{organiser_id}/events" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/organiser/{organiser_id}/events",
@@ -2180,13 +1962,11 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
     "exception": null,
     "original": {
         "status": "success",
@@ -2245,7 +2025,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 1,
-                    "name": "Art & Theatre",
+                    "name": "Art &amp; Theatre",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/art.jpg",
                     "events": 1,
                     "fans_ids": []
@@ -2308,7 +2088,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 3,
-                    "name": "Music & Entertainment",
+                    "name": "Music &amp; Entertainment",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg",
                     "events": 3,
                     "fans_ids": []
@@ -2438,7 +2218,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 3,
-                    "name": "Music & Entertainment",
+                    "name": "Music &amp; Entertainment",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg",
                     "events": 3,
                     "fans_ids": []
@@ -2551,8 +2331,8 @@ $.ajax(settings).done(function (response) {
                         "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
                     }
                 },
-                "venue_name": "Bahrain International Exhibition & Convention Centre",
-                "venue_name_full": "Bahrain International Exhibition & Convention Centre, Avenue 28, Sanabis, Bahrain",
+                "venue_name": "Bahrain International Exhibition &amp; Convention Centre",
+                "venue_name_full": "Bahrain International Exhibition &amp; Convention Centre, Avenue 28, Sanabis, Bahrain",
                 "location_address": "158 Avenue 28, Sanabis 11644, Bahrain",
                 "location_address_line_1": "Avenue 28",
                 "location_address_line_2": "Sanabis",
@@ -2569,7 +2349,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 4,
-                    "name": "Networking & Social",
+                    "name": "Networking &amp; Social",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/social.jpg",
                     "events": 2,
                     "fans_ids": [
@@ -2765,7 +2545,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 6,
-                    "name": "Food & Dining",
+                    "name": "Food &amp; Dining",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/food.jpg",
                     "events": 1,
                     "fans_ids": []
@@ -2826,7 +2606,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 4,
-                    "name": "Networking & Social",
+                    "name": "Networking &amp; Social",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/social.jpg",
                     "events": 2,
                     "fans_ids": [
@@ -2952,7 +2732,7 @@ $.ajax(settings).done(function (response) {
                 "social_show_linkedin": 1,
                 "category": {
                     "id": 3,
-                    "name": "Music & Entertainment",
+                    "name": "Music &amp; Entertainment",
                     "image": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg",
                     "events": 3,
                     "fans_ids": []
@@ -2963,28 +2743,19 @@ $.ajax(settings).done(function (response) {
         "message": null
     },
     "headers": {}
-}
-```
-
-### HTTP Request
-`GET /api/organiser/{organiser_id}/events`
-
-`HEAD /api/organiser/{organiser_id}/events`
-
-
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/organiser/{organiser_id}/events</code></p>
+<p><code>HEAD /api/organiser/{organiser_id}/events</code></p>
 <!-- END_ff11ed1613c3216917e968b8fc30ae36 -->
 <!-- START_fce8ab495aa93d48e21f89aa353a456b -->
-## Search Events by title, venue name, location
-
-> Example request:
-
-```bash
-curl "http://localhost//api/events/search/{query}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Search Events by title, venue name, location</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/events/search/{query}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/events/search/{query}",
@@ -2996,13 +2767,11 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
     "exception": null,
     "original": {
         "status": "success",
@@ -3010,28 +2779,19 @@ $.ajax(settings).done(function (response) {
         "message": null
     },
     "headers": {}
-}
-```
-
-### HTTP Request
-`GET /api/events/search/{query}`
-
-`HEAD /api/events/search/{query}`
-
-
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/events/search/{query}</code></p>
+<p><code>HEAD /api/events/search/{query}</code></p>
 <!-- END_fce8ab495aa93d48e21f89aa353a456b -->
 <!-- START_90ff9ef6349162494090babf6b55299e -->
-## Search Organisers by name
-
-> Example request:
-
-```bash
-curl "http://localhost//api/organisers/search/{query}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Search Organisers by name</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/organisers/search/{query}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/organisers/search/{query}",
@@ -3043,34 +2803,23 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/organisers/search/{query}`
-
-`HEAD /api/organisers/search/{query}`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/organisers/search/{query}</code></p>
+<p><code>HEAD /api/organisers/search/{query}</code></p>
 <!-- END_90ff9ef6349162494090babf6b55299e -->
 <!-- START_4a96d8391893117ce248bf6eb44b2b37 -->
-## Validate a ticket request. If successful reserve the tickets
-
-> Example request:
-
-```bash
-curl "http://localhost//api/event/{event_id}/checkout" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Validate a ticket request. If successful reserve the tickets</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/event/{event_id}/checkout" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/event/{event_id}/checkout",
@@ -3082,27 +2831,18 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-
-### HTTP Request
-`POST /api/event/{event_id}/checkout`
-
-
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/event/{event_id}/checkout</code></p>
 <!-- END_4a96d8391893117ce248bf6eb44b2b37 -->
 <!-- START_44b07b75fda9d03fb837a154b98649a7 -->
-## Create the order, handle payment, update stats, fire off email jobs
-
-> Example request:
-
-```bash
-curl "http://localhost//api/event/{event_id}/checkout/create" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Create the order, handle payment, update stats, fire off email jobs</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/event/{event_id}/checkout/create" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/event/{event_id}/checkout/create",
@@ -3114,35 +2854,25 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-
-### HTTP Request
-`POST /api/event/{event_id}/checkout/create`
-
-
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /api/event/{event_id}/checkout/create</code></p>
 <!-- END_44b07b75fda9d03fb837a154b98649a7 -->
 <!-- START_15a147728dee9811856fbceea4db3d3b -->
-## Follow Organiser
-
-* <strong>Required:</strong><br>
-
-header: Authorization "token" for this user
-
-<strong>Parameters:</strong>
+<h2>Follow Organiser</h2>
+<ul>
+<li><strong>Required:</strong><br></li>
+</ul>
+<p>header: Authorization &quot;token&quot; for this user</p>
+<p><strong>Parameters:</strong>
 <br>
-organiser_id
-
-> Example request:
-
-```bash
-curl "http://localhost//api/follow/{organiser_id}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+organiser_id</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/follow/{organiser_id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/follow/{organiser_id}",
@@ -3154,42 +2884,30 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/follow/{organiser_id}`
-
-`HEAD /api/follow/{organiser_id}`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/follow/{organiser_id}</code></p>
+<p><code>HEAD /api/follow/{organiser_id}</code></p>
 <!-- END_15a147728dee9811856fbceea4db3d3b -->
 <!-- START_ddd419ded5e734d748f94080817a3a91 -->
-## Unfollow Organiser
-
-* <strong>Required:</strong><br>
-
-header: Authorization "token" for this user
-
-<strong>Parameters:</strong>
+<h2>Unfollow Organiser</h2>
+<ul>
+<li><strong>Required:</strong><br></li>
+</ul>
+<p>header: Authorization &quot;token&quot; for this user</p>
+<p><strong>Parameters:</strong>
 <br>
-organiser_id
-
-> Example request:
-
-```bash
-curl "http://localhost//api/unfollow/{organiser_id}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+organiser_id</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/unfollow/{organiser_id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/unfollow/{organiser_id}",
@@ -3201,42 +2919,30 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/unfollow/{organiser_id}`
-
-`HEAD /api/unfollow/{organiser_id}`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/unfollow/{organiser_id}</code></p>
+<p><code>HEAD /api/unfollow/{organiser_id}</code></p>
 <!-- END_ddd419ded5e734d748f94080817a3a91 -->
 <!-- START_a0d0501a38ed8ac081cae918cbb2f3d3 -->
-## Favorite a Category
-
-* <strong>Required:</strong><br>
-
-header: Authorization "token" for this user
-
-<strong>Parameters:</strong>
+<h2>Favorite a Category</h2>
+<ul>
+<li><strong>Required:</strong><br></li>
+</ul>
+<p>header: Authorization &quot;token&quot; for this user</p>
+<p><strong>Parameters:</strong>
 <br>
-category_id
-
-> Example request:
-
-```bash
-curl "http://localhost//api/favorite/{category_id}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+category_id</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/favorite/{category_id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/favorite/{category_id}",
@@ -3248,42 +2954,30 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/favorite/{category_id}`
-
-`HEAD /api/favorite/{category_id}`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/favorite/{category_id}</code></p>
+<p><code>HEAD /api/favorite/{category_id}</code></p>
 <!-- END_a0d0501a38ed8ac081cae918cbb2f3d3 -->
 <!-- START_9d192c1f0c94ae92172cf88ec05f63f2 -->
-## UnFavorite a Category
-
-* <strong>Required:</strong><br>
-
-header: Authorization "token" for this user
-
-<strong>Parameters:</strong>
+<h2>UnFavorite a Category</h2>
+<ul>
+<li><strong>Required:</strong><br></li>
+</ul>
+<p>header: Authorization &quot;token&quot; for this user</p>
+<p><strong>Parameters:</strong>
 <br>
-category_id
-
-> Example request:
-
-```bash
-curl "http://localhost//api/unfavorite/{category_id}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+category_id</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/unfavorite/{category_id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/unfavorite/{category_id}",
@@ -3295,42 +2989,30 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/unfavorite/{category_id}`
-
-`HEAD /api/unfavorite/{category_id}`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/unfavorite/{category_id}</code></p>
+<p><code>HEAD /api/unfavorite/{category_id}</code></p>
 <!-- END_9d192c1f0c94ae92172cf88ec05f63f2 -->
 <!-- START_fc55239adc7e2a0f81c474ac98b458a8 -->
-## Like an Event
-
-* <strong>Required:</strong><br>
-
-header: Authorization "token" for this user
-
-<strong>Parameters:</strong>
+<h2>Like an Event</h2>
+<ul>
+<li><strong>Required:</strong><br></li>
+</ul>
+<p>header: Authorization &quot;token&quot; for this user</p>
+<p><strong>Parameters:</strong>
 <br>
-event_id
-
-> Example request:
-
-```bash
-curl "http://localhost//api/like/{event_id}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+event_id</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/like/{event_id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/like/{event_id}",
@@ -3342,42 +3024,30 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/like/{event_id}`
-
-`HEAD /api/like/{event_id}`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/like/{event_id}</code></p>
+<p><code>HEAD /api/like/{event_id}</code></p>
 <!-- END_fc55239adc7e2a0f81c474ac98b458a8 -->
 <!-- START_d2bf13b469eba1e5400ead84c72d0a47 -->
-## Unlike an Event
-
-* <strong>Required:</strong><br>
-
-header: Authorization "token" for this user
-
-<strong>Parameters:</strong>
+<h2>Unlike an Event</h2>
+<ul>
+<li><strong>Required:</strong><br></li>
+</ul>
+<p>header: Authorization &quot;token&quot; for this user</p>
+<p><strong>Parameters:</strong>
 <br>
-event_id
-
-> Example request:
-
-```bash
-curl "http://localhost//api/unlike/{event_id}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+event_id</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/unlike/{event_id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/unlike/{event_id}",
@@ -3389,38 +3059,27 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/unlike/{event_id}`
-
-`HEAD /api/unlike/{event_id}`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/unlike/{event_id}</code></p>
+<p><code>HEAD /api/unlike/{event_id}</code></p>
 <!-- END_d2bf13b469eba1e5400ead84c72d0a47 -->
 <!-- START_217cab57cc58e277d3c403efccc6a76f -->
-## Get Events posted by organizers who are being followed by this client
-
-* <strong>Required:</strong><br>
-
-header: Authorization "token" for this user
-
-> Example request:
-
-```bash
-curl "http://localhost//api/followings/events" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Get Events posted by organizers who are being followed by this client</h2>
+<ul>
+<li><strong>Required:</strong><br></li>
+</ul>
+<p>header: Authorization &quot;token&quot; for this user</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/followings/events" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/followings/events",
@@ -3432,38 +3091,27 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/followings/events`
-
-`HEAD /api/followings/events`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/followings/events</code></p>
+<p><code>HEAD /api/followings/events</code></p>
 <!-- END_217cab57cc58e277d3c403efccc6a76f -->
 <!-- START_59702db55cb76c7a3c261eb1279c750c -->
-## Get Events from client&#039;s favorites categories
-
-* <strong>Required:</strong><br>
-
-header: Authorization "token" for this user
-
-> Example request:
-
-```bash
-curl "http://localhost//api/favorites/events" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Get Events from client&#039;s favorites categories</h2>
+<ul>
+<li><strong>Required:</strong><br></li>
+</ul>
+<p>header: Authorization &quot;token&quot; for this user</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/favorites/events" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/favorites/events",
@@ -3475,38 +3123,31 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/favorites/events`
-
-`HEAD /api/favorites/events`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/favorites/events</code></p>
+<p><code>HEAD /api/favorites/events</code></p>
 <!-- END_59702db55cb76c7a3c261eb1279c750c -->
 <!-- START_fe3933bdb0b91b5d1cfcddd7b8b2ea3d -->
-## Get organizers who are being followed by this client
-
-* * <strong>Required:</strong><br>
-
-header: Authorization "token" for this user
-
-> Example request:
-
-```bash
-curl "http://localhost//api/followings" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Get organizers who are being followed by this client</h2>
+<ul>
+<li>
+<ul>
+<li><strong>Required:</strong><br></li>
+</ul>
+</li>
+</ul>
+<p>header: Authorization &quot;token&quot; for this user</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/followings" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/followings",
@@ -3518,38 +3159,27 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/followings`
-
-`HEAD /api/followings`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/followings</code></p>
+<p><code>HEAD /api/followings</code></p>
 <!-- END_fe3933bdb0b91b5d1cfcddd7b8b2ea3d -->
 <!-- START_2fe5f7ac7af3305e4fce6d54cc6ee2e6 -->
-## Get categories that are being favorite by this client
-
-* <strong>Required:</strong><br>
-
-header: Authorization "token" for this user
-
-> Example request:
-
-```bash
-curl "http://localhost//api/favorites" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Get categories that are being favorite by this client</h2>
+<ul>
+<li><strong>Required:</strong><br></li>
+</ul>
+<p>header: Authorization &quot;token&quot; for this user</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/favorites" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/favorites",
@@ -3561,38 +3191,27 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/favorites`
-
-`HEAD /api/favorites`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/favorites</code></p>
+<p><code>HEAD /api/favorites</code></p>
 <!-- END_2fe5f7ac7af3305e4fce6d54cc6ee2e6 -->
 <!-- START_945ade917bd05a4bc1152d670a8982a4 -->
-## Get events that are being liked by this client
-
-* <strong>Required:</strong><br>
-
-header: Authorization "token" for this user
-
-> Example request:
-
-```bash
-curl "http://localhost//api/likes" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+<h2>Get events that are being liked by this client</h2>
+<ul>
+<li><strong>Required:</strong><br></li>
+</ul>
+<p>header: Authorization &quot;token&quot; for this user</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/likes" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/likes",
@@ -3604,38 +3223,26 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-null
-```
-
-### HTTP Request
-`GET /api/likes`
-
-`HEAD /api/likes`
-
-
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/likes</code></p>
+<p><code>HEAD /api/likes</code></p>
 <!-- END_945ade917bd05a4bc1152d670a8982a4 -->
 <!-- START_d6da835a8bc1ecd847652a4b22f720b2 -->
-## count event likers
-
-<strong>Parameters:</strong>
+<h2>count event likers</h2>
+<p><strong>Parameters:</strong>
 <br>
-event_id
-
-> Example request:
-
-```bash
-curl "http://localhost//api/likes/{event_id}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+event_id</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/likes/{event_id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/likes/{event_id}",
@@ -3647,13 +3254,11 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
     "exception": null,
     "original": {
         "status": "success",
@@ -3663,32 +3268,22 @@ $.ajax(settings).done(function (response) {
         "message": null
     },
     "headers": {}
-}
-```
-
-### HTTP Request
-`GET /api/likes/{event_id}`
-
-`HEAD /api/likes/{event_id}`
-
-
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/likes/{event_id}</code></p>
+<p><code>HEAD /api/likes/{event_id}</code></p>
 <!-- END_d6da835a8bc1ecd847652a4b22f720b2 -->
 <!-- START_ecd0e114c1f0b5c95c5499b0cccfd1a7 -->
-## count category fans
-
-<strong>Parameters:</strong>
+<h2>count category fans</h2>
+<p><strong>Parameters:</strong>
 <br>
-category_id
-
-> Example request:
-
-```bash
-curl "http://localhost//api/fans/{category_id}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+category_id</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/fans/{category_id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/fans/{category_id}",
@@ -3700,13 +3295,11 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
     "exception": null,
     "original": {
         "status": "success",
@@ -3716,32 +3309,22 @@ $.ajax(settings).done(function (response) {
         "message": null
     },
     "headers": {}
-}
-```
-
-### HTTP Request
-`GET /api/fans/{category_id}`
-
-`HEAD /api/fans/{category_id}`
-
-
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/fans/{category_id}</code></p>
+<p><code>HEAD /api/fans/{category_id}</code></p>
 <!-- END_ecd0e114c1f0b5c95c5499b0cccfd1a7 -->
 <!-- START_a594b6e2c7b6cc0fca3d560d162f6cf6 -->
-## count organiser&#039;s followers
-
-<strong>Parameters:</strong>
+<h2>count organiser&#039;s followers</h2>
+<p><strong>Parameters:</strong>
 <br>
-organiser_id
-
-> Example request:
-
-```bash
-curl "http://localhost//api/followers/{organiser_id}" \
--H "Accept: application/json"
-```
-
-```javascript
-var settings = {
+organiser_id</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost//api/followers/{organiser_id}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
     "url": "http://localhost//api/followers/{organiser_id}",
@@ -3753,13 +3336,11 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-```
-
-> Example response:
-
-```json
-{
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
     "exception": null,
     "original": {
         "status": "success",
@@ -3769,13 +3350,18 @@ $.ajax(settings).done(function (response) {
         "message": null
     },
     "headers": {}
-}
-```
-
-### HTTP Request
-`GET /api/followers/{organiser_id}`
-
-`HEAD /api/followers/{organiser_id}`
-
-
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /api/followers/{organiser_id}</code></p>
+<p><code>HEAD /api/followers/{organiser_id}</code></p>
 <!-- END_a594b6e2c7b6cc0fca3d560d162f6cf6 -->
+      </div>
+      <div class="dark-box">
+                        <div class="lang-selector">
+                                    <a href="#" data-language-name="bash">bash</a>
+                                    <a href="#" data-language-name="javascript">javascript</a>
+                              </div>
+                </div>
+    </div>
+  </body>
+</html>

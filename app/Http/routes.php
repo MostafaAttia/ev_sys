@@ -135,6 +135,17 @@ Route::group(['prefix' => 'client'], function(){
             'uses'  => 'ClientController@organiserFollowers'
         ]);
 
+        Route::get('/followings/events', [
+            'as'    => 'followingsEvents',
+            'uses'  => 'HomeController@getFollowingsEvents'
+        ]);
+
+        Route::get('/favorites/events', [
+            'as'    => 'favoritesEvents',
+            'uses'  => 'HomeController@getFavoritesCategoriesEvents'
+        ]);
+
+
     });
 
 

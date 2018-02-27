@@ -28,6 +28,9 @@ class HomeController extends Controller
         return view('Front.Payment.Test');
     }
 
+
+
+
     /**
      * Show Home page
      *
@@ -123,6 +126,75 @@ class HomeController extends Controller
 
         return view('Front.Home.Partials.MasonryGrid', compact('events'));
     }
+
+
+    /**
+     * Get Events by organizers who are being followed by this client
+     *
+     * @return \Dingo\Api\Http\Response
+     */
+    public function getFollowingsEvents()
+    {
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+
+        $auth_client = Auth::guard('client')->user();
+        $following = $auth_client->followings(Organiser::class)->get()->pluck('id')->toArray();
+
+        $eventsOriginal = Event::whereIn('organiser_id', $following)
+            ->where('is_live', '=', 1)
+            ->where('end_date', '>', date("Y-m-d H:i:s"))
+            ->inRandomOrder()
+            ->paginate(10);
+
+        $events = new Fractal\Resource\Collection($eventsOriginal, new EventTransformer);
+        $events = $fractal->createData($events)->toArray();
+
+        foreach($eventsOriginal->toArray() as $key=>$value){
+            if($key == 'data') continue;
+            $events[$key] = $value;
+        }
+
+        $liked_events = $auth_client->likes(Event::class)->get()->pluck('id')->toArray();
+        $favorites = $auth_client->favorites(Category::class)->get()->pluck('id')->toArray();
+        return view('Front.Home.Partials.MasonryGrid', compact('events', 'liked_events', 'favorites', 'following'));
+
+    }
+
+    /**
+     * Get Events from client's favorites categories
+     *
+     * @return \Dingo\Api\Http\Response
+     */
+    public function getFavoritesCategoriesEvents()
+    {
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+
+        $auth_client = Auth::guard('client')->user();
+        $following = $auth_client->followings(Organiser::class)->get()->pluck('id')->toArray();
+        $liked_events = $auth_client->likes(Event::class)->get()->pluck('id')->toArray();
+        $favorites = $auth_client->favorites(Category::class)->get()->pluck('id')->toArray();
+
+        $eventsOriginal = Event::whereIn('category_id', $favorites)
+            ->where('is_live', '=', 1)
+            ->where('end_date', '>', date("Y-m-d H:i:s"))
+            ->orderBy('start_date', 'asc')
+            ->paginate(10);
+
+        $events = new Fractal\Resource\Collection($eventsOriginal, new EventTransformer);
+        $events = $fractal->createData($events)->toArray();
+
+        foreach($eventsOriginal->toArray() as $key=>$value){
+            if($key == 'data') continue;
+            $events[$key] = $value;
+        }
+
+
+        return view('Front.Home.Partials.MasonryGrid', compact('events', 'liked_events', 'favorites', 'following'));
+
+    }
+
 
     /**
      * Get Events orderedBy orders' count

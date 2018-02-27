@@ -133,7 +133,7 @@
                                data-content="<div class='organiser-popover-content'>
                                 <img class='img-thumbnail category-thumb' src='{{ $event['organiser']['image_path']['60*60'] }}'>
                                 <br> <span class='text-info'><strong>{{ $event['organiser']['name'] }}</strong></span> <br>
-                                <i class='material-icons btn-follow-organiser {{ in_array($event['organiser']['id'], $following) ? 'vt-red': 'vt-grey' }} '
+                                <i title='follow' class='material-icons btn-follow-organiser {{ in_array($event['organiser']['id'], $following) ? 'vt-red': 'vt-grey' }} '
                                 data-organiser-events='{{ $event['organiser']['events'] }}'
                                 data-organiser-name='{{ $event['organiser']['name'] }}'
                                 data-organiser-thumb='{{ $event['organiser']['image_path']['60*60'] }}'
@@ -166,7 +166,7 @@
                         @if(Auth::guard('client')->user())
                         <div class="stats">
                             <a class="event-like-status {{ in_array($event['id'], $liked_events) ? 'vt-red': 'vt-grey' }}" data-event-id="{{ $event['id'] }}">
-                                <i class="material-icons">thumb_up</i>
+                                <i title='like' class="material-icons">thumb_up</i>
                             </a> <span id="likes-counter-{{$event['id']}}">{{ count($event['likers_ids']) }}</span>
                         </div>
                         @else

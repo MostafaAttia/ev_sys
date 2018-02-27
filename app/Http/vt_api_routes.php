@@ -149,4 +149,94 @@ $api->version('v1',
         'uses' => 'App\Api\V1\Controllers\EventCheckoutController@postCreateOrder',
     ]);
 
+
+
+    /*
+    * ----------
+    * Like / Follow / Favorite
+    * ----------
+    */
+
+    $api->group(['middleware' => 'jwt.refresh'], function($api){
+
+        $api->get('follow/{organiser_id}', [
+            'as'    => 'api-follow',
+            'uses'  => 'App\Api\V1\Controllers\ClientController@followOrganiser'
+        ]);
+
+        $api->get('unfollow/{organiser_id}', [
+            'as'    => 'api-unfollow',
+            'uses'  => 'App\Api\V1\Controllers\ClientController@unfollowOrganiser'
+        ]);
+
+        $api->get('favorite/{category_id}', [
+            'as'    => 'api-favorite',
+            'uses'  => 'App\Api\V1\Controllers\ClientController@favoriteCategory'
+        ]);
+
+        $api->get('unfavorite/{category_id}', [
+            'as'    => 'api-unfavorite',
+            'uses'  => 'App\Api\V1\Controllers\ClientController@unfavoriteCategory'
+        ]);
+
+        $api->get('like/{event_id}', [
+            'as'    => 'api-like',
+            'uses'  => 'App\Api\V1\Controllers\ClientController@likeEvent'
+        ]);
+
+        $api->get('unlike/{event_id}', [
+            'as'    => 'api-unlike',
+            'uses'  => 'App\Api\V1\Controllers\ClientController@unlikeEvent'
+        ]);
+
+        $api->get('followings/events', [
+            'as'    => 'api-followingsEvents',
+            'uses'  => 'App\Api\V1\Controllers\ClientController@getFollowingsEvents'
+        ]);
+
+        $api->get('favorites/events', [
+            'as'    => 'api-favoritesEvents',
+            'uses'  => 'App\Api\V1\Controllers\ClientController@getFavoritesCategoriesEvents'
+        ]);
+
+        $api->get('followings', [
+            'as'    => 'api-followings',
+            'uses'  => 'App\Api\V1\Controllers\ClientController@followings'
+        ]);
+
+        $api->get('favorites', [
+            'as'    => 'api-favorites',
+            'uses'  => 'App\Api\V1\Controllers\ClientController@favorites'
+        ]);
+
+        $api->get('likes', [
+            'as'    => 'api-client-likes',
+            'uses'  => 'App\Api\V1\Controllers\ClientController@likes'
+        ]);
+
+    });
+
+    $api->get('likes/{event_id}', [
+        'as'    => 'api-likes',
+        'uses'  => 'App\Api\V1\Controllers\ClientController@eventLikes',
+    ]);
+
+    $api->get('fans/{category_id}', [
+        'as'    => 'api-fans',
+        'uses'  => 'App\Api\V1\Controllers\ClientController@categoryFans'
+    ]);
+
+    $api->get('/followers/{organiser_id}', [
+        'as'    => 'api-followers',
+        'uses'  => 'App\Api\V1\Controllers\ClientController@organiserFollowers'
+    ]);
+
 });
+
+
+
+
+
+
+
+

@@ -86,10 +86,27 @@
 							All
 						</a>
 					</li>
+
+                    @if(Auth::guard('client')->user())
+                    <li>
+                        <a class="events-filter" data-cat-route="{{ route("followingsEvents") }}" id="events-followings" role="tab"  data-toggle="tab">
+                            <i class="material-icons">star</i>
+                            My Organizers
+                        </a>
+                    </li>
+                    <li>
+                        <a class="events-filter" data-cat-route="{{ route("favoritesEvents") }}" id="events-favorites" role="tab"  data-toggle="tab">
+                            <i class="material-icons">favorite</i>
+                            My Favorites
+                        </a>
+                    </li>
+                    @endif
+
+
 					<li>
 						<a class="events-filter" data-cat-route="{{ route("home") . '/events/around/' }}" id="events-around" role="tab" data-toggle="tab">
 							<i class="material-icons">person_pin_circle</i>
-							Around You
+							Around
 						</a>
 					</li>
 					<li>

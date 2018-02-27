@@ -100,8 +100,6 @@ $.ajax(settings).done(function (response) {
 
 ```json
 {
-    "exception": null,
-    "original": {},
     "headers": {}
 }
 ```
@@ -327,7 +325,31 @@ $.ajax(settings).done(function (response) {
 > Example response:
 
 ```json
-null
+{
+    "exception": null,
+    "original": {
+        "status": "success",
+        "data": {
+            "id": 1,
+            "first_name": "Mostafa",
+            "last_name": "Attiaaa",
+            "email": "mostafa.elperrawy@gmail.com",
+            "gender": "male",
+            "dob": "1990-04-01",
+            "phone": "38102062",
+            "address": "road 843, block 208, building 1591, flat 9",
+            "image_path": {
+                "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/user_content\/original\/img_22ec45d82445cbafe82056e9bc4dd052.jpg",
+                "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/user_content\/60*60\/img_22ec45d82445cbafe82056e9bc4dd052.jpg",
+                "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/user_content\/120*120\/img_22ec45d82445cbafe82056e9bc4dd052.jpg",
+                "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/user_content\/240*240\/img_22ec45d82445cbafe82056e9bc4dd052.jpg"
+            },
+            "is_email_confirmed": 1
+        },
+        "message": null
+    },
+    "headers": {}
+}
 ```
 
 ### HTTP Request
@@ -556,32 +578,7 @@ $.ajax(settings).done(function (response) {
 > Example response:
 
 ```json
-{
-    "exception": null,
-    "original": {
-        "status": "success",
-        "data": [
-            {
-                "id": 7,
-                "event_id": 1,
-                "client_id": 43,
-                "content": "the concert was awesome",
-                "created_at": "2017-05-11 15:48:34",
-                "updated_at": "2017-05-11 15:48:34"
-            },
-            {
-                "id": 8,
-                "event_id": 1,
-                "client_id": 32,
-                "content": "not my comment",
-                "created_at": "2017-05-14 10:08:15",
-                "updated_at": "2017-05-14 10:08:15"
-            }
-        ],
-        "message": null
-    },
-    "headers": {}
-}
+null
 ```
 
 ### HTTP Request
@@ -737,544 +734,1045 @@ $.ajax(settings).done(function (response) {
 ```json
 {
     "exception": null,
-    "original": [
-        {
-            "id": 3,
-            "title": "Batelco Event",
-            "location": null,
-            "bg_type": "image",
-            "bg_color": "#B23333",
-            "bg_image_path": "assets\/images\/public\/EventPage\/backgrounds\/5.jpg",
-            "description": "batelco desc",
-            "start_date": "2016-11-09 15:51:00",
-            "end_date": "2016-11-11 15:51:00",
-            "on_sale_date": null,
-            "account_id": 11,
-            "user_id": 12,
-            "currency_id": 2,
-            "sales_volume": "0.00",
-            "organiser_fees_volume": "0.00",
-            "organiser_fee_fixed": "0.00",
-            "organiser_fee_percentage": "0.000",
-            "organiser_id": 4,
-            "venue_name": "Batelco Building",
-            "venue_name_full": "Batelco Building, Manama, Bahrain",
-            "location_address": "Batelco Building, Manama 304, Bahrain",
-            "location_address_line_1": "",
-            "location_address_line_2": "Manama",
-            "location_country": "Bahrain",
-            "location_country_code": "BH",
-            "location_state": "Capital Governorate",
-            "location_post_code": "304",
-            "location_street_number": "",
-            "location_lat": "26.2347067",
-            "location_long": "50.576700399999936",
-            "location_google_place_id": "ChIJXwHr8V-vST4RmrNgXBdv-XY",
-            "pre_order_display_message": null,
-            "post_order_display_message": null,
-            "social_share_text": null,
-            "social_show_facebook": 1,
-            "social_show_linkedin": 1,
-            "social_show_twitter": 1,
-            "social_show_email": 1,
-            "social_show_googleplus": 1,
-            "location_is_manual": 0,
-            "is_live": 1,
-            "created_at": "2016-11-06 12:52:00",
-            "updated_at": "2016-11-07 11:40:48",
-            "deleted_at": null,
-            "barcode_type": "QRCODE",
-            "ticket_border_color": "#000000",
-            "ticket_bg_color": "#FFFFFF",
-            "ticket_text_color": "#000000",
-            "ticket_sub_text_color": "#999999",
-            "social_show_whatsapp": 1,
-            "questions_collection_type": "buyer",
-            "checkout_timeout_after": 8,
-            "is_1d_barcode_enabled": 0,
-            "enable_offline_payments": 0,
-            "offline_payment_instructions": null,
-            "category_id": null,
-            "is_activity": false,
-            "activity_start_date": null,
-            "activity_end_date": null,
-            "activity_start_time": null,
-            "activity_end_time": null,
-            "is_show": 0,
-            "director": null,
-            "cast": null,
-            "duration": null
-        },
-        {
-            "id": 4,
-            "title": "Batelco first event",
-            "location": null,
-            "bg_type": "image",
-            "bg_color": "#B23333",
-            "bg_image_path": "assets\/images\/public\/EventPage\/backgrounds\/5.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            "start_date": "2016-11-09 11:44:00",
-            "end_date": "2016-11-13 11:44:00",
-            "on_sale_date": null,
-            "account_id": 11,
-            "user_id": 13,
-            "currency_id": 2,
-            "sales_volume": "0.00",
-            "organiser_fees_volume": "0.00",
-            "organiser_fee_fixed": "0.00",
-            "organiser_fee_percentage": "0.000",
-            "organiser_id": 5,
-            "venue_name": "F1 Night Club",
-            "venue_name_full": "F1 Night Club, Manama, Bahrain",
-            "location_address": "Manama, Bahrain",
-            "location_address_line_1": "",
-            "location_address_line_2": "Manama",
-            "location_country": "Bahrain",
-            "location_country_code": "BH",
-            "location_state": "Capital Governorate",
-            "location_post_code": "",
-            "location_street_number": "",
-            "location_lat": "26.2344744",
-            "location_long": "50.59595030000003",
-            "location_google_place_id": "ChIJ3TAkKVOvST4RpwN-DtOt0no",
-            "pre_order_display_message": null,
-            "post_order_display_message": null,
-            "social_share_text": null,
-            "social_show_facebook": 1,
-            "social_show_linkedin": 1,
-            "social_show_twitter": 1,
-            "social_show_email": 1,
-            "social_show_googleplus": 1,
-            "location_is_manual": 0,
-            "is_live": 1,
-            "created_at": "2016-11-08 08:46:21",
-            "updated_at": "2016-11-08 11:03:33",
-            "deleted_at": null,
-            "barcode_type": "QRCODE",
-            "ticket_border_color": "#000000",
-            "ticket_bg_color": "#FFFFFF",
-            "ticket_text_color": "#000000",
-            "ticket_sub_text_color": "#999999",
-            "social_show_whatsapp": 1,
-            "questions_collection_type": "buyer",
-            "checkout_timeout_after": 8,
-            "is_1d_barcode_enabled": 0,
-            "enable_offline_payments": 0,
-            "offline_payment_instructions": null,
-            "category_id": null,
-            "is_activity": false,
-            "activity_start_date": null,
-            "activity_end_date": null,
-            "activity_start_time": null,
-            "activity_end_time": null,
-            "is_show": 0,
-            "director": null,
-            "cast": null,
-            "duration": null
-        },
-        {
-            "id": 5,
-            "title": "Craig David Concert",
-            "location": null,
-            "bg_type": "image",
-            "bg_color": "#B23333",
-            "bg_image_path": "assets\/images\/public\/EventPage\/backgrounds\/5.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            "start_date": "2016-11-10 14:56:00",
-            "end_date": "2016-11-11 14:56:00",
-            "on_sale_date": null,
-            "account_id": 11,
-            "user_id": 12,
-            "currency_id": 1,
-            "sales_volume": "0.00",
-            "organiser_fees_volume": "0.00",
-            "organiser_fee_fixed": "0.00",
-            "organiser_fee_percentage": "0.000",
-            "organiser_id": 4,
-            "venue_name": "Bahrain City Centre Mall",
-            "venue_name_full": "Bahrain City Centre Mall, Isa Town, Bahrain",
-            "location_address": "Building 2758، Road 4650, Sh. Khalifa Highway، Manama، Bahrain",
-            "location_address_line_1": "Road 4650, Sh. Khalifa Highway",
-            "location_address_line_2": "Manama",
-            "location_country": "Bahrain",
-            "location_country_code": "BH",
-            "location_state": "محافظة العاصمة",
-            "location_post_code": "",
-            "location_street_number": "",
-            "location_lat": "26.2328708",
-            "location_long": "50.5535989",
-            "location_google_place_id": "ChIJ6VRVVTGvST4R39uYys8Pn_U",
-            "pre_order_display_message": null,
-            "post_order_display_message": null,
-            "social_share_text": null,
-            "social_show_facebook": 1,
-            "social_show_linkedin": 1,
-            "social_show_twitter": 1,
-            "social_show_email": 1,
-            "social_show_googleplus": 1,
-            "location_is_manual": 0,
-            "is_live": 1,
-            "created_at": "2016-11-09 11:57:24",
-            "updated_at": "2016-11-15 12:38:06",
-            "deleted_at": null,
-            "barcode_type": "QRCODE",
-            "ticket_border_color": "#000000",
-            "ticket_bg_color": "#FFFFFF",
-            "ticket_text_color": "#000000",
-            "ticket_sub_text_color": "#999999",
-            "social_show_whatsapp": 1,
-            "questions_collection_type": "buyer",
-            "checkout_timeout_after": 8,
-            "is_1d_barcode_enabled": 0,
-            "enable_offline_payments": 0,
-            "offline_payment_instructions": null,
-            "category_id": 3,
-            "is_activity": false,
-            "activity_start_date": null,
-            "activity_end_date": null,
-            "activity_start_time": null,
-            "activity_end_time": null,
-            "is_show": 0,
-            "director": null,
-            "cast": null,
-            "duration": null
-        },
-        {
-            "id": 6,
-            "title": "Sting Live Concert ",
-            "location": null,
-            "bg_type": "image",
-            "bg_color": "#B23333",
-            "bg_image_path": "assets\/images\/public\/EventPage\/backgrounds\/11.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            "start_date": "2017-05-26 07:01:00",
-            "end_date": "2017-05-26 08:01:00",
-            "on_sale_date": null,
-            "account_id": 11,
-            "user_id": 12,
-            "currency_id": 1,
-            "sales_volume": "0.00",
-            "organiser_fees_volume": "0.00",
-            "organiser_fee_fixed": "0.00",
-            "organiser_fee_percentage": "0.000",
-            "organiser_id": 4,
-            "venue_name": "Dubai Marina",
-            "venue_name_full": "Dubai Marina - Dubai - United Arab Emirates",
-            "location_address": "Dubai Marina - Dubai - United Arab Emirates",
-            "location_address_line_1": "",
-            "location_address_line_2": "Dubai",
-            "location_country": "United Arab Emirates",
-            "location_country_code": "AE",
-            "location_state": "Dubai",
-            "location_post_code": "",
-            "location_street_number": "",
-            "location_lat": "25.0805422",
-            "location_long": "55.14034259999994",
-            "location_google_place_id": "ChIJ4ybBAlRrXz4RfG3EVWYeUbk",
-            "pre_order_display_message": "We can't wait to see you!",
-            "post_order_display_message": "Welcome to the party!",
-            "social_share_text": null,
-            "social_show_facebook": 1,
-            "social_show_linkedin": 1,
-            "social_show_twitter": 1,
-            "social_show_email": 1,
-            "social_show_googleplus": 1,
-            "location_is_manual": 0,
-            "is_live": 1,
-            "created_at": "2016-11-15 12:44:05",
-            "updated_at": "2017-02-13 15:03:09",
-            "deleted_at": null,
-            "barcode_type": "QRCODE",
-            "ticket_border_color": "#bd2020",
-            "ticket_bg_color": "#256b33",
-            "ticket_text_color": "#000000",
-            "ticket_sub_text_color": "#999999",
-            "social_show_whatsapp": 1,
-            "questions_collection_type": "buyer",
-            "checkout_timeout_after": 8,
-            "is_1d_barcode_enabled": 0,
-            "enable_offline_payments": 1,
-            "offline_payment_instructions": "1- Call me { 1239875 }\n2- Meet me at { Location }",
-            "category_id": 3,
-            "is_activity": false,
-            "activity_start_date": null,
-            "activity_end_date": null,
-            "activity_start_time": null,
-            "activity_end_time": null,
-            "is_show": 0,
-            "director": null,
-            "cast": null,
-            "duration": null
-        },
-        {
-            "id": 14,
-            "title": "Debenhams Festival",
-            "location": null,
-            "bg_type": "image",
-            "bg_color": "#B23333",
-            "bg_image_path": "assets\/images\/public\/EventPage\/backgrounds\/5.jpg",
-            "description": "> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.\n\nDebenhams I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure .\n\n1. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n2. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n3. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n4. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n\n* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.\n* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.\n* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.\n* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.\n\n",
-            "start_date": "2016-12-10 00:00:00",
-            "end_date": "2017-01-10 23:59:00",
-            "on_sale_date": null,
-            "account_id": 11,
-            "user_id": 12,
-            "currency_id": 1,
-            "sales_volume": "0.00",
-            "organiser_fees_volume": "0.00",
-            "organiser_fee_fixed": "0.00",
-            "organiser_fee_percentage": "0.000",
-            "organiser_id": 4,
-            "venue_name": "Bahrain City Centre Mall",
-            "venue_name_full": "Bahrain City Centre Mall, Manama, Bahrain",
-            "location_address": "Building 2758، Road 4650, Sh. Khalifa Highway، المنامة، Bahrain",
-            "location_address_line_1": "Road 4650, Sh. Khalifa Highway",
-            "location_address_line_2": "المنامة",
-            "location_country": "Bahrain",
-            "location_country_code": "BH",
-            "location_state": "محافظة العاصمة",
-            "location_post_code": "",
-            "location_street_number": "",
-            "location_lat": "26.2328708",
-            "location_long": "50.5535989",
-            "location_google_place_id": "ChIJ6VRVVTGvST4R39uYys8Pn_U",
-            "pre_order_display_message": null,
-            "post_order_display_message": null,
-            "social_share_text": null,
-            "social_show_facebook": 1,
-            "social_show_linkedin": 1,
-            "social_show_twitter": 1,
-            "social_show_email": 1,
-            "social_show_googleplus": 1,
-            "location_is_manual": 0,
-            "is_live": 1,
-            "created_at": "2016-12-04 12:26:50",
-            "updated_at": "2016-12-26 03:54:05",
-            "deleted_at": null,
-            "barcode_type": "QRCODE",
-            "ticket_border_color": "#000000",
-            "ticket_bg_color": "#FFFFFF",
-            "ticket_text_color": "#000000",
-            "ticket_sub_text_color": "#999999",
-            "social_show_whatsapp": 1,
-            "questions_collection_type": "buyer",
-            "checkout_timeout_after": 8,
-            "is_1d_barcode_enabled": 0,
-            "enable_offline_payments": 0,
-            "offline_payment_instructions": null,
-            "category_id": 2,
-            "is_activity": true,
-            "activity_start_date": null,
-            "activity_end_date": null,
-            "activity_start_time": "03:00:00",
-            "activity_end_time": "09:00:00",
-            "is_show": 0,
-            "director": null,
-            "cast": null,
-            "duration": null
-        },
-        {
-            "id": 19,
-            "title": "Activty 7",
-            "location": null,
-            "bg_type": "image",
-            "bg_color": "#B23333",
-            "bg_image_path": "assets\/images\/public\/EventPage\/backgrounds\/5.jpg",
-            "description": "desc",
-            "start_date": "2016-12-11 00:00:00",
-            "end_date": "2017-01-01 23:59:00",
-            "on_sale_date": null,
-            "account_id": 11,
-            "user_id": 12,
-            "currency_id": 1,
-            "sales_volume": "0.00",
-            "organiser_fees_volume": "0.00",
-            "organiser_fee_fixed": "0.00",
-            "organiser_fee_percentage": "0.000",
-            "organiser_id": 4,
-            "venue_name": "Batelco Building",
-            "venue_name_full": "Batelco Building, Manama, Bahrain",
-            "location_address": "Batelco Building, Manama 304, Bahrain",
-            "location_address_line_1": "",
-            "location_address_line_2": "Manama",
-            "location_country": "Bahrain",
-            "location_country_code": "BH",
-            "location_state": "Capital Governorate",
-            "location_post_code": "304",
-            "location_street_number": "",
-            "location_lat": "26.2347067",
-            "location_long": "50.576700399999936",
-            "location_google_place_id": "ChIJXwHr8V-vST4RmrNgXBdv-XY",
-            "pre_order_display_message": null,
-            "post_order_display_message": null,
-            "social_share_text": null,
-            "social_show_facebook": 1,
-            "social_show_linkedin": 1,
-            "social_show_twitter": 1,
-            "social_show_email": 1,
-            "social_show_googleplus": 1,
-            "location_is_manual": 0,
-            "is_live": 1,
-            "created_at": "2016-12-12 09:25:20",
-            "updated_at": "2016-12-12 10:15:18",
-            "deleted_at": null,
-            "barcode_type": "QRCODE",
-            "ticket_border_color": "#000000",
-            "ticket_bg_color": "#FFFFFF",
-            "ticket_text_color": "#000000",
-            "ticket_sub_text_color": "#999999",
-            "social_show_whatsapp": 1,
-            "questions_collection_type": "buyer",
-            "checkout_timeout_after": 8,
-            "is_1d_barcode_enabled": 0,
-            "enable_offline_payments": 0,
-            "offline_payment_instructions": null,
-            "category_id": 3,
-            "is_activity": true,
-            "activity_start_date": null,
-            "activity_end_date": null,
-            "activity_start_time": "12:38:00",
-            "activity_end_time": "13:38:00",
-            "is_show": 0,
-            "director": null,
-            "cast": null,
-            "duration": null
-        },
-        {
-            "id": 20,
-            "title": "Activity 8",
-            "location": null,
-            "bg_type": "image",
-            "bg_color": "#B23333",
-            "bg_image_path": "assets\/images\/public\/EventPage\/backgrounds\/5.jpg",
-            "description": "desc",
-            "start_date": "2016-12-12 00:00:00",
-            "end_date": "2017-02-12 23:59:00",
-            "on_sale_date": null,
-            "account_id": 11,
-            "user_id": 12,
-            "currency_id": 1,
-            "sales_volume": "0.00",
-            "organiser_fees_volume": "0.00",
-            "organiser_fee_fixed": "0.00",
-            "organiser_fee_percentage": "0.000",
-            "organiser_id": 4,
-            "venue_name": "Bahrain City Centre Mall",
-            "venue_name_full": "Bahrain City Centre Mall, Manama, Bahrain",
-            "location_address": "Building 2758، Road 4650, Sh. Khalifa Highway، المنامة، Bahrain",
-            "location_address_line_1": "Road 4650, Sh. Khalifa Highway",
-            "location_address_line_2": "المنامة",
-            "location_country": "Bahrain",
-            "location_country_code": "BH",
-            "location_state": "محافظة العاصمة",
-            "location_post_code": "",
-            "location_street_number": "",
-            "location_lat": "26.2328708",
-            "location_long": "50.5535989",
-            "location_google_place_id": "ChIJ6VRVVTGvST4R39uYys8Pn_U",
-            "pre_order_display_message": null,
-            "post_order_display_message": null,
-            "social_share_text": null,
-            "social_show_facebook": 1,
-            "social_show_linkedin": 1,
-            "social_show_twitter": 1,
-            "social_show_email": 1,
-            "social_show_googleplus": 1,
-            "location_is_manual": 0,
-            "is_live": 1,
-            "created_at": "2016-12-12 10:03:52",
-            "updated_at": "2016-12-12 10:11:54",
-            "deleted_at": null,
-            "barcode_type": "QRCODE",
-            "ticket_border_color": "#000000",
-            "ticket_bg_color": "#FFFFFF",
-            "ticket_text_color": "#000000",
-            "ticket_sub_text_color": "#999999",
-            "social_show_whatsapp": 1,
-            "questions_collection_type": "buyer",
-            "checkout_timeout_after": 8,
-            "is_1d_barcode_enabled": 0,
-            "enable_offline_payments": 0,
-            "offline_payment_instructions": null,
-            "category_id": 4,
-            "is_activity": true,
-            "activity_start_date": null,
-            "activity_end_date": null,
-            "activity_start_time": "13:03:00",
-            "activity_end_time": "14:03:00",
-            "is_show": 0,
-            "director": null,
-            "cast": null,
-            "duration": null
-        },
-        {
-            "id": 22,
-            "title": "Bryan Adams Concert",
-            "location": null,
-            "bg_type": "image",
-            "bg_color": "#B23333",
-            "bg_image_path": "assets\/images\/public\/EventPage\/backgrounds\/5.jpg",
-            "description": "> Bryan Adams\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            "start_date": "2017-04-01 13:42:00",
-            "end_date": "2017-04-01 14:42:00",
-            "on_sale_date": null,
-            "account_id": 11,
-            "user_id": 12,
-            "currency_id": 1,
-            "sales_volume": "0.00",
-            "organiser_fees_volume": "0.00",
-            "organiser_fee_fixed": "0.00",
-            "organiser_fee_percentage": "0.000",
-            "organiser_id": 4,
-            "venue_name": "Coral Bay",
-            "venue_name_full": "Coral Bay, شارع الفاتح, Manama, Capital Governorate, Bahrain",
-            "location_address": "Block 322, Road 2407, Building 491, Road 2407 شارع الفاتح، Manama 317, Bahrain",
-            "location_address_line_1": "شارع الفاتح",
-            "location_address_line_2": "Manama",
-            "location_country": "Bahrain",
-            "location_country_code": "BH",
-            "location_state": "Capital Governorate",
-            "location_post_code": "317",
-            "location_street_number": "Road 2407",
-            "location_lat": "26.229316",
-            "location_long": "50.59996899999999",
-            "location_google_place_id": "ChIJwT4HlrOoST4RzAPlh1UcMY8",
-            "pre_order_display_message": null,
-            "post_order_display_message": null,
-            "social_share_text": null,
-            "social_show_facebook": 1,
-            "social_show_linkedin": 1,
-            "social_show_twitter": 1,
-            "social_show_email": 1,
-            "social_show_googleplus": 1,
-            "location_is_manual": 0,
-            "is_live": 1,
-            "created_at": "2016-12-25 10:47:07",
-            "updated_at": "2016-12-26 03:56:49",
-            "deleted_at": null,
-            "barcode_type": "QRCODE",
-            "ticket_border_color": "#000000",
-            "ticket_bg_color": "#FFFFFF",
-            "ticket_text_color": "#000000",
-            "ticket_sub_text_color": "#999999",
-            "social_show_whatsapp": 1,
-            "questions_collection_type": "buyer",
-            "checkout_timeout_after": 8,
-            "is_1d_barcode_enabled": 0,
-            "enable_offline_payments": 0,
-            "offline_payment_instructions": null,
-            "category_id": 3,
-            "is_activity": false,
-            "activity_start_date": null,
-            "activity_end_date": null,
-            "activity_start_time": null,
-            "activity_end_time": null,
-            "is_show": 0,
-            "director": null,
-            "cast": null,
-            "duration": null
-        }
-    ],
+    "original": {
+        "status": "success",
+        "data": [
+            {
+                "id": 1,
+                "title": "first event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_0f94924227fdae9f2c47d05e27077369.jpg"
+                },
+                "start_date": {
+                    "date": "2018-05-22 00:02:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-06-22 00:02:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Egyptian Museum Cairo",
+                "venue_name_full": "Egyptian Museum, Meret Basha, Ismailia, Qasr an Nile, Egypt",
+                "location_address": "15 Meret Basha, Ismailia, Qasr an Nile, Cairo Governorate, Egypt",
+                "location_address_line_1": "Meret Basha",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Cairo Governorate",
+                "location_lat": "30.0478468",
+                "location_long": "31.233649300000025",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/1\/first-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 1,
+                    "name": "Art & Theatre",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/art.jpg",
+                    "events": 1,
+                    "fans_ids": []
+                },
+                "likers_ids": [
+                    2
+                ]
+            },
+            {
+                "id": 2,
+                "title": "second event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg"
+                },
+                "start_date": {
+                    "date": "2018-07-25 00:21:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-08-25 00:21:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Egyptian Media Production City - EMPC",
+                "venue_name_full": "Egyptian Media Production City - EMPC, Egypt",
+                "location_address": "Giza Governorate, Egypt",
+                "location_address_line_1": "",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Giza Governorate",
+                "location_lat": "29.96574120000001",
+                "location_long": "31.016253900000038",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/2\/second-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 3,
+                    "name": "Music & Entertainment",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg",
+                    "events": 3,
+                    "fans_ids": []
+                },
+                "likers_ids": [
+                    2
+                ]
+            },
+            {
+                "id": 3,
+                "title": "Third Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:33:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-06-22 00:33:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Egypt Pyramids Tours",
+                "venue_name_full": "Egypt Pyramids Tours, Oula, Giza, Egypt",
+                "location_address": "Ad Doqi, Giza, Oula, Giza, Giza Governorate 12411, Egypt",
+                "location_address_line_1": "",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Giza Governorate",
+                "location_lat": "30.01382300000001",
+                "location_long": "31.20957199999998",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/3\/third-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 2,
+                    "name": "Exhibitions",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/exhibition.jpg",
+                    "events": 2,
+                    "fans_ids": [
+                        2
+                    ]
+                },
+                "likers_ids": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "id": 4,
+                "title": "Fourth Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:34:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-07-22 00:34:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Abo Ali Restaurant",
+                "venue_name_full": "Abo Ali Restaurant, مجمع عبد المقصود - الاردنية، العاشر من رمضان، الشرقية، Egypt",
+                "location_address": "مجمع عبد المقصود - الاردنية، العاشر من رمضان، الشرقية، محافظة القاهرة‬، Egypt",
+                "location_address_line_1": "مجمع عبد المقصود - الاردنية",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "محافظة القاهرة‬",
+                "location_lat": "30.29376500000001",
+                "location_long": "31.745685999999978",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/4\/fourth-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 3,
+                    "name": "Music & Entertainment",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg",
+                    "events": 3,
+                    "fans_ids": []
+                },
+                "likers_ids": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "id": 5,
+                "title": "Fifth Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_716d9dcf34302161a891d4e983f076ba.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:38:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-06-22 00:38:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Alexandria Faculty of Medicine",
+                "venue_name_full": "Alexandria University, Al Mesallah Sharq, Qesm Al Attarin, Egypt",
+                "location_address": "Chamblion street, el azareeta, Al Mesallah Sharq, Qesm Al Attarin, Alexandria Governorate, Egypt",
+                "location_address_line_1": "",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Alexandria Governorate",
+                "location_lat": "31.2023016",
+                "location_long": "29.90580669999997",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/5\/fifth-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 5,
+                    "name": "Nightlife",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/nightlife.jpg",
+                    "events": 3,
+                    "fans_ids": [
+                        2,
+                        3
+                    ]
+                },
+                "likers_ids": [
+                    2
+                ]
+            },
+            {
+                "id": 6,
+                "title": "Sixth Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_dc335e1e6654016463b20afdab94ce25.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:39:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-05-22 00:39:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Bahrain International Exhibition & Convention Centre",
+                "venue_name_full": "Bahrain International Exhibition & Convention Centre, Avenue 28, Sanabis, Bahrain",
+                "location_address": "158 Avenue 28, Sanabis 11644, Bahrain",
+                "location_address_line_1": "Avenue 28",
+                "location_address_line_2": "Sanabis",
+                "location_country": "Bahrain",
+                "location_country_code": "BH",
+                "location_state": "Capital Governorate",
+                "location_lat": "26.229856",
+                "location_long": "50.54240400000003",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/6\/sixth-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 4,
+                    "name": "Networking & Social",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/social.jpg",
+                    "events": 2,
+                    "fans_ids": [
+                        1
+                    ]
+                },
+                "likers_ids": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "id": 7,
+                "title": "Seventh Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_4c03292ddc701554c04ee01267a58523.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:41:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-05-22 00:41:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Bahrain National Stadium",
+                "venue_name_full": "Bahrain National Stadium, شارع المحرق، Riffa, Bahrain",
+                "location_address": "East Riffa, Bahrain، شارع المحرق، Riffa, Bahrain",
+                "location_address_line_1": "شارع المحرق",
+                "location_address_line_2": "Riffa",
+                "location_country": "Bahrain",
+                "location_country_code": "BH",
+                "location_state": "Central Governorate",
+                "location_lat": "26.153794",
+                "location_long": "50.54364529999998",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/7\/seventh-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 5,
+                    "name": "Nightlife",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/nightlife.jpg",
+                    "events": 3,
+                    "fans_ids": [
+                        2,
+                        3
+                    ]
+                },
+                "likers_ids": [
+                    2
+                ]
+            },
+            {
+                "id": 8,
+                "title": "Eighth Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:54:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-05-22 00:54:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Stavolta",
+                "venue_name_full": "Stavolta, Maadi as Sarayat Al Gharbeyah, Al Maadi, Cairo, Egypt",
+                "location_address": "39 Road 231, Degla - Maadi, Maadi as Sarayat Al Gharbeyah, Al Maadi, Cairo Governorate, Egypt",
+                "location_address_line_1": "",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Cairo Governorate",
+                "location_lat": "29.962045",
+                "location_long": "31.276809999999955",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/8\/eighth-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 7,
+                    "name": "Sports",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/sports.jpg",
+                    "events": 4,
+                    "fans_ids": [
+                        1
+                    ]
+                },
+                "likers_ids": []
+            },
+            {
+                "id": 9,
+                "title": "Ninth Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg"
+                },
+                "start_date": {
+                    "date": "2018-06-22 00:55:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-06-23 00:55:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Cairo International Airport",
+                "venue_name_full": "Cairo International Airport, Sheraton Al Matar, Qism El-Nozha, Egypt",
+                "location_address": "Sheraton Al Matar, Qism El-Nozha, Cairo Governorate, Egypt",
+                "location_address_line_1": "",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Cairo Governorate",
+                "location_lat": "30.118977",
+                "location_long": "31.40692809999996",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/9\/ninth-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 6,
+                    "name": "Food & Dining",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/food.jpg",
+                    "events": 1,
+                    "fans_ids": []
+                },
+                "likers_ids": []
+            },
+            {
+                "id": 10,
+                "title": "Tenth Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg"
+                },
+                "start_date": {
+                    "date": "2018-05-22 00:56:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-05-23 00:56:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "National Museum of Egyptian Civilization",
+                "venue_name_full": "National Museum of Egyptian Civilization, طريق مصر القديمه، Ad Deyorah, Misr Al Qadimah, Cairo, Egypt",
+                "location_address": "طريق مصر القديمه، Ad Deyorah, Misr Al Qadimah, Cairo Governorate, Egypt",
+                "location_address_line_1": "طريق مصر القديمه",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Cairo Governorate",
+                "location_lat": "30.00748590000001",
+                "location_long": "31.24846189999994",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/10\/tenth-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 4,
+                    "name": "Networking & Social",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/social.jpg",
+                    "events": 2,
+                    "fans_ids": [
+                        1
+                    ]
+                },
+                "likers_ids": []
+            },
+            {
+                "id": 11,
+                "title": "Eleventh Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:58:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-05-22 00:58:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Stadium Metro station",
+                "venue_name_full": "Stadium Metro station, Khedr El-Touny, Ash Sharekat, Nasr City, Cairo, Egypt",
+                "location_address": "Khedr El-Touny, Ash Sharekat, Nasr City, Cairo Governorate, Egypt",
+                "location_address_line_1": "Khedr El-Touny",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Cairo Governorate",
+                "location_lat": "30.07339079999999",
+                "location_long": "31.317991500000062",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/11\/eleventh-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 2,
+                    "name": "Exhibitions",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/exhibition.jpg",
+                    "events": 2,
+                    "fans_ids": [
+                        2
+                    ]
+                },
+                "likers_ids": []
+            },
+            {
+                "id": 13,
+                "title": "Twelve Event ",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_c82865ac7d3a65876508712ab3760867.jpg"
+                },
+                "start_date": {
+                    "date": "2018-03-23 00:00:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-07-22 23:59:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Alexandria National Museum",
+                "venue_name_full": "Alexandria National Museum, El-Shaheed Galal El-Desouky, Bab Sharqi WA Wabour Al Meyah, Qesm Bab Sharqi, Egypt",
+                "location_address": "131 El-Shaheed Galal El-Desouky, Bab Sharqi WA Wabour Al Meyah, Qesm Bab Sharqi, Alexandria Governorate, Egypt",
+                "location_address_line_1": "El-Shaheed Galal El-Desouky",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Alexandria Governorate",
+                "location_lat": "31.2009548",
+                "location_long": "29.91325759999995",
+                "is_activity": true,
+                "event_url": "http:\/\/localhost\/e\/13\/twelve-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 3,
+                    "name": "Music & Entertainment",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg",
+                    "events": 3,
+                    "fans_ids": []
+                },
+                "likers_ids": []
+            },
+            {
+                "id": 14,
+                "title": "Karaoke Night",
+                "desc": "At vero eos et **accusamus** et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. *Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.* Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_25654870d258d269c8fb7bd97595f10e.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_25654870d258d269c8fb7bd97595f10e.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_25654870d258d269c8fb7bd97595f10e.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_25654870d258d269c8fb7bd97595f10e.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_25654870d258d269c8fb7bd97595f10e.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_25654870d258d269c8fb7bd97595f10e.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_25654870d258d269c8fb7bd97595f10e.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_25654870d258d269c8fb7bd97595f10e.jpg"
+                },
+                "start_date": {
+                    "date": "2018-06-26 03:44:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-06-26 04:44:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 2,
+                    "name": "Zomba",
+                    "events": 2,
+                    "followers_ids": [
+                        2
+                    ],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_82135f7e5a42ad07d8ce266179ad9861.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_82135f7e5a42ad07d8ce266179ad9861.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_82135f7e5a42ad07d8ce266179ad9861.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_82135f7e5a42ad07d8ce266179ad9861.jpg"
+                    }
+                },
+                "venue_name": "Cairo Opera House",
+                "venue_name_full": "Cairo Opera House, Opera Land، EL GEZIRAH، Zamalek, Egypt",
+                "location_address": "Opera Land، EL GEZIRAH، الزمالك، محافظة القاهرة‬، Egypt",
+                "location_address_line_1": "Opera Land",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "محافظة القاهرة‬",
+                "location_lat": "30.0424866",
+                "location_long": "31.224456799999984",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/14\/karaoke-night",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 7,
+                    "name": "Sports",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/sports.jpg",
+                    "events": 4,
+                    "fans_ids": [
+                        1
+                    ]
+                },
+                "likers_ids": []
+            },
+            {
+                "id": 15,
+                "title": "Zomba event",
+                "desc": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_fd7413cfc06baeae83362e499330a381.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_fd7413cfc06baeae83362e499330a381.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_fd7413cfc06baeae83362e499330a381.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_fd7413cfc06baeae83362e499330a381.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_fd7413cfc06baeae83362e499330a381.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_fd7413cfc06baeae83362e499330a381.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_fd7413cfc06baeae83362e499330a381.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_fd7413cfc06baeae83362e499330a381.jpg"
+                },
+                "start_date": {
+                    "date": "2018-03-20 03:53:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-03-20 05:53:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 2,
+                    "name": "Zomba",
+                    "events": 2,
+                    "followers_ids": [
+                        2
+                    ],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_82135f7e5a42ad07d8ce266179ad9861.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_82135f7e5a42ad07d8ce266179ad9861.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_82135f7e5a42ad07d8ce266179ad9861.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_82135f7e5a42ad07d8ce266179ad9861.jpg"
+                    }
+                },
+                "venue_name": "Cairo International Stadium",
+                "venue_name_full": "Cairo Stadium, Al Estad, Nasr City, Egypt",
+                "location_address": "Al Estad, Nasr City, Cairo Governorate, Egypt",
+                "location_address_line_1": "",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Cairo Governorate",
+                "location_lat": "30.0691131",
+                "location_long": "31.312257899999963",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/15\/zomba-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 5,
+                    "name": "Nightlife",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/nightlife.jpg",
+                    "events": 3,
+                    "fans_ids": [
+                        2,
+                        3
+                    ]
+                },
+                "likers_ids": []
+            },
+            {
+                "id": 16,
+                "title": "Romba ",
+                "desc": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_aebf3a850b36d9fa275579f374f1227f.jpeg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_aebf3a850b36d9fa275579f374f1227f.jpeg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_aebf3a850b36d9fa275579f374f1227f.jpeg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_aebf3a850b36d9fa275579f374f1227f.jpeg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_aebf3a850b36d9fa275579f374f1227f.jpeg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_aebf3a850b36d9fa275579f374f1227f.jpeg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_aebf3a850b36d9fa275579f374f1227f.jpeg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_aebf3a850b36d9fa275579f374f1227f.jpeg"
+                },
+                "start_date": {
+                    "date": "2018-06-26 06:54:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-06-26 08:54:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 3,
+                    "name": "Liverpool",
+                    "events": 2,
+                    "followers_ids": [
+                        2,
+                        1,
+                        3
+                    ],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_4d7b03e615f126a9366bf0d01e01adaa.png",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_4d7b03e615f126a9366bf0d01e01adaa.png",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_4d7b03e615f126a9366bf0d01e01adaa.png",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_4d7b03e615f126a9366bf0d01e01adaa.png"
+                    }
+                },
+                "venue_name": "Anfield",
+                "venue_name_full": "Anfield Stadium, Anfield Road, Liverpool, UK",
+                "location_address": "Anfield Rd, Liverpool L4 0TH, UK",
+                "location_address_line_1": "Anfield Road",
+                "location_address_line_2": "",
+                "location_country": "UnitedKingdom",
+                "location_country_code": "GB",
+                "location_state": "England",
+                "location_lat": "53.43082939999999",
+                "location_long": "-2.960829999999987",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/16\/romba",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 7,
+                    "name": "Sports",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/sports.jpg",
+                    "events": 4,
+                    "fans_ids": [
+                        1
+                    ]
+                },
+                "likers_ids": []
+            },
+            {
+                "id": 17,
+                "title": "Mo Salah",
+                "desc": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_8ee2f30120e9e77d54375702a49404e3.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_8ee2f30120e9e77d54375702a49404e3.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_8ee2f30120e9e77d54375702a49404e3.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_8ee2f30120e9e77d54375702a49404e3.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_8ee2f30120e9e77d54375702a49404e3.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_8ee2f30120e9e77d54375702a49404e3.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_8ee2f30120e9e77d54375702a49404e3.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_8ee2f30120e9e77d54375702a49404e3.jpg"
+                },
+                "start_date": {
+                    "date": "2018-06-26 06:57:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-06-26 07:57:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 3,
+                    "name": "Liverpool",
+                    "events": 2,
+                    "followers_ids": [
+                        2,
+                        1,
+                        3
+                    ],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_4d7b03e615f126a9366bf0d01e01adaa.png",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_4d7b03e615f126a9366bf0d01e01adaa.png",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_4d7b03e615f126a9366bf0d01e01adaa.png",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_4d7b03e615f126a9366bf0d01e01adaa.png"
+                    }
+                },
+                "venue_name": "Anfield",
+                "venue_name_full": "Anfield Stadium, Anfield Road, Liverpool, UK",
+                "location_address": "Anfield Rd, Liverpool L4 0TH, UK",
+                "location_address_line_1": "Anfield Road",
+                "location_address_line_2": "",
+                "location_country": "UnitedKingdom",
+                "location_country_code": "GB",
+                "location_state": "England",
+                "location_lat": "53.43082939999999",
+                "location_long": "-2.960829999999987",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/17\/mo-salah",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 7,
+                    "name": "Sports",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/sports.jpg",
+                    "events": 4,
+                    "fans_ids": [
+                        1
+                    ]
+                },
+                "likers_ids": []
+            }
+        ],
+        "message": null
+    },
     "headers": {}
 }
 ```
@@ -1322,71 +1820,71 @@ $.ajax(settings).done(function (response) {
 {
     "exception": null,
     "original": {
-        "id": 1,
-        "title": "Solar Expo",
-        "location": null,
-        "bg_type": "image",
-        "bg_color": "#B23333",
-        "bg_image_path": "assets\/images\/public\/EventPage\/backgrounds\/5.jpg",
-        "description": "just for testing",
-        "start_date": "2016-11-04 10:00:00",
-        "end_date": "2016-11-05 10:00:00",
-        "on_sale_date": null,
-        "account_id": 11,
-        "user_id": 12,
-        "currency_id": 2,
-        "sales_volume": "0.00",
-        "organiser_fees_volume": "0.00",
-        "organiser_fee_fixed": "0.00",
-        "organiser_fee_percentage": "0.000",
-        "organiser_id": 4,
-        "venue_name": "Rotana Hotel",
-        "venue_name_full": null,
-        "location_address": null,
-        "location_address_line_1": "404",
-        "location_address_line_2": "",
-        "location_country": null,
-        "location_country_code": null,
-        "location_state": "MANAMA",
-        "location_post_code": "361",
-        "location_street_number": null,
-        "location_lat": null,
-        "location_long": null,
-        "location_google_place_id": null,
-        "pre_order_display_message": null,
-        "post_order_display_message": null,
-        "social_share_text": null,
-        "social_show_facebook": 1,
-        "social_show_linkedin": 1,
-        "social_show_twitter": 1,
-        "social_show_email": 1,
-        "social_show_googleplus": 1,
-        "location_is_manual": 1,
-        "is_live": 0,
-        "created_at": "2016-11-03 11:53:09",
-        "updated_at": "2016-11-03 11:53:09",
-        "deleted_at": null,
-        "barcode_type": "QRCODE",
-        "ticket_border_color": "#000000",
-        "ticket_bg_color": "#FFFFFF",
-        "ticket_text_color": "#000000",
-        "ticket_sub_text_color": "#999999",
-        "social_show_whatsapp": 1,
-        "questions_collection_type": "buyer",
-        "checkout_timeout_after": 8,
-        "is_1d_barcode_enabled": 0,
-        "enable_offline_payments": 0,
-        "offline_payment_instructions": null,
-        "category_id": null,
-        "is_activity": false,
-        "activity_start_date": null,
-        "activity_end_date": null,
-        "activity_start_time": null,
-        "activity_end_time": null,
-        "is_show": 0,
-        "director": null,
-        "cast": null,
-        "duration": null
+        "status": "success",
+        "data": {
+            "id": 1,
+            "title": "first event",
+            "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+            "image_path": {
+                "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_0f94924227fdae9f2c47d05e27077369.jpg"
+            },
+            "start_date": {
+                "date": "2018-05-22 00:02:00",
+                "timezone_type": 3,
+                "timezone": "UTC"
+            },
+            "end_date": {
+                "date": "2018-06-22 00:02:00",
+                "timezone_type": 3,
+                "timezone": "UTC"
+            },
+            "organiser": {
+                "id": 1,
+                "name": "Culture-Authority@Bahrain",
+                "events": 12,
+                "followers_ids": [],
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                    "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                    "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                    "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                }
+            },
+            "venue_name": "Egyptian Museum Cairo",
+            "venue_name_full": "Egyptian Museum, Meret Basha, Ismailia, Qasr an Nile, Egypt",
+            "location_address": "15 Meret Basha, Ismailia, Qasr an Nile, Cairo Governorate, Egypt",
+            "location_address_line_1": "Meret Basha",
+            "location_address_line_2": "",
+            "location_country": "Egypt",
+            "location_country_code": "EG",
+            "location_state": "Cairo Governorate",
+            "location_lat": "30.0478468",
+            "location_long": "31.233649300000025",
+            "is_activity": false,
+            "event_url": "http:\/\/localhost\/e\/1\/first-event",
+            "social_show_facebook": 1,
+            "social_show_twitter": 1,
+            "social_show_googleplus": 1,
+            "social_show_linkedin": 1,
+            "category": {
+                "id": 1,
+                "name": "Art & Theatre",
+                "image": "http:\/\/localhost:8000\/front\/img\/categories\/art.jpg",
+                "events": 1,
+                "fans_ids": []
+            },
+            "likers_ids": [
+                2
+            ]
+        },
+        "message": null
     },
     "headers": {}
 }
@@ -1434,7 +1932,11 @@ $.ajax(settings).done(function (response) {
 ```json
 {
     "exception": null,
-    "original": [],
+    "original": {
+        "status": "success",
+        "data": [],
+        "message": null
+    },
     "headers": {}
 }
 ```
@@ -1477,43 +1979,54 @@ $.ajax(settings).done(function (response) {
 ```json
 {
     "exception": null,
-    "original": [
-        {
-            "id": 1,
-            "name": "Art & Theatre",
-            "description": ""
-        },
-        {
-            "id": 2,
-            "name": "Exhibitions",
-            "description": ""
-        },
-        {
-            "id": 3,
-            "name": "Music & Entertainment",
-            "description": ""
-        },
-        {
-            "id": 4,
-            "name": "Networking & Social",
-            "description": ""
-        },
-        {
-            "id": 5,
-            "name": "Nightlife",
-            "description": ""
-        },
-        {
-            "id": 6,
-            "name": "Food & Dining",
-            "description": ""
-        },
-        {
-            "id": 7,
-            "name": "Sport",
-            "description": ""
-        }
-    ],
+    "original": {
+        "status": "success",
+        "data": [
+            {
+                "id": 1,
+                "name": "Art & Theatre",
+                "description": "",
+                "img_path": "http:\/\/localhost:8000\/front\/img\/categories\/art.jpg"
+            },
+            {
+                "id": 2,
+                "name": "Exhibitions",
+                "description": "",
+                "img_path": "http:\/\/localhost:8000\/front\/img\/categories\/exhibition.jpg"
+            },
+            {
+                "id": 3,
+                "name": "Music & Entertainment",
+                "description": "",
+                "img_path": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg"
+            },
+            {
+                "id": 4,
+                "name": "Networking & Social",
+                "description": "",
+                "img_path": "http:\/\/localhost:8000\/front\/img\/categories\/social.jpg"
+            },
+            {
+                "id": 5,
+                "name": "Nightlife",
+                "description": "",
+                "img_path": "http:\/\/localhost:8000\/front\/img\/categories\/nightlife.jpg"
+            },
+            {
+                "id": 6,
+                "name": "Food & Dining",
+                "description": "",
+                "img_path": "http:\/\/localhost:8000\/front\/img\/categories\/food.jpg"
+            },
+            {
+                "id": 7,
+                "name": "Sports",
+                "description": "",
+                "img_path": "http:\/\/localhost:8000\/front\/img\/categories\/sports.jpg"
+            }
+        ],
+        "message": null
+    },
     "headers": {}
 }
 ```
@@ -1560,7 +2073,75 @@ $.ajax(settings).done(function (response) {
 ```json
 {
     "exception": null,
-    "original": [],
+    "original": {
+        "status": "success",
+        "data": [
+            {
+                "id": 1,
+                "title": "first event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_0f94924227fdae9f2c47d05e27077369.jpg"
+                },
+                "start_date": {
+                    "date": "2018-05-22 00:02:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-06-22 00:02:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Egyptian Museum Cairo",
+                "venue_name_full": "Egyptian Museum, Meret Basha, Ismailia, Qasr an Nile, Egypt",
+                "location_address": "15 Meret Basha, Ismailia, Qasr an Nile, Cairo Governorate, Egypt",
+                "location_address_line_1": "Meret Basha",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Cairo Governorate",
+                "location_lat": "30.0478468",
+                "location_long": "31.233649300000025",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/1\/first-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 1,
+                    "name": "Art & Theatre",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/art.jpg",
+                    "events": 1,
+                    "fans_ids": []
+                },
+                "likers_ids": [
+                    2
+                ]
+            }
+        ],
+        "message": null
+    },
     "headers": {}
 }
 ```
@@ -1572,6 +2153,826 @@ $.ajax(settings).done(function (response) {
 
 
 <!-- END_5d38a97a16c14f50e92fe67fedb6392f -->
+<!-- START_ff11ed1613c3216917e968b8fc30ae36 -->
+## Get Events by organiser id
+
+<strong>Parameters:</strong>
+<br>
+organiser_id  : required|integer <br>
+
+> Example request:
+
+```bash
+curl "http://localhost//api/organiser/{organiser_id}/events" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/organiser/{organiser_id}/events",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "exception": null,
+    "original": {
+        "status": "success",
+        "data": [
+            {
+                "id": 1,
+                "title": "first event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_0f94924227fdae9f2c47d05e27077369.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_0f94924227fdae9f2c47d05e27077369.jpg"
+                },
+                "start_date": {
+                    "date": "2018-05-22 00:02:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-06-22 00:02:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Egyptian Museum Cairo",
+                "venue_name_full": "Egyptian Museum, Meret Basha, Ismailia, Qasr an Nile, Egypt",
+                "location_address": "15 Meret Basha, Ismailia, Qasr an Nile, Cairo Governorate, Egypt",
+                "location_address_line_1": "Meret Basha",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Cairo Governorate",
+                "location_lat": "30.0478468",
+                "location_long": "31.233649300000025",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/1\/first-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 1,
+                    "name": "Art & Theatre",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/art.jpg",
+                    "events": 1,
+                    "fans_ids": []
+                },
+                "likers_ids": [
+                    2
+                ]
+            },
+            {
+                "id": 2,
+                "title": "second event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_9db7d7a1d65de18478cc760bf95c1c52.jpg"
+                },
+                "start_date": {
+                    "date": "2018-07-25 00:21:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-08-25 00:21:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Egyptian Media Production City - EMPC",
+                "venue_name_full": "Egyptian Media Production City - EMPC, Egypt",
+                "location_address": "Giza Governorate, Egypt",
+                "location_address_line_1": "",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Giza Governorate",
+                "location_lat": "29.96574120000001",
+                "location_long": "31.016253900000038",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/2\/second-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 3,
+                    "name": "Music & Entertainment",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg",
+                    "events": 3,
+                    "fans_ids": []
+                },
+                "likers_ids": [
+                    2
+                ]
+            },
+            {
+                "id": 3,
+                "title": "Third Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_dc764cf0bd172f77ad2abb7ec8f49f22.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:33:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-06-22 00:33:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Egypt Pyramids Tours",
+                "venue_name_full": "Egypt Pyramids Tours, Oula, Giza, Egypt",
+                "location_address": "Ad Doqi, Giza, Oula, Giza, Giza Governorate 12411, Egypt",
+                "location_address_line_1": "",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Giza Governorate",
+                "location_lat": "30.01382300000001",
+                "location_long": "31.20957199999998",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/3\/third-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 2,
+                    "name": "Exhibitions",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/exhibition.jpg",
+                    "events": 2,
+                    "fans_ids": [
+                        2
+                    ]
+                },
+                "likers_ids": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "id": 4,
+                "title": "Fourth Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_6877b3afd22b28817c6d2283c84edbdb.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:34:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-07-22 00:34:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Abo Ali Restaurant",
+                "venue_name_full": "Abo Ali Restaurant, مجمع عبد المقصود - الاردنية، العاشر من رمضان، الشرقية، Egypt",
+                "location_address": "مجمع عبد المقصود - الاردنية، العاشر من رمضان، الشرقية، محافظة القاهرة‬، Egypt",
+                "location_address_line_1": "مجمع عبد المقصود - الاردنية",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "محافظة القاهرة‬",
+                "location_lat": "30.29376500000001",
+                "location_long": "31.745685999999978",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/4\/fourth-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 3,
+                    "name": "Music & Entertainment",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg",
+                    "events": 3,
+                    "fans_ids": []
+                },
+                "likers_ids": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "id": 5,
+                "title": "Fifth Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_716d9dcf34302161a891d4e983f076ba.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_716d9dcf34302161a891d4e983f076ba.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:38:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-06-22 00:38:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Alexandria Faculty of Medicine",
+                "venue_name_full": "Alexandria University, Al Mesallah Sharq, Qesm Al Attarin, Egypt",
+                "location_address": "Chamblion street, el azareeta, Al Mesallah Sharq, Qesm Al Attarin, Alexandria Governorate, Egypt",
+                "location_address_line_1": "",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Alexandria Governorate",
+                "location_lat": "31.2023016",
+                "location_long": "29.90580669999997",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/5\/fifth-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 5,
+                    "name": "Nightlife",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/nightlife.jpg",
+                    "events": 3,
+                    "fans_ids": [
+                        2,
+                        3
+                    ]
+                },
+                "likers_ids": [
+                    2
+                ]
+            },
+            {
+                "id": 6,
+                "title": "Sixth Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_dc335e1e6654016463b20afdab94ce25.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_dc335e1e6654016463b20afdab94ce25.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:39:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-05-22 00:39:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Bahrain International Exhibition & Convention Centre",
+                "venue_name_full": "Bahrain International Exhibition & Convention Centre, Avenue 28, Sanabis, Bahrain",
+                "location_address": "158 Avenue 28, Sanabis 11644, Bahrain",
+                "location_address_line_1": "Avenue 28",
+                "location_address_line_2": "Sanabis",
+                "location_country": "Bahrain",
+                "location_country_code": "BH",
+                "location_state": "Capital Governorate",
+                "location_lat": "26.229856",
+                "location_long": "50.54240400000003",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/6\/sixth-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 4,
+                    "name": "Networking & Social",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/social.jpg",
+                    "events": 2,
+                    "fans_ids": [
+                        1
+                    ]
+                },
+                "likers_ids": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "id": 7,
+                "title": "Seventh Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_4c03292ddc701554c04ee01267a58523.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_4c03292ddc701554c04ee01267a58523.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:41:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-05-22 00:41:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Bahrain National Stadium",
+                "venue_name_full": "Bahrain National Stadium, شارع المحرق، Riffa, Bahrain",
+                "location_address": "East Riffa, Bahrain، شارع المحرق، Riffa, Bahrain",
+                "location_address_line_1": "شارع المحرق",
+                "location_address_line_2": "Riffa",
+                "location_country": "Bahrain",
+                "location_country_code": "BH",
+                "location_state": "Central Governorate",
+                "location_lat": "26.153794",
+                "location_long": "50.54364529999998",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/7\/seventh-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 5,
+                    "name": "Nightlife",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/nightlife.jpg",
+                    "events": 3,
+                    "fans_ids": [
+                        2,
+                        3
+                    ]
+                },
+                "likers_ids": [
+                    2
+                ]
+            },
+            {
+                "id": 8,
+                "title": "Eighth Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_49e5f70e37185fe15ec663f6abae6b32.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:54:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-05-22 00:54:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Stavolta",
+                "venue_name_full": "Stavolta, Maadi as Sarayat Al Gharbeyah, Al Maadi, Cairo, Egypt",
+                "location_address": "39 Road 231, Degla - Maadi, Maadi as Sarayat Al Gharbeyah, Al Maadi, Cairo Governorate, Egypt",
+                "location_address_line_1": "",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Cairo Governorate",
+                "location_lat": "29.962045",
+                "location_long": "31.276809999999955",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/8\/eighth-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 7,
+                    "name": "Sports",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/sports.jpg",
+                    "events": 4,
+                    "fans_ids": [
+                        1
+                    ]
+                },
+                "likers_ids": []
+            },
+            {
+                "id": 9,
+                "title": "Ninth Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_5a79b3fdfc1c99abcd55dd2eda70f876.jpg"
+                },
+                "start_date": {
+                    "date": "2018-06-22 00:55:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-06-23 00:55:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Cairo International Airport",
+                "venue_name_full": "Cairo International Airport, Sheraton Al Matar, Qism El-Nozha, Egypt",
+                "location_address": "Sheraton Al Matar, Qism El-Nozha, Cairo Governorate, Egypt",
+                "location_address_line_1": "",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Cairo Governorate",
+                "location_lat": "30.118977",
+                "location_long": "31.40692809999996",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/9\/ninth-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 6,
+                    "name": "Food & Dining",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/food.jpg",
+                    "events": 1,
+                    "fans_ids": []
+                },
+                "likers_ids": []
+            },
+            {
+                "id": 10,
+                "title": "Tenth Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_26b1a0ab970a1f2803dc040e96d5dddc.jpg"
+                },
+                "start_date": {
+                    "date": "2018-05-22 00:56:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-05-23 00:56:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "National Museum of Egyptian Civilization",
+                "venue_name_full": "National Museum of Egyptian Civilization, طريق مصر القديمه، Ad Deyorah, Misr Al Qadimah, Cairo, Egypt",
+                "location_address": "طريق مصر القديمه، Ad Deyorah, Misr Al Qadimah, Cairo Governorate, Egypt",
+                "location_address_line_1": "طريق مصر القديمه",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Cairo Governorate",
+                "location_lat": "30.00748590000001",
+                "location_long": "31.24846189999994",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/10\/tenth-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 4,
+                    "name": "Networking & Social",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/social.jpg",
+                    "events": 2,
+                    "fans_ids": [
+                        1
+                    ]
+                },
+                "likers_ids": []
+            },
+            {
+                "id": 11,
+                "title": "Eleventh Event",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_130a56899a6c6be0fe47daa1f6153377.jpg"
+                },
+                "start_date": {
+                    "date": "2018-04-22 00:58:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-05-22 00:58:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Stadium Metro station",
+                "venue_name_full": "Stadium Metro station, Khedr El-Touny, Ash Sharekat, Nasr City, Cairo, Egypt",
+                "location_address": "Khedr El-Touny, Ash Sharekat, Nasr City, Cairo Governorate, Egypt",
+                "location_address_line_1": "Khedr El-Touny",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Cairo Governorate",
+                "location_lat": "30.07339079999999",
+                "location_long": "31.317991500000062",
+                "is_activity": false,
+                "event_url": "http:\/\/localhost\/e\/11\/eleventh-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 2,
+                    "name": "Exhibitions",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/exhibition.jpg",
+                    "events": 2,
+                    "fans_ids": [
+                        2
+                    ]
+                },
+                "likers_ids": []
+            },
+            {
+                "id": 13,
+                "title": "Twelve Event ",
+                "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                "image_path": {
+                    "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/original\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "200*200": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/200*200\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "300*300": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*300\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "335*250": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/335*250\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "300*400": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/300*400\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "450*600": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/450*600\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "400*720": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/400*720\/event_image_c82865ac7d3a65876508712ab3760867.jpg",
+                    "600*1080": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/event_images\/600*1080\/event_image_c82865ac7d3a65876508712ab3760867.jpg"
+                },
+                "start_date": {
+                    "date": "2018-03-23 00:00:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "end_date": {
+                    "date": "2018-07-22 23:59:00",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "organiser": {
+                    "id": 1,
+                    "name": "Culture-Authority@Bahrain",
+                    "events": 12,
+                    "followers_ids": [],
+                    "image_path": {
+                        "original": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/original\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "60*60": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/60*60\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "120*120": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/120*120\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg",
+                        "240*240": "https:\/\/s3.amazonaws.com\/cdn.vt17.dev\/organizer\/240*240\/img_6235a9739aaf74ae2f0c6dbcf1f53ed7.jpg"
+                    }
+                },
+                "venue_name": "Alexandria National Museum",
+                "venue_name_full": "Alexandria National Museum, El-Shaheed Galal El-Desouky, Bab Sharqi WA Wabour Al Meyah, Qesm Bab Sharqi, Egypt",
+                "location_address": "131 El-Shaheed Galal El-Desouky, Bab Sharqi WA Wabour Al Meyah, Qesm Bab Sharqi, Alexandria Governorate, Egypt",
+                "location_address_line_1": "El-Shaheed Galal El-Desouky",
+                "location_address_line_2": "",
+                "location_country": "Egypt",
+                "location_country_code": "EG",
+                "location_state": "Alexandria Governorate",
+                "location_lat": "31.2009548",
+                "location_long": "29.91325759999995",
+                "is_activity": true,
+                "event_url": "http:\/\/localhost\/e\/13\/twelve-event",
+                "social_show_facebook": 1,
+                "social_show_twitter": 1,
+                "social_show_googleplus": 1,
+                "social_show_linkedin": 1,
+                "category": {
+                    "id": 3,
+                    "name": "Music & Entertainment",
+                    "image": "http:\/\/localhost:8000\/front\/img\/categories\/music.jpg",
+                    "events": 3,
+                    "fans_ids": []
+                },
+                "likers_ids": []
+            }
+        ],
+        "message": null
+    },
+    "headers": {}
+}
+```
+
+### HTTP Request
+`GET /api/organiser/{organiser_id}/events`
+
+`HEAD /api/organiser/{organiser_id}/events`
+
+
+<!-- END_ff11ed1613c3216917e968b8fc30ae36 -->
 <!-- START_fce8ab495aa93d48e21f89aa353a456b -->
 ## Search Events by title, venue name, location
 
@@ -1603,144 +3004,11 @@ $.ajax(settings).done(function (response) {
 ```json
 {
     "exception": null,
-    "original": [
-        {
-            "id": 26,
-            "title": "Activity 2017",
-            "location": null,
-            "bg_type": "image",
-            "bg_color": "#B23333",
-            "bg_image_path": "assets\/images\/public\/EventPage\/backgrounds\/5.jpg",
-            "description": "random text",
-            "start_date": "2017-05-07 00:00:00",
-            "end_date": "2017-11-07 23:59:00",
-            "on_sale_date": null,
-            "account_id": 11,
-            "user_id": 12,
-            "currency_id": 1,
-            "sales_volume": "0.00",
-            "organiser_fees_volume": "0.00",
-            "organiser_fee_fixed": "0.00",
-            "organiser_fee_percentage": "0.000",
-            "organiser_id": 6,
-            "venue_name": "Batelco Building",
-            "venue_name_full": "Batelco Building, Manama, Bahrain",
-            "location_address": "Batelco Building, Manama 304, Bahrain",
-            "location_address_line_1": "",
-            "location_address_line_2": "Manama",
-            "location_country": "Bahrain",
-            "location_country_code": "BH",
-            "location_state": "Capital Governorate",
-            "location_post_code": "304",
-            "location_street_number": "",
-            "location_lat": "26.2347067",
-            "location_long": "50.576700399999936",
-            "location_google_place_id": "ChIJXwHr8V-vST4RmrNgXBdv-XY",
-            "pre_order_display_message": null,
-            "post_order_display_message": null,
-            "social_share_text": null,
-            "social_show_facebook": 1,
-            "social_show_linkedin": 1,
-            "social_show_twitter": 1,
-            "social_show_email": 1,
-            "social_show_googleplus": 1,
-            "location_is_manual": 0,
-            "is_live": 0,
-            "created_at": "2017-05-07 14:13:59",
-            "updated_at": "2017-05-07 14:13:59",
-            "deleted_at": null,
-            "barcode_type": "QRCODE",
-            "ticket_border_color": "#000000",
-            "ticket_bg_color": "#FFFFFF",
-            "ticket_text_color": "#000000",
-            "ticket_sub_text_color": "#999999",
-            "social_show_whatsapp": 1,
-            "questions_collection_type": "buyer",
-            "checkout_timeout_after": 8,
-            "is_1d_barcode_enabled": 0,
-            "enable_offline_payments": 0,
-            "offline_payment_instructions": null,
-            "category_id": 1,
-            "is_activity": true,
-            "activity_start_date": null,
-            "activity_end_date": null,
-            "activity_start_time": "17:13:00",
-            "activity_end_time": "19:13:00",
-            "is_show": 0,
-            "director": null,
-            "cast": null,
-            "duration": null,
-            "relevance": 10
-        },
-        {
-            "id": 4,
-            "title": "Batelco first event",
-            "location": null,
-            "bg_type": "image",
-            "bg_color": "#B23333",
-            "bg_image_path": "assets\/images\/public\/EventPage\/backgrounds\/5.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            "start_date": "2016-11-09 11:44:00",
-            "end_date": "2016-11-13 11:44:00",
-            "on_sale_date": null,
-            "account_id": 11,
-            "user_id": 13,
-            "currency_id": 2,
-            "sales_volume": "0.00",
-            "organiser_fees_volume": "0.00",
-            "organiser_fee_fixed": "0.00",
-            "organiser_fee_percentage": "0.000",
-            "organiser_id": 5,
-            "venue_name": "F1 Night Club",
-            "venue_name_full": "F1 Night Club, Manama, Bahrain",
-            "location_address": "Manama, Bahrain",
-            "location_address_line_1": "",
-            "location_address_line_2": "Manama",
-            "location_country": "Bahrain",
-            "location_country_code": "BH",
-            "location_state": "Capital Governorate",
-            "location_post_code": "",
-            "location_street_number": "",
-            "location_lat": "26.2344744",
-            "location_long": "50.59595030000003",
-            "location_google_place_id": "ChIJ3TAkKVOvST4RpwN-DtOt0no",
-            "pre_order_display_message": null,
-            "post_order_display_message": null,
-            "social_share_text": null,
-            "social_show_facebook": 1,
-            "social_show_linkedin": 1,
-            "social_show_twitter": 1,
-            "social_show_email": 1,
-            "social_show_googleplus": 1,
-            "location_is_manual": 0,
-            "is_live": 1,
-            "created_at": "2016-11-08 08:46:21",
-            "updated_at": "2016-11-08 11:03:33",
-            "deleted_at": null,
-            "barcode_type": "QRCODE",
-            "ticket_border_color": "#000000",
-            "ticket_bg_color": "#FFFFFF",
-            "ticket_text_color": "#000000",
-            "ticket_sub_text_color": "#999999",
-            "social_show_whatsapp": 1,
-            "questions_collection_type": "buyer",
-            "checkout_timeout_after": 8,
-            "is_1d_barcode_enabled": 0,
-            "enable_offline_payments": 0,
-            "offline_payment_instructions": null,
-            "category_id": null,
-            "is_activity": false,
-            "activity_start_date": null,
-            "activity_end_date": null,
-            "activity_start_time": null,
-            "activity_end_time": null,
-            "is_show": 0,
-            "director": null,
-            "cast": null,
-            "duration": null,
-            "relevance": 8
-        }
-    ],
+    "original": {
+        "status": "success",
+        "data": [],
+        "message": null
+    },
     "headers": {}
 }
 ```
@@ -1752,6 +3020,45 @@ $.ajax(settings).done(function (response) {
 
 
 <!-- END_fce8ab495aa93d48e21f89aa353a456b -->
+<!-- START_90ff9ef6349162494090babf6b55299e -->
+## Search Organisers by name
+
+> Example request:
+
+```bash
+curl "http://localhost//api/organisers/search/{query}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/organisers/search/{query}",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/organisers/search/{query}`
+
+`HEAD /api/organisers/search/{query}`
+
+
+<!-- END_90ff9ef6349162494090babf6b55299e -->
 <!-- START_4a96d8391893117ce248bf6eb44b2b37 -->
 ## Validate a ticket request. If successful reserve the tickets
 
@@ -1816,3 +3123,659 @@ $.ajax(settings).done(function (response) {
 
 
 <!-- END_44b07b75fda9d03fb837a154b98649a7 -->
+<!-- START_15a147728dee9811856fbceea4db3d3b -->
+## Follow Organiser
+
+* <strong>Required:</strong><br>
+
+header: Authorization "token" for this user
+
+<strong>Parameters:</strong>
+<br>
+organiser_id
+
+> Example request:
+
+```bash
+curl "http://localhost//api/follow/{organiser_id}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/follow/{organiser_id}",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/follow/{organiser_id}`
+
+`HEAD /api/follow/{organiser_id}`
+
+
+<!-- END_15a147728dee9811856fbceea4db3d3b -->
+<!-- START_ddd419ded5e734d748f94080817a3a91 -->
+## Unfollow Organiser
+
+* <strong>Required:</strong><br>
+
+header: Authorization "token" for this user
+
+<strong>Parameters:</strong>
+<br>
+organiser_id
+
+> Example request:
+
+```bash
+curl "http://localhost//api/unfollow/{organiser_id}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/unfollow/{organiser_id}",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/unfollow/{organiser_id}`
+
+`HEAD /api/unfollow/{organiser_id}`
+
+
+<!-- END_ddd419ded5e734d748f94080817a3a91 -->
+<!-- START_a0d0501a38ed8ac081cae918cbb2f3d3 -->
+## Favorite a Category
+
+* <strong>Required:</strong><br>
+
+header: Authorization "token" for this user
+
+<strong>Parameters:</strong>
+<br>
+category_id
+
+> Example request:
+
+```bash
+curl "http://localhost//api/favorite/{category_id}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/favorite/{category_id}",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/favorite/{category_id}`
+
+`HEAD /api/favorite/{category_id}`
+
+
+<!-- END_a0d0501a38ed8ac081cae918cbb2f3d3 -->
+<!-- START_9d192c1f0c94ae92172cf88ec05f63f2 -->
+## UnFavorite a Category
+
+* <strong>Required:</strong><br>
+
+header: Authorization "token" for this user
+
+<strong>Parameters:</strong>
+<br>
+category_id
+
+> Example request:
+
+```bash
+curl "http://localhost//api/unfavorite/{category_id}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/unfavorite/{category_id}",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/unfavorite/{category_id}`
+
+`HEAD /api/unfavorite/{category_id}`
+
+
+<!-- END_9d192c1f0c94ae92172cf88ec05f63f2 -->
+<!-- START_fc55239adc7e2a0f81c474ac98b458a8 -->
+## Like an Event
+
+* <strong>Required:</strong><br>
+
+header: Authorization "token" for this user
+
+<strong>Parameters:</strong>
+<br>
+event_id
+
+> Example request:
+
+```bash
+curl "http://localhost//api/like/{event_id}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/like/{event_id}",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/like/{event_id}`
+
+`HEAD /api/like/{event_id}`
+
+
+<!-- END_fc55239adc7e2a0f81c474ac98b458a8 -->
+<!-- START_d2bf13b469eba1e5400ead84c72d0a47 -->
+## Unlike an Event
+
+* <strong>Required:</strong><br>
+
+header: Authorization "token" for this user
+
+<strong>Parameters:</strong>
+<br>
+event_id
+
+> Example request:
+
+```bash
+curl "http://localhost//api/unlike/{event_id}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/unlike/{event_id}",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/unlike/{event_id}`
+
+`HEAD /api/unlike/{event_id}`
+
+
+<!-- END_d2bf13b469eba1e5400ead84c72d0a47 -->
+<!-- START_217cab57cc58e277d3c403efccc6a76f -->
+## Get Events posted by organizers who are being followed by this client
+
+* <strong>Required:</strong><br>
+
+header: Authorization "token" for this user
+
+> Example request:
+
+```bash
+curl "http://localhost//api/followings/events" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/followings/events",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/followings/events`
+
+`HEAD /api/followings/events`
+
+
+<!-- END_217cab57cc58e277d3c403efccc6a76f -->
+<!-- START_59702db55cb76c7a3c261eb1279c750c -->
+## Get Events from client&#039;s favorites categories
+
+* <strong>Required:</strong><br>
+
+header: Authorization "token" for this user
+
+> Example request:
+
+```bash
+curl "http://localhost//api/favorites/events" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/favorites/events",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/favorites/events`
+
+`HEAD /api/favorites/events`
+
+
+<!-- END_59702db55cb76c7a3c261eb1279c750c -->
+<!-- START_fe3933bdb0b91b5d1cfcddd7b8b2ea3d -->
+## Get organizers who are being followed by this client
+
+* * <strong>Required:</strong><br>
+
+header: Authorization "token" for this user
+
+> Example request:
+
+```bash
+curl "http://localhost//api/followings" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/followings",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/followings`
+
+`HEAD /api/followings`
+
+
+<!-- END_fe3933bdb0b91b5d1cfcddd7b8b2ea3d -->
+<!-- START_2fe5f7ac7af3305e4fce6d54cc6ee2e6 -->
+## Get categories that are being favorite by this client
+
+* <strong>Required:</strong><br>
+
+header: Authorization "token" for this user
+
+> Example request:
+
+```bash
+curl "http://localhost//api/favorites" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/favorites",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/favorites`
+
+`HEAD /api/favorites`
+
+
+<!-- END_2fe5f7ac7af3305e4fce6d54cc6ee2e6 -->
+<!-- START_945ade917bd05a4bc1152d670a8982a4 -->
+## Get events that are being liked by this client
+
+* <strong>Required:</strong><br>
+
+header: Authorization "token" for this user
+
+> Example request:
+
+```bash
+curl "http://localhost//api/likes" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/likes",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET /api/likes`
+
+`HEAD /api/likes`
+
+
+<!-- END_945ade917bd05a4bc1152d670a8982a4 -->
+<!-- START_d6da835a8bc1ecd847652a4b22f720b2 -->
+## count event likers
+
+<strong>Parameters:</strong>
+<br>
+event_id
+
+> Example request:
+
+```bash
+curl "http://localhost//api/likes/{event_id}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/likes/{event_id}",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "exception": null,
+    "original": {
+        "status": "success",
+        "data": {
+            "likes": 1
+        },
+        "message": null
+    },
+    "headers": {}
+}
+```
+
+### HTTP Request
+`GET /api/likes/{event_id}`
+
+`HEAD /api/likes/{event_id}`
+
+
+<!-- END_d6da835a8bc1ecd847652a4b22f720b2 -->
+<!-- START_ecd0e114c1f0b5c95c5499b0cccfd1a7 -->
+## count category fans
+
+<strong>Parameters:</strong>
+<br>
+category_id
+
+> Example request:
+
+```bash
+curl "http://localhost//api/fans/{category_id}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/fans/{category_id}",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "exception": null,
+    "original": {
+        "status": "success",
+        "data": {
+            "fans": 0
+        },
+        "message": null
+    },
+    "headers": {}
+}
+```
+
+### HTTP Request
+`GET /api/fans/{category_id}`
+
+`HEAD /api/fans/{category_id}`
+
+
+<!-- END_ecd0e114c1f0b5c95c5499b0cccfd1a7 -->
+<!-- START_a594b6e2c7b6cc0fca3d560d162f6cf6 -->
+## count organiser&#039;s followers
+
+<strong>Parameters:</strong>
+<br>
+organiser_id
+
+> Example request:
+
+```bash
+curl "http://localhost//api/followers/{organiser_id}" \
+-H "Accept: application/json"
+```
+
+```javascript
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost//api/followers/{organiser_id}",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+```
+
+> Example response:
+
+```json
+{
+    "exception": null,
+    "original": {
+        "status": "success",
+        "data": {
+            "fans": 0
+        },
+        "message": null
+    },
+    "headers": {}
+}
+```
+
+### HTTP Request
+`GET /api/followers/{organiser_id}`
+
+`HEAD /api/followers/{organiser_id}`
+
+
+<!-- END_a594b6e2c7b6cc0fca3d560d162f6cf6 -->

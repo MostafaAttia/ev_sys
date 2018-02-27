@@ -32,16 +32,31 @@ class AttendeesApiController extends ApiBaseController
         return response('Attendee Not Found', 404);
     }
 
+    public function create()
+    {
+        //
+    }
+
     public function store(Request $request)
     {
+        //
     }
 
-    public function update(Request $request)
+
+    public function edit($id)
     {
+        //
     }
 
-    public function destroy(Request $request)
+
+    public function update(Request $request, $id)
     {
+        //
+    }
+
+    public function destroy($id)
+    {
+        //
     }
 
 

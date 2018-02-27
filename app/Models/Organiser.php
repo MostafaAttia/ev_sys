@@ -3,13 +3,12 @@
 namespace App\Models;
 
 use Overtrue\LaravelFollow\Traits\CanBeFollowed;
-use Overtrue\LaravelFollow\Traits\CanFollow;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Str;
 
 class Organiser extends MyBaseModel
 {
-    use SearchableTrait, CanFollow, CanBeFollowed;
+    use SearchableTrait, CanBeFollowed;
 
     protected $searchable = [
         /**
