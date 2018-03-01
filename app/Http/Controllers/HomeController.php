@@ -38,6 +38,14 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+
+        if(Auth::guard('client')->user()) {
+            $auth_client = Auth::guard('client')->user();
+            $liked_events = $auth_client->likes(Event::class)->get()->pluck('id')->toArray();
+            $favorites = $auth_client->favorites(Category::class)->get()->pluck('id')->toArray();
+            $following = $auth_client->followings(Organiser::class)->get()->pluck('id')->toArray();
+        }
+
         $fractal = new Fractal\Manager();
         $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
         $eventsOriginal = Event::where('is_live', 1)
@@ -62,25 +70,15 @@ class HomeController extends Controller
         if($request->ajax()){
 
             if(Auth::guard('client')->user()) {
-                $auth_client = Auth::guard('client')->user();
-                $liked_events = $auth_client->likes(Event::class)->get()->pluck('id')->toArray();
-                $favorites = $auth_client->favorites(Category::class)->get()->pluck('id')->toArray();
-                $following = $auth_client->followings(Organiser::class)->get()->pluck('id')->toArray();
                 return view('Front.Home.Partials.MasonryGrid', compact('events', 'liked_events', 'favorites', 'following'));
             }
 
             return view('Front.Home.Partials.MasonryGrid', compact('events'));
-
         }
 
         if(Auth::guard('client')->user()) {
-            $auth_client = Auth::guard('client')->user();
             $client_obj = new Fractal\Resource\Item($auth_client, new ClientTransformer);
             $client = $fractal->createData($client_obj)->toArray();
-            $liked_events = $auth_client->likes(Event::class)->get()->pluck('id')->toArray();
-            $favorites = $auth_client->favorites(Category::class)->get()->pluck('id')->toArray();
-            $following = $auth_client->followings(Organiser::class)->get()->pluck('id')->toArray();
-
             return view('Front.Home.Home', compact('events', 'client', 'categories', 'liked_events', 'favorites', 'following'));
         }
 
