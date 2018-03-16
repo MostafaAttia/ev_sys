@@ -10,9 +10,10 @@ namespace App\Http\Controllers\ClientAuth;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\ClientMeta;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\Registrar;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+//use Illuminate\Contracts\Auth\Registrar;
+//use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,8 @@ use Intervention\Image\Facades\Image;
 use Validator;
 use App\Models\Client;
 
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class AuthController extends Controller
 {
@@ -38,7 +41,8 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesUsers;
+//    use RegistersUsers;
 
     protected $auth;
 
@@ -55,10 +59,10 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct(Guard $auth, Registrar $registrar)
+    public function __construct()
     {
-        $this->auth = $auth;
-        $this->registrar = $registrar;
+//        $this->auth = $auth;
+//        $this->registrar = $registrar;
     }
 
 
@@ -99,7 +103,7 @@ class AuthController extends Controller
         } else {
             Session::flash('notification', [
                 'content'   => 'your email is incorrect!',
-                'type'      => 'error' // alert, success, error, warning, info
+                'type'      => 'error' // allogoutert, success, error, warning, info
             ]);
 
             return redirect()->back();
@@ -181,6 +185,22 @@ class AuthController extends Controller
         }
 
         $client = Client::create($client_data);
+
+        $meta = new ClientMeta([
+            'show_email'        => 1,
+            'show_gender'       => 1,
+            'show_phone'        => 0,
+            'show_address'      => 0,
+            'show_followings'       => 1,
+            'show_favorites'        =>1,
+            'show_likes'        => 1,
+            'show_attended_events'      => 1,
+            'get_notif_about_followings'        => 1,
+            'get_notif_about_favorites'     => 1,
+            'get_mail_notif'        => 0
+        ]);
+
+        $client->meta()->save($meta);
 
         // TODO: Do this async?
         Mail::send('Emails.ClientConfirmEmail',

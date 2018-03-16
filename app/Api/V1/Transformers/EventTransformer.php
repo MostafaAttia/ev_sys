@@ -12,17 +12,17 @@ class EventTransformer extends TransformerAbstract
     {
 
         $organiser  = Organiser::findOrFail($event->organiser_id);
-        $organiser_events = Event::where(['organiser_id' => $organiser->id, 'is_live'=> 1])
-            ->where('end_date', '>', date("Y-m-d H:i:s"))->get()->toArray();
+        $organiser_events_counter = Event::where(['organiser_id' => $organiser->id, 'is_live'=> 1])
+            ->where('end_date', '>', date("Y-m-d H:i:s"))
+            ->count();
 
-        $organiser_events_counter  = count($organiser_events);
+        $likers_ids  =$event->likers()->get()->pluck('id')->toArray();
 
         if($event->category_id){
             $category = $event->category;
-            $events = Event::where(['category_id' => $category->id, 'is_live'=> 1])
-                ->where('end_date', '>', date("Y-m-d H:i:s"))->get()->toArray();
-
-            $events_counter  = count($events);
+            $events_counter = Event::where(['category_id' => $category->id, 'is_live'=> 1])
+                ->where('end_date', '>', date("Y-m-d H:i:s"))
+                ->count();
         }
 
         // reformat date
@@ -109,7 +109,8 @@ class EventTransformer extends TransformerAbstract
                 'events'                => null,
                 'fans_ids'              => null
             ],
-            'likers_ids'                  => $event->likers()->get()->pluck('id')->toArray()
+            'likers_ids'                  => $likers_ids,
+            'likes_counter'               => count($likers_ids)
         ];
 
         return $events;

@@ -14,31 +14,38 @@ class WeekDaysTableSeeder extends Seeder
         DB::table('weekdays')->insert([
             [
                 'id'            => 1,
-                'name'          => 'Monday'
+                'name'          => 'Monday',
+                'short'          => 'mon'
             ],
             [
                 'id'            => 2,
-                'name'          => 'Tuesday'
+                'name'          => 'Tuesday',
+                'short'          => 'tues'
             ],
             [
                 'id'            => 3,
-                'name'          => 'Wednesday'
+                'name'          => 'Wednesday',
+                'short'          => 'wed'
             ],
             [
                 'id'            => 4,
-                'name'          => 'Thursday'
+                'name'          => 'Thursday',
+                'short'          => 'thurs'
             ],
             [
                 'id'            => 5,
-                'name'          => 'Friday'
+                'name'          => 'Friday',
+                'short'          => 'fri'
             ],
             [
                 'id'            => 6,
-                'name'          => 'Saturday'
+                'name'          => 'Saturday',
+                'short'          => 'sat'
             ],
             [
                 'id'            => 7,
-                'name'          => 'Sunday'
+                'name'          => 'Sunday',
+                'short'          => 'sun'
             ],
 
         ]);

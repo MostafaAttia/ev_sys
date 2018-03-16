@@ -20,7 +20,7 @@ class EventCustomizeController extends MyBaseController
      */
     public function showCustomize($event_id = '', $tab = '')
     {
-        $categories = Category::lists('name', 'id')->all();
+        $categories = Category::pluck('name', 'id')->all();
 
         $data = $this->getEventViewData($event_id, [
             'available_bg_images'        => $this->getAvailableBackgroundImages(),

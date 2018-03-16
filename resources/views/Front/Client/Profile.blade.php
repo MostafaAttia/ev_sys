@@ -11,13 +11,10 @@
 @section('header-scripts')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 @stop
-
 @section('content')
-
     <div class="main main-raised profile-page-wrapper">
         <div class="profile-content">
             <div class="container">
-
                 <div class="row">
                     <div class="col-xs-6 col-xs-offset-3 text-center">
                         <div class="profile">
@@ -30,12 +27,9 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-
-                        <span id="route" data-route="{{ route('updateClient', $client['id']) }}" style="display: none;"></span>
-
+                        <span id="route" data-route="{{ route('updateClient') }}" style="display: none;"></span>
                         <div class="form-group label-floating">
                             <label class="control-label">First Name</label>
                             <input type="text" name="first_name" value="{{ $client['first_name'] }}" class="form-control client-inputs" />
@@ -77,16 +71,12 @@
                                 <i class="material-icons">done</i>
                             </span>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-
 @stop
-
 @section('footer')
     @include('Front.Partials.Footer')
 @stop

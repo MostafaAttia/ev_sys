@@ -45,5 +45,45 @@
 {{--    @include('Shared.Layouts.ViewJavascript')--}}
 
     {!!  HTML::script(config('attendize.cdn_url_static_assets').'/front/js/vt-custom.js') !!}
+
+
+    <script src="https://js.pusher.com/4.2/pusher.min.js"></script>
+    <script>
+
+        //            Pusher.log = function(msg) {
+        //                console.log(msg);
+        //            };
+
+
+        const socket = new Pusher('{{ env("PUSHER_KEY") }}', {
+            cluster: 'us2'
+        });
+
+        const channel = socket.subscribe('test_channel');
+
+        channel.bind('my_event', function (data) {
+            console.log(data.message.name + ' says: ' +  data.message.content);
+
+            new Noty({
+                text: data.message.name + ' says: ' +  data.message.content,
+                type: 'success',
+                layout: 'topRight',
+                theme: 'metroui',
+                timeout: 5000,
+                progressBar: true,
+                closeWith: ['click', 'button'],
+                animation: {
+                    open: 'animated bounceInRight',
+                    close: 'animated bounceOutRight'
+                },
+                queue: 'global'
+            }).show();
+
+
+        });
+
+    </script>
+
+
 </body>
 </html>

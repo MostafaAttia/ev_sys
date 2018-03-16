@@ -9,6 +9,16 @@ use Image;
 
 class OrganiserController extends MyBaseController
 {
+
+    /**
+     * Get latest 5 unread notifications as array
+     */
+    public function notifications($organiser_id)
+    {
+        $organiser = Organiser::scope()->findOrFail($organiser_id);
+        return $organiser->unreadNotifications()->limit(10)->get()->toArray();
+    }
+
     /**
      * Show the select organiser page
      *

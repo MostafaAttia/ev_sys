@@ -224,3 +224,23 @@
     cursor: pointer;
 }
 
+.tab-pane {
+    min-height: 480px;
+}
+
+.tab-pane .togglebutton {
+    margin-bottom: 35px;
+}
+
+.togglebutton p {
+    font-size: 20px;
+    display: inline-block;
+}
+.organiser-card-labels{
+    margin: 20px;
+}
+.profile-page .profile .name {
+    padding-top: 20px;
+}
+
+

@@ -167,11 +167,11 @@
                         <div class="stats">
                             <a class="event-like-status {{ in_array($event['id'], $liked_events) ? 'vt-red': 'vt-grey' }}" data-event-id="{{ $event['id'] }}">
                                 <i title='like' class="material-icons">thumb_up</i>
-                            </a> <span id="likes-counter-{{$event['id']}}">{{ count($event['likers_ids']) }}</span>
+                            </a> <span id="likes-counter-{{$event['id']}}">{{ $event['likes_counter'] }}</span>
                         </div>
                         @else
                         <div class="stats">
-                            <i class="material-icons fav">thumb_up</i> <span>{{ count($event['likers_ids']) }}</span>
+                            <i class="material-icons fav">thumb_up</i> <span>{{ $event['likes_counter'] }}</span>
                         </div>
                         @endif
                     </div>

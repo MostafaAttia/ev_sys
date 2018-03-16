@@ -11,7 +11,20 @@
 
     <!--Meta-->
     @include('Shared.Partials.GlobalMeta')
-   <!--/Meta--> 
+   <!--/Meta-->
+
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
+
+    <!-- This makes the current user's id available in javascript -->
+    @if(!auth()->guest())
+        <script>
+            window.Laravel.organiserId = <?php echo isset($organiser->id) ?  $organiser->id :  $event->organiser->id; ?>
+        </script>
+    @endif
 
     <!--JS-->
     {!! HTML::script(config('attendize.cdn_url_static_assets').'/vendor/jquery/dist/jquery.min.js') !!}
@@ -20,6 +33,8 @@
     <!--Style-->
     {!! HTML::style(config('attendize.cdn_url_static_assets').'/assets/stylesheet/application.css') !!}
     <!--/Style-->
+
+    {!! HTML::script(config('attendize.cdn_url_static_assets').'/assets/javascript/notifications/app.js') !!}
 
     @yield('head')
 </head>
@@ -37,6 +52,16 @@
         @yield('top_nav')
 
         <ul class="nav navbar-nav navbar-right">
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="glyphicon glyphicon-bell"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
+                    <li class="dropdown-header">No notifications</li>
+                </ul>
+            </li>
+
             <li class="dropdown profile">
 
                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">

@@ -14,7 +14,7 @@ class AddIsActivityColumnToEventsTable extends Migration
     {
         Schema::table('events', function($table)
         {
-            $table->tinyInteger('is_activity');
+            $table->tinyInteger('is_activity')->nullable()->default(0);
             $table->date('activity_start_date')->nullable();
             $table->date('activity_end_date')->nullable();
             $table->time('activity_start_time')->nullable();

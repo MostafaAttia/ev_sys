@@ -130,7 +130,7 @@ class CreateUsersTable extends Migration
             $t->string('phone')->nullable();
             $t->string('email');
             $t->string('password');
-            $t->string('confirmation_code');
+            $t->string('confirmation_code')->nullable();
             $t->boolean('is_registered')->default(false);
             $t->boolean('is_confirmed')->default(false);
             $t->boolean('is_parent')->default(false);

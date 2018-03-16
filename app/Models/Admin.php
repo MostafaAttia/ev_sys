@@ -8,6 +8,4 @@ use Cartalyst\Sentinel\Users\EloquentUser;
 class Admin extends  EloquentUser
 {
 
-
-
 }

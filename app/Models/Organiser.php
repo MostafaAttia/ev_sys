@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Overtrue\LaravelFollow\Traits\CanBeFollowed;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use Illuminate\Notifications\Notifiable;
 use Str;
 
 class Organiser extends MyBaseModel
 {
-    use SearchableTrait, CanBeFollowed;
+    use SearchableTrait, CanBeFollowed, Notifiable;
 
     protected $searchable = [
         /**

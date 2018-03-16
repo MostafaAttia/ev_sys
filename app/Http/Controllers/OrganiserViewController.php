@@ -12,6 +12,7 @@ use League\Fractal;
 
 class OrganiserViewController extends Controller
 {
+
     /**
      * Show the public organiser page
      *

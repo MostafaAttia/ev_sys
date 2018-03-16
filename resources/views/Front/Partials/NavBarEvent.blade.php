@@ -56,12 +56,12 @@
                         </a>
                         <ul class="dropdown-menu dropdown-with-icons">
                             <li>
-                                <a href="{{ route('showClientProfile', $client['id']) }}">
+                                <a href="{{ route('showClientProfile') }}">
                                     <i class="fa fa-sign-in vt-color"></i> Profile
                                 </a>
                             </li>
                             <li>
-                                <a href="../sections.html#features">
+                                <a href="{{ route('showClientSettings') }}">
                                     <i class="fa fa-user-plus vt-color"></i> Settings
                                 </a>
                             </li>

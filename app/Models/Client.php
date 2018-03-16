@@ -9,6 +9,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 
 use Overtrue\LaravelFollow\Traits\CanFavorite;
 use Overtrue\LaravelFollow\Traits\CanFollow;
@@ -17,7 +18,7 @@ use Overtrue\LaravelFollow\Traits\CanLike;
 class Client extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
 
-    use Authenticatable, CanResetPassword, SoftDeletes, CanFollow, CanLike, CanFavorite;
+    use Authenticatable, CanResetPassword, SoftDeletes, CanFollow, CanLike, CanFavorite, Notifiable;
 
     /**
      * The database table used by the model.
@@ -95,6 +96,16 @@ class Client extends Model implements AuthenticatableContract, CanResetPasswordC
     public function ratings()
     {
         return $this->hasMany(\App\Models\Rating::class);
+    }
+
+    /**
+     * The preferences/settings of this client.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function meta()
+    {
+        return $this->hasOne(\App\Models\ClientMeta::class);
     }
 
 

@@ -22,7 +22,7 @@ class CreateClientsTable extends Migration
             $table->date('dob');
             $table->string('phone');
             $table->string('address');
-            $table->string('confirmation_code');
+            $table->string('confirmation_code')->nullable();
             $table->boolean('is_email_confirmed')->default(0);
             $table->string('image_path')->nullable();
             $table->softDeletes();

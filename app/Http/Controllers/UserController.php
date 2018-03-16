@@ -9,6 +9,7 @@ use Validator;
 
 class UserController extends Controller
 {
+
     /**
      * Show the edit user modal
      *

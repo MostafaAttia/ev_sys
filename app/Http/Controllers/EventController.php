@@ -25,12 +25,12 @@ class EventController extends MyBaseController
      */
     public function showCreateEvent(Request $request)
     {
-        $categories = Category::lists('name', 'id')->all();
+        $categories = Category::pluck('name', 'id')->all();
 
 
         $data = [
             'modal_id'     => $request->get('modal_id'),
-            'organisers'   => Organiser::scope()->lists('name', 'id'),
+            'organisers'   => Organiser::scope()->pluck('name', 'id'),
             'organiser_id' => $request->get('organiser_id') ? $request->get('organiser_id') : false,
             'categories'   => $categories,
         ];

@@ -14,6 +14,8 @@ use App\Api\V1\Transformers\OrganiserTransformer;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\Organiser;
+use App\Notifications\OrganiserFollowed;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 use Dingo\Api\Routing\Helpers;
@@ -59,13 +61,13 @@ class ClientController extends Controller
         return redirect()->intended('home');
     }
 
-    public function showClientProfile($client_id)
+    public function showClientProfile()
     {
 
         $fractal = new Fractal\Manager();
         $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
 
-        $auth_client = Client::findOrFail($client_id);
+        $auth_client = Auth::guard('client')->user();
         $client_obj = new Fractal\Resource\Item($auth_client, new ClientTransformer);
         $client = $fractal->createData($client_obj)->toArray();
 
@@ -73,6 +75,51 @@ class ClientController extends Controller
 
         return view('Front.Client.Profile', compact('client', 'title'));
 
+    }
+
+    public function showClientSettings()
+    {
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+
+        $auth_client = Auth::guard('client')->user();
+        $client_obj = new Fractal\Resource\Item($auth_client, new ClientTransformer);
+        $client = $fractal->createData($client_obj)->toArray();
+        $meta = $auth_client->meta;
+        $title = $client['first_name'] . '\' Preferences';
+
+        $organisers = $auth_client->followings(\App\Models\Organiser::class)->get();
+        $organisers_ids = $organisers->pluck('id')->toArray();
+
+        $organisers_array = [];
+        foreach($organisers as $organiser){
+            $organiser = new Fractal\Resource\Item($organiser, new OrganiserTransformer);
+            $organiser = $fractal->createData($organiser)->toArray();
+            array_push($organisers_array, $organiser);
+        }
+
+        $organisers = $organisers_array;
+
+        $categories = $auth_client->favorites(\App\Models\Category::class)->get();
+        $categories_array = [];
+        foreach($categories as $category){
+            $category = new Fractal\Resource\Item($category, new CategoryTransformer);
+            $category = $fractal->createData($category)->toArray();
+            array_push($categories_array, $category);
+        }
+
+        $categories = $categories_array;
+
+        $followings = count($organisers);
+        $likes = count($auth_client->likes(\App\Models\Event::class)->get());
+        $favorites = count($categories);
+        $counters = [
+            'followings'    => $followings,
+            'likes'         => $likes,
+            'favorites'     => $favorites
+        ];
+
+        return view('Front.Client.Settings', compact('client', 'meta', 'counters' , 'categories', 'organisers', 'organisers_ids', 'title'));
     }
 
     /**
@@ -93,9 +140,9 @@ class ClientController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updateClient(Request $request, $client_id)
+    public function updateClient(Request $request)
     {
-        $user = Client::findOrFail($client_id);
+        $user = Auth::guard('client')->user();
 
         if($request->has('email') || $request->has('password')){
             return response()->json(
@@ -132,6 +179,67 @@ class ClientController extends Controller
                 'message'   => 'User Updated successfully',
             ], 200);
 
+    }
+
+    /**
+     * Update client preferences
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateClientPreferences(Request $request)
+    {
+        $client = Auth::guard('client')->user();
+        $meta = [
+            'show_email'            => $request->has('email') ? 1 : 0,
+            'show_gender'           => $request->has('gender') ? 1 : 0,
+            'show_phone'            => $request->has('phone') ? 1 : 0,
+            'show_address'          => $request->has('address') ? 1 : 0,
+            'show_followings'       => $request->has('followings') ? 1 : 0,
+            'show_favorites'        => $request->has('favorites') ? 1 : 0,
+            'show_likes'            => $request->has('likes') ? 1 : 0,
+            'show_attended_events'  => $request->has('attended') ? 1 : 0,
+        ];
+
+        $client->meta()->update($meta);
+        Session::flash('notification', [
+            'content'   => 'Preferences updated successfully!',
+            'type'      => 'success' // alert, success, error, warning, info
+        ]);
+        return redirect()->back();
+
+    }
+
+    /**
+     * Update client notifications preferences
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateClientNotificationsPreferences(Request $request)
+    {
+        $client = Auth::guard('client')->user();
+        $meta = [
+            'get_notif_about_followings'    => $request->has('notif_followings') ? 1 : 0,
+            'get_notif_about_favorites'     => $request->has('notif_favorites') ? 1 : 0,
+            'get_mail_notif'                => $request->has('notif_email') ? 1 : 0,
+        ];
+
+        $client->meta()->update($meta);
+        Session::flash('notification', [
+            'content'   => 'Notifications\' Preference updated successfully!',
+            'type'      => 'success' // alert, success, error, warning, info
+        ]);
+        return redirect()->back();
+
+    }
+
+    /**
+     * Get latest 5 unread notifications as array
+     */
+    public function notifications()
+    {
+        return Auth::guard('client')->user()->unreadNotifications()->limit(5)->get()->toArray();
     }
 
     /**
@@ -175,6 +283,8 @@ class ClientController extends Controller
                 ],
                 'message'   => $client_name . ' is now following you!',
             ];
+
+            $organiser->notify(new OrganiserFollowed($client));
 
             LaravelPusher::trigger('organiser_notifications', 'new_follower', $message);
 

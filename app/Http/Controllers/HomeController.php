@@ -59,7 +59,6 @@ class HomeController extends Controller
         $categories = Category::all();
         $categories = new Fractal\Resource\Collection($categories, new CategoryTransformer);
         $categories = $fractal->createData($categories)->toArray();
-
         $categories = $categories['data'];
 
         foreach($eventsOriginal->toArray() as $key=>$value){
@@ -195,22 +194,37 @@ class HomeController extends Controller
 
 
     /**
-     * Get Events orderedBy orders' count
+     * Get Events orderedBy orders' count && likes
      */
     public function getPopularEvents()
     {
+
+        /**
+         * IMPORTANT NOTES:
+         * for now, popular events are sorted by likes count.
+         * To order by orders count, uncomment the query below
+         */
         $fractal = new Fractal\Manager();
         $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
 
         $eventsOriginal = Event::where('is_live', 1)
             ->where('end_date', '>', date("Y-m-d H:i:s"))
-            ->withCount('orders')
-            ->orderBy('start_date', 'asc')
-            ->orderBy('orders_count', 'desc')
+//            ->withCount('orders')
+//            ->orderBy('start_date', 'asc')
+//            ->orderBy('orders_count', 'desc')
             ->paginate(10);
 
         $events = new Fractal\Resource\Collection($eventsOriginal, new EventTransformer);
         $events = $fractal->createData($events)->toArray();
+
+        /**
+         * sort events by likes_counter
+         */
+        $collection = collect($events['data']);
+        $sorted_events = $collection->sortBy('likes_counter')->reverse();
+        $events = $sorted_events->values()->all();
+        $new_events['data'] = $events;
+        $events = $new_events;
 
         foreach($eventsOriginal->toArray() as $key=>$value) {
             if($key == 'data') continue;

@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Redirect;
 use View;
+use Auth;
 
 class UserLoginController extends Controller
 {
@@ -79,6 +80,8 @@ class UserLoginController extends Controller
                 ->with(['message' => 'Your username/password combination was incorrect', 'failed' => true])
                 ->withInput();
         }
+
+//        return Auth::user();
 
         return redirect()->intended(route('showSelectOrganiser'));
     }

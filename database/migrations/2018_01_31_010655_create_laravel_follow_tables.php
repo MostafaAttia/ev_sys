@@ -16,12 +16,12 @@ class CreateLaravelFollowTables extends Migration
             $table->unsignedInteger('client_id');
             $table->unsignedInteger('followable_id');
             $table->string('followable_type')->index();
-            $table->string('relation')->default('follow')->comment('folllow/like/subscribe/favorite/');
+            $table->string('relation')->default('follow')->comment('follow/like/subscribe/favorite/');
             $table->timestamp('created_at');
 
             $table->foreign('client_id')
                 ->references(config('follow.users_table_primary_key', 'id'))
-                ->on(config('follow.users_table_name', 'users'))
+                ->on(config('follow.users_table_name', 'clients'))
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });

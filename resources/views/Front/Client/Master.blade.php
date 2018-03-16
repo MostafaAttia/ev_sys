@@ -32,17 +32,11 @@
 <body class="vt-overflow-x-hidden">
 
 	@yield('navbar')
-
 	@yield('content')
-
     @yield('footer')
-
     @yield('footer-scripts')
-
     @include('Front.Partials.core-scripts')
     @include('Front.Home.Modals.Modals')
-
     {!!  HTML::script(config('attendize.cdn_url_static_assets').'/front/js/client-profile.js') !!}
-
 </body>
 </html>

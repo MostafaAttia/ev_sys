@@ -17,10 +17,12 @@ class CategoryTransformer extends TransformerAbstract
         $events_counter  = count($events);
 
         $categories = [
-            'id'        => $category->id,
-            'name'      => $category->name,
-            'name_slug' => str_slug($category->name, '-'),
-            'events'    => $events_counter
+            'id'            => $category->id,
+            'name'          => $category->name,
+            'name_slug'     => str_slug($category->name, '-'),
+            'image_path'    => $category->img_path,
+            'events'        => $events_counter,
+            'fans'          => $category->favoriters()->get()->count()
         ];
 
         return $categories;

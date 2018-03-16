@@ -36,7 +36,7 @@ class AdminController extends Controller
     {
         $user = Sentinel::check();
         $page_title = 'Create Admin';
-        $roles = Sentinel::getRoleRepository()->lists('name', 'id')->all();
+        $roles = Sentinel::getRoleRepository()->pluck('name', 'id')->all();
         return  view('admin.ManageAdmin.create', compact('user', 'page_title', 'roles'));
     }
 
