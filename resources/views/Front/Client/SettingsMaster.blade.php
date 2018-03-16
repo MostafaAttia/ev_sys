@@ -6,7 +6,11 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>{{ $title }}</title>
+    <title>
+        @section('title')
+            Vitee ::
+        @show
+    </title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -28,20 +32,20 @@
     @yield('navbar')
     @yield('content')
     @yield('footer')
+    @include('Front.Home.Modals.Modals')
 
+    <!--   Core JS Files   -->
+    {!!  HTML::script('/front/js/jquery.min.js') !!}
+    {!!  HTML::script('/front/js/bootstrap.min.js') !!}
+    {!!  HTML::script('/front/js/material.min.js') !!}
+    {!!  HTML::script('/front/js/moment.min.js') !!}
+    {!!  HTML::script('/front/js/nouislider.min.js') !!}
+    {!!  HTML::script('/front/js/bootstrap-datetimepicker.js') !!}
+    {!!  HTML::script('/front/js/bootstrap-selectpicker.js') !!}
+    {!!  HTML::script('/front/js/bootstrap-tagsinput.js') !!}
+    {!!  HTML::script('/front/js/jasny-bootstrap.min.js') !!}
+    {!!  HTML::script('/front/js/atv-img-animation.js') !!}
+    {!!  HTML::script('/front/js/material-kit.js?v=1.1.0') !!}
+    {!!  HTML::script('/front/js/client-profile.js') !!}
 </body>
-
-<!--   Core JS Files   -->
-{!!  HTML::script('/front/js/jquery.min.js') !!}
-{!!  HTML::script('/front/js/bootstrap.min.js') !!}
-{!!  HTML::script('/front/js/material.min.js') !!}
-{!!  HTML::script('/front/js/moment.min.js') !!}
-{!!  HTML::script('/front/js/nouislider.min.js') !!}
-{!!  HTML::script('/front/js/bootstrap-datetimepicker.js') !!}
-{!!  HTML::script('/front/js/bootstrap-selectpicker.js') !!}
-{!!  HTML::script('/front/js/bootstrap-tagsinput.js') !!}
-{!!  HTML::script('/front/js/jasny-bootstrap.min.js') !!}
-{!!  HTML::script('/front/js/atv-img-animation.js') !!}
-{!!  HTML::script('/front/js/material-kit.js?v=1.1.0') !!}
-{!!  HTML::script('/front/js/client-profile.js') !!}
 </html>

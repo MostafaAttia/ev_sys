@@ -7,7 +7,6 @@
                     <div class="card-image">
                         <img class="img img-raised" src="../front/img/NoCategoryEvents.png" />
                     </div>
-
                     <div class="card-content">
                         <h4 class="card-title">No Events in This Category, Stay Tuned!</h4>
                     </div>

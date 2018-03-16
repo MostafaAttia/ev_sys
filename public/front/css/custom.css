@@ -236,11 +236,16 @@
     font-size: 20px;
     display: inline-block;
 }
-.organiser-card-labels{
+.organiser-card-labels {
     margin: 20px;
 }
 .profile-page .profile .name {
     padding-top: 20px;
 }
 
-
+.categories-wrapper {
+    padding: 70px 0;
+}
+.category-card {
+    margin-bottom: 10px;
+}

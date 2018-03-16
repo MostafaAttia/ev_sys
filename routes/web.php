@@ -77,6 +77,13 @@ Route::group(['prefix' => 'home'], function(){
         'as'   => 'showPublicClientProfile',
         'uses' => 'ClientController@showPublicClientProfile',
     ]);
+
+    Route::get('/categories', [
+        'as'   => 'showCategories',
+        'uses' => 'CategoriesController@index',
+    ]);
+
+
 });
 
 Route::group(['prefix' => 'client', 'middleware' => 'auth:client'], function(){
