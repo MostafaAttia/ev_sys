@@ -32,7 +32,7 @@
                                 </div>
                                 @endif
                                 <div class="card-content">
-                                    <a href="#">
+                                    <a href="{{route('showCategory', $category['id'])}}">
                                         <h2 class="card-title">{{ $category['name'] }}</h2>
                                     </a>
                                     <div class="organiser-card-labels">

@@ -83,6 +83,11 @@ Route::group(['prefix' => 'home'], function(){
         'uses' => 'CategoriesController@index',
     ]);
 
+    Route::get('category/{category_id}', [
+        'as'   => 'showCategory',
+        'uses' => 'CategoriesController@showCategory',
+    ]);
+
 
 });
 

@@ -36,7 +36,6 @@ $(document).ready(function(){
         }
     });
 
-
     $(document).on('click','.btn-fav-category', function(event){
         event.preventDefault();
         var category_id = $(this).attr('data-category-id');
@@ -131,7 +130,6 @@ $(document).ready(function(){
     });
 
     $(document).ajaxComplete(function() {
-
         $(".category").popover({ trigger: "manual" , html: true, animation:false})
             .on("mouseenter", function () {
                 var _this = this;
@@ -163,9 +161,7 @@ $(document).ready(function(){
                     }
                 }, 300);
             });
-
     });
-
 
     $('.nav-pills-icons li').click(function(event){
         event.preventDefault();

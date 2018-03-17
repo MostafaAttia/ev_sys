@@ -7,6 +7,7 @@
                     <div class="card-image">
                         <img class="img img-raised" src="../front/img/NoCategoryEvents.png" />
                     </div>
+
                     <div class="card-content">
                         <h4 class="card-title">No Events in This Category, Stay Tuned!</h4>
                     </div>
@@ -87,39 +88,44 @@
                     </h4>
 
                     @if(Auth::guard('client')->user())
-                    <h6 class="category category-popover-{{ $event['category']['id'] }} text-info"
-                        data-html="true" data-toggle="popover" data-placement="auto bottom"
-                        data-content="<div class='category-popover'>
-                        <img class='img-thumbnail category-thumb' src='{{ $event['category']['image'] }}'>
-                        <br> <span class='text-info'><strong>{{ $event['category']['name'] }}</strong></span> <br>
+                        <a href="{{ route('showCategory', $event['category']['id']) }}">
+                            <h6 class="category category-popover-{{ $event['category']['id'] }} text-info"
+                                data-html="true" data-toggle="popover" data-placement="auto bottom"
+                                data-content="<div class='category-popover'>
+                                <img class='img-thumbnail category-thumb' src='{{ $event['category']['image'] }}'>
+                                <br> <span class='text-info'><strong>{{ $event['category']['name'] }}</strong></span> <br>
 
-                        <i class='material-icons btn-fav-category {{ in_array($event['category']['id'], $favorites) ? 'vt-red': 'vt-grey' }} '
-                        data-category-events='{{ $event['category']['events'] }}'
-                        data-category-name='{{ $event['category']['name'] }}'
-                        data-category-thumb='{{ $event['category']['image'] }}'
-                        data-category-id='{{ $event['category']['id'] }}'>favorite</i>
-                        <br>
-                        <div class='fav-counter vt-grey'>
-                        <i class='material-icons'>favorite</i> <span title='#fans' class='fans-counter-{{ $event['category']['id'] }}'> {{ count($event['category']['fans_ids']) }} </span> &nbsp; &middot; &nbsp;
-                        <i class='material-icons'>list</i> <span title='#active events'> {{ $event['category']['events'] }}</span>
-                        </div></div>">
+                                <i class='material-icons btn-fav-category {{ in_array($event['category']['id'], $favorites) ? 'vt-red': 'vt-grey' }} '
+                                data-category-events='{{ $event['category']['events'] }}'
+                                data-category-name='{{ $event['category']['name'] }}'
+                                data-category-thumb='{{ $event['category']['image'] }}'
+                                data-category-id='{{ $event['category']['id'] }}'>favorite</i>
+                                <br>
+                                <div class='fav-counter vt-grey'>
+                                <i class='material-icons'>favorite</i> <span title='#fans' class='fans-counter-{{ $event['category']['id'] }}'> {{ count($event['category']['fans_ids']) }} </span> &nbsp; &middot; &nbsp;
+                                <i class='material-icons'>list</i> <span title='#active events'> {{ $event['category']['events'] }}</span>
+                                </div></div>">
 
-                        {{ $event['category']['name'] }}
-                    </h6>
+                                {{ $event['category']['name'] }}
+                            </h6>
+                        </a>
+
                     @else
-                        <h6 class="category text-info"
-                            data-html="true" data-toggle="popover" data-placement="auto bottom"
-                            data-content="<div class='category-popover'>
-                            <img class='img-thumbnail category-thumb' src='{{ $event['category']['image'] }}'>
-                            <br> <span class='text-info'><strong>{{ $event['category']['name'] }}</strong></span> <br>
+                        <a href="{{ route('showCategory', $event['category']['id']) }}">
+                            <h6 class="category text-info"
+                                data-html="true" data-toggle="popover" data-placement="auto bottom"
+                                data-content="<div class='category-popover'>
+                                <img class='img-thumbnail category-thumb' src='{{ $event['category']['image'] }}'>
+                                <br> <span class='text-info'><strong>{{ $event['category']['name'] }}</strong></span> <br>
 
-                            <div class='fav-counter vt-grey'>
-                            <i class='material-icons'>favorite</i> <span title='#fans'> {{ count($event['category']['fans_ids']) }} </span> &nbsp; &middot; &nbsp;
-                            <i class='material-icons'>list</i> <span title='#active events'> {{ $event['category']['events'] }}</span>
-                            </div></div>">
+                                <div class='fav-counter vt-grey'>
+                                <i class='material-icons'>favorite</i> <span title='#fans'> {{ count($event['category']['fans_ids']) }} </span> &nbsp; &middot; &nbsp;
+                                <i class='material-icons'>list</i> <span title='#active events'> {{ $event['category']['events'] }}</span>
+                                </div></div>">
 
-                            {{ $event['category']['name'] }}
-                        </h6>
+                                {{ $event['category']['name'] }}
+                            </h6>
+                        </a>
                     @endif
                     <p class="card-description">
                         {{ str_limit($event['desc'], $limit = 200, $end = '...') }}
