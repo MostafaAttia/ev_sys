@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Event;
+use Debugbar;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
-use LaravelPusher;
+//use LaravelPusher;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,8 +19,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //require app_path('Attendize/constants.php');
 
-        $pusher = $this->app->make('pusher');
-        $pusher->set_logger( new LaravelLoggerProxy() );
+//        $pusher = $this->app->make('pusher');
+//        $pusher->set_logger( new LaravelLoggerProxy() );
 
     }
 
@@ -38,9 +40,9 @@ class AppServiceProvider extends ServiceProvider
         );
     }
 }
-
-class LaravelLoggerProxy { // logging pusher events
-    public function log( $msg ) {
-        Log::info($msg);
-    }
-}
+//
+//class LaravelLoggerProxy { // logging pusher events
+//    public function log( $msg ) {
+//        Log::info($msg);
+//    }
+//}

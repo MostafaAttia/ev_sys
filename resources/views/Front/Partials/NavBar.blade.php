@@ -14,6 +14,13 @@
 
     	<div class="collapse navbar-collapse">
     		<ul class="nav navbar-nav navbar-right">
+                <li @if(Auth::guard('client')->user()) style="padding-top: 6px;" @endif>
+                    <a href="{{ route('showCategories') }}">
+                        <i class="fa fa-th-list vt-color"></i> Categories
+                    </a>
+                    <div class="ripple-container"></div>
+                </li>
+
                 @if(! Auth::guard('client')->user())
 				<li>
 					<a href="#login" data-toggle="modal" data-target="#loginModal">
@@ -32,7 +39,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 						<i class="material-icons vt-color">event</i> Event Organizers 
 						<b class="caret"></b>
-					<div class="ripple-container"></div></a>
+					    <div class="ripple-container"></div></a>
 					<ul class="dropdown-menu dropdown-with-icons">
 						<li>
 							<a href="{{ route('login') }}">
@@ -47,6 +54,16 @@
 					</ul>
 				</li>
                 @else
+                <li class="dropdown" @if(Auth::guard('client')->user()) style="padding-top: 6px;" @endif>
+                    <a href="javascript:void(0);" class="dropdown-toggle" id="notifications" data-toggle="dropdown" >
+                        <i class="fa fa-bell"></i>
+                        <b class="caret"></b>
+                        <div class="ripple-container"></div>
+                    </a>
+                    <ul class="dropdown-menu vt-scroll-bar" role="menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
+                        <li class="dropdown-header">No notifications</li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" style="padding-bottom: 0px;" data-toggle="dropdown" aria-expanded="false">
                         <img src="{{ $client['image_path']['original'] }}" alt="{{ $client['first_name'] .'\' image' }}" class="client-avatar"/>

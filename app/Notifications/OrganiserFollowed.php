@@ -3,7 +3,9 @@
 namespace App\Notifications;
 
 use App\Models\Client;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -32,7 +34,7 @@ class OrganiserFollowed extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -46,6 +48,8 @@ class OrganiserFollowed extends Notification implements ShouldQueue
         return [
             'follower_id' => $this->follower->id,
             'follower_name' => $this->follower->first_name. ' '. $this->follower->last_name,
+            'follower_avatar' => $this->follower->getAvatar(),
+            'follower_profile' => $this->follower->getPublicProfileURL()
         ];
     }
 
@@ -63,6 +67,22 @@ class OrganiserFollowed extends Notification implements ShouldQueue
                     ->line('Thank you for using our application!');
     }
 
+//    public function broadcastOn()
+//    {
+//        return new PrivateChannel('Organiser.'.$this->update->order_id);
+//    }
+
+
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'follower_id' => $this->follower->id,
+            'follower_name' => $this->follower->first_name. ' '. $this->follower->last_name,
+            'follower_avatar' => $this->follower->getAvatar(),
+            'follower_profile' => $this->follower->getPublicProfileURL()
+        ]);
+    }
+
     /**
      * Get the array representation of the notification.
      *
@@ -72,7 +92,14 @@ class OrganiserFollowed extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            //
+            'id' => $this->id,
+            'read_at' => null,
+            'data' => [
+                'follower_id' => $this->follower->id,
+                'follower_name' => $this->follower->first_name. ' '. $this->follower->last_name,
+                'follower_avatar' => $this->follower->getAvatar(),
+                'follower_profile' => $this->follower->getPublicProfileURL()
+            ],
         ];
     }
 }

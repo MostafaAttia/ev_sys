@@ -15,17 +15,12 @@
 .nav-pills > li i {
     color: #f44336;
 }
-
 .nav-pills > li.active  i {
 	color: #ffffff !important;
 }
-
 .nav-pills-icons li {
     cursor: pointer;
 }
-
-
-
 /* WORDS SWAP */
 [data-words]{
   vertical-align: top;
@@ -101,10 +96,6 @@
     border-radius: 50%;
     margin-right: 5px;
     box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
-}
-
-.client-profile-avatar {
-    margin: 0 auto;
 }
 
 #infscr-loading {

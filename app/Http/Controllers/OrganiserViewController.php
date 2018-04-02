@@ -45,6 +45,7 @@ class OrganiserViewController extends Controller
         $past_events = $organiser->events()->where('is_live', 1)->where('end_date', '<', Carbon::now())->limit(10)->get();
 
         $client = [];
+        $followings_ids = [];
 
         if(Auth::guard('client')->user()) {
             $fractal = new Fractal\Manager();
@@ -52,6 +53,8 @@ class OrganiserViewController extends Controller
             $auth_client = Auth::guard('client')->user();
             $client_obj = new Fractal\Resource\Item($auth_client, new ClientTransformer);
             $client = $fractal->createData($client_obj)->toArray();
+            $followings = $auth_client->followings(\App\Models\Organiser::class)->get();
+            $followings_ids = $followings->pluck('id')->toArray();
         }
 
         $data = [
@@ -60,7 +63,8 @@ class OrganiserViewController extends Controller
             'is_embedded'     => 0,
             'upcoming_events' => $upcoming_events,
             'past_events'     => $past_events,
-            'client'          => $client
+            'client'          => $client,
+            'followings_ids'  => $followings_ids
         ];
 
         return view('Public.ViewOrganiser.OrganiserPage', $data);

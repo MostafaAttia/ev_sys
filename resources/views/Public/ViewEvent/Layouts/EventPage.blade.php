@@ -103,5 +103,6 @@
         @include('Front.Home.Modals.Modals')
 
         @include('Shared.Partials.GlobalFooterJS')
+        @include('Front.Partials.Shared-Javascript')
     </body>
 </html>

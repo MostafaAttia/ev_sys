@@ -11,8 +11,8 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/assets/javascript/notifications/')
-    .sass('resources/assets/sass/app.scss', 'public/assets/javascript/notifications/');
+mix.js('resources/assets/js/*', 'public/assets/javascript/notifications/notif.js')
+    .sass('resources/assets/sass/notif.scss', 'public/assets/stylesheet/notifications/');
 
 
 // Full API

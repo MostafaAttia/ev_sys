@@ -54,15 +54,21 @@ class AuthController extends Controller
     /**
      * Create a new authentication controller instance.
      *
-     * @param \Illuminate\Contracts\Auth\Guard $auth
-     * @param \Illuminate\Contracts\Auth\Registrar $registrar
+     * @internal param Guard $auth
+     * @internal param \Illuminate\Contracts\Auth\Registrar $registrar
      *
-     * @return void
      */
     public function __construct()
     {
 //        $this->auth = $auth;
 //        $this->registrar = $registrar;
+    }
+
+    public function logout()
+    {
+        Auth::guard('client')->logout();
+
+        return redirect()->intended('home');
     }
 
 

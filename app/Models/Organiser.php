@@ -137,6 +137,37 @@ class Organiser extends MyBaseModel
     }
 
     /**
+     * return path of organisers' avatar, optionally select avatar size, default size is '60*60'
+     * available sizes: 60 / 120 / 240 / original
+     *
+     * @param string $size
+     * @return string
+     */
+    public function getAvatar($size = '60')
+    {
+        if($this->logo_path) {
+            switch ($size) {
+                case 'original':
+                    return config('attendize.s3_base_url').config('attendize.s3_organiser_original'). $this->logo_path;
+                    break;
+                case '60':
+                    return config('attendize.s3_base_url').config('attendize.s3_organiser_60_60'). $this->logo_path;
+                    break;
+                case '120':
+                    return config('attendize.s3_base_url').config('attendize.s3_organiser_120_120'). $this->logo_path;
+                    break;
+                case '240':
+                    return config('attendize.s3_base_url').config('attendize.s3_organiser_240_240'). $this->logo_path;
+                    break;
+                default:
+                    return config('attendize.s3_base_url').config('attendize.s3_organiser_60_60'). $this->logo_path;
+            }
+        }
+
+        return config('attendize.s3_base_url').config('attendize.s3_organiser_defaults'). 'original.jpg';
+    }
+
+    /**
      * TODO:implement DailyStats method
      */
     public function getDailyStats()

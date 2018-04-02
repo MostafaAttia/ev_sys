@@ -14,65 +14,82 @@
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
+                <li @if(Auth::guard('client')->user()) style="padding-top: 6px;" @endif>
+                    <a href="{{ route('showCategories') }}">
+                        <i class="fa fa-th-list vt-color"></i> Categories
+                    </a>
+                    <div class="ripple-container"></div>
+                </li>
                 @if(! Auth::guard('client')->user())
-                    <li>
-                        <a href="#login" data-toggle="modal" data-target="#loginModal">
-                            <i class="fa fa-sign-in vt-color"></i> Login
-                        </a>
-                        <div class="ripple-container"></div>
-                    </li>
+                <li>
+                    <a href="#login" data-toggle="modal" data-target="#loginModal">
+                        <i class="fa fa-sign-in vt-color"></i> Login
+                    </a>
+                    <div class="ripple-container"></div>
+                </li>
 
-                    <li>
-                        <a href="#signup" data-toggle="modal" data-target="#signupModal">
-                            <i class="fa fa-user-plus vt-color"></i> Signup
-                        </a>
-                    </li>
+                <li>
+                    <a href="#signup" data-toggle="modal" data-target="#signupModal">
+                        <i class="fa fa-user-plus vt-color"></i> Signup
+                    </a>
+                </li>
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons vt-color">event</i> Event Organizers
-                            <b class="caret"></b>
-                            <div class="ripple-container"></div></a>
-                        <ul class="dropdown-menu dropdown-with-icons">
-                            <li>
-                                <a href="{{ route('login') }}">
-                                    <i class="fa fa-sign-in vt-color"></i> Login
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('showSignup') }}">
-                                    <i class="fa fa-user-plus vt-color"></i> Join Us
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <i class="material-icons vt-color">event</i> Event Organizers
+                        <b class="caret"></b>
+                        <div class="ripple-container"></div></a>
+                    <ul class="dropdown-menu dropdown-with-icons">
+                        <li>
+                            <a href="{{ route('login') }}">
+                                <i class="fa fa-sign-in vt-color"></i> Login
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('showSignup') }}">
+                                <i class="fa fa-user-plus vt-color"></i> Join Us
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" style="padding-bottom: 0px;" data-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ $client['image_path']['original'] }}" alt="{{ $client['first_name'] .'\' image' }}" class="client-avatar"/>
-                            {{ $client['first_name'] }}
-                            <b class="caret"></b>
-                            <div class="ripple-container"></div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-with-icons">
-                            <li>
-                                <a href="{{ route('showClientProfile') }}">
-                                    <i class="fa fa-sign-in vt-color"></i> Profile
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('showClientSettings') }}">
-                                    <i class="fa fa-user-plus vt-color"></i> Settings
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="{{ url('/home/logout') }}" >
-                                    <i class="fa fa-user-plus vt-color"></i> Logout
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+
+                <li class="dropdown" @if(Auth::guard('client')->user()) style="padding-top: 6px;" @endif>
+                    <a href="javascript:void(0);" class="dropdown-toggle" id="notifications" data-toggle="dropdown" >
+                        <i class="fa fa-bell"></i>
+                        <b class="caret"></b>
+                        <div class="ripple-container"></div>
+                    </a>
+                    <ul class="dropdown-menu vt-scroll-bar" role="menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
+                        <li class="dropdown-header">No notifications</li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" style="padding-bottom: 0px;" data-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ $client['image_path']['original'] }}" alt="{{ $client['first_name'] .'\' image' }}" class="client-avatar"/>
+                        {{ $client['first_name'] }}
+                        <b class="caret"></b>
+                        <div class="ripple-container"></div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-with-icons">
+                        <li>
+                            <a href="{{ route('showClientProfile') }}">
+                                <i class="fa fa-sign-in vt-color"></i> Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('showClientSettings') }}">
+                                <i class="fa fa-user-plus vt-color"></i> Settings
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{{ url('/home/logout') }}" >
+                                <i class="fa fa-user-plus vt-color"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 @endif
             </ul>
         </div>

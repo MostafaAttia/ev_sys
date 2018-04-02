@@ -6,13 +6,17 @@ use App\Models\Category;
 use App\Models\Event;
 use App\Models\EventImage;
 use App\Models\Organiser;
+use App\Notifications\NewEventFromCategory;
+use App\Notifications\NewEventFromOrganiser;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Image;
 use Log;
+use Session;
 use Validator;
 
 class EventController extends MyBaseController
@@ -434,5 +438,37 @@ class EventController extends MyBaseController
                 'error' => 'There was a problem uploading your image.',
             ]);
         }
+    }
+
+    public function makeEventLive($event_id)
+    {
+        $event = Event::scope()->findOrFail($event_id);
+        $event->is_live = 1;
+        $event->save();
+
+        // notify followers about this event, *if they want to get notified
+        $organiser = $event->organiser;
+        $followers = $organiser->followers()->get();
+        foreach ($followers as $follower) {
+            if($follower->meta->get_notif_about_followings){
+                $follower->notify(new NewEventFromOrganiser($organiser, $event));
+            }
+        }
+
+        // notify clients who favor a category about this event, *if they want to get notified
+        $category = $event->category;
+        $favoriters = $category->favoriters()->get();
+        foreach ($favoriters as $client) {
+            if($client->meta->get_notif_about_favorites){
+                $client->notify(new NewEventFromCategory($category, $event));
+            }
+        }
+
+        Session::flash('message',
+            'Event Successfully Made Live! You can undo this action in event settings page.');
+
+        return Redirect::route('showEventDashboard', [
+            'event_id' => $event_id,
+        ]);
     }
 }

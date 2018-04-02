@@ -6,13 +6,14 @@
 include_once('api.php');
 
 
+
 Route::get('/bridge', function() {
     $messages = [
         "name"      =>"hello from vitee",
         "content"   =>"Another message from the other side"
     ];
 
-    LaravelPusher::trigger('test_channel', 'my_event', ['message' => $messages]);
+//    LaravelPusher::trigger('test_channel', 'my_event', ['message' => $messages]);
 
     return 'sent';
 });
@@ -73,7 +74,7 @@ Route::group(['prefix' => 'home'], function(){
         'uses' => 'HomeController@index',
     ]);
 
-    Route::get('/{client_id}/profile', [
+    Route::get('client/{client_id}/profile', [
         'as'   => 'showPublicClientProfile',
         'uses' => 'ClientController@showPublicClientProfile',
     ]);
@@ -87,7 +88,6 @@ Route::group(['prefix' => 'home'], function(){
         'as'   => 'showCategory',
         'uses' => 'CategoriesController@showCategory',
     ]);
-
 
 });
 
@@ -602,22 +602,10 @@ Route::group(['middleware' => ['auth', 'web', 'first.run']], function () {
             ]);
         });
 
-        /*
-         * @todo Move to a controller
-         */
-        Route::get('{event_id}/go_live', [
-            'as' => 'MakeEventLive',
-            function ($event_id) {
-                $event = \App\Models\Event::scope()->findOrFail($event_id);
-                $event->is_live = 1;
-                $event->save();
-                \Session::flash('message',
-                    'Event Successfully Made Live! You can undo this action in event settings page.');
 
-                return Redirect::route('showEventDashboard', [
-                    'event_id' => $event_id,
-                ]);
-            }
+        Route::get('{event_id}/go_live', [
+            'as'    => 'MakeEventLive',
+            'uses'  => 'EventController@makeEventLive',
         ]);
 
 

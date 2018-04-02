@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse;
+use Auth;
 
 class RedirectIfAuthenticated
 {
@@ -13,7 +14,7 @@ class RedirectIfAuthenticated
      *
      * @var Guard
      */
-    protected $auth;
+//    protected $auth;
 
     /**
      * Create a new filter instance.
@@ -35,8 +36,12 @@ class RedirectIfAuthenticated
      *
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $guard = null)
     {
+        if (Auth::guard($guard)->check()) {
+            return redirect('/home');
+        }
+
         if ($this->auth->check()) {
             return new RedirectResponse(route('showSelectOrganiser'));
         }

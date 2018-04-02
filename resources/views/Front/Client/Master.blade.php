@@ -7,10 +7,16 @@
         @show
 	</title>
 
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
+
 	<meta charset="utf-8" />
 	{{-- <link rel="apple-touch-icon" sizes="76x76" href="front/img/apple-icon.png"> --}}
-	<link rel="apple-touch-icon" sizes="76x76" href="front/img/favicon.ico">
-	<link rel="icon" type="image/png" href="front/img/favicon.ico">
+	<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('front/img/favicon.ico') }}">
+	<link rel="icon" type="image/png" href="{{ asset('front/img/favicon.ico') }}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -37,6 +43,7 @@
     @yield('footer-scripts')
     @include('Front.Partials.core-scripts')
     @include('Front.Home.Modals.Modals')
-    {!!  HTML::script(config('attendize.cdn_url_static_assets').'/front/js/client-profile.js') !!}
+    @include('Front.Partials.Shared-Javascript')
+    @if(Auth::guard('client')->user()){!!  HTML::script('/front/js/client-profile.js') !!}@endif
 </body>
 </html>

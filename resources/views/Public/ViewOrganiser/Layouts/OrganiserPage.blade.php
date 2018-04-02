@@ -57,5 +57,6 @@
 
         @include('Shared.Partials.GlobalFooterJS')
         @yield('foot')
+        @include('Front.Partials.Shared-Javascript')
 </body>
 </html>

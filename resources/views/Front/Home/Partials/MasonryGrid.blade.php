@@ -5,7 +5,7 @@
             <div id="noCategoryEvents" class="text-center">
                 <div class="card card-plain card-blog">
                     <div class="card-image">
-                        <img class="img img-raised" src="../front/img/NoCategoryEvents.png" />
+                        <img class="img img-raised" src="{{ asset('front/img/NoCategoryEvents.png') }}" />
                     </div>
 
                     <div class="card-content">
@@ -96,14 +96,17 @@
                                 <br> <span class='text-info'><strong>{{ $event['category']['name'] }}</strong></span> <br>
 
                                 <i class='material-icons btn-fav-category {{ in_array($event['category']['id'], $favorites) ? 'vt-red': 'vt-grey' }} '
+                                data-fans-route='{{ route('fans', $event['category']['id']) }}'
+                                data-favorite-route='{{ route('favorite', $event['category']['id']) }}'
+                                data-unfavorite-route='{{ route('unfavorite', $event['category']['id']) }}'
                                 data-category-events='{{ $event['category']['events'] }}'
                                 data-category-name='{{ $event['category']['name'] }}'
                                 data-category-thumb='{{ $event['category']['image'] }}'
                                 data-category-id='{{ $event['category']['id'] }}'>favorite</i>
                                 <br>
                                 <div class='fav-counter vt-grey'>
-                                <i class='material-icons'>favorite</i> <span title='#fans' class='fans-counter-{{ $event['category']['id'] }}'> {{ count($event['category']['fans_ids']) }} </span> &nbsp; &middot; &nbsp;
-                                <i class='material-icons'>list</i> <span title='#active events'> {{ $event['category']['events'] }}</span>
+                                <i class='material-icons' title='#fans'>favorite</i> <span title='#fans' class='fans-counter-{{ $event['category']['id'] }}'> {{ count($event['category']['fans_ids']) }} </span> &nbsp; &middot; &nbsp;
+                                <i class='material-icons' title='#active events'>list</i> <span title='#active events'> {{ $event['category']['events'] }}</span>
                                 </div></div>">
 
                                 {{ $event['category']['name'] }}
@@ -119,8 +122,8 @@
                                 <br> <span class='text-info'><strong>{{ $event['category']['name'] }}</strong></span> <br>
 
                                 <div class='fav-counter vt-grey'>
-                                <i class='material-icons'>favorite</i> <span title='#fans'> {{ count($event['category']['fans_ids']) }} </span> &nbsp; &middot; &nbsp;
-                                <i class='material-icons'>list</i> <span title='#active events'> {{ $event['category']['events'] }}</span>
+                                <i class='material-icons' title='#fans'>favorite</i> <span title='#fans'> {{ count($event['category']['fans_ids']) }} </span> &nbsp; &middot; &nbsp;
+                                <i class='material-icons' title='#active events'>list</i> <span title='#active events'> {{ $event['category']['events'] }}</span>
                                 </div></div>">
 
                                 {{ $event['category']['name'] }}
@@ -139,6 +142,9 @@
                                 <img class='img-thumbnail category-thumb' src='{{ $event['organiser']['image_path']['60*60'] }}'>
                                 <br> <span class='text-info'><strong>{{ $event['organiser']['name'] }}</strong></span> <br>
                                 <i title='follow' class='material-icons btn-follow-organiser {{ in_array($event['organiser']['id'], $following) ? 'vt-red': 'vt-grey' }} '
+                                data-follow-route='{{ route('follow', $event['organiser']['id']) }}'
+                                data-unfollow-route='{{ route('unfollow', $event['organiser']['id']) }}'
+                                data-followers-route='{{ route('followers', $event['organiser']['id']) }}'
                                 data-organiser-events='{{ $event['organiser']['events'] }}'
                                 data-organiser-name='{{ $event['organiser']['name'] }}'
                                 data-organiser-thumb='{{ $event['organiser']['image_path']['60*60'] }}'
@@ -146,8 +152,8 @@
 
                                 <br>
                                 <div class='fav-counter vt-grey'>
-                                <i class='material-icons'>star</i> <span title='#fans' class='followers-counter-{{ $event['organiser']['id'] }}'> {{ count($event['organiser']['followers_ids']) }} </span> &nbsp; &middot; &nbsp;
-                                <i class='material-icons'>list</i> <span title='#active events'> {{ $event['organiser']['events'] }}</span>
+                                <i class='material-icons' title='#fans'>star</i> <span title='#fans' class='followers-counter-{{ $event['organiser']['id'] }}'> {{ count($event['organiser']['followers_ids']) }} </span> &nbsp; &middot; &nbsp;
+                                <i class='material-icons' title='#active events'>list</i> <span title='#active events'> {{ $event['organiser']['events'] }}</span>
                                 </div></div>">
                                 <img src="{{ $event['organiser']['image_path']['original'] }}" alt="organiser logo" class="avatar img-raised">
                                 <span>{{ $event['organiser']['name'] }}</span>
@@ -160,8 +166,8 @@
                                 <br> <span class='text-info'><strong>{{ $event['organiser']['name'] }}</strong></span> <br>
 
                                 <div class='fav-counter vt-grey'>
-                                <i class='material-icons'>star</i> <span title='#fans'> {{ count($event['organiser']['followers_ids']) }} </span> &nbsp; &middot; &nbsp;
-                                <i class='material-icons'>list</i> <span title='#active events'> {{ $event['organiser']['events'] }}</span>
+                                <i class='material-icons' title='#fans'>star</i> <span title='#fans'> {{ count($event['organiser']['followers_ids']) }} </span> &nbsp; &middot; &nbsp;
+                                <i class='material-icons' title='#active events'>list</i> <span title='#active events'> {{ $event['organiser']['events'] }}</span>
                                 </div></div>">
                                 <img src="{{ $event['organiser']['image_path']['60*60'] }}" alt="organiser logo" class="avatar img-raised">
                                 <span>{{ $event['organiser']['name'] }}</span>
@@ -170,7 +176,11 @@
                         </div>
                         @if(Auth::guard('client')->user())
                         <div class="stats">
-                            <a class="event-like-status {{ in_array($event['id'], $liked_events) ? 'vt-red': 'vt-grey' }}" data-event-id="{{ $event['id'] }}">
+                            <a class="event-like-status {{ in_array($event['id'], $liked_events) ? 'vt-red': 'vt-grey' }}"
+                               data-like-route="{{ route('like', $event['id']) }}"
+                               data-unlike-route="{{ route('unlike', $event['id']) }}"
+                               data-likes-route="{{ route('likes', $event['id']) }}"
+                               data-event-id="{{ $event['id'] }}">
                                 <i title='like' class="material-icons">thumb_up</i>
                             </a> <span id="likes-counter-{{$event['id']}}">{{ $event['likes_counter'] }}</span>
                         </div>

@@ -1,7 +1,7 @@
 @extends('Front.Master')
 
 @section('title')
-    Categories
+    {{ $category['name'] }} Category
 @stop
 
 @section('navbar')
@@ -20,11 +20,11 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="brand">
-                        <h1 class="title" style="display: inline-block;">{{ $category['name'] }}</h1>
+                        <h1 class="title" style="display: inline-block;">{{ $category['name'] }}</h1> &nbsp; &nbsp;
                         @if(Auth::guard('client')->user())
                                 <button data-favorite-route="{{ route('favorite', $category['id']) }}"
                                         data-unfavorite-route="{{ route('unfavorite', $category['id']) }}"
-                                        class="btn btn-fab {{ in_array($category['id'], $favorites) ? 'btn-primary': 'btn-default'}} favorite_category " rel="tooltip"
+                                        class="btn btn-sm btn-fab {{ in_array($category['id'], $favorites) ? 'btn-primary': 'btn-default'}} favorite_category " rel="tooltip"
                                         title="{{ in_array($category['id'], $favorites) ? 'Unfavorite': 'Favorite'}}"
                                         style="vertical-align: baseline;">
                                     <i class="material-icons">favorite</i>
@@ -55,7 +55,7 @@
         </div>
     </div>
 
-    {!!  HTML::script(config('attendize.cdn_url_static_assets').'/front/js/client-profile.js') !!}
+    @if(Auth::guard('client')->user()){!!  HTML::script('/front/js/client-profile.js') !!}@endif
 @stop
 @section('footer')
     @include('Front.Partials.Footer')

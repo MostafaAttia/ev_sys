@@ -20,10 +20,15 @@ class Authenticate
         if (Auth::guard($guard)->guest()) {
             if ($request->is('api/*') || $request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
-            } else {
+
+            }
+
+            else {
                 return redirect()->guest('/home');
             }
+
         }
+
         return $next($request);
     }
 }

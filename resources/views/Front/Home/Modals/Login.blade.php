@@ -31,14 +31,20 @@
 								<span class="input-group-addon">
 									<i class="material-icons">email</i>
 								</span>
-                                <div class="form-group is-empty"><input type="email" name="email" class="form-control" placeholder="Email..."><span class="material-input"></span></div>
+                                <div class="form-group is-empty">
+                                    <input type="email" name="email" class="form-control" placeholder="Email..." autofocus="" required>
+                                    <span class="material-input"></span>
+                                </div>
                             </div>
 
                             <div class="input-group">
 								<span class="input-group-addon">
 									<i class="material-icons">lock_outline</i>
 								</span>
-                                <div class="form-group is-empty"><input type="password" name="password" placeholder="Password..." class="form-control"><span class="material-input"></span></div>
+                                <div class="form-group is-empty">
+                                    <input type="password" name="password" placeholder="Password..." class="form-control" required>
+                                    <span class="material-input"></span>
+                                </div>
                             </div>
 
                             <!-- If you want to add a checkbox to this form, uncomment this code

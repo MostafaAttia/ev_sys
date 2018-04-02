@@ -68,32 +68,91 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
-module.exports = __webpack_require__(5);
+__webpack_require__(2);
+module.exports = __webpack_require__(6);
 
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+    $('#notifications').on('click', function () {
+
+        if ($(this).hasClass('has-notifications')) {
+            $(this).removeClass('has-notifications');
+        }
+
+        $('.divider:last-of-type').remove();
+    });
+});
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(2);
-//window.$ = window.jQuery = require('jquery');
-//require('bootstrap-sass');
+window._ = __webpack_require__(3);
+
+//import Echo from "laravel-echo";
+//window.Pusher = require('pusher-js');
+//window.Echo = new Echo({
+//    broadcaster: 'pusher',
+//    key: '9d1c81efe142ffcf493b',
+//    cluster: 'us2',
+//    encrypted: true
+//});
+//Pusher.log = function(message){
+//    window.console.log(message)
+//};
 
 var notifications = [];
 
 var NOTIFICATION_TYPES = {
-    follow: 'App\\Notifications\\OrganiserFollowed'
+    follow: 'App\\Notifications\\OrganiserFollowed',
+    newEventFromOrganiser: 'App\\Notifications\\NewEventFromOrganiser',
+    newEventFromCategory: 'App\\Notifications\\NewEventFromCategory'
 };
 
 $(document).ready(function () {
     // check if there's a logged in user
     if (Laravel.organiserId) {
+
         $.get('/organiser/' + Laravel.organiserId + '/notifications', function (data) {
+            addNotifications(data, "#notifications");
+        });
+
+        //setInterval( get_organiser_notifications, 5000 );
+
+    } else if (Laravel.clientId) {
+        $.get('/client/notifications', function (data) {
             addNotifications(data, "#notifications");
         });
     }
 });
+
+function get_organiser_notifications() {
+    //console.log('called');
+
+    $.get('/organiser/' + Laravel.organiserId + '/notifications', function (data) {
+        //console.log(data.length > 0);
+        if (data.length > 0) {
+            data.forEach(function (notification) {
+                if ($('#' + notification.id).length) {
+                    console.log('already exists');
+                } else {
+                    addNotifications(data, "#notifications");
+                }
+            });
+        }
+    });
+}
+
+function get_client_notifications() {
+    //$.get(route, function (data) {
+    //    addNotifications(data, "#notifications");
+    //});
+}
 
 function addNotifications(newNotifications, target) {
     notifications = _.concat(notifications, newNotifications);
@@ -118,16 +177,24 @@ function showNotifications(notifications, target) {
 function makeNotification(notification) {
     var to = routeNotification(notification);
     var notificationText = makeNotificationText(notification);
-    return '<li><a href="' + to + '">' + notificationText + '</a></li>';
+    return '<li id="' + notification.id + '"><a target="_blank" href="' + to + '">' + notificationText + '</a></li><li class="divider"></li>';
 }
 
 // get the notification route based on it's type
 function routeNotification(notification) {
     var to = '&read=' + notification.id;
     if (notification.type === NOTIFICATION_TYPES.follow) {
-        to = '?organiser_id=' + Laravel.organiserId + to;
+        var profile_url = notification.data.follower_profile;
+        to = profile_url + '?organiser_id=' + Laravel.organiserId + to;
+    } else if (notification.type === NOTIFICATION_TYPES.newEventFromOrganiser) {
+        var event_url = notification.data.event_url;
+        to = event_url + '?client_id=' + Laravel.clientId + '&ntf_org=1' + to;
+    } else if (notification.type === NOTIFICATION_TYPES.newEventFromCategory) {
+        var _event_url = notification.data.event_url;
+        to = _event_url + '?client_id=' + Laravel.clientId + '&ntf_cat=1' + to;
     }
-    return '/' + to;
+
+    return to;
 }
 
 // get the notification text based on it's type
@@ -135,13 +202,26 @@ function makeNotificationText(notification) {
     var text = '';
     if (notification.type === NOTIFICATION_TYPES.follow) {
         var name = notification.data.follower_name;
-        text += '<strong>' + name + '</strong> followed you';
+        var avatar = notification.data.follower_avatar;
+        var avatarHTML = '<img class="img-circle" style="max-width:35px; margin-right: 8px;" src="' + avatar + '" />';
+        text += avatarHTML + '<strong>' + name + '</strong> followed you';
+    } else if (notification.type === NOTIFICATION_TYPES.newEventFromOrganiser) {
+        var _name = notification.data.following_name;
+        var _avatar = notification.data.following_avatar;
+        var avatarHTML = '<img class="img-circle" style="max-width:35px; margin-right: 8px;" src="' + _avatar + '" />';
+        text += avatarHTML + ('<strong>' + _name + '</strong> published a new event');
+    } else if (notification.type === NOTIFICATION_TYPES.newEventFromCategory) {
+        var _name2 = notification.data.category_name;
+        var _avatar2 = notification.data.category_avatar;
+        var avatarHTML = '<img class="img-circle" style="max-width:35px; margin-right: 8px;" src="' + _avatar2 + '" />';
+        text += avatarHTML + ('New event in <strong>' + _name2 + '</strong>');
     }
+
     return text;
 }
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -17243,10 +17323,10 @@ function makeNotificationText(notification) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(4)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(5)(module)))
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 var g;
@@ -17273,7 +17353,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -17301,7 +17381,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

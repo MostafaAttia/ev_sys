@@ -22,7 +22,8 @@
     <!-- This makes the current user's id available in javascript -->
     @if(!auth()->guest())
         <script>
-            window.Laravel.organiserId = <?php echo isset($organiser->id) ?  $organiser->id :  $event->organiser->id; ?>
+            window.Laravel.organiserId = <?php echo isset($organiser->id) ?  $organiser->id :  $event->organiser->id; ?>;
+            window.Laravel.userId      = <?php echo auth()->user()->id; ?>;
         </script>
     @endif
 
@@ -34,7 +35,8 @@
     {!! HTML::style(config('attendize.cdn_url_static_assets').'/assets/stylesheet/application.css') !!}
     <!--/Style-->
 
-    {!! HTML::script(config('attendize.cdn_url_static_assets').'/assets/javascript/notifications/app.js') !!}
+    {!! HTML::script(config('attendize.cdn_url_static_assets').'/assets/javascript/notifications/notif.js') !!}
+    {!! HTML::style(config('attendize.cdn_url_static_assets').'/assets/stylesheet/notifications/notif.css') !!}
 
     @yield('head')
 </head>
@@ -54,24 +56,24 @@
         <ul class="nav navbar-nav navbar-right">
 
             <li class="dropdown">
-                <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span class="glyphicon glyphicon-bell"></span>
+                <a href="javascript:void(0);" class="dropdown-toggle" id="notifications" data-toggle="dropdown" >
+                    <span class="meta">
+                        <span class="glyphicon glyphicon-bell"></span>
+                        <span class="arrow"></span>
+                    </span>
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
+                <ul class="dropdown-menu vt-scroll-bar" role="menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
                     <li class="dropdown-header">No notifications</li>
                 </ul>
             </li>
 
             <li class="dropdown profile">
-
                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                     <span class="meta">
                         <span class="text ">{{isset($organiser->name) ? $organiser->name : $event->organiser->name}}</span>
                         <span class="arrow"></span>
                     </span>
                 </a>
-
-
                 <ul class="dropdown-menu" role="menu">
                     <li>
                         <a href="{{route('showCreateOrganiser')}}">

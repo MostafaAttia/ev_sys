@@ -81,7 +81,5 @@ class CategoriesController extends Controller
         }
 
         return view('Front.Categories.Category', compact('events', 'category'));
-
-
     }
 }

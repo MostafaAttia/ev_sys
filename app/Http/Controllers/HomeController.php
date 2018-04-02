@@ -22,6 +22,11 @@ class HomeController extends Controller
 
     use Helpers;
 
+//    public function __construct()
+//    {
+//        \Debugbar::disable();
+//    }
+
 
     public function testPayment()
     {
@@ -290,16 +295,28 @@ class HomeController extends Controller
         $fractal = new Fractal\Manager();
         $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
 
-        $eventsOriginal = Event::where('is_live', 1)
-            ->where('end_date', '>', date("Y-m-d H:i:s"))
-            ->where(function($query) use ($city, $country) {
-                $query->where('location_address_line_2',  $city)
-                    ->orWhere('venue_name_full', 'like', $city)
-                    ->orWhere('location_country', $country);
+        if($city){
+            $eventsOriginal = Event::where('is_live', 1)
+                ->where('end_date', '>', date("Y-m-d H:i:s"))
+                ->where(function($query) use ($city, $country) {
+                    $query->where('location_address_line_2',  $city)
+                        ->orWhere('venue_name_full', 'like', $city)
+                        ->orWhere('location_country', $country);
 
-            })
-            ->orderBy('start_date', 'asc')
-            ->paginate(10);
+                })
+                ->orderBy('start_date', 'asc')
+                ->paginate(10);
+        } else {
+            $eventsOriginal = Event::where('is_live', 1)
+                ->where('end_date', '>', date("Y-m-d H:i:s"))
+                ->where(function($query) use ($city, $country) {
+                    $query->where('location_country',  $country);
+                })
+                ->orderBy('start_date', 'asc')
+                ->paginate(10);
+        }
+
+
 
         $events = new Fractal\Resource\Collection($eventsOriginal, new EventTransformer);
         $events = $fractal->createData($events)->toArray();

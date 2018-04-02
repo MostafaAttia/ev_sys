@@ -15,18 +15,20 @@ use App\Models\Category;
 use App\Models\Event;
 use App\Models\Organiser;
 use App\Notifications\OrganiserFollowed;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Log;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Http\Requests;
 use League\Fractal;
-use LaravelPusher;
+//use LaravelPusher;
 use Validator;
 use JWTAuth;
 use Auth;
+use JavaScript;
 
 
 class ClientController extends Controller
@@ -74,6 +76,46 @@ class ClientController extends Controller
         $title = $client['first_name'] . '\' Profile';
 
         return view('Front.Client.Profile', compact('client', 'title'));
+
+    }
+
+    public function showPublicClientProfile($client_id)
+    {
+        $fractal = new Fractal\Manager();
+        $fractal->setSerializer(new Fractal\Serializer\ArraySerializer());
+
+        $client_obj = Client::findOrFail($client_id);
+        $meta = $client_obj->meta;
+        $client = new Fractal\Resource\Item($client_obj, new ClientTransformer);
+        $client = $fractal->createData($client)->toArray();
+
+        $organisers = $client_obj->followings(\App\Models\Organiser::class)->get();
+        $organisers_ids = $organisers->pluck('id')->toArray();
+
+        $organisers_array = [];
+        foreach($organisers as $organiser){
+            $organiser = new Fractal\Resource\Item($organiser, new OrganiserTransformer);
+            $organiser = $fractal->createData($organiser)->toArray();
+            array_push($organisers_array, $organiser);
+        }
+
+        $categories = $client_obj->favorites(\App\Models\Category::class)->get();
+        $categories_array = [];
+        foreach($categories as $category){
+            $category = new Fractal\Resource\Item($category, new CategoryTransformer);
+            $category = $fractal->createData($category)->toArray();
+            array_push($categories_array, $category);
+        }
+        $categories = $categories_array;
+        $organisers = $organisers_array;
+
+        /*TODO
+        * show attended events
+        */
+
+        $title = $client['first_name'] . '\' Profile';
+
+        return view('Front.Client.PublicProfile', compact('client', 'title', 'meta', 'organisers', 'organisers_ids', 'categories'));
 
     }
 
@@ -143,15 +185,7 @@ class ClientController extends Controller
     public function updateClient(Request $request)
     {
         $user = Auth::guard('client')->user();
-
-        if($request->has('email') || $request->has('password')){
-            return response()->json(
-                [
-                    'status'    => 'error',
-                    'data'      => null,
-                    'message'   => 'you can not change your email/password from here! :( ',
-                ], 401);
-        }
+        $client_data = $request->except('email', 'password');
 
         $validator = Validator::make($request->all(), [
             'first_name'    => 'filled|min:3|max:56',
@@ -163,21 +197,38 @@ class ClientController extends Controller
 
         if($validator->fails())
         {
-            return response()->json(
-                [
-                    'status'    => 'error',
-                    'data'      => null,
-                    'message'   => $validator->errors()->all(),
-                ], 400);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $user->update($request->except('email'));
-        return response()->json(
-            [
-                'status'    => 'success',
-                'data'      => null,
-                'message'   => 'User Updated successfully',
-            ], 200);
+        // upload user image
+        if ($request->hasFile('user_image')) {
+
+            $image = $request->file('user_image');
+            $imageName = 'img_'.md5(time(). str_random()).'.'.$image->getClientOriginalExtension();
+            $client_data['image_path'] = $imageName;
+
+            Storage::disk('s3')->put('user_content/original/'.$imageName, file_get_contents($image), 'public');
+
+            // save as THUMB 60*?
+            $image_thumb_60_60 = Image::make($image)->resize(60, 60)->stream();
+            Storage::disk('s3')->put('user_content/60*60/'.$imageName, $image_thumb_60_60->__toString(), 'public');
+
+            // save as THUMB 120*?
+            $image_thumb_120_120 = Image::make($image)->resize(120, 120)->stream();
+            Storage::disk('s3')->put('user_content/120*120/'.$imageName, $image_thumb_120_120->__toString(), 'public');
+
+            // save as VERTICAL poster 240*?
+            $image_vert_poster_240_240 = Image::make($image)->resize(240, 240)->stream();
+            Storage::disk('s3')->put('user_content/240*240/'.$imageName, $image_vert_poster_240_240->__toString(), 'public');
+
+        }
+
+        $user->update($client_data);
+        Session::flash('notification', [
+            'content'   => 'Your profile has been updated successfully!',
+            'type'      => 'success' // alert, success, error, warning, info
+        ]);
+        return redirect()->back();
 
     }
 
@@ -203,7 +254,7 @@ class ClientController extends Controller
 
         $client->meta()->update($meta);
         Session::flash('notification', [
-            'content'   => 'Preferences updated successfully!',
+            'content'   => 'Preferences has been updated successfully!',
             'type'      => 'success' // alert, success, error, warning, info
         ]);
         return redirect()->back();
@@ -286,7 +337,7 @@ class ClientController extends Controller
 
             $organiser->notify(new OrganiserFollowed($client));
 
-            LaravelPusher::trigger('organiser_notifications', 'new_follower', $message);
+//            LaravelPusher::trigger('organiser_notifications', 'new_follower', $message);
 
             return response()->json(
                 [

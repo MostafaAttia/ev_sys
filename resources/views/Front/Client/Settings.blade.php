@@ -39,7 +39,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#notifications" role="tab" data-toggle="tab">
+                                        <a href="#notif" role="tab" data-toggle="tab">
                                             <i class="material-icons">notifications_active</i>
                                             Notifications
                                         </a>
@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div class="tab-content">
-                    <div class="tab-pane active work" id="public">
+                    <div class="tab-pane gallery active" id="public">
                         <div class="row">
                             <div class="col-md-7 col-md-offset-1">
                                 <h5>Your Public Info: </h5>
@@ -140,7 +140,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane connections" id="notifications">
+                    <div class="tab-pane gallery" id="notif">
                         <form class="form" method="POST" action="{{ route('updateClientNotificationsPreferences') }}">
                             {{ csrf_field() }}
                             <div class="row">
@@ -186,7 +186,7 @@
 
 
                     @if(!empty($organisers))
-                    <div class="tab-pane text-center gallery" id="followings">
+                    <div class="tab-pane gallery text-center" id="followings">
                         <div class="row collections">
                             @foreach($organisers as $organiser)
                             <div class="col-md-6">
@@ -244,7 +244,7 @@
                                                 </button>
                                             </div>
                                             <div class="card-content">
-                                                <a href="#">
+                                                <a href="{{ route('showCategory', $category['id']) }}">
                                                     <h2 class="card-title">{{ $category['name'] }}</h2>
                                                 </a>
                                                 <div class="organiser-card-labels">
@@ -258,9 +258,9 @@
                             </div>
                         </div>
                     @else
-                        <div class="tab-pane text-center gallery" id="followings">
+                        <div class="tab-pane text-center gallery" id="categories">
                             <div class="row collections">
-                                <h2>you haven't followed any organisers yet!</h2>
+                                <h2>you haven't favorite any categories yet!</h2>
                             </div>
                         </div>
                     @endif

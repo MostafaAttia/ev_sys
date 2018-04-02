@@ -11,7 +11,7 @@ class OrganiserController extends MyBaseController
 {
 
     /**
-     * Get latest 5 unread notifications as array
+     * Get latest 10 unread notifications as array
      */
     public function notifications($organiser_id)
     {
