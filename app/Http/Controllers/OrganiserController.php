@@ -20,6 +20,18 @@ class OrganiserController extends MyBaseController
     }
 
     /**
+     * Mark all organiser notifications as read
+     */
+    public function markAllNotificationsAsRead($organiser_id)
+    {
+        $organiser = Organiser::scope()->findOrFail($organiser_id);
+        $notifications = $organiser->notifications()->where('read_at', null)->get();
+        foreach($notifications as $notification){
+            $notification->markAsRead();
+        }
+    }
+
+    /**
      * Show the select organiser page
      *
      * @return \Illuminate\Contracts\View\View

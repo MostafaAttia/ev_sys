@@ -94,6 +94,11 @@ Route::group(['prefix' => 'home'], function(){
 Route::group(['prefix' => 'client', 'middleware' => 'auth:client'], function(){
 
     Route::get('/notifications', 'ClientController@notifications');
+    Route::get('/markAllNotifsAsRead', [
+        'as'   => 'markAllNotificationsAsRead',
+        'uses' => 'ClientController@markAllNotificationsAsRead',
+    ]);
+
 
     Route::get('/profile', [
         'as'   => 'showClientProfile',
@@ -450,6 +455,10 @@ Route::group(['middleware' => ['auth', 'web', 'first.run']], function () {
     Route::group(['prefix' => 'organiser'], function () {
 
         Route::get('{organiser_id}/notifications', 'OrganiserController@notifications');
+        Route::get('{organiser_id}/markAllNotifsAsRead', [
+            'as'   => 'markOrganiserNotifsAsRead',
+            'uses' => 'OrganiserController@markAllNotificationsAsRead',
+        ]);
 
         Route::get('{organiser_id}/dashboard', [
             'as'   => 'showOrganiserDashboard',

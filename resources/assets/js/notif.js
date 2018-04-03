@@ -1,17 +1,4 @@
-
 window._ = require('lodash');
-
-//import Echo from "laravel-echo";
-//window.Pusher = require('pusher-js');
-//window.Echo = new Echo({
-//    broadcaster: 'pusher',
-//    key: '9d1c81efe142ffcf493b',
-//    cluster: 'us2',
-//    encrypted: true
-//});
-//Pusher.log = function(message){
-//    window.console.log(message)
-//};
 
 var notifications = [];
 
@@ -21,50 +8,81 @@ const NOTIFICATION_TYPES = {
     newEventFromCategory: 'App\\Notifications\\NewEventFromCategory'
 };
 
-
 $(document).ready(function() {
+
+    var markAllAsReadRoute = window.Laravel.organiserId
+        ? $('#notificationsMenu').attr('data-markAllAsReadRoute')
+        : $('.markAllNotificationsAsRead').attr('data-route');
+
     // check if there's a logged in user
     if(Laravel.organiserId) {
 
         $.get('/organiser/'+ Laravel.organiserId +'/notifications', function (data) {
             addNotifications(data, "#notifications");
+        })
+        .done(function(data){
+            if(data.length > 0){
+                $('#notificationsMenu').append("<li id='mark-all-as-read'><a>Mark All As Read</a></li>");
+            }
         });
-
-        //setInterval( get_organiser_notifications, 5000 );
-
-
+        setInterval( get_organiser_notifications, 10000 );
     } else if (Laravel.clientId){
+
         $.get('/client/notifications', function (data) {
             addNotifications(data, "#notifications");
-        });
-
+        })
+        .done(function(data){
+                if(data.length > 0){
+                    $('#notificationsMenu').append("<li id='mark-all-as-read'><a>Mark All As Read</a></li>");
+                }
+            });
+        setInterval( get_client_notifications, 10000 );
     }
+
+    $('#notifications').on('click', function(){
+        if($(this).hasClass('has-notifications')) {
+            $(this).removeClass('has-notifications');
+        }
+        $('.divider:last-of-type').remove();
+    });
+
+    $(document).on('click', '#mark-all-as-read',  function(){
+        $.get(markAllAsReadRoute)
+            .done(function(data){
+                $('#notificationsMenu').html('<li class="dropdown-header">No notifications</li>');
+        });
+    });
+
 });
 
 function get_organiser_notifications(){
-    //console.log('called');
-
     $.get('/organiser/'+ Laravel.organiserId +'/notifications', function (data) {
-        //console.log(data.length > 0);
         if(data.length > 0){
             data.forEach(function(notification){
-                if($(`#${notification.id}`).length){
-                    console.log('already exists');
-                } else {
-                    addNotifications(data, "#notifications");
+                if(! $(`#${notification.id}`).length){
+                    addNotifications([notification], "#notifications");
                 }
             });
-
+            if(! $('#mark-all-as-read').length){
+                $('#notificationsMenu').append("<li id='mark-all-as-read'><a>Mark All As Read</a></li>");
+            }
         }
-
-
     });
 }
 
 function get_client_notifications(){
-    //$.get(route, function (data) {
-    //    addNotifications(data, "#notifications");
-    //});
+    $.get('/client/notifications', function (data) {
+        if(data.length > 0){
+            data.forEach(function(notification){
+                if(! $(`#${notification.id}`).length){
+                    addNotifications([notification], "#notifications");
+                }
+            });
+            if(! $('#mark-all-as-read').length){
+                $('#notificationsMenu').append("<li id='mark-all-as-read'><a>Mark All As Read</a></li>");
+            }
+        }
+    });
 }
 
 function addNotifications(newNotifications, target) {
@@ -90,7 +108,7 @@ function showNotifications(notifications, target) {
 function makeNotification(notification) {
     var to = routeNotification(notification);
     var notificationText = makeNotificationText(notification);
-    return '<li id="'+ notification.id +'"><a target="_blank" href="' + to + '">' + notificationText + '</a></li><li class="divider"></li>';
+    return '<li class="notification-item" id="'+ notification.id +'"><a target="_blank" href="' + to + '">' + notificationText + '</a></li><li class="divider"></li>';
 }
 
 // get the notification route based on it's type
@@ -132,7 +150,6 @@ function makeNotificationText(notification) {
         text += avatarHTML + `New event in <strong>${name}</strong>`;
 
     }
-
 
     return text;
 }

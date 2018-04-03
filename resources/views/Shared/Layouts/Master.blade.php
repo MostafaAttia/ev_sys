@@ -62,7 +62,7 @@
                         <span class="arrow"></span>
                     </span>
                 </a>
-                <ul class="dropdown-menu vt-scroll-bar" role="menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
+                <ul class="dropdown-menu vt-scroll-bar" role="menu" aria-labelledby="notificationsMenu" id="notificationsMenu" data-markAllAsReadRoute="{{ route('markOrganiserNotifsAsRead', isset($organiser->id) ? $organiser->id : $event->organiser->id) }}">
                     <li class="dropdown-header">No notifications</li>
                 </ul>
             </li>

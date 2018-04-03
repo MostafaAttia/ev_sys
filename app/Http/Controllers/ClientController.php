@@ -293,6 +293,15 @@ class ClientController extends Controller
         return Auth::guard('client')->user()->unreadNotifications()->limit(5)->get()->toArray();
     }
 
+    public function markAllNotificationsAsRead()
+    {
+        $client = Auth::guard('client')->user();
+        $notifications = $client->notifications()->where('read_at', null)->get();
+        foreach($notifications as $notification){
+            $notification->markAsRead();
+        }
+    }
+
     /**
      * Follow Organiser
      */
