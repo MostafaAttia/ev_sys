@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <form class="form" method="POST" action="{{ url('/home/login') }}">
+                    <form name="login" class="form" method="POST" action="{{ url('/home/login') }}">
                         {{ csrf_field() }}
 
                         <p class="description text-center">Or Be Classical</p>
@@ -32,7 +32,7 @@
 									<i class="material-icons">email</i>
 								</span>
                                 <div class="form-group is-empty">
-                                    <input type="email" name="email" class="form-control" placeholder="Email..." autofocus="" required>
+                                    <input type="email" name="email" class="form-control" placeholder="Email..." autofocus="" >
                                     <span class="material-input"></span>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
 									<i class="material-icons">lock_outline</i>
 								</span>
                                 <div class="form-group is-empty">
-                                    <input type="password" name="password" placeholder="Password..." class="form-control" required>
+                                    <input type="password" name="password" placeholder="Password..." class="form-control" >
                                     <span class="material-input"></span>
                                 </div>
                             </div>

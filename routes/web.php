@@ -5,20 +5,6 @@
  */
 include_once('api.php');
 
-
-
-Route::get('/bridge', function() {
-    $messages = [
-        "name"      =>"hello from vitee",
-        "content"   =>"Another message from the other side"
-    ];
-
-//    LaravelPusher::trigger('test_channel', 'my_event', ['message' => $messages]);
-
-    return 'sent';
-});
-
-
 /*
  * -------------------------
  * Clients

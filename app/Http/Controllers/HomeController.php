@@ -22,18 +22,10 @@ class HomeController extends Controller
 
     use Helpers;
 
-//    public function __construct()
-//    {
-//        \Debugbar::disable();
-//    }
-
-
     public function testPayment()
     {
         return view('Front.Payment.Test');
     }
-
-
 
 
     /**

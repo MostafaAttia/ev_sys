@@ -21,7 +21,7 @@
                         <h4> or be classical </h4>
                     </div>
 
-                    <form class="form" method="POST" action="{{ url('/home/signup') }}" enctype='multipart/form-data'>
+                    <form name="signup" class="form" method="POST" action="{{ url('/home/signup') }}" enctype='multipart/form-data'>
                         <div class="row">
                             <div class="col-md-6">
                                 {{ csrf_field() }}
