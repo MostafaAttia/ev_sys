@@ -20,16 +20,16 @@
                 product_names: "Product1,Product2,Product3",
                 order_id: 25,
                 url_redirect: "http://ec2-52-71-113-238.compute-1.amazonaws.com/home",
-                display_billing_fields: 0,
+                display_billing_fields: 1,
                 display_shipping_fields: 0,
                 display_customer_info: 1,
                 language: "en",
                 redirect_on_reject: 1,
 
-                //  is_iframe:{
-                //      load: "onbodyload",
-                //      show: 1
-                //  },
+                  is_iframe:{
+                      load: "onbodyload",
+                      show: 1
+                  },
             },
             customer_info:{
                 first_name: "John",
@@ -38,17 +38,16 @@
                 country_code: "973",
                 email_address: "john@test.com"
             },
-//            billing_address:{
-//                full_address: "Manama, Bahrain",
-//                city: "Manama",
-//                state: "Manama",
-//                country: "BHR",
-//                postal_code: "00973"
-//            },
+            billing_address:{
+                full_address: "Manama, Bahrain",
+                city: "Manama",
+                state: "Manama",
+                country: "BHR",
+                postal_code: "00973"
+            },
             checkout_button:{
                 width: 400,
                 height: 130,
-//                                img_url: "../assets/images/stripe-connect-blue.png",
                 img_url: " {{ asset('/front/img/checkout.png') }} "
             },
 //                            pay_button:{
