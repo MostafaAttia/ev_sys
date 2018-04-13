@@ -14,7 +14,8 @@
             settings:{
                 secret_key: "5TXqUUNH350N4Ql6dm1CGY0EvjrTSvhXpfojab1eg12lSnr5KsIqqI5V2wPU27SrngLxsMMJOO4GbvMWYumpdrlgYaa0h3rFkdcM",
                 merchant_id: "10018556",
-                amount: ".200",
+                amount: {{ json_encode(session()->get('ticket_order_' . $event_id)['order_total']) }},
+//                amount: ".200",
                 currency: "BHD",
                 title: "Test Express Checkout Transaction",
                 product_names: "Product1,Product2,Product3",
@@ -46,11 +47,11 @@
                 height: 130,
                 img_url: " {{ asset('/front/img/checkout.png') }} "
             },
-            pay_button:{
-                width: 150,
-                height: 30,
-                img_url: "http://ec2-52-71-113-238.compute-1.amazonaws.com/assets/images/stripe-connect-blue.png"
-            }
+//            pay_button:{
+//                width: 150,
+//                height: 30,
+//                img_url: "http://ec2-52-71-113-238.compute-1.amazonaws.com/assets/images/stripe-connect-blue.png"
+//            }
         });
     </script>
 @endif

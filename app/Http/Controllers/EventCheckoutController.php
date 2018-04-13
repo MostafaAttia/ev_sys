@@ -212,6 +212,8 @@ class EventCheckoutController extends Controller
             'payment_gateway'         => count($event->account->active_payment_gateway) ? $event->account->active_payment_gateway->payment_gateway : false,
         ]);
 
+        Log::info(session()->get('ticket_order_' . $event_id)['order_total']);
+
         /*
          * If we're this far assume everything is OK and redirect them
          * to the the checkout page.
