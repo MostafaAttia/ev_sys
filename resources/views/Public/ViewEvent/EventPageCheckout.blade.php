@@ -2,11 +2,8 @@
 
 @if($order_requires_payment)
 @section('head')
-    {{--<script type="text/javascript" src="https://js.stripe.com/v2/"></script>--}}
-
     <link rel="stylesheet" href="https://www.paytabs.com/express/express.css">
     <script src="https://www.paytabs.com/express/express_checkout_v3.js"></script>
-
 
 @stop
 @endif
