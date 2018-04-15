@@ -6,7 +6,9 @@
 include_once('api.php');
 
 Route::post('payment', function(\Illuminate\Http\Request $request){
-    dd($request);
+
+    return $request;
+
 });
 
 /*
