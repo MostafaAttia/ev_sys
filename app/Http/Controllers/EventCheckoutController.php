@@ -92,6 +92,8 @@ class EventCheckoutController extends Controller
         $organiser_booking_fee = 0;
         $quantity_available_validation_rules = [];
 
+        $tickets_names = '';
+
         foreach ($ticket_ids as $ticket_id) {
             $current_ticket_quantity = (int)$request->get('ticket_' . $ticket_id);
 
@@ -102,6 +104,8 @@ class EventCheckoutController extends Controller
             $total_ticket_quantity = $total_ticket_quantity + $current_ticket_quantity;
 
             $ticket = Ticket::find($ticket_id);
+
+            $tickets_names = $ticket->title . ', ' .  $tickets_names;
 
             $ticket_quantity_remaining = $ticket->quantity_remaining;
 
@@ -202,6 +206,8 @@ class EventCheckoutController extends Controller
             'expires'                 => $order_expires_time,
             'reserved_tickets_id'     => $reservedTickets->id,
             'order_total'             => $order_total,
+            'currency'                => $event->currency->code,
+            'tickets_names'           => substr($tickets_names, 0, -2),
             'booking_fee'             => $booking_fee,
             'organiser_booking_fee'   => $organiser_booking_fee,
             'total_booking_fee'       => $booking_fee + $organiser_booking_fee,
@@ -212,7 +218,7 @@ class EventCheckoutController extends Controller
             'payment_gateway'         => count($event->account->active_payment_gateway) ? $event->account->active_payment_gateway->payment_gateway : false,
         ]);
 
-        Log::info(session()->get('ticket_order_' . $event_id)['order_total']);
+        Log::info(session()->get('ticket_order_' . $event_id));
 
         /*
          * If we're this far assume everything is OK and redirect them
@@ -246,7 +252,8 @@ class EventCheckoutController extends Controller
         $order_session = session()->get('ticket_order_' . $event_id);
 
         if (!$order_session || $order_session['expires'] < Carbon::now()) {
-            return redirect()->route('showEventPage', ['event_id' => $event_id]);
+            $route_name = $this->is_embedded ? 'showEmbeddedEventPage' : 'showEventPage';
+            return redirect()->route($route_name, ['event_id' => $event_id]);
         }
 
         $secondsToExpire = Carbon::now()->diffInSeconds($order_session['expires']);
@@ -362,6 +369,7 @@ class EventCheckoutController extends Controller
                         $token = $request->get('stripeToken');
                         $transaction_data += [
                             'token' => $token,
+                            'receipt_email' => $request->get('order_email'),
                         ];
                         break;
                     case config('attendize.payment_gateway_migs'):
