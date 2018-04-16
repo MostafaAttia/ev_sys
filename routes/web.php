@@ -365,7 +365,7 @@ Route::group(['prefix' => 'e'], function () {
         'uses' => 'EventCheckoutController@showEventCheckout',
     ]);
 
-    Route::post('{event_id}/checkout/create', [
+    Route::post('{event_id}/payment', [
         'as'   => 'postEventCheckout',
         'uses' => 'EventCheckoutController@postEventCheckout',
     ]);

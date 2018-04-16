@@ -19,7 +19,7 @@
                 title: "{{ $event->title }}",
                 product_names: "{{ session()->get('ticket_order_' . $event_id)['tickets_names'] }}",
                 order_id: 25,
-                url_redirect: "http://ec2-52-71-113-238.compute-1.amazonaws.com/e/" + {{ $event_id }} + "/checkout/create",
+                url_redirect: "http://ec2-52-71-113-238.compute-1.amazonaws.com/e/" + {{ $event_id }} + "/payment",
 //                url_redirect: "http://ec2-52-71-113-238.compute-1.amazonaws.com/payment",
                 display_billing_fields: 1,
                 display_shipping_fields: 0,
