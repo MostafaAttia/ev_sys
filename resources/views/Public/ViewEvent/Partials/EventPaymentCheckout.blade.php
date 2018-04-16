@@ -1,7 +1,7 @@
 <section id='order_form' class="container">
     <div class="row">
         <h1 class="section_head">
-            Order Details
+            Payment Information
         </h1>
     </div>
     <div class="row">
@@ -47,7 +47,6 @@
         <div class="col-md-8 col-md-pull-4">
             <div class="event_order_form">
 
-                <h3>Your Information</h3>
 
                 @if($event->enable_offline_payments)
                     <style>
