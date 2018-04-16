@@ -268,17 +268,30 @@ class EventCheckoutController extends Controller
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
         }
 
-//        if($order_session['order_requires_payment']) {
-//            return view('Public.ViewEvent.');
-//        }
-
         return view('Public.ViewEvent.EventPageCheckout', $data);
     }
 
     public function postEventCheckout(Request $request, $event_id)
     {
 
-        return $request->all();
+
+        if($request->get('response_code') == "100") {
+
+            session()->push('ticket_order_' . $event_id . '.payment_info', $request->all());
+            return redirect()->route('showEventCheckout', ['event_id' => $event_id]);
+
+
+        } else {
+            return response()->json([
+                'status'      => 'error',
+                'message'     => 'Payment failed! Please check your details.',
+                'redirectUrl' => route('showEventCheckout', [
+                    'event_id' => $event_id,
+                ])
+            ]);
+        }
+
+
 
         $order_session = session()->get('ticket_order_' . $event_id);
 
@@ -297,10 +310,6 @@ class EventCheckoutController extends Controller
 
         if ($this->is_embedded) {
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
-        }
-
-        if($order_session['order_requires_payment']) {
-            return view('');
         }
 
         return view('Public.ViewEvent.EventPageCheckout', $data);
@@ -349,8 +358,6 @@ class EventCheckoutController extends Controller
             ]);
         }
 
-//        Log::info($ticket_order);
-
 
         /*
          * Add the request data to a session in case payment is required off-site
@@ -360,18 +367,18 @@ class EventCheckoutController extends Controller
         /*
          * Begin payment attempt before creating the attendees etc.
          * */
-        if ($ticket_order['order_requires_payment']) {
-
-            /*
-             * Check if the user has chosen to pay offline
-             * and if they are allowed
-             */
-            if ($request->get('pay_offline') && $event->enable_offline_payments) {
-                return $this->completeOrder($event_id);
-            }
-
-            /* Todo: payment magic */
-        }
+//        if ($ticket_order['order_requires_payment']) {
+//
+//            /*
+//             * Check if the user has chosen to pay offline
+//             * and if they are allowed
+//             */
+//            if ($request->get('pay_offline') && $event->enable_offline_payments) {
+//                return $this->completeOrder($event_id);
+//            }
+//
+//            /* Todo: payment magic */
+//        }
 
 
         /*
