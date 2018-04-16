@@ -365,6 +365,12 @@ Route::group(['prefix' => 'e'], function () {
         'uses' => 'EventCheckoutController@showEventCheckout',
     ]);
 
+
+    Route::get('{event_id}/payment', [
+        'as'   => 'getEventPayment',
+        'uses' => 'EventCheckoutController@getEventPayment',
+    ]);
+
     Route::post('{event_id}/payment', [
         'as'   => 'postEventCheckout',
         'uses' => 'EventCheckoutController@postEventCheckout',
