@@ -98,7 +98,7 @@
                                 language: "en",
                                 redirect_on_reject: 1,
                                 is_iframe: {
-                                    load: onbodyload,
+                                    load: "onbodyload",
                                     show: 1
                                 }
 
