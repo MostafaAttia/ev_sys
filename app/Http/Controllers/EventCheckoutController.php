@@ -227,17 +227,6 @@ class EventCheckoutController extends Controller
          * to the the checkout page.
          */
         if ($request->ajax()) {
-
-            if($order_requires_payment) {
-                return response()->json([
-                    'status'      => 'success',
-                    'redirectUrl' => route('getEventPayment', [
-                            'event_id'    => $event_id,
-                            'is_embedded' => $this->is_embedded,
-                        ]) . '#order_form',
-                ]);
-            }
-
             return response()->json([
                 'status'      => 'success',
                 'redirectUrl' => route('showEventCheckout', [
