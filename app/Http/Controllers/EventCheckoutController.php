@@ -193,6 +193,8 @@ class EventCheckoutController extends Controller
             ]);
         }
 
+        $order_requires_payment = (ceil($order_total) == 0) ? false : true;
+
         /*
          * The 'ticket_order_{event_id}' session stores everything we need to complete the transaction.
          */
@@ -211,7 +213,7 @@ class EventCheckoutController extends Controller
             'booking_fee'             => $booking_fee,
             'organiser_booking_fee'   => $organiser_booking_fee,
             'total_booking_fee'       => $booking_fee + $organiser_booking_fee,
-            'order_requires_payment'  => (ceil($order_total) == 0) ? false : true,
+            'order_requires_payment'  => $order_requires_payment,
             'account_id'              => $event->account->id,
             'affiliate_referral'      => Cookie::get('affiliate_' . $event_id),
             'account_payment_gateway' => count($event->account->active_payment_gateway) ? $event->account->active_payment_gateway : false,
@@ -225,6 +227,17 @@ class EventCheckoutController extends Controller
          * to the the checkout page.
          */
         if ($request->ajax()) {
+
+            if($order_requires_payment) {
+                return response()->json([
+                    'status'      => 'success',
+                    'redirectUrl' => route('getEventPayment', [
+                            'event_id'    => $event_id,
+                            'is_embedded' => $this->is_embedded,
+                        ]) . '#order_form',
+                ]);
+            }
+
             return response()->json([
                 'status'      => 'success',
                 'redirectUrl' => route('showEventCheckout', [
@@ -268,12 +281,15 @@ class EventCheckoutController extends Controller
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
         }
 
+        if($order_session['order_requires_payment']) {
+            return view('Public.ViewEvent.EventPagePayment', $data);
+        }
+
         return view('Public.ViewEvent.EventPageCheckout', $data);
     }
 
     public function postEventCheckout(Request $request, $event_id)
     {
-
 
         if($request->get('response_code') == "100") {
 
@@ -290,29 +306,6 @@ class EventCheckoutController extends Controller
                 ])
             ]);
         }
-
-
-
-        $order_session = session()->get('ticket_order_' . $event_id);
-
-        if (!$order_session || $order_session['expires'] < Carbon::now()) {
-            $route_name = $this->is_embedded ? 'showEmbeddedEventPage' : 'showEventPage';
-            return redirect()->route($route_name, ['event_id' => $event_id]);
-        }
-
-        $secondsToExpire = Carbon::now()->diffInSeconds($order_session['expires']);
-
-        $data = $order_session + [
-                'event'           => Event::findorFail($order_session['event_id']),
-                'secondsToExpire' => $secondsToExpire,
-                'is_embedded'     => $this->is_embedded,
-            ];
-
-        if ($this->is_embedded) {
-            return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
-        }
-
-        return view('Public.ViewEvent.EventPageCheckout', $data);
     }
 
     /**
