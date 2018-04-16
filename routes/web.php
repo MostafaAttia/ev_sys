@@ -366,7 +366,7 @@ Route::group(['prefix' => 'e'], function () {
     ]);
 
 
-    Route::get('{event_id}/payment', [
+    Route::get('{event_id}/payment/checkout', [
         'as'   => 'getEventPayment',
         'uses' => 'EventCheckoutController@getEventPayment',
     ]);
