@@ -74,7 +74,7 @@
 
                 <div class="row">
                     <div class="col-md-offset-4 col-md-6 text-center">
-                        <div class="PT_express_checkout" onclick="event.preventDefault()"></div>
+                        <div class="PT_express_checkout" style="height: 300px;" onclick="event.preventDefault()"></div>
                     </div>
                 </div>
 
@@ -97,6 +97,10 @@
                                 display_customer_info: 1,
                                 language: "en",
                                 redirect_on_reject: 1,
+                                is_iframe: {
+                                    load: onbodyload,
+                                    show: 1
+                                }
 
                             },
                             customer_info:{
