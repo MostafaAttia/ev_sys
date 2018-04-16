@@ -7,6 +7,7 @@ include_once('api.php');
 
 Route::post('payment', function(\Illuminate\Http\Request $request){
 
+
     return $request->all();
 
 });
@@ -362,6 +363,11 @@ Route::group(['prefix' => 'e'], function () {
     Route::get('{event_id}/checkout/create', [
         'as'   => 'showEventCheckout',
         'uses' => 'EventCheckoutController@showEventCheckout',
+    ]);
+
+    Route::post('{event_id}/checkout/create', [
+        'as'   => 'postEventCheckout',
+        'uses' => 'EventCheckoutController@postEventCheckout',
     ]);
 
     Route::get('{event_id}/checkout/success', [

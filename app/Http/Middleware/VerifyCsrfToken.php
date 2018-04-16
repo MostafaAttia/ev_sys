@@ -10,7 +10,7 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         'install/*',
         'api/*',
-        'payment',
+        'e/{event_id}/checkout/create',
     ];
 
     /**

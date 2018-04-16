@@ -6,7 +6,16 @@
     <script src="https://www.paytabs.com/express/express_checkout_v3.js"></script>
 
 @stop
-@endif
+
+@section('content')
+    @include('Public.ViewEvent.Partials.EventHeaderSection')
+
+    @include('Public.ViewEvent.Partials.EventPaymentCheckout')
+    <script>var OrderExpires = {{strtotime($expires)}};</script>
+    @include('Public.ViewEvent.Partials.EventFooterSection')
+@stop
+
+@else
 
 @section('content')
     @include('Public.ViewEvent.Partials.EventHeaderSection')
@@ -15,4 +24,8 @@
     <script>var OrderExpires = {{strtotime($expires)}};</script>
     @include('Public.ViewEvent.Partials.EventFooterSection')
 @stop
+
+@endif
+
+
 
