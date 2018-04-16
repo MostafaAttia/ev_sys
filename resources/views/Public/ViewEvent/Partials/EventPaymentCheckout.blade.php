@@ -74,7 +74,7 @@
 
                 <div class="row">
                     <div class="col-md-offset-4 col-md-6 text-center">
-                        <div class="PT_express_checkout" style="height: 550px; width: 300px" onclick="event.preventDefault()"></div>
+                        <div class="PT_express_checkout" style="height: 550px; width: 450px" onclick="event.preventDefault()"></div>
                     </div>
                 </div>
 
