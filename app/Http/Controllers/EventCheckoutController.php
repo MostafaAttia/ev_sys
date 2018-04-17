@@ -281,10 +281,6 @@ class EventCheckoutController extends Controller
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);
         }
 
-//        if($order_session['order_requires_payment']) {
-//            return view('Public.ViewEvent.EventPagePayment', $data);
-//        }
-
         return view('Public.ViewEvent.EventPageCheckout', $data);
     }
 
@@ -342,9 +338,6 @@ class EventCheckoutController extends Controller
      */
     public function postCreateOrder(Request $request, $event_id)
     {
-//        $ticket_session = array_filter($request->session()->all(), function($key) {
-//            return strpos($key, 'ticket_order_') === 0;
-//        }, ARRAY_FILTER_USE_KEY);
 
         /*
          * If there's no session kill the request and redirect back to the event homepage.
@@ -376,28 +369,10 @@ class EventCheckoutController extends Controller
             ]);
         }
 
-
         /*
          * Add the request data to a session in case payment is required off-site
          */
         session()->push('ticket_order_' . $event_id . '.request_data', $request->except(['card-number', 'card-cvc']));
-
-        /*
-         * Begin payment attempt before creating the attendees etc.
-         * */
-//        if ($ticket_order['order_requires_payment']) {
-//
-//            /*
-//             * Check if the user has chosen to pay offline
-//             * and if they are allowed
-//             */
-//            if ($request->get('pay_offline') && $event->enable_offline_payments) {
-//                return $this->completeOrder($event_id);
-//            }
-//
-//            /* Todo: payment magic */
-//        }
-
 
         /*
          * No payment required so go ahead and complete the order
@@ -478,9 +453,7 @@ class EventCheckoutController extends Controller
             if (isset($ticket_order['transaction_id'])) {
                 $order->transaction_id = $ticket_order['transaction_id'][0];
             }
-//            if ($ticket_order['order_requires_payment'] && !isset($request_data['pay_offline'])) {
-//                $order->payment_gateway_id = $ticket_order['payment_gateway']->id;
-//            }
+
             $order->first_name = $request_data['order_first_name'];
             $order->last_name = $request_data['order_last_name'];
             $order->email = $request_data['order_email'];

@@ -5,13 +5,6 @@
  */
 include_once('api.php');
 
-Route::post('payment', function(\Illuminate\Http\Request $request){
-
-
-    return $request->all();
-
-});
-
 /*
  * -------------------------
  * Clients

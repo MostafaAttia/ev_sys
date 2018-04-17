@@ -122,10 +122,7 @@
                                             @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_number' => $total_attendee_increment++])
 
                                         </div>
-
                                     </div>
-
-
                                 </div>
                                 @endfor
                             @endforeach
@@ -141,7 +138,6 @@
 
                {!! Form::hidden('is_embedded', $is_embedded) !!}
                {!! Form::submit('Checkout', ['class' => 'btn btn-lg btn-success card-submit', 'style' => 'width:100%;']) !!}
-
 
             </div>
         </div>

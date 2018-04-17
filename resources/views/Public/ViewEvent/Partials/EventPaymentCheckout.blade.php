@@ -120,12 +120,7 @@
                                 width: 400,
                                 height: 130,
                                 img_url: " {{ asset('/front/img/checkout.png') }} "
-                            },
-                            // pay_button:{
-                            //     width: 150,
-                            //     height: 30,
-                            //     img_url: "http://ec2-52-71-113-238.compute-1.amazonaws.com/assets/images/stripe-connect-blue.png"
-                            // }
+                            }
                         });
                     </script>
                 @endif
